@@ -12,7 +12,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
+                <li class="selected" ><a href="index.html">Accueil</a></li>
                 <li><a href="regles.html">Règlement</a></li>
                 <li><a href="servic.html">Services</a></li>
             </ul>
@@ -22,20 +22,40 @@
         <p id="palg">P A L G A N I A</p>
         <div id="discordip">
             <p>Ip du serveur :<br /><span id="ip">51.77.148.210</span></p>
-            <div id="discord"><p>Rejoignez-nous sur Discord !</p></div>
+            <div id="discord">
+                <p>Rejoignez-nous sur Discord !
+                    <img src="discordimg.png" alt="Discord"/>
+                </p>
+            </div>
         </div>
     </div>
-    <section id="bienvenue">
-        <h1>Bienvenue !</h1>
-        Palgania est un serveur survie ouvert à tous. Rejoignez-nous dans notre belle République virtuelle !
-        <article>
-            <h1>Trailer du serveur</h1>
-            <iframe src="https://www.youtube.com/embed/vcZmVZhQhTg" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-        </article>
-    </section>
+    <div id="sections">
+        <section id="bienvenue">
+            <h1>Bienvenue !</h1>
+            Palgania est un serveur survie ouvert à tous. Rejoignez-nous dans notre belle République virtuelle !
+            <article>
+                <h1>Trailer du serveur</h1>
+                <iframe src="https://www.youtube.com/embed/vcZmVZhQhTg" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </article>
+        </section>
+        <section>
+            <h1>Pack de ressources</h1>
+            Le pack de ressources recommandé pour le serveur est disponible !
+        </section>
+        <section>
+            <p>En vous rendant sur le serveur, vous acceptez le règlement de la communauté. Vous pouvez le lire <a
+                    href="#">ici</a>.</p>
+        </section>
+    </div>
     <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a></footer>
+    <script>
+        var banniere = document.querySelector(".banniere"),
+            menu = document.querySelector("header");
+            banniere.style.marginTop = menu.offsetHeight + 20 + "px";
+
+    </script>
 </body>
 
 </html>

@@ -1,41 +1,87 @@
 *{
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: justify;
-}
-body{
-    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 header{
-    background: rgb(56, 49, 97);
-    margin: 0;
-}
-
-header ul {
-    display: flex;
-    justify-content: space-around;
-    list-style-type: none;
-}
-header ul li a{
-    display: block;
-    padding: 20px;
+    margin-top: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    text-decoration: unset;
-}
-header ul li a:hover{
-    background: rgb(201, 102, 45);
-}
-.banniere{
-    background: linear-gradient(rgba(85, 85, 85, 0.712),rgba(85, 85, 85, 0));
+    height: 5%;
+    background: rgba(128, 128, 128, 0.274);
     display: flex;
-    justify-content: space-around;
     align-items: center;
 }
+
+.banniere{
+    margin-top: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
 #palg{
-    font-weight: bold;
+    font-size: 4em;
+}
+
+#ip{
+    display: block;
+    background: rgb(51, 51, 51);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 2em;
     color: white;
-    font-size: 3em;
+}
+
+#discordip{
+    text-align: center;
+}
+
+#discord img {
+    display: block;
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+
+nav{
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 100%;
+}
+
+nav ul{
+    margin: 0;
+    list-style: none;
+    align-items: center;
+    display: flex;
+    height: 100%;
+}
+
+nav ul a{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.selected a{
+    text-decoration: underline white;
+}
+
+li{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background: rgba(77, 76, 76, 0.801);
+    
+}
+
+li:hover, .selected{
+    background: rgba(77, 76, 76);
+}
+li.selected:hover{
+    background: rgb(46, 45, 45);
 }
