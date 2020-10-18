@@ -177,3 +177,20 @@ footer{
     background: rgba(128, 128, 128, 0.459);
     text-align: center;
 }
+
+ul.regles li{
+    background: unset;
+}
+
+ul.regles{
+    text-align: justify;
+}
+
+ul.regles li::before {
+    /* content: "\2022";    */
+    content: "— ";
+    color: white;  
+    display: inline-block;  
+    width: 1em; 
+    margin-left: -1em;
+    } 
