@@ -2,6 +2,11 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body{
+    background: url("images/background.png") fixed no-repeat;
+    background-size: cover;
+}
+
 header{
     margin-top: 10px;
     position: fixed;
@@ -16,12 +21,23 @@ header{
 
 .banniere{
     margin-top: 10%;
+    border-radius: 10px;
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    background: url("images/banniere.png");
+    background-size: cover;
+    color: white;
+    
 }
 
 #palg{
     font-size: 4em;
+}
+
+#palg, #discordip{
+    background: rgba(122, 122, 122, 0.274) ;
+    padding: 10px;
 }
 
 #ip{
@@ -32,6 +48,7 @@ header{
     border-radius: 10px;
     font-size: 2em;
     color: white;
+    transition: 0.2s;
 }
 
 #discordip{
@@ -40,9 +57,10 @@ header{
 
 #discord img {
     display: block;
-    width: 50%;
+    width: 40%;
     height: auto;
     margin: auto;
+    margin-top: 10px;
 }
 
 nav{
@@ -57,6 +75,16 @@ nav ul{
     align-items: center;
     display: flex;
     height: 100%;
+}
+
+a{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: unset;
+}
+
+a:hover{
+    text-decoration: unset;
 }
 
 nav ul a{
@@ -76,6 +104,7 @@ li{
     align-items: center;
     height: 100%;
     background: rgba(77, 76, 76, 0.801);
+    transition: 0.2s;
     
 }
 
@@ -84,4 +113,67 @@ li:hover, .selected{
 }
 li.selected:hover{
     background: rgb(46, 45, 45);
+}
+#ip:hover{
+    background: rgb(0, 0, 0);
+}
+
+section{
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1em;
+}
+
+section:nth-child(n){
+    background: rgba(255, 255, 255, 0.9);
+    color: grey;
+}
+
+article{
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#article_packs{
+    display: flex;
+    justify-content: center;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+  .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+section:nth-child(n) article{
+    background: rgba(24, 24, 24, 0.637);
+    color: white;
+}
+
+section:nth-child(2n) article{
+    background: rgba(255, 255, 255, 0.9);
+    color: grey;
+}
+
+section:nth-child(2n){
+    background: rgba(24, 24, 24, 0.9);
+    color: white;
+}
+
+footer{
+    margin: 10px;
+    background: rgba(128, 128, 128, 0.459);
+    text-align: center;
 }

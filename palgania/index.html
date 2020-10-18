@@ -12,7 +12,7 @@
     <header>
         <nav>
             <ul>
-                <li class="selected" ><a href="index.html">Accueil</a></li>
+                <li class="selected"><a href="index.html">Accueil</a></li>
                 <li><a href="regles.html">Règlement</a></li>
                 <li><a href="servic.html">Services</a></li>
             </ul>
@@ -24,7 +24,8 @@
             <p>Ip du serveur :<br /><span id="ip">51.77.148.210</span></p>
             <div id="discord">
                 <p>Rejoignez-nous sur Discord !
-                    <img src="discordimg.png" alt="Discord"/>
+                    <a href="https://discord.gg/FdJ6uEE" target="_blank"><img src="images/discordimg.png"
+                            alt="Discord" /></a>
                 </p>
             </div>
         </div>
@@ -32,28 +33,46 @@
     <div id="sections">
         <section id="bienvenue">
             <h1>Bienvenue !</h1>
-            Palgania est un serveur survie ouvert à tous. Rejoignez-nous dans notre belle République virtuelle !
+            Palgania est un serveur survie ouvert à tous.<br />Rejoignez-nous dans notre belle République virtuelle !
             <article>
                 <h1>Trailer du serveur</h1>
-                <iframe src="https://www.youtube.com/embed/vcZmVZhQhTg" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+                <div class="videoWrapper"><iframe src="https://www.youtube.com/embed/vcZmVZhQhTg" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" width="100%"
+                        allowfullscreen></iframe></div>
+
             </article>
         </section>
         <section>
             <h1>Pack de ressources</h1>
-            Le pack de ressources recommandé pour le serveur est disponible !
+            Le pack de ressources recommandé pour le serveur est disponible ci-dessous !
+            <article id="article_packs">
+                <table>
+                    <tr>
+                        <td>Téléchargement</td>
+                        <td style="padding: 10px;">:</td>
+                        <td><a href="files/Custom chinois.zip" title="Téléchargement"><img src="images/download-button.png" alt="Cliquez ici"/></a></td>
+                    </tr>
+                    <tr>
+                        <td>Téléchargement <br/> (version sans les sons personnalisés)</td>
+                        <td style="padding: 10px;">:</td>
+                        <td><a href="files/Custom chinois (no sounds).zip" title="Téléchargement (version sans les sons personnalisés)"><img src="images/download-button.png" alt="Cliquez ici"/></a></td>
+                    </tr>
+                </table>
+            </article>
         </section>
         <section>
-            <p>En vous rendant sur le serveur, vous acceptez le règlement de la communauté. Vous pouvez le lire <a
-                    href="#">ici</a>.</p>
+            <h1>Règlement</h1>
+            <p>En vous rendant sur le serveur, vous acceptez le règlement de la communauté. <br />Vous pouvez le lire <a
+                    href="regles.html">ici</a>.</p>
         </section>
     </div>
-    <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a></footer>
+    <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a><br />Icons made by <a
+            href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></footer>
     <script>
         var banniere = document.querySelector(".banniere"),
             menu = document.querySelector("header");
-            banniere.style.marginTop = menu.offsetHeight + 20 + "px";
+        banniere.style.marginTop = menu.offsetHeight + 20 + "px";
 
     </script>
 </body>
