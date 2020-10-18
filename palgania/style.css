@@ -3,7 +3,7 @@
 }
 
 body{
-    background: url("images/background.png") fixed no-repeat;
+    background: url("images/background.jpg") fixed no-repeat;
     background-size: cover;
 }
 
@@ -25,7 +25,7 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: url("images/banniere.png");
+    background: url("images/banniere.jpg");
     background-size: cover;
     color: white;
     
