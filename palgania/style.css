@@ -132,6 +132,10 @@ section:nth-child(n){
     color: grey;
 }
 
+section.reglement{
+    display: block;
+}
+
 article{
     width: 50%;
     margin: auto;
@@ -182,8 +186,9 @@ ul.regles li{
     background: unset;
 }
 
-ul.regles{
+ul.regles li{
     text-align: justify;
+    display: block;
 }
 
 ul.regles li::before {
