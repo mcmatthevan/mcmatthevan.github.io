@@ -19,6 +19,10 @@
         </nav>
     </header>
     <section class="firstelement reglement">
+        <div class="modeaffichage">
+            <div id="dark">Sombre</div>
+            <div id="light">Clair</div>
+        </div>
         <h1>Règlement du serveur</h1>
         <p>Palgania est un serveur minecraft survie gratuit et ouvert au public.&nbsp Pour le bon fonctionnement de la
             communauté, des règles régissent le jeu et les utilisations
@@ -206,7 +210,7 @@
                 - Les infractions <em>mineures</em>, qui concernent les manquements aux règles de jeux.&nbsp<br />
                 - Les infractions <em>majeures</em>, qui concernent tous les autres manquements.&nbsp<br /><br />
                 <span style="color: red;">ATTENTION !</span> <strong>La répétition fréquente et abusive d'infractions
-                    mineures par un même utilisateur est considéré comme une infraction majeure.&nbsp</strong>
+                    mineures par un même utilisateur est considérée comme une infraction majeure.&nbsp</strong>
             </p>
             <h3>a.&nbsp Sanctions <em>in-game</em></h3>
             <p>
@@ -277,6 +281,7 @@
             </p>
             <h2>Questions</h2>
             <p>Pour toute question relative au règlement, contactez un administrateur.&nbsp</p>
+            <hr/>
             <p class="signature"><strong>lumahell</strong>, le 19/10/2020</p>
     </section>
     <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a>
@@ -288,6 +293,26 @@
         var banniere = document.querySelector(".firstelement"),
             menu = document.querySelector("header");
         banniere.style.marginTop = menu.offsetHeight + 20 + "px";
+
+        (function(){
+            var dark_bt = document.querySelector("#dark"),
+                light_bt = document.querySelector("#light"),
+                firstel = document.querySelector(".firstelement");
+            dark_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv != null){
+                    configdiv.parentNode.removeChild(configdiv);
+                }
+            });
+            light_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv == null){
+                    var configdiv = document.createElement("div");
+                    configdiv.id = "darklightdiv";
+                    document.body.insertBefore(configdiv,firstel);
+                }
+            });
+        })();
 
     </script>
 </body>

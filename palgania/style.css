@@ -134,6 +134,8 @@ section:nth-child(n){
 
 section.reglement{
     display: block;
+    position: relative;
+    transition: 300ms;
 }
 
 .reglement h2{
@@ -201,20 +203,27 @@ ul.regles li{
 }
 
 ul.regles li ul li::before{
-    content: "- ";
-    color: white;  
+    content: "- "; 
     display: inline-block;  
     width: 1em; 
     margin-left: -1em;
 }
 
 ul.regles li::before {
-    content: "— ";
-    color: white;  
+    content: "— "; 
     display: inline-block;  
     width: 1em;     
     margin-left: -1em;
-    } 
+} 
+
+
+section:nth-child(n) ul.regles li ul li::before,section:nth-child(n) ul.regles li::before{
+    color: grey;
+}
+
+section:nth-child(2n) ul.regles li ul li::before,section:nth-child(2n) ul.regles li::before{
+    color: white;
+}
 
 .flist{
     max-width: 30%;
@@ -228,4 +237,42 @@ strong{
 .signature{
     text-align: end;
     font-size: 0.8em;
+    margin-top: 50px;
+}
+
+.modeaffichage{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.modeaffichage #dark{
+    transition: 200ms;
+    background: black;
+    opacity: 0.6;
+    color: white;
+}
+
+.modeaffichage div{
+    padding: 5px;
+    cursor: pointer;
+}
+
+.modeaffichage #light{
+    transition: 200ms;
+    margin-top: 10px;
+    background: white;
+    opacity: 0.6;
+    color: grey;
+}
+
+
+#dark:hover, #light:hover{
+    opacity: 1;
+}
+
+.contact{
+    width: 40%;
+    border: 2px grey solid;
+    margin: auto;
 }

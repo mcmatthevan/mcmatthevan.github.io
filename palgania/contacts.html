@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PALGANIA-contacts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="regles.html">Règlement</a></li>
+                <li class="selected"><a href="contacts.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div></div>
+    <section class="firstelement">
+        <h1>Contacts</h1>
+        <table class="contact">
+            <tr><td rowspan="2"><img src="https://minotar.net/body/AigleAttarde/100.png"/></td><td>AigleAttarde</td></tr>
+            <tr><td style="color:red;">Administrateur</td></tr>
+            <tr><td>Discord</td><td>Tôchiro#6797</td></tr>
+        </table>
+        <table class="contact">
+            <tr><td rowspan="2"><img src="https://minotar.net/body/lumahell/100.png"/></td><td>lumahell</td></tr>
+            <tr><td style="color:red;">Administrateur</td></tr>
+            <tr><td>Discord</td><td>lumahell#9437</td></tr>
+        </table>
+    </section>
+    <script>
+        var banniere = document.querySelector(".firstelement"),
+            menu = document.querySelector("header");
+        banniere.style.marginTop = menu.offsetHeight + 20 + "px";
+
+    </script>
+</body>
+</html>
