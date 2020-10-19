@@ -136,6 +136,15 @@ section.reglement{
     display: block;
 }
 
+.reglement h2{
+    text-decoration: underline;
+}
+
+.reglement h1{
+    font-size: 3em;
+    text-decoration: underline;
+}
+
 article{
     width: 50%;
     margin: auto;
@@ -191,11 +200,32 @@ ul.regles li{
     display: block;
 }
 
-ul.regles li::before {
-    /* content: "\2022";    */
-    content: "— ";
+ul.regles li ul li::before{
+    content: "- ";
     color: white;  
     display: inline-block;  
     width: 1em; 
     margin-left: -1em;
+}
+
+ul.regles li::before {
+    content: "— ";
+    color: white;  
+    display: inline-block;  
+    width: 1em;     
+    margin-left: -1em;
     } 
+
+.flist{
+    max-width: 30%;
+    margin: auto;
+    text-align: justify;
+}
+strong{
+    text-decoration: underline;
+    color: rgb(214, 155, 155);
+}
+.signature{
+    text-align: end;
+    font-size: 0.8em;
+}
