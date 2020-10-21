@@ -17,6 +17,7 @@ header{
     background: rgba(128, 128, 128, 0.274);
     display: flex;
     align-items: center;
+    z-index: 100;
 }
 
 .banniere{
