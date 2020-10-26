@@ -133,7 +133,7 @@ section:nth-child(n){
     color: grey;
 }
 
-section.reglement{
+section.reglement, .bedrock_actu{
     display: block;
     position: relative;
     transition: 300ms;
@@ -350,6 +350,12 @@ strong{
 	}
 	.flist{
         max-width: 95%;
+    }
+
+    nav ul a{
+        color: white;
+        padding: 5px;
+        font-size: 0.8em;
     }
 
     .reglement h1{
