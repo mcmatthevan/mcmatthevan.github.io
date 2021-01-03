@@ -254,6 +254,10 @@ strong{
     color: white;
 }
 
+i{
+    font-size: 0.7em;
+}
+
 .modeaffichage div{
     padding: 5px;
     cursor: pointer;
@@ -265,6 +269,16 @@ strong{
     background: white;
     opacity: 0.6;
     color: grey;
+}
+.cgu * a{
+    font-size: 1em;
+}
+
+mark{
+    background: unset;
+    font-weight: bold;
+    color: unset;
+    display: inline;
 }
 
 
@@ -358,9 +372,10 @@ strong{
         font-size: 0.8em;
     }
 
-    .reglement h1{
+    .reglement h1, .cgu h1{
         margin-top: 100px;
     }
+
     
     .contact{
         width: unset;
