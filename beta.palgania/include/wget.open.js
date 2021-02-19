@@ -6,7 +6,7 @@
 				dataType : 'html',
 				error:function(msg){
                   // message en cas d'erreur :
-                  alert( "Error !: " + msg );
+                  
                 },
 				success:function(data){
                   // affiche le contenu du fichier dans le conteneur dédié :
