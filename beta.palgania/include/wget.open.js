@@ -10,6 +10,6 @@
                 },
 				success:function(data){
                   // affiche le contenu du fichier dans le conteneur dédié :
-                  $('#content-wget-info').text(data);
+                  $('#content-wget-info').html(data);
                 }
         });
