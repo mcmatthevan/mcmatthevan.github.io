@@ -3,6 +3,7 @@
 		$.ajax({
 				type: "GET",
 				url: "docs/wget.inside.html",
+				dataType : 'html',
 				error:function(msg){
                   // message en cas d'erreur :
                   alert( "Error !: " + msg );
