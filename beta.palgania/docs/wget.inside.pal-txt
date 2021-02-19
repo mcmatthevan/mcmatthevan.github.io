@@ -1,1 +1,6 @@
-﻿blablabla {'Title' = {dd}} blablabla {[nom] = 'ff'} etc...{[nom] = 'ss'}
+﻿<!-- code html -->
+<div class="art-info-view" id="block">
+	<div class="title-art-info" id="block">
+		<h2>Teddy</h2>
+	</div>
+</div>
