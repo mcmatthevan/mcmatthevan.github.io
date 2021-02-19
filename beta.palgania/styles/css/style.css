@@ -1,0 +1,276 @@
+@font-face {
+	font-family: "MA";
+	src: url('../Gill Sans.otf');
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: MA;
+}
+
+ul li {
+/* on enl?ve ce comportement pour les liens du sous menu */
+    display: inherit;
+}
+
+* { margin: 0; padding: 0; }
+
+.content#main 
+{
+    background-color: ;
+    position: relative;
+}
+
+.section#nav
+{
+    background-color: rgba(24,24,24);
+    padding: 20px 3%;
+    width: 94%;
+    color: #fafafa;
+    position: relative;
+}
+
+.section#nav #left_nav
+{
+    background-color: ;
+    width: 18%;
+    /*
+    position: relative;
+    */
+    float: left;
+}
+
+.section#nav #center_nav
+{
+    background-color: ;
+    width: 60%;
+    position: relative;
+    display: inline-block;
+    left: 35px;
+}
+
+.section#nav #right_nav
+{
+    background-color: ;
+    width: 16%;
+    /*
+    position: absolute;
+    top: 20px;
+    left: 80.1%;
+    */
+    float: right;
+}
+
+.section#nav #left_nav #logo_web
+{
+    font-size: 35px;
+    font-family: MA;
+    width: 100%;
+    position: relative;
+    top: -8px;
+	color:#fafafa;
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view
+{
+	background-color: rgba( 209, 107, 0);
+	padding: 8px;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+	font-family: MA; 
+	border-radius: 6px;
+	border-bottom: solid 5px rgba(169, 88, .1);
+	border-right: solid 5px rgba(167, 86, 0);
+	top: -8px;
+	transition: .2s;
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view .btn_view#no
+{
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view .btn_view#yes
+{
+    visibility: hidden;
+    position: absolute;
+    top: 8px;
+    width: 90%;
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view:hover .btn_view#yes
+{
+    visibility: visible;
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view:hover .btn_view#no
+{
+	visibility: hidden;
+}
+
+.section#nav #right_nav .btn#btn_ .block#ip-view:hover
+{
+	border: none;
+	top: 0px;
+	left: 0px;
+	transition: .2s;
+}
+
+.section#body
+{
+	background-color: ;
+	padding: 0px;
+}
+
+.section#body .section#banner
+{
+	background-color: ;
+	height: 500px;
+	background: url("../img/background.png") no-repeat;
+	background-size: 100% auto;
+    background-position: 0px -105px;
+}
+
+.section#body .section#banner .block#screen-server
+{
+	background-color: ;
+	height: 300px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 80px;
+	background: url("../img/banniere.png") no-repeat;
+	background-size: 100% auto;
+	overflow: hidden;
+	border-radius: 30px;
+	opacity: 0.9;
+	text-align: center;
+}
+
+.section#body .section#banner .block#screen-server:hover
+{
+	opacity: 1;
+}
+
+.section#body .section#banner .block#screen-server .logo_banner_web
+{
+	color: #fafafa;
+	font-size: 80px;
+	font-family: MA;
+	position: relative;
+	top: 100px;
+	letter-spacing: 30px;
+	transition: 0.5s;
+}
+
+.section#body .section#banner .block#screen-server:hover .logo_banner_web
+{
+	color: #fafafa;
+	font-size: 35px;
+	font-family: MA;
+	position: relative;
+	top: 100px;
+	letter-spacing: 60px;
+	transition: 0.5s;
+}
+
+.section#body .section#banner .block#screen-server .block#add_discord
+{
+	position: relative;
+	top: 300px;
+	visibility: hidden;
+}
+
+.section#body .section#banner .block#screen-server:hover .block#add_discord
+{
+	position: relative;
+	top: 130px;
+	font-size: 27px;
+	color: #fafafa;
+	visibility: visible;
+}
+
+.section#body .section#banner .block#screen-server .block#add_discord a .block#content-a
+{
+	display: inline-block;
+	padding: 10px 60px;
+	background-color: rgba(53, 83, 163, .8);
+	color: #fafafa;
+	border-radius: 5px;
+}
+
+.section#body .section#banner .block#screen-server .block#add_discord a:hover .block#content-a
+{
+	background-color: rgba(53, 83, 163, .9);
+}
+.section#body .section#banner .block#screen-server .block#add_discord a:hover
+{
+	cursor: pointeur;
+}
+.section#main-body
+{
+	padding: 15px;
+	margin-auto: auto;
+	margin-right: auto;
+	position: relative;
+
+}
+
+.section#main-body .section#left
+{
+	width: 66%;
+	background-color: ;
+	padding: 2%;
+}
+
+.section#main-body .section#right
+{
+	width: 27%;
+	background-color: rgba(24,24,24,0.2);
+	position: absolute;
+	top: 15px;
+	left: 70%;
+	padding: 1%;
+}
+
+.block#art_O
+{
+   font-size: 18px;
+}
+
+.block#art_O .block#content-video
+{
+	width: 94%;
+	padding: 0px 2% 2% 2%;
+	background-color: rgba(240,240,240,.2);
+	border-left: solid 8px rgba(230,230,230,.4);
+	border-bottom: solid 8px rgba(230,230,230,.8);
+    line-height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.block#art_O .block#content-video .block#spoiler
+{
+	
+}
+
+.block#art_O .block#content-video .block#spoiler iframe
+{
+    height: 460px;
+    display: block;
+}
+/* temporaire */
+
+.section#nav #center_nav a
+{
+    font-size: 22px;
+    color: #fafafa;
+    text-decoration: none;
+}
