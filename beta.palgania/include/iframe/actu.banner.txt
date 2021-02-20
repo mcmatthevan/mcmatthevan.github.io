@@ -1,4 +1,0 @@
-[
-	[Title] = "Bienvenu"
-	[Content] = "bonjour, dddddddd"
-]
