@@ -67,7 +67,6 @@ ul li {
     /*
     position: relative;
     */
-    float: left;
 }
 
 .section#nav-section-web #center_nav
@@ -83,11 +82,8 @@ ul li {
 {
     background-color: ;
     width: 16%;
-    /*
-    position: absolute;
-    top: 20px;
-    left: 80.1%;
-    */
+    position: relative;
+    top: -30px;
     float: right;
 }
 
@@ -97,7 +93,7 @@ ul li {
     font-family: MA;
     width: 100%;
     position: relative;
-    top: -8px;
+    top: 0px;
 	color:#fafafa;
 }
 
@@ -176,6 +172,12 @@ ul li {
 	border-radius: 30px;
 	opacity: 0.9;
 	text-align: center;
+}
+
+.block#menu_block
+{
+	background-color: rgba(50,50,50);
+	padding: 1%;
 }
 
 .section#body .section#banner .block#screen-server:hover
@@ -277,7 +279,7 @@ ul li {
 {
 	width: 94%;
 	padding: 0px 2% 2% 2%;
-	background-color: rgba(240,240,240,.2);
+	background-color: rgba(240,240,240,.8);
 	border-left: solid 8px rgba(230,230,230,.4);
 	border-bottom: solid 8px rgba(230,230,230,.8);
     line-height: 50px;
@@ -295,34 +297,35 @@ ul li {
 
 .block#art_O .block#content-video .block#spoiler iframe
 {
-    height: 460px;
+	width: 70%;
+    height: 320px;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* temporaire */
 
-.section#nav-section-web #center_nav a
+.block#menu_block a
 {
     font-size: 22px;
     color: #fafafa;
     text-decoration: none;
 }
 
-.section#nav-section-web #center_nav li {
+.block#menu_block li {
 /* on place les liens du menu horizontalement */
     display: inline-block;
     margin-left: 8px;
     margin-right: 8px;
 }
-.section#nav-section-web #center_nav a {
-    font-size: 22px;
+.block#menu_block a {
+    font-size: 18px;
     color: #fafafa;
     text-decoration: none;
 }
 
-.section#nav-section-web #center_nav a:hover {
-    font-size: 22px;
+.block#menu_block a:hover {
     color: rgba(255,255,255,.6);
-    text-decoration: none;
 }
 
 .block#art-info-view
