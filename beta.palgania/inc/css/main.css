@@ -217,6 +217,7 @@ li
 {
 	position: relative;
 	top: 0px;
+	z-index: 1;
 }
 
 .right#menu-banner-right #bouton-ip .btn_#btn-ip-styles
@@ -239,9 +240,8 @@ li
     background-color: rgba(20,20,20);
     color: rgba(240,240,240);
     height: 22px;
-    position: relative;
-    display: inline-block;
     width: 100%;
+    position: relative;
 }
 
 .section#main-nav .section#main-nav_menu-bouton ul 
