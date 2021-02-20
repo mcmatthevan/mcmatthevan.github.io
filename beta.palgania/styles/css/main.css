@@ -23,7 +23,7 @@ ul li {
     position: relative;
 }
 
-.section#nav
+.section#nav-section-web
 {
     background-color: rgba(24,24,24,.7);
     padding: 20px 3%;
@@ -33,7 +33,7 @@ ul li {
     transition: .5s;
 }
 
-.section#nav:hover
+.section#nav-section-web:hover
 {
     background-color: rgba(24,24,24,.9);
     padding: 20px 3%;
@@ -43,7 +43,7 @@ ul li {
     transition: .5s;
 }
 
-.section#nav #left_nav
+.section#nav-section-web #left_nav
 {
     background-color: ;
     width: 18%;
@@ -53,7 +53,7 @@ ul li {
     float: left;
 }
 
-.section#nav #center_nav
+.section#nav-section-web #center_nav
 {
     background-color: ;
     width: 60%;
@@ -62,7 +62,7 @@ ul li {
     left: 35px;
 }
 
-.section#nav #right_nav
+.section#nav-section-web #right_nav
 {
     background-color: ;
     width: 16%;
@@ -74,7 +74,7 @@ ul li {
     float: right;
 }
 
-.section#nav #left_nav #logo_web
+.section#nav-section-web #left_nav #logo_web
 {
     font-size: 35px;
     font-family: MA;
@@ -84,7 +84,7 @@ ul li {
 	color:#fafafa;
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view
 {
 	background-color: rgba( 209, 107, 0);
 	padding: 8px;
@@ -99,11 +99,11 @@ ul li {
 	transition: .2s;
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view .btn_view#no
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view .btn_view#no
 {
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view .btn_view#yes
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view .btn_view#yes
 {
     visibility: hidden;
     position: absolute;
@@ -111,17 +111,17 @@ ul li {
     width: 90%;
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view:hover .btn_view#yes
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view:hover .btn_view#yes
 {
     visibility: visible;
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view:hover .btn_view#no
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view:hover .btn_view#no
 {
 	visibility: hidden;
 }
 
-.section#nav #right_nav .btn#btn_ .block#ip-view:hover
+.section#nav-section-web #right_nav .btn#btn_ .block#ip-view:hover
 {
 	border: none;
 	top: 0px;
@@ -283,30 +283,29 @@ ul li {
 }
 /* temporaire */
 
-.section#nav #center_nav a
+.section#nav-section-web #center_nav a
 {
-    display: inherit;
+    font-size: 22px;
+    color: #fafafa;
+    text-decoration: none;
 }
 
-.section#nav #center_nav li {
+.section#nav-section-web #center_nav li {
 /* on place les liens du menu horizontalement */
     display: inline-block;
     margin-left: 8px;
     margin-right: 8px;
 }
-
-.section#nav #center_nav  a {
+.section#nav-section-web #center_nav a {
     font-size: 22px;
     color: #fafafa;
     text-decoration: none;
-    display: block;
 }
 
-.section#nav #center_nav  a:hover {
+.section#nav-section-web #center_nav a:hover {
     font-size: 22px;
     color: rgba(255,255,255,.6);
     text-decoration: none;
-    display: block;
 }
 
 .block#art-info-view
