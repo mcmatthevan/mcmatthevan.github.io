@@ -285,9 +285,28 @@ ul li {
 
 .section#nav #center_nav a
 {
+    display: inherit;
+}
+
+.section#nav #center_nav li {
+/* on place les liens du menu horizontalement */
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.section#nav #center_nav  a {
     font-size: 22px;
     color: #fafafa;
     text-decoration: none;
+    display: block;
+}
+
+.section#nav #center_nav  a:hover {
+    font-size: 22px;
+    color: rgba(255,255,255,.6);
+    text-decoration: none;
+    display: block;
 }
 
 .block#art-info-view
