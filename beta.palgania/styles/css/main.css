@@ -1,3 +1,4 @@
+/* main */
 @font-face {
 	font-family: "MA";
 	src: url('../Gill Sans.otf');
@@ -9,6 +10,22 @@ body
     padding: 0;
     font-family: MA;
 }
+
+.error.red
+{
+	padding: 10px;
+
+	display: block;
+
+	background-color: rgba(211, 47, 11, .8);
+
+	color: #fafafa;
+
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* /Main */
 
 ul li {
 /* on enl?ve ce comportement pour les liens du sous menu */
