@@ -116,7 +116,7 @@ only screen and (max-width: 769px)
     }
 
     /* button ip menu  */
-    .right#menu-banner-right #bouton-ip
+    #main-nav_menu-bouton #bouton-ip
     {
         display: none;
     }

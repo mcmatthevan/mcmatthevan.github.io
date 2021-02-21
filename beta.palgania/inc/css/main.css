@@ -206,14 +206,14 @@ li
 	transition: .5s;
 }
 
-.right#menu-banner-right #bouton-ip 
+#bouton-ip 
 {
 	position: relative;
 	top: 0px;
 	z-index: 1;
 }
 
-.right#menu-banner-right #bouton-ip .btn_#btn-ip-styles
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles
 {
     padding: 20px 70px;
     background-color: rgba(17, 165, 71);
