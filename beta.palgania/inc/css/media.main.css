@@ -1,0 +1,138 @@
+@media
+only screen and (max-width: 769px)
+{
+    /* nav */
+
+    .section#main-nav
+    {
+        width: 100%;
+
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        margin: 0;
+    }
+
+    .section#main-nav .section#main-nav_banner-menu
+    {
+        position: relative;
+        background: url("../img/background.png") no-repeat;
+        background-size: 100% auto;
+        background-position: center;
+    }
+
+    .section#main-nav .section#main-nav_banner-menu .left#menu-banner-left
+    {
+        position: relative;
+        padding: 30px 38px;
+        background-color: ;
+        text-align: center;
+    }
+    
+    /* nav logo */
+
+    .section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu
+    {
+        font-size: 80px;
+        font-family: MA;
+        color: rgbagg(250,250,250);
+        overflow: hidden;
+        text-shadow: 1px 1px 2px black;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* menu black */
+
+    .section#main-nav .section#main-nav_menu-bouton
+    {
+        padding: 1%;
+        background-color: rgba(20,20,20);
+        color: rgba(240,240,240);
+        width: 98%;
+        position: relative;
+        text-align :center;
+    }
+
+    .section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu #span-a
+    {
+        float: left;
+    }
+
+    .section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu span
+    {
+        position: relative;
+        top: 0px;
+    }
+
+    .section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu #span-a:hover span
+    {
+        position: relative;
+        top: 0px;
+    }
+
+    .section#main-nav .section#main-nav_menu-bouton ul 
+    {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        top: 0;
+    }
+    .section#main-nav .section#main-nav_menu-bouton li
+    {
+        padding: 0;
+        margin-left: 10px;
+        margin-right: 10px;
+        position: relative;
+        padding: 0px 10px 0px 10px;
+    }
+
+    .section#main-nav .section#main-nav_menu-bouton li:hover a
+    {
+        padding: 0;
+        position: relative;
+    }
+
+    .section#main-nav .section#main-nav_menu-bouton a
+    {
+        color: rgba(240,240,240);
+        position: relative;
+        top: 0;
+        transition: .1s;
+        display: block;
+    }
+
+    .section#main-nav .section#main-nav_menu-bouton a:hover
+    {
+        color: rgba(240,240,240,.7);
+        top: 0px;
+        display: block;
+        transition: .3s;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* button ip menu  */
+    .right#menu-banner-right #bouton-ip
+    {
+        display: none;
+    }
+
+    /* body main */
+
+    .section#main-body .left#main-body-left
+    {
+        width: 100%;
+    }
+
+    .section#main-body .right#main-body-right
+    {
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+}

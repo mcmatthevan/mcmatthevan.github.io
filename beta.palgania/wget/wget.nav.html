@@ -2,7 +2,7 @@
     <script src="inc/particles.js"></script>
     <script src="inc/app.js"></script> 
     <style>
-        #particles-js canvas
+        .particles-js canvas
         {
             width: 100%;
             min-height: 188px;
@@ -10,7 +10,7 @@
             position: relative;
         }
     </style>
-    <div id="particles-js">
+    <div class="particles-js" id="particles-js">
         <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;"></canvas>
     </div>
     <div id="menu-banner-left" class="left">
@@ -45,21 +45,23 @@
 
     </div>
     <div id="menu-banner-right" class="right">
-        <div id="bouton-ip">
-            <a>
-                <div id="btn-ip-styles" class="btn_">
-                    <span>Ip Minecraft</span>s
-                </div>
-            </a>
-        </div>
+        
     </div>
 </div>
 <div id="main-nav_menu-bouton" class="section">
     <div id="menu-nav" class="menu">
         <ul>
-            <li><a id="a-home" onclick="WGetOpenViewButton('a#a-home', 'root/home.html')">home</a></li>
-            <li><a id="a-actu" onclick="WGetOpenViewButton('a#a-actu', 'root/information.html')">Information</a></li>
-            <li><a id="a-cgu" onclick="WGetOpenViewButton('a#a-cgu', 'root/cgu.html')">Reglements</a></li>
+            <li><a id="a-home" onclick="WGetOpenViewButton('a#a-home', 'root/home.html', 'home')">home</a></li>
+            <li><a id="a-actu" onclick="WGetOpenViewButton('a#a-actu', 'root/information.html', 'news')">Information</a></li>
+            <li><a id="a-cgu" onclick="WGetOpenViewButton('a#a-cgu', 'root/cgu.html','cgu')">Reglements</a></li>
         </ul>
+        <div id="bouton-ip">
+            <a>
+                <div id="btn-ip-styles" class="btn_">
+                    <span id="msg">Ip Minecraft</span>
+                    <span id="ip">51.77.148.210</span>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
