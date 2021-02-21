@@ -1,0 +1,12 @@
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="inc/pl.cook.js"></script>
+<script src="inc/hashtag.js"></script>
+<script src="routeur.js"></script>
+<script src="exec.js"></script>
+<script>
+    if($_GET('file') == "cgu")
+    {
+        $.cookie('file','root/cgu.html');
+        document.location.href="index.html";
+    }
+</script>

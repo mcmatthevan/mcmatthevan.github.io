@@ -1,6 +1,24 @@
 <html>
     <head>
-        <title>PALAGANIA</title>
+        <script>
+
+            function dd()
+            {
+                document.getElementById("main-body-left").style.display = 'block';
+                document.querySelector("#load").className  = 'stop-run-animes';
+            }
+
+            function run()
+            {
+                setTimeout('dd()', 3000);
+            }
+
+            window.onload = function()
+            {
+                run();
+            }
+        </script>
+        <title>Routeur en JQuery and JS and Ajax</title>
         <!-- lien css -->
         <link rel="stylesheet" href="inc/css/main.css">
         <link rel="stylesheet" href="inc/css/media.main.css">
@@ -25,7 +43,7 @@
                 </div>
             </div>
             <div id="main-body" class="section">
-                <div id="main-body-left" class="left">
+                <div id="main-body-left" class="left"  style="display: none;">
                     <div class="block-warning">
                         Nous avons pas pue charger les fichier de page.
                         <br>
@@ -39,7 +57,13 @@
                         Il se peut que votre "JavaScript" sur votre naviguateur Internet soit desactivé.
                     </div>
                 </div>
-                <div id="end_file_img"></div>
+                <div id="load" class="run-animes" >
+                    <div id="aligned-load">
+                        <span id="block-1"></span>
+                        <span id="block-2"></span>
+                        <span id="block-3"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

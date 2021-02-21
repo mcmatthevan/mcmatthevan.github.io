@@ -13,10 +13,3 @@ else
 {
     WGetOpenView('root/home.html','#main-body-left', 'html');
 }
-
-function refresh(a)
-{
-    
-}
-
-// setInterval("refresh('#main-body-left')", 1000)

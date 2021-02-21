@@ -3,3 +3,34 @@
     <br>
     51.77.148.210
 </div>
+<div class="block-warning">
+    <h3>Info Serveur</h3>
+    <ul>
+        <p id="status">Ouvert: </p>
+        <p id="version">Version: </p>
+        <p id="players_num"></p>
+        <ul id="players_list"></ul>
+    </ul>
+</div>
+<script>
+    let url = "51.77.148.210";
+    $(document).ready(() => {
+        $.getJSON("https://api.mcsrvstat.us/1/" + url, (status) => {
+            if (status.debug.ping) {
+                $("#motd").append(status.motd.raw);
+                $("#status").append("Oui");
+                $("#version").append(status.version);
+                $("#players_num").append(status.players.online + " sur " + status.players.max + " Joueurs")
+                $.each(status.players.list, function (index, player) {
+                    $("#players_list").append("<li>" + player + "</li>")
+                });
+            } else {
+                $("#motd").append(status.hostname);
+                $("#status").append("Off");
+                $("#version").hide();
+                $("#players_num").hide();
+            }
+            $("body").fadeIn(2000);
+        });
+    });
+</script>
