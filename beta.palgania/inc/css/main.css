@@ -206,10 +206,10 @@ li
 	transition: .5s;
 }
 
-#bouton-ip 
+#main-nav_menu-bouton #bouton-ip 
 {
 	position: relative;
-	top: 0px;
+	top: -44px;
 	z-index: 1;
 }
 
