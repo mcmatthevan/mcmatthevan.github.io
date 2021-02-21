@@ -237,14 +237,14 @@ li
 	transition: .5s;
 }
 
-.right#menu-banner-right #bouton-ip .btn_#btn-ip-styles #msg
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles #msg
 {
 	position: relative;
 	top: 0px;
 	transition: .5s;
 }
 
-.right#menu-banner-right #bouton-ip .btn_#btn-ip-styles:hover #msg
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles:hover #msg
 {
 	visibility:hidden;
 	position: relative;
@@ -252,11 +252,20 @@ li
 	transition: .5s;
 }
 
-.right#menu-banner-right #bouton-ip .btn_#btn-ip-styles:hover #ip
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles #ip
+{
+	position: absolute;
+	top: 60px;
+	left: 70px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles:hover #ip
 {
 	visibility: visible;
 	height: auto;
 	top: 20px;
+	left: 70px;
 	transition: .5s;
 }
 
