@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <script>
+
+            function dd()
+            {
+                document.getElementById("main-body-left").style.display = 'block';
+                document.querySelector("#load").className  = 'stop-run-animes';
+            }
+
+            function run()
+            {
+                setTimeout('dd()', 3000);
+            }
+
+            window.onload = function()
+            {
+                run();
+            }
+        </script>
+        <title>Routeur en JQuery and JS and Ajax</title>
+        <!-- lien css -->
+        <link rel="stylesheet" href="inc/css/main.css">
+        <link rel="stylesheet" href="inc/css/media.main.css">
+        <link rel="stylesheet" media="screen" href="inc/css/style.css">
+        <!-- Lien javaScript -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="inc/pl.cook.js"></script>
+        <script src="routeur.js"></script>
+        <script src="exec.js"></script>
+        <!-- Meta -->
+        <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+         <meta name="author" content="Vincent Garreau" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
+    <body>
+        <div id="main-app" class="section">
+            <div id="main-nav" class="section">
+                <div class="block-warning">
+                    Nous avons pas pue charger les fichier de page.
+                    <br>
+                    Il se peut que votre "JavaScript" sur votre naviguateur Internet soit desactivé.
+                </div>
+            </div>
+            <div id="main-body" class="section">
+                <div id="main-body-left" class="left"  style="display: none;">
+                    <div class="block-warning">
+                        Nous avons pas pue charger les fichier de page.
+                        <br>
+                        Il se peut que votre "JavaScript" sur votre naviguateur Internet soit desactivé.
+                    </div>
+                </div>
+                <div id="main-body-right" class="right">
+                    <div class="block-warning txt">
+                        Nous avons pas pue charger les fichier de page.
+                        <br>
+                        Il se peut que votre "JavaScript" sur votre naviguateur Internet soit desactivé.
+                    </div>
+                </div>
+                <div id="load" class="run-animes" >
+                    <div id="aligned-load">
+                        <span id="block-1"></span>
+                        <span id="block-2"></span>
+                        <span id="block-3"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

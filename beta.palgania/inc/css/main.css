@@ -1,0 +1,478 @@
+/* 
+ici se trouve tout les 'Class' et 'Id', qui ont pour base des styles,
+ensuite les autre styles des autre page se trouve dans un fichier respective a chaque page.
+Mais, se fichier et valide pour toute la page, elle affiche les styles de base, quand se les fichier
+des page n'existe pas.
+
+- les 'Class' ou '.' corrresponde a des type de div, de meme pour les 'Id' ou '#'
+
+- de base, le fond de la page est en 'SteelBlue'.
+*/
+
+/* affchage de base */
+@font-face {
+	font-family: "MA";
+	src: url('../Gill Sans.otf');
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(17, 165, 71, .1);
+}
+
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: MA;
+}
+
+.section#main-app
+{
+    width: 100%;
+    min-height: 100%;
+    background-color: #fafafa;
+}
+
+li {
+/* on place les liens du menu horizontalement */
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+a {
+    font-size: 18px;
+    font-family: MA;
+    text-decoration: none;
+}
+
+/* base Texte */
+
+
+h1
+{
+	font-size: 32px;
+	padding: 10px 10px 10px 10px;
+}
+
+h2
+{
+	font-size: 25px;
+	padding: 10px 20px 10px 20px;
+	opacity: .9;
+}
+
+#main-articles-view p
+{
+	padding: 20px;
+	word-wrap: break-word;
+}
+
+ul
+{
+	padding: 10px;
+}
+
+.block-warning
+{
+	padding: 20px;
+	display: block;
+	background-color: rgba(220,220,220);
+	border-left: solid rgba(17, 165, 71);
+	margin-top:  10px;
+}
+
+.block-tag
+{
+	padding: 16px;
+	display: block;
+	background-color: red;
+	margin: 38px;
+	background-color: rgba(17, 165, 71, .4);
+}
+
+li
+{
+    padding: 10px;
+}
+
+.block-content-A
+{
+	border-left: solid  6px rgba(17, 165, 71, .8);
+	border-bottom: solid 8px rgba(17, 165, 71, .8);
+	display: inline-block;
+	background-color: rgba(240,240,240);
+}
+
+.block-content-A h1
+{
+	margin-left: 20px;
+	padding: 15px;
+}
+
+.block-content-A ul
+{
+	margin: 0;
+	padding: 0;
+}
+
+.content-video
+{
+}
+
+.content-video
+{
+	margin-left: auto;
+	margin-right: auto;
+	height: 355px;
+	width: 630px;
+	position: relative;
+}
+
+.content-video iframe
+{
+	height: 355px;
+	width: 630px;
+}
+
+.content-video-screen-size
+{
+	background-color: ;
+
+	width: 90%;
+	height: 90%;
+
+	position: fixed;
+	top: 5%;
+
+	z-index: 999;
+}
+
+.content-video-screen-size iframe
+{
+	height: 100%;
+	width: 100%.
+}
+
+.content-video #btn-scrren-video
+{
+	position: absolute;
+	top: 33%;
+	left: 13%;
+	padding: 20px;
+	height: 33px;
+	width: 33px;
+	background-color: rgba(30,30,30, .7);
+	color: #fafafa;
+	border-radius: 50%;
+}
+
+#particles-js canvas
+{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#end_file_img
+{
+	background: url("../img/end_file.png") no-repeat;
+	background-size: 100% auto;
+	width: 180px;
+	height: 48px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#load
+{
+	position: relative;
+	top: 0;
+	left: 0;
+	background-color: ;
+	z-index: 999;
+}
+
+.load-main-window#load
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: ;
+	z-index: 999;
+}
+
+#aligned-load
+{
+	height: 58px;
+	width: 212px;
+	background-color: ;
+    position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+.load-main-window#aligned-load
+{
+    position: relative;
+	margin-top: 160px;
+}
+
+#load #aligned-load span
+{
+	margin-left: 0px;
+	background-color: rgba(17, 165, 71);
+	height: 58;
+	width: 58px;
+	display: block;
+	float: left;
+	transition: .1s;
+	box-shadow: 0pc 0pc 5pc rgba(17, 165, 71);
+}
+
+.run-animes#load #aligned-load span
+{
+	animation: 3s infinite slidein;
+}
+
+#load #aligned-load:hover span
+{
+	background-color: rgba(17, 165, 71);
+	height: 48px;
+	width: 48px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-top: 5px;
+	transition: .1s;
+	animation: 3s infinite slidein;
+}
+
+#load #aligned-load span:nth-child(2n+1)
+{
+	background-color: rgba(17, 165, 71);
+	height: 48px;
+	width: 48px;
+	margin-left: 14px;
+	margin-right: 14px;
+	margin-top: 5px;
+	transition: .1s;
+}
+
+#load #aligned-load:hover span:nth-child(2n+1)
+{
+	background-color: rgba(17, 165, 71);
+	height: 58px;
+	width: 58px;
+	margin-left: 9px;
+	margin-right: 9px;
+	margin-top: 0px;
+	transition: .1s;
+}
+/* affichage de l'espace de naviguation temporaire*/
+
+.section#main-nav
+{
+    width: 100%;
+    
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    margin: 0;
+}
+
+.section#main-nav .section#main-nav_banner-menu
+{
+	background-color: rgba(37,37,37);
+	padding: 0;
+	position: relative;
+	background: url("../img/background.png") no-repeat;
+	background-size: 100% auto;
+	background-position: center;
+}
+
+.section#main-nav .section#main-nav_banner-menu .left#menu-banner-left
+{
+	width: 80%;
+	position: relative;
+	text-align: center;
+	padding: 70px 38px;
+}
+.section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu
+{
+	font-size: 40px;
+	font-family: MA;
+	color: rgba(250,250,250);
+	overflow: hidden;
+	text-shadow: 1px 1px 2px black;
+}
+
+.section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu #span-a
+{
+	float: left;
+}
+
+.section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu span
+{
+	position: relative;
+	top: 0px;
+	transition: 3s;
+}
+
+.section#main-nav_banner-menu .left#menu-banner-left #logo-banner-menu #span-a:hover span
+{
+	position: relative;
+	top: -40px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip 
+{
+	position: relative;
+	top: -44px;
+	z-index: 1;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles
+{
+    padding: 20px 70px;
+    background-color: rgba(17, 165, 71);
+    font-size: 20px;
+    color: #fafafa;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    overflow: hidden;
+}
+
+.right#menu-banner-right #bouton-ip .btn_#btn-ip-styles #ip
+{
+	visibility:hidden;
+	display: block;
+	height: 0px;
+	position: absolute;
+	top: 60px;
+	left: 70px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles #msg
+{
+	position: relative;
+	top: 0px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles:hover #msg
+{
+	visibility:hidden;
+	position: relative;
+	top: -100px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles #ip
+{
+	position: absolute;
+	top: 100px;
+	left: 70px;
+	transition: .5s;
+}
+
+#main-nav_menu-bouton #bouton-ip .btn_#btn-ip-styles:hover #ip
+{
+	visibility: visible;
+	height: auto;
+	top: 20px;
+	left: 70px;
+	transition: .5s;
+}
+
+/* menu nav  */
+
+.section#main-nav .section#main-nav_menu-bouton
+{
+    padding: 1% 10%;
+    background-color: rgba(20,20,20);
+    color: rgba(240,240,240);
+    width: 80%;
+    position: relative;
+}
+
+.section#main-nav .section#main-nav_menu-bouton ul 
+{
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 0;
+}
+.section#main-nav .section#main-nav_menu-bouton li
+{
+	padding: 0;
+	margin-left: 10px;
+	margin-right: 10px;
+	position: relative;
+	padding: 0px 10px 0px 10px;
+}
+
+.section#main-nav .section#main-nav_menu-bouton li:hover a
+{
+	padding: 0;
+	position: relative;
+}
+
+.section#main-nav .section#main-nav_menu-bouton a
+{
+    color: rgba(240,240,240);
+    position: relative;
+    top: 0;
+    transition: .1s;
+    display: block;
+}
+
+.section#main-nav .section#main-nav_menu-bouton a:hover
+{
+    color: rgba(240,240,240,.7);
+    top: 0px;
+    display: block;
+    transition: .3s;
+    cursor: pointer;
+    position: relative;
+}
+
+/* body */
+
+.section#main-body
+{
+	position: relative;
+	padding: 20px 3% 20px 3%;
+}
+
+.section#main-body .left#main-body-left
+{
+	width: 70%;
+}
+
+.section#main-body .right#main-body-right
+{
+	width: 26%;
+	position: absolute;
+	top: 20px;
+	left: 71%;
+}
+
+/* animation */
+
+@keyframes slidein {
+  from { transform: scaleX(-1); }
+  to   { transform: scaleX(1), scalY(1); }
+}
