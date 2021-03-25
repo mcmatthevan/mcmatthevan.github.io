@@ -148,6 +148,15 @@ section.reglement, .bedrock_actu{
     text-decoration: underline;
 }
 
+.borders{
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto;
+}
+.borders tbody tr td{
+    border: solid 1px gray;
+}
+
 article{
     width: 50%;
     margin: auto;
@@ -321,7 +330,9 @@ mark{
 	video {
 		max-width: 100%;
 	}
-	
+	.borders{
+        width: 90%;
+    }
 	/* conserver le ratio des images */
 
 	img {
