@@ -12,10 +12,6 @@ header{
     background: grey;
 }
 
-section{
-    display: flex;
-}
-
 #logo{
     display: block;
     width: 5%;
