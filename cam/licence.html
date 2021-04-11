@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icon.png" type="image/png">
+    <link rel="stylesheet" href="licence.css">
+    <title>C.A.M.</title>
+</head>
+
+<body>
+        <header>
+            <img id="logo" src="img/logo.png" alt="">
+        </header>
+        <h1>Certificat d'Aptitude à la Modération</h1>
+        <h2>N° <span id="nb-c"></span></h2>
+        <section>
+            <dl>
+                <dt>Joueur titulaire :</dt>
+                <dd>
+                    <div>
+                        <dt>
+                            Pseudo :<dt> <dd id="pseudo"></dd>
+                        
+                    </div>
+                    
+                    <div class="right">
+                        <dt>UUID : </dt><dd id="uuid"></dd>
+                    </div>
+                </dd>
+                <dt>Date et heure de délivrance :</dt><dd id="date"></dd>
+                <dt>Organisme émetteur :</dt><dd class="sc">Administration de Palgania</dd>
+                <dt>Procès verbal mentionnant l'avis favorable : </dt><dd><a id="link" href="">Lien vers PDF</a></dd>
+                
+            </dl>
+        </section>
+        
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="lic.js"></script>
+</body>
+
+</html>
