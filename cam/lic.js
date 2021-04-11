@@ -1,7 +1,7 @@
 $(function(){
     let id = location.search.replace(/^[\s\S]*[\?&]id=([\S\s]*?)(?:&[\S\s]*)?$/,"$1");
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "lic/"+id+".json",
         success: function (response) {
             response = JSON.parse(response);
