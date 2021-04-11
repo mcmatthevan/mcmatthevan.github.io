@@ -4,13 +4,14 @@ $(function(){
         type: "GET",
         url: "lic/"+id+".json",
         success: function (response) {
-            response = JSON.parse(response);
-            $("#pseudo").text(reponse.pseudo);
+            $("#pseudo").text(response.pseudo);
             $("#uuid").text(response.uuid);
             $("#nb-c").text(response.id);
             $("#date").text(new Date(timestamp=parseFloat(response.delivt)*1000).toLocaleString("fr-FR",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
-            $("#link").attr("href","pdf_lic/"+reponse.id+".pdf");
+            $("#link").attr("href","pdf_lic/"+response.id+".pdf");
+        },
+        error: function(x,h,r){
+            location.href = "../palgania/404.html";
         }
     });
 });
-//{"pseudo": "pseudo", "uuid": "0bf7687", "id": "PALG2021-04-11-5518", "delivt": 1618127718.414568}
