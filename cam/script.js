@@ -6,7 +6,7 @@ $(function () {
     function ping(port,code){
         $.ajax({
             type: "GET",
-            url: "https://" + ip + ":" + port + "/apps/ping?code=" + code,
+            url: "http://" + ip + ":" + port + "/apps/ping?code=" + code,
             success: function(){
                 location.href = "http://" + ip + ":" + port + "/index?code=" + code;
             },
