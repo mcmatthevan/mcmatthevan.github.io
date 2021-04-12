@@ -1,5 +1,22 @@
 $(function () {
-    var ip = "localhost";
+    let ip = location.search.replace(/^[\s\S]*[\?&]ip=([\S\s]*?)(?:&[\S\s]*)?$/,"$1");
+    if (ip == ""){
+        ip = "51.77.148.210";
+    }
+    function ping(port,code){
+        $.ajax({
+            type: "GET",
+            url: "https://" + ip + ":" + port + "/apps/ping?code=" + code,
+            success: function(){
+                location.href = "http://" + ip + ":" + port + "/index?code=" + code;
+            },
+            error: function(){
+                setTimeout(function(){
+                    return ping(port,code);
+                },1000)
+            }
+        })
+    }
     $("#ok").click(function (e) {
         var id = $("#id").val().trim(),
             mdp = $("#mdp").val().trim();
@@ -20,7 +37,8 @@ $(function () {
                         $("#error").text("L'identifiant ou le mot de passe est incorrect.");
                     } else {
                         response = JSON.parse(response);
-                        location.href = "http://" + ip + ":" + response.port + "/index?code=" + response.code;
+                        $("#info").text("Veuillez patienter, vous serez bientôt redirigé vers le serveur d'examen...");
+                        ping(reponse.port,response.code);
                     }
                 },
                 error: function (x, s, e) {
