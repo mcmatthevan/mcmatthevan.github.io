@@ -38,7 +38,7 @@ $(function () {
                     } else {
                         response = JSON.parse(response);
                         $("#info").text("Veuillez patienter, vous serez bientôt redirigé vers le serveur d'examen...");
-                        ping(reponse.port,response.code);
+                        ping(response.port,response.code);
                     }
                 },
                 error: function (x, s, e) {
