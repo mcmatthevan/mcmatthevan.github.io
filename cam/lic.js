@@ -9,7 +9,7 @@ $(function(){
             $("#nb-c").text(response.id);
             $("#date").text(new Date(timestamp=parseFloat(response.delivt)*1000).toLocaleString("fr-FR",{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
             $("#link").attr("href","pdf_lic/"+response.id+".pdf");
-            $("#serie").text(reponse.serie)
+            $("#serie").text(response.serie)
         },
         error: function(x,h,r){
             location.href = "../palgania/404.html";
