@@ -9,7 +9,7 @@ $(function () {
             type: "GET",
             url: "http" + secure + "://" + ip + ":" + port + "/apps/ping?code=" + code,
             success: function(){
-                location.href = "http://" + ip + ":" + port + "/index?code=" + code;
+                location.href = "http" + secure + "://" + ip + ":" + port + "/index?code=" + code;
             },
             error: function(){
                 setTimeout(function(){
