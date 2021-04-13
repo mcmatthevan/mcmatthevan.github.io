@@ -3,10 +3,11 @@ $(function () {
     if (ip == ""){
         ip = "51.77.148.210";
     }
+    let secure = location.search.replace(/^[\s\S]*[\?&]secure=([\S\s]*?)(?:&[\S\s]*)?$/,"$1") == "false" ? "" : "s";
     function ping(port,code){
         $.ajax({
             type: "GET",
-            url: "http://" + ip + ":" + port + "/apps/ping?code=" + code,
+            url: "http" + secure + "://" + ip + ":" + port + "/apps/ping?code=" + code,
             success: function(){
                 location.href = "http://" + ip + ":" + port + "/index?code=" + code;
             },
@@ -27,7 +28,7 @@ $(function () {
             $("#error").html("&nbsp;");
             $.ajax({
                 type: "POST",
-                url: "http://" + ip + ":6488/index?code=9090",
+                url: "http" + secure + "://" + ip + ":6488/index?code=9090",
                 data: {
                     "id": id,
                     "mdp": mdp
