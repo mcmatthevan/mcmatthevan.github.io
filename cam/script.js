@@ -1,7 +1,7 @@
 $(function () {
     let ip = location.search.replace(/^[\s\S]*[\?&]ip=([\S\s]*?)(?:&[\S\s]*)?$/,"$1");
     if (ip == ""){
-        ip = "51.77.148.210";
+        ip = "singalong-game.com";
     }
     let secure = location.search.replace(/^[\s\S]*[\?&]secure=([\S\s]*?)(?:&[\S\s]*)?$/,"$1") == "false" ? "" : "s";
     function ping(port,code){
