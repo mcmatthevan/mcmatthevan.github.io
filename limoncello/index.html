@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mbadapt.css">
+    <link rel="shortcut icon" href="../palgania/images/logo.png" type="image/png">
+    <title>Limoncello</title>
+</head>
+
+<body>
+    <div id="banner"><div><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt=""></div>
+        <div>
+            <p>Administration de Palgania</p>
+            <p>Commission de Modération</p>
+        </div>
+        <div id="signOut">Se déconnecter</div>
+    </div>
+    <section id="connection">
+        <div>
+            <h1>Limoncello - Connection</h1>
+            <table>
+                <tr>
+                    <td><label for="user_input">Nom d'utilisateur</label></td>
+                    <td><input type="text" id="user_input"></td>
+                </tr>
+                <tr>
+                    <td><label for="password_input">Mot de passe</label></td>
+                    <td><input type="password" id="password_input"></td>
+                </tr>
+            </table>
+            <input type="button" value="Se connecter" id="button_connect">
+            <p id="error_connect" class="error"></p>
+        </div>
+
+    </section>
+    <section id="error_notavailable">
+        <h1>
+            Erreur : <br/>le serveur n'est pas joignable pour le moment. <br/>Veuillez réessayer dans quelques minutes.
+        </h1>
+    </section>
+    <section id="home">
+        <ul class="buttons"><li id="button_tickets">Tickets</li><li id="button_procedures">Procédures</li><li id="button_indictments">Réquisitoires</li></ul>
+        <div id="home_cadre"><p id="nothing_to_see">Aucun élément à afficher</p></div>
+    </section>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="functions.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

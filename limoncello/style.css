@@ -1,0 +1,136 @@
+body{
+    margin: unset;
+    font-family: Calibri,Arial, Helvetica, sans-serif;
+}
+#banner{
+    position: relative;
+    height: 5em;
+    background: linear-gradient(rgb(194, 194, 194),rgb(240, 240, 240));
+    display: flex;
+    align-items: center;
+    font-variant: small-caps;
+}
+#banner div:nth-child(1){
+    display: flex;
+    height: 5em;
+    align-items: center;
+}
+#banner div:nth-child(2){
+    display: block;
+    font-size: 1.1em;
+}
+img{
+    display: block;
+    height: 95%;
+    margin: 10px;
+}
+
+#connection{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#connection div{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(rgb(194, 194, 194),rgb(240, 240, 240));
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#error_notavailable{
+    display: none;
+    color: red;
+    text-align: center;
+}
+
+.error{
+    color: red;
+    font-style: italic;
+}
+
+#home{
+    display: none;
+    margin-top: 20px;
+}
+
+.buttons{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin: auto;
+}
+
+#home_cadre{
+    width: 60%;
+    margin: auto;
+    margin-top: 0;
+    border: 1px black solid;
+}
+
+
+.closed{
+    color: green;
+}
+
+.waiting{
+    color: orange;
+}
+
+.opened{
+    color: red;
+}
+
+#nothing_to_see, .summary div:nth-child(2) p,.summary div:nth-child(3) p{
+    text-align: center;
+    font-style: italic;
+}
+
+.buttons li{
+    background: linear-gradient(rgb(194, 194, 194),rgb(240, 240, 240));
+    padding: 10px 30px 10px 30px;
+    border-left: 1px solid grey; border-right: 1px solid grey; border-top: 1px solid grey;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+.buttons li.selected{
+    border-bottom: solid 3px red;
+    background: linear-gradient(rgb(170, 170, 170),rgb(207, 207, 207));
+}
+
+.buttons li:hover{
+    border-bottom: solid 1px red;
+    background: linear-gradient(rgb(163, 162, 162),rgb(202, 202, 202));
+}
+
+.summary{
+    display: flex;
+    background: linear-gradient(rgb(163, 162, 162),rgb(202, 202, 202));
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    align-items: center;
+}
+
+.summary div h1, .summary div p{
+    margin: 0;
+}
+
+#signOut{
+    color: red;
+    text-decoration: underline;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+#signOut:hover{
+    color: rgb(134, 35, 35);
+}
