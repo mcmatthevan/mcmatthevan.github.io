@@ -12,39 +12,93 @@
 </head>
 
 <body>
-    <div id="banner"><div><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt=""></div>
-        <div>
+    <div id="banner">
+        <div id="divlogos"><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt=""></div>
+        <div id="divinst">
             <p>Administration de Palgania</p>
             <p>Commission de Modération</p>
         </div>
-        <div id="signOut">Se déconnecter</div>
+        <div id="userbloc">
+            <div id="firstdivuserbloc">
+                <div id="div_titlename"><span id="titlename"></span></div>
+                <div id="titlerole"></div>
+                <div id="homesettings">
+                    <a id="homelink" href="?page=home"><img src="img/homeicon.png" alt=""></a>
+                    <a href="?page=changepassword">Paramètres</a>
+                </div>
+                
+            </div>
+            <div id=signOut>Se déconnecter</div>
+        </div>
     </div>
     <section id="connection">
         <div>
             <h1>Limoncello - Connection</h1>
-            <table>
-                <tr>
-                    <td><label for="user_input">Nom d'utilisateur</label></td>
-                    <td><input type="text" id="user_input"></td>
-                </tr>
-                <tr>
-                    <td><label for="password_input">Mot de passe</label></td>
-                    <td><input type="password" id="password_input"></td>
-                </tr>
-            </table>
-            <input type="button" value="Se connecter" id="button_connect">
+            <form id="connect_form">
+                <table>
+                    <tr>
+                        <td><label for="user_input">Nom d'utilisateur</label></td>
+                        <td><input type="text" id="user_input" name="username"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password_input">Mot de passe</label></td>
+                        <td><input type="password" id="password_input" name="password"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Se connecter" id="button_connect">
+            </form>
+
             <p id="error_connect" class="error"></p>
         </div>
 
     </section>
-    <section id="error_notavailable">
+    <section id="error_notavailable" class="error_section">
         <h1>
-            Erreur : <br/>le serveur n'est pas joignable pour le moment. <br/>Veuillez réessayer dans quelques minutes.
+            Erreur : <br />le serveur n'est pas joignable pour le moment. <br />Veuillez réessayer dans quelques
+            minutes.
+        </h1>
+    </section>
+    <section id="error_404" class="error_section">
+        <h1>
+            Erreur : <br />404 Not Found
         </h1>
     </section>
     <section id="home">
-        <ul class="buttons"><li id="button_tickets">Tickets</li><li id="button_procedures">Procédures</li><li id="button_indictments">Réquisitoires</li></ul>
-        <div id="home_cadre"><p id="nothing_to_see">Aucun élément à afficher</p></div>
+        <ul class="buttons">
+            <li id="button_tickets">Tickets</li>
+            <li id="button_procedures">Procédures</li>
+            <li id="button_indictments">Réquisitoires</li>
+        </ul>
+        <div id="home_cadre">
+            <p id="nothing_to_see">Aucun élément à afficher</p>
+            <div id="home_opened">
+
+            </div>
+            <hr/>
+            <div id="home_closed"></div>
+        </div>
+    </section>
+    <section id="changepassword">
+        <h1>Changement du mot de passe</h1>
+        <form id="changepassword_form">
+            <table>
+                <tr id="group_old">
+                    <td><label for="input_old">Mot de passe actuel</label></td>
+                    <td><input type="password" id="input_old" name="old_password"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_new">Nouveau mot de passe</label></td>
+                    <td><input type="password" id="input_new" name="new_password"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_confirm">Confirmer le nouveau mot de passe</label></td>
+                    <td><input type="password" id="input_confirm" name="confirm_password"></td>
+                </tr>
+            </table>
+            <input type="submit" value="OK" id="ok_changepassword">
+        </form>
+        <p id="error_changepassword" class="error"></p>
+        <p id="success_changepassword" class="success"></p>
     </section>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="functions.js"></script>

@@ -54,3 +54,47 @@ function isAuth() {
     });
     return result;
 }
+
+function needPassword(){
+    let result;
+    if (typeof sessionStorage["limoncello-sessionId"] !== "undefined"){
+        $.ajax({
+            type: "GET",
+            url: IP + "user/changePassword",
+            data: sessioned({}),
+            async: false,
+            dataType: "json",
+            error: function(x){
+                if (x.status === 0){
+                    result = "ERR_NOT_AVAILABLE";
+                }
+            },
+            success: function(response){
+                result = response == "NEEDED";
+            }
+        });
+        return result;
+    }
+}
+
+function getUserInfo(){
+    let result;
+    if (typeof sessionStorage["limoncello-sessionId"] !== "undefined"){
+        $.ajax({
+            type: "GET",
+            url: IP + "user/selfInfo",
+            data: sessioned({}),
+            async: false,
+            dataType: "json",
+            error: function(x){
+                if (x.status === 0){
+                    result = "ERR_NOT_AVAILABLE";
+                }
+            },
+            success: function(response){
+                result = response;
+            }
+        });
+        return result;
+    }
+}

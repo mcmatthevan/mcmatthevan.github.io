@@ -2,20 +2,25 @@ body{
     margin: unset;
     font-family: Calibri,Arial, Helvetica, sans-serif;
 }
+
+section{
+    display: none;
+}
+
 #banner{
     position: relative;
-    height: 5em;
+    height: 6em;
     background: linear-gradient(rgb(194, 194, 194),rgb(240, 240, 240));
     display: flex;
     align-items: center;
     font-variant: small-caps;
 }
-#banner div:nth-child(1){
+#divlogos{
     display: flex;
     height: 5em;
     align-items: center;
 }
-#banner div:nth-child(2){
+#divinst{
     display: block;
     font-size: 1.1em;
 }
@@ -27,7 +32,7 @@ img{
 
 #connection{
     text-align: center;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -41,7 +46,7 @@ img{
     padding: 20px;
 }
 
-#error_notavailable{
+.error_section{
     display: none;
     color: red;
     text-align: center;
@@ -50,6 +55,10 @@ img{
 .error{
     color: red;
     font-style: italic;
+}
+
+.success{
+    color: green;
 }
 
 #home{
@@ -78,14 +87,14 @@ img{
 }
 
 .waiting{
-    color: orange;
+    color: rgb(255, 123, 0);
 }
 
 .opened{
     color: red;
 }
 
-#nothing_to_see, .summary div:nth-child(2) p,.summary div:nth-child(3) p{
+#nothing_to_see, .summary div:nth-child(2) p,.summary div:nth-child(3) p,.summary div:nth-child(4) p{
     text-align: center;
     font-style: italic;
 }
@@ -118,19 +127,89 @@ img{
     margin: 10px;
     padding: 5px;
     align-items: center;
+    text-align: center;
 }
 
 .summary div h1, .summary div p{
     margin: 0;
 }
 
+#userbloc{
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
 #signOut{
     color: red;
     text-decoration: underline;
-    position: absolute;
-    right: 10px;
     cursor: pointer;
+    margin-left: 20px;
 }
 #signOut:hover{
     color: rgb(134, 35, 35);
+}
+
+#changepassword{
+    text-align: center;
+    display: none;
+}
+
+#changepassword table{
+    margin: auto;
+}
+
+a{
+    color: red;
+    font-variant: normal;
+    font-size: 0.8em;
+}
+
+a:hover{
+    color: rgb(109, 26, 26);
+    text-decoration: unset;
+}
+
+a:visited{
+    color: red;
+}
+
+#firstdivuserbloc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    font-variant: normal;
+}
+#div_titlename img{
+    width: 15px;
+}
+
+#titlename::before{
+    content: url("img/profile_icon.png");
+}
+
+#homesettings{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#homesettings a{
+    margin: 5px;
+}
+
+#homelink{
+    border-right: 1px grey solid;
+}
+
+#titlename{
+    font-weight: bold;
+}
+
+#titlerole{
+    font-size: 0.9em;
+    color: rgb(99, 99, 99);
 }
