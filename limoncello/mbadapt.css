@@ -7,6 +7,7 @@
 
 	body {
 		width: auto;
+		font-size: 0.8em;
 		margin: 0;
 		padding: 0;
 	}
@@ -50,16 +51,9 @@
 	}
 	#banner{
 		height: 10em;
-		justify-content: center;
 	}
 	#banner img{
 		width: 20%;
-	}
-	#banner div:nth-child(2){
-		display: none;
-	}
-	#banner div:nth-child(1){
-		justify-content: center;
 	}
 	code,
 	pre,
@@ -68,6 +62,12 @@
 	}
 	
 	/* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+
+	.buttons li{
+		padding: 1px;
+		padding-top: 2px;
+		margin: auto;
+	}
 
 	.element1,
 	.element2 {
@@ -80,15 +80,29 @@
 	.hide_mobile {
 		display: none !important;
 	}
+
+	#userbloc{
+		flex-direction: column;
+	}
+
+	#homelink img{
+		width: 15px;
+	}
+
+	#home_cadre{
+		width: 90%;
+	}
+
+	#banner{
+		justify-content: flex-start;
+	}
 	
+	#banner div:nth-child(1) {
+		justify-content: flex-start;
+	}
+
 	/* Un message personnalisé */
 
-	body:before {
-		display: block;
-		text-align: center;
-		font-style: italic;
-		color: #777;
-	}
 @media (max-device-width:768px) and (orientation: landscape) {
     html {
      -webkit-text-size-adjust: 100%;

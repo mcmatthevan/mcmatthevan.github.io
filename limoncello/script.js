@@ -14,7 +14,8 @@ $(function () {
         });
     });
     $("section").hide();
-    let auth = isAuth();
+    let auth = isAuth(),
+        counter = 0;
     if (auth === "ERR_NOT_AVAILABLE") {
         $("#error_notavailable").show();
         $("#userbloc").hide();
@@ -35,7 +36,7 @@ $(function () {
             if (auth === true) {
                 location.search = "?page=home";
             }
-            $("#connection").css("display","flex");
+            $("#connection").css("display", "flex");
             $("#userbloc").hide();
             $("#connect_form").submit(function (e) {
                 e.preventDefault();
@@ -64,111 +65,153 @@ $(function () {
             $("#titlerole").text(userinfos[1]);
             if (args.page === "home") {
                 $("#home").show();
+                $("#home_display_option input").change(function () {
+                    let actsearch = location.search.replace(/&(nbpage|perpage)=[0-9]*/g, "");
+                    location.search = actsearch + "&nbpage=" + $("#opt_page").val() + "&perpage=" + $("#opt_perpage").val();
+                });
+                if (~["indictments", "procedures", "tickets"].indexOf(args.show)) {
+                    $("#home_display_option").css("display", "flex");
+                }
+                if (/^[0-9]+$/.test(args.nbpage)) {
+                    $("#opt_page").val(args.nbpage);
+                }
+                if (/^[0-9]+$/.test(args.perpage)) {
+                    $("#opt_perpage").val(args.perpage);
+                }
                 $("#button_tickets,#button_procedures,#button_indictments").click(function (e) {
                     location.search = "?page=home&show=" + e.currentTarget.id.replace(/button_/, "");
                 });
-                if (args.show === "tickets") {
-                    $("#button_tickets").addClass("selected");
-                    $("#button_procedures").removeClass("selected");
-                    $("#button_indictments").removeClass("selected");
-                    $.ajax({
-                        type: "GET",
-                        url: IP + "ticket/list",
-                        data: sessioned({}),
-                        dataType: "json",
-                        success: function (response) {
-                            if (response != []) {
-                                $("#nothing_to_see").html("");
-                            }
-                            for (let i = 0, c = response.length; i < c; ++i) {
-                                let status;
-                                if (response[i].closedConfirm === false) {
-                                    status = ["waiting", "En attente de clôture"];
-                                } else {
-                                    status = ["closed", "Clôturé"];
-                                }
-                                let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
-                                "</p><p>" + response[i].authorId + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
-                                + "</p></div></div>";
-                                if (status[0] === "waiting"){
-                                    $("#home_opened").append(toappend);
-                                } else {
-                                    $("#home_closed").append(toappend);
-                                }
-                            }
-                        }
-                    });
-                } else if (args.show === "procedures") {
-                    $("#button_tickets").removeClass("selected");
-                    $("#button_procedures").addClass("selected");
-                    $("#button_indictments").removeClass("selected");
 
-                    $.ajax({
-                        type: "GET",
-                        url: IP + "procedure/list",
-                        data: sessioned({}),
-                        dataType: "json",
-                        success: function (response) {
-                            let status;
+                switch (args.show) {
+                    case "tickets":
+                        $("#button_tickets").addClass("selected");
+                        $("#button_procedures").removeClass("selected");
+                        $("#button_indictments").removeClass("selected");
+                        if (checkPerm("ticket.new")) {
+                            $("#home_new p").text("Nouveau ticket");
+                            $("#home_new a").attr("href", $("#home_new a").attr("href") + "ticket");
+                            $("#home_new").show();
+                        }
+                        $.ajax({
+                            type: "GET",
+                            url: IP + "ticket/list",
+                            data: sessioned({
+                                "page": $("#opt_page").val(),
+                                "perpage": $("#opt_perpage").val()
+                            }),
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.length !== 0) {
+                                    $("#nothing_to_see").html("");
+                                }
+                                for (let i = 0, c = response.length; i < c; ++i) {
+                                    let status;
+                                    if (response[i].closedConfirm === false) {
+                                        status = ["waiting", "En attente de clôture"];
+                                    } else {
+                                        status = ["closed", "Clôturé"];
+                                    }
+                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
+                                        "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
+                                        "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
+                                        + "</p></div></div>";
+                                    if (status[0] === "waiting") {
+                                        $("#home_opened").append(toappend);
+                                    } else {
+                                        $("#home_closed").append(toappend);
+                                    }
+                                }
+                            }
+                        });
+                        break;
+                    case "procedures":
+                        $("#button_tickets").removeClass("selected");
+                        $("#button_procedures").addClass("selected");
+                        $("#button_indictments").removeClass("selected");
+                        if (checkPerm("procedure.new")) {
+                            $("#home_new p").text("Nouvelle procédure");
+                            $("#home_new a").attr("href", $("#home_new a").attr("href") + "procedure");
+                            $("#home_new").show();
+                        }
 
-                            if (response != []) {
-                                $("#nothing_to_see").html("");
-                            }
-                            for (let i = 0, c = response.length; i < c; ++i) {
-                                if (response[i].closedConfirm && !response[i].opened) {
-                                    status = ["closed", "Clôturée"];
-                                } else if (!response[i].opened) {
-                                    status = ["waiting", "En attente de clôture"];
-                                } else {
-                                    status = ["opened", "En cours"];
-                                }
-                                let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                "</h1><p>" + response[i].descr + "</p></div><div><p>Id : " + response[i].id +
-                                "</p><p>" + response[i].authorId + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
-                                + "</p></div></div>"
-                                if (status[0] === "waiting" || status[0] === "opened"){
-                                    $("#home_opened").append(toappend);
-                                } else {
-                                    $("#home_closed").append(toappend);
-                                }
-                            }
-                        }
-                    });
-                } else if (args.show === "indictments") {
-                    $("#button_tickets").removeClass("selected");
-                    $("#button_procedures").removeClass("selected");
-                    $("#button_indictments").addClass("selected");
-                    $.ajax({
-                        type: "GET",
-                        url: IP + "indictment/list",
-                        data: sessioned({}),
-                        dataType: "json",
-                        success: function (response) {
-                            let status;
-                            if (response != []) {
-                                $("#nothing_to_see").html("");
-                            }
-                            for (let i = 0, c = response.length; i < c; ++i) {
+                        $.ajax({
+                            type: "GET",
+                            url: IP + "procedure/list",
+                            data: sessioned({
+                                "page": $("#opt_page").val(),
+                                "perpage": $("#opt_perpage").val()
+                            }),
+                            dataType: "json",
+                            success: function (response) {
                                 let status;
-                                if (typeof response[i].procedureId === "undefined") {
-                                    status = ["opened", "Non-traité"];
-                                } else {
-                                    status = ["closed", "Traité par<br/>" + response[i].procedureId];
+
+                                if (response != []) {
+                                    $("#nothing_to_see").html("");
                                 }
-                                let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
-                                "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
-                                "</p><p>" + response[i].authorId + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
-                                + "</p></div></div>";
-                                if (status[0] === "opened"){
-                                    $("#home_opened").append(toappend);
-                                } else {
-                                    $("#home_closed").append(toappend);
+                                for (let i = 0, c = response.length; i < c; ++i) {
+                                    if (response[i].closedConfirm && !response[i].opened) {
+                                        status = ["closed", "Clôturée"];
+                                    } else if (!response[i].opened) {
+                                        status = ["waiting", "En attente de clôture"];
+                                    } else {
+                                        status = ["opened", "En cours"];
+                                    }
+                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
+                                        "</h1><p>" + response[i].descr + "</p></div><div><p>Id : " + response[i].id +
+                                        "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
+                                        + "</p></div></div>"
+                                    if (status[0] === "waiting" || status[0] === "opened") {
+                                        $("#home_opened").append(toappend);
+                                    } else {
+                                        $("#home_closed").append(toappend);
+                                    }
                                 }
-                                
                             }
+                        });
+                        break;
+                    case "indictments":
+                        $("#button_tickets").removeClass("selected");
+                        $("#button_procedures").removeClass("selected");
+                        $("#button_indictments").addClass("selected");
+                        if (checkPerm("indictment.new")) {
+                            $("#home_new p").text("Nouveau réquisitoire");
+                            $("#home_new a").attr("href", $("#home_new a").attr("href") + "indictment");
+                            $("#home_new").show();
                         }
-                    });
+                        $.ajax({
+                            type: "GET",
+                            url: IP + "indictment/list",
+                            data: sessioned({
+                                "page": $("#opt_page").val(),
+                                "perpage": $("#opt_perpage").val()
+                            }),
+                            dataType: "json",
+                            success: function (response) {
+                                let status;
+                                if (response != []) {
+                                    $("#nothing_to_see").html("");
+                                }
+                                for (let i = 0, c = response.length; i < c; ++i) {
+                                    let status;
+                                    if (typeof response[i].procedureId === "undefined" || response[i].procedureId === null) {
+                                        status = ["opened", "Non-traité"];
+                                    } else {
+                                        status = ["closed", "Traité par<br/>" + response[i].procedureId];
+                                    }
+                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
+                                        "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
+                                        "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
+                                        + "</p></div></div>";
+                                    if (status[0] === "opened") {
+                                        $("#home_opened").append(toappend);
+                                    } else {
+                                        $("#home_closed").append(toappend);
+                                    }
+
+                                }
+                            }
+                        });
+                        break;
                 }
             } else if (args.page === "changepassword") {
                 $("#changepassword").show();
@@ -202,6 +245,247 @@ $(function () {
                         }
                     });
                 });
+            } else if (args.page === "new") {
+                switch (args.new) {
+                    case "procedure":
+                        $("#new_proc_form").submit(function (e) {
+                            e.preventDefault();
+                            let initValue = $("#proc_initiative option:selected").val(),
+                                dic = {
+                                    "title": $("#proc_title").val(),
+                                    "descr": $("#proc_descr").val()
+                                };
+                            if (initValue === "Complaint") {
+                                dic.initiative = JSON.stringify({
+                                    type: "Complaint",
+                                    complainant: $("#pinit_complainant").val(),
+                                    target: $("#pinit_compl_target").val(),
+                                    comment: $("#pinit_compl_comment").val()
+                                });
+                            } else if (initValue === "Observation") {
+                                dic.initiative = JSON.stringify({
+                                    type: "Observation",
+                                    author: $("#pinit_observator").val(),
+                                    comment: $("#pinit_obs_comment").val()
+                                });
+                            } else {
+                                dic.initiative = "::Indictment." + $("#pinit_ind_id").val();
+                            }
+                            $.ajax({
+                                type: "POST",
+                                url: IP + "procedure/new",
+                                data: sessioned(dic),
+                                dataType: "JSON",
+                                success: function (response) {
+                                    console.log(response);
+                                    location.search = "?page=home&show=procedures";
+                                }
+                            });
+                            
+                        });
+                        $("#new_procedure").css("display", "flex");
+                        $("#proc_initiative").change(function () {
+                            let initValue = $("#proc_initiative option:selected").val();
+                            $(".pinit_config").hide();
+                            $(".pinit_config input, .pinit_config textarea, .pinit_config select").prop({ "disabled": true, "required": false });
+                            switch (initValue) {
+                                case "Complaint":
+                                    $("#pinit_compl").show();
+                                    $(".pinit_compl_input").prop({ "disabled": false, "required": true });
+                                    break;
+                                case "Observation":
+                                    $("#pinit_obs").show();
+                                    $(".pinit_obs_input").prop({ "disabled": false, "required": true });
+                                    break;
+                                case "Indictment":
+                                    $("#pinit_ind").show();
+                                    $(".pinit_ind_input").prop({ "disabled": false, "required": true });
+                                    $("#pinit_ind_id").html("<option value=''></option>");
+                                    $.ajax({
+                                        type: "GET",
+                                        url: IP + "indictment/list",
+                                        data: sessioned({
+                                            "page": 1,
+                                            "perpage": 20
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            let ids = [];
+                                            for (let i = 0, c = response.length; i < c; ++i) {
+                                                if (response[i].procedureId === null) {
+                                                    ids.push(response[i].id);
+                                                }
+                                            }
+                                            delete response;
+                                            for (let i = 0, c = ids.length; i < c; ++i) {
+                                                $("#pinit_ind_id").append("<option value=\"" + ids[i] + "\">" + ids[i] + "</option>");
+                                            }
+                                        }
+                                    });
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        });
+                        break;
+                    case "ticket":
+                        $("#new_tick_form").submit(function (e) {
+                            e.preventDefault();
+                            let initValue = $("#tick_initiative option:selected").val(),
+                                dic = {
+                                    "title": $("#tick_title").val(),
+                                    "descr": $("#tick_descr").val(),
+                                    "act": JSON.stringify({
+                                        "type": "Element",
+                                        "subject": "Simple Element",
+                                        "authorId": "",
+                                        "comment": $("#tick_act").val()
+                                    })
+                                },
+                                closeActs = [];
+                            if (initValue === "Complaint") {
+                                dic.initiative = JSON.stringify({
+                                    type: "Complaint",
+                                    complainant: $("#tinit_complainant").val(),
+                                    target: $("#tinit_compl_target").val(),
+                                    comment: $("#tinit_compl_comment").val()
+                                });
+                            } else if (initValue === "Observation") {
+                                dic.initiative = JSON.stringify({
+                                    type: "Observation",
+                                    author: $("#tinit_observator").val(),
+                                    comment: $("#tinit_obs_comment").val()
+                                });
+                            } else {
+                                dic.initiative = "::Indictment." + $("#tinit_ind_id").val();
+                            }
+
+                            $(".tclose").each(function(j,v){
+                                let i = parseInt(v.id.replace(/tclose/,""));
+                                closeActs.push({
+                                    type: $("#tclose_type"+i+" option:selected").val(),
+                                    target: $("#tclose_target"+i).val(),
+                                    reason: $("#tclose_reason"+i).val(),
+                                    comment: $("#tclose_comment"+i).val(),
+                                    expire: new Date($("#tclose_expire"+i).val()).getTime()/1000,
+                                    authorId: ""
+                                });
+                                if ($("#tclose_type"+i+" option:selected").val() === "ItemBlacklist"){
+                                    closeActs[j].blacklisted = $("#tclose_item"+i).val();
+                                }
+                            });
+                            dic.closeActs = JSON.stringify(closeActs);
+                            $.ajax({
+                                type: "POST",
+                                url: IP + "ticket/new",
+                                data: sessioned(dic),
+                                dataType: "JSON",
+                                success: function (response) {
+                                    console.log(response);
+                                    location.search = "?page=home&show=tickets";
+                                }
+                            });
+                        });
+                        $("#tick_close_new").click(function () {
+                            counter += 1;
+                            let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                                maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
+                            $(this).before(`<table id='tclose` + counter + `' class='tclose'>
+                            <tr><td><label for='tclose_type`+ counter + `'>Sanction :</label></td><td><select required id='tclose_type` + counter + `'>
+                                <option value=""></option>
+                                <optgroup label="Sanctions habituelles">
+                                    <option value="Ban">Bannissement</option>
+                                    <option value="Jail">Emprisonnement</option>
+                                    <option value="Mute">Mute</option>
+                                    <option value="ItemBlacklist">Interdiction d'item</option>
+                                </optgroup>
+                                <optgroup label="Autre">
+                                    <option value="Sanction">Autre</option>
+                                </optgroup>` + (counter > 1 ? `<optgroup label="OPTIONS">
+                                <option value="Delete" style='color:red;'>Supprimer le champ</option>
+                            </optgroup>` : "") + `
+                            </select></td></tr>
+                            <tr class="tclose_commenttd" id='tclose_commenttd`+ counter + `'><td><label for='tclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='tclose_comment` + counter + `' type='text' disabled></textarea></td></tr>
+                            <tr class="tclose_itemd" id='tclose_itemtd`+ counter + `'><td><label for='tclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='tclose_item` + counter + `' type='text' disabled/></td></tr>
+                            <tr><td><label for='tclose_target`+ counter + `'>Joueur :</label></td><td><input required id='tclose_target` + counter + `' type='text'/></td></tr>
+                            <tr><td><label for='tclose_reason`+ counter + `'>Motif :</label></td><td><input required id='tclose_reason` + counter + `' type='text'/></td></tr>
+                            <tr><td><label for='tclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='tclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
+                            
+                            </table>`);
+                            (function (counter) {
+                                $("#tclose_type" + counter).change(function (e) {
+                                    if ($(this).val() === "ItemBlacklist") {
+                                        $("#tclose_itemtd" + counter).show();
+                                        $("#tclose_item" + counter).prop({ "disabled": false, "required": true });
+                                    } else {
+                                        $("#tclose_itemtd" + counter).hide();
+                                        $("#tclose_item" + counter).prop({ "disabled": true, "required": false });
+                                    }
+                                    if ($(this).val() === "Sanction") {
+                                        $("#tclose_commenttd" + counter).show();
+                                        $("#tclose_comment" + counter).prop({ "disabled": false, "required": true });
+                                    } else {
+                                        $("#tclose_commenttd" + counter).hide();
+                                        $("#tclose_comment" + counter).prop({ "disabled": true, "required": false });
+                                    }
+                                    if ($(this).val() === "Delete"){
+                                        $("#tclose"+this.id.replace(/tclose_type/,"")).remove();
+                                    }
+                                });
+                            })(counter);
+
+                        });
+                        $("#new_ticket").css("display", "flex");
+                        $("#tick_initiative").change(function () {
+                            let initValue = $("#tick_initiative option:selected").val();
+                            $(".tinit_config").hide();
+                            $(".tinit_config input, .tinit_config textarea, .tinit_config select").prop({ "disabled": true, "required": false });
+                            switch (initValue) {
+                                case "Complaint":
+                                    $("#tinit_compl").show();
+                                    $(".tinit_compl_input").prop({ "disabled": false, "required": true });
+                                    break;
+                                case "Observation":
+                                    $("#tinit_obs").show();
+                                    $(".tinit_obs_input").prop({ "disabled": false, "required": true });
+                                    break;
+                                case "Indictment":
+                                    $("#tinit_ind").show();
+                                    $(".tinit_ind_input").prop({ "disabled": false, "required": true });
+                                    $("#tinit_ind_id").html("<option value=''></option>");
+                                    $.ajax({
+                                        type: "GET",
+                                        url: IP + "indictment/list",
+                                        data: sessioned({
+                                            "page": 1,
+                                            "perpage": 20
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            let ids = [];
+                                            for (let i = 0, c = response.length; i < c; ++i) {
+                                                if (response[i].procedureId === null) {
+                                                    ids.push(response[i].id);
+                                                }
+                                            }
+                                            delete response;
+                                            for (let i = 0, c = ids.length; i < c; ++i) {
+                                                $("#tinit_ind_id").append("<option value=\"" + ids[i] + "\">" + ids[i] + "</option>");
+                                            }
+                                        }
+                                    });
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        });
+                        $("#tick_close_new").trigger("click");
+                        break;
+                    default:
+                        $("#error_404").show();
+                }
             } else {
                 $("#error_404").show();
             }

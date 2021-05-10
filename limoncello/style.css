@@ -213,3 +213,114 @@ a:visited{
     font-size: 0.9em;
     color: rgb(99, 99, 99);
 }
+
+#home_new{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-style: italic;
+    color: rgb(88, 88, 88);
+}
+
+#home_new p{
+    margin: 0;
+    padding: 0;
+}
+
+#home_new a{
+    color: rgb(88, 88, 88);
+    display: block;
+    font-style: normal;
+    width: 1em;
+    font-size: 1.2em;
+    margin: auto;
+    text-decoration: unset;
+    border: solid 1px rgb(88, 88, 88);
+    border-radius: 20px;
+    padding: 0;
+    
+}
+
+#home_new:hover{
+    color: black;
+}
+
+#home_new a:hover{
+    border: solid 1px rgb(88, 88, 88);
+    color: black;
+    padding: 0;
+}
+
+#home_display_option{
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    font-style: italic;
+    font-size: 0.7em;
+}
+
+#home_display_option input{
+    max-width: 3em;
+}
+
+.section_new{
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pinit_config{
+    display: none;
+    border: solid 1px black;
+}
+
+.tinit_config{
+    display: none;
+    border: solid 1px black;
+}
+
+.l_area{
+    width: 20em;
+    height: 10em;
+}
+
+.tick_closeActs{
+    border: 1px black solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tclose{
+    border: 1px dashed grey;
+    margin: 5px;
+}
+
+.tclose_itemd{
+    display: none;
+}
+.tclose_commenttd{
+    display: none;
+}
+
+.plus{
+    color: rgb(155, 155, 155);
+    border: solid 2px rgb(155, 155, 155);
+    width: 1em;
+    margin: auto;
+    border-radius: 20px;
+    font-size: 1.3em;
+    padding-left: 2px;padding-right: 2px;
+    cursor: pointer;
+}
+
+.plus:hover{
+    color: black;
+    border-color: black;
+    transition-duration: 200ms;
+}
