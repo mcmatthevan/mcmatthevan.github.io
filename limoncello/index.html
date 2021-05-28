@@ -13,7 +13,8 @@
 
 <body>
     <div id="banner">
-        <div id="divlogos"><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt=""></div>
+        <div id="divlogos"><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt="">
+        </div>
         <div id="divinst" class="hide_mobile">
             <p>Administration de Palgania</p>
             <p>Commission de Modération</p>
@@ -26,7 +27,7 @@
                     <a id="homelink" href="?page=home"><img src="img/homeicon.png" alt=""></a>
                     <a href="?page=changepassword">Paramètres</a>
                 </div>
-                
+
             </div>
             <div id=signOut>Se déconnecter</div>
         </div>
@@ -73,11 +74,11 @@
             <div id="home_display_option">
                 <div>
                     <label for="opt_page">Page :</label>
-                    <input id="opt_page" type="number" min="1" value="1"/>
+                    <input id="opt_page" type="number" min="1" value="1" />
                 </div>
                 <div>
                     <label for="opt_perpage">Par page :</label>
-                    <input id="opt_perpage" type="number" min="1" max="50" value="10"/>
+                    <input id="opt_perpage" type="number" min="1" max="50" value="10" />
                 </div>
             </div>
             <p id="nothing_to_see">Aucun élément à afficher</p>
@@ -88,10 +89,10 @@
                 <p>Nouvelle</p>
                 <a href="?page=new&new=">+</a>
             </div>
-            <hr/>
+            <hr />
             <div id="home_closed"></div>
         </div>
-        
+
     </section>
     <section id="changepassword">
         <h1>Changement du mot de passe</h1>
@@ -115,20 +116,43 @@
         <p id="error_changepassword" class="error"></p>
         <p id="success_changepassword" class="success"></p>
     </section>
+    <section id="display_section">
+        <div id="main_title">
+            <h1 id="big_title"></h1>
+            <p id="subtitle_infos"></p>
+        </div>
+        <table id="display_table">
+            <tr>
+                <td class='end'>Titre :</td>
+                <td>
+                    <h2 id="a_title"></h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="a_descr_box">
+                    <div id="_a_descr">Description</div>
+                    <hr class="sm_margin">
+                    <div id="a_descr"></div>
+                </td>
+            </tr>
+        </table>
+    </section>
     <section id="new_procedure" class="section_new">
         <h1>Nouvelle procédure</h1>
         <form id="new_proc_form" class="new_form">
             <table>
                 <tr>
-                    <td><label for="proc_title">Titre de la procédure :</label></td><td><input type="text" id="proc_title" placeholder="Ex: Grief près du spawn" required></td>
+                    <td><label for="proc_title">Titre de la procédure :</label></td>
+                    <td><input type="text" id="proc_title" placeholder="Ex: Grief près du spawn" required></td>
                 </tr>
                 <tr>
-                    <td><label for="proc_initiative">Initiative de la procédure :</label></td><td><select id="proc_initiative" required>
-                        <option value=""></option>
-                        <option value="Complaint">Plainte</option>
-                        <option value="Observation">Constatation</option>
-                        <option value="Indictment">Réquisitoire</option>
-                    </select></td>
+                    <td><label for="proc_initiative">Initiative de la procédure :</label></td>
+                    <td><select id="proc_initiative" required>
+                            <option value=""></option>
+                            <option value="Complaint">Plainte</option>
+                            <option value="Observation">Constatation</option>
+                            <option value="Indictment">Réquisitoire</option>
+                        </select></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -136,40 +160,59 @@
                         <div id="pinit_compl" class="pinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="pinit_complainant">Pseudo du joueur plaignant :</label></td><td><input type="text" id="pinit_complainant" class="pinit_compl_input" disabled></td>
+                                    <td><label for="pinit_complainant">Pseudo du joueur plaignant :</label></td>
+                                    <td><input type="text" id="pinit_complainant" class="pinit_compl_input" disabled>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label for="pinit_compl_target">Pseudo du joueur visé par la plainte :</label></td><td><input type="text" id="pinit_compl_target" class="pinit_compl_input" disabled></td>
+                                    <td><label for="pinit_compl_target">Pseudo du joueur visé par la plainte :</label>
+                                    </td>
+                                    <td><input type="text" id="pinit_compl_target" class="pinit_compl_input" disabled>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label for="pinit_compl_comment">Motif de la plainte :</label></td><td><textarea id="pinit_compl_comment" class="pinit_compl_input l_area" disabled></textarea></td>
+                                    <td><label for="pinit_compl_comment">Motif de la plainte :</label></td>
+                                    <td><textarea id="pinit_compl_comment" class="pinit_compl_input l_area"
+                                            disabled></textarea></td>
                                 </tr>
                             </table>
                         </div>
                         <div id="pinit_obs" class="pinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="pinit_observator">Modérateur à l'origine du constat :</label></td><td><input type="text" id="pinit_observator" class="pinit_obs_input" disabled></td>
+                                    <td><label for="pinit_observator">Modérateur à l'origine du constat :</label></td>
+                                    <td><input type="text" id="pinit_observator" class="pinit_obs_input" disabled></td>
                                 </tr>
                                 <tr>
-                                    <td><label for="pinit_obs_comment">Description du constat (liens acceptés) :</label></td><td><textarea id="pinit_obs_comment" class="pinit_obs_input l_area" disabled></textarea></td>
+                                    <td><label for="pinit_obs_comment">Description du constat (liens acceptés) :</label>
+                                    </td>
+                                    <td><textarea id="pinit_obs_comment" class="pinit_obs_input l_area"
+                                            disabled></textarea></td>
                                 </tr>
                             </table>
                         </div>
                         <div id="pinit_ind" class="pinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="pinit_ind_id">Id du réquisitoire:</label></td><td><select id="pinit_ind_id" class="pinit_ind_input" disabled><option value=""></option></select></td>
+                                    <td><label for="pinit_ind_id">Id du réquisitoire:</label></td>
+                                    <td><select id="pinit_ind_id" class="pinit_ind_input" disabled>
+                                            <option value=""></option>
+                                        </select></td>
                                 </tr>
                             </table>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><hr></td>
+                    <td colspan="2">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="proc_descr">Description de la procédure :</label></td><td><textarea class="l_area" id="proc_descr" placeholder="Ex: Grief constaté en -478 72 679, sans doute réalisé avec du feu..." required></textarea></td>
+                    <td><label for="proc_descr">Description de la procédure :</label></td>
+                    <td><textarea class="l_area" id="proc_descr"
+                            placeholder="Ex: Grief constaté en -478 72 679, sans doute réalisé avec du feu..."
+                            required></textarea></td>
                 </tr>
             </table>
             <input type="submit" value="Créer la procédure">
@@ -180,15 +223,17 @@
         <form id="new_tick_form" class="new_form">
             <table>
                 <tr>
-                    <td><label for="tick_title">Titre du ticket :</label></td><td><input type="text" id="tick_title" placeholder="Ex: Grief près du spawn" required></td>
+                    <td><label for="tick_title">Titre du ticket :</label></td>
+                    <td><input type="text" id="tick_title" placeholder="Ex: Grief près du spawn" required></td>
                 </tr>
                 <tr>
-                    <td><label for="tick_initiative">Initiative du ticket :</label></td><td><select id="tick_initiative" required>
-                        <option value=""></option>
-                        <option value="Complaint">Plainte</option>
-                        <option value="Observation">Constatation</option>
-                        <option value="Indictment">Réquisitoire</option>
-                    </select></td>
+                    <td><label for="tick_initiative">Initiative du ticket :</label></td>
+                    <td><select id="tick_initiative" required>
+                            <option value=""></option>
+                            <option value="Complaint">Plainte</option>
+                            <option value="Observation">Constatation</option>
+                            <option value="Indictment">Réquisitoire</option>
+                        </select></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -196,52 +241,112 @@
                         <div id="tinit_compl" class="tinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="tinit_complainant">Pseudo du joueur plaignant :</label></td><td><input type="text" id="tinit_complainant" class="tinit_compl_input" disabled></td>
+                                    <td><label for="tinit_complainant">Pseudo du joueur plaignant :</label></td>
+                                    <td><input type="text" id="tinit_complainant" class="tinit_compl_input" disabled>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label for="tinit_compl_target">Pseudo du joueur visé par la plainte :</label></td><td><input type="text" id="tinit_compl_target" class="tinit_compl_input" disabled></td>
+                                    <td><label for="tinit_compl_target">Pseudo du joueur visé par la plainte :</label>
+                                    </td>
+                                    <td><input type="text" id="tinit_compl_target" class="tinit_compl_input" disabled>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><label for="tinit_compl_comment">Motif de la plainte :</label></td><td><textarea id="tinit_compl_comment" class="tinit_compl_input l_area" disabled></textarea></td>
+                                    <td><label for="tinit_compl_comment">Motif de la plainte :</label></td>
+                                    <td><textarea id="tinit_compl_comment" class="tinit_compl_input l_area"
+                                            disabled></textarea></td>
                                 </tr>
                             </table>
                         </div>
                         <div id="tinit_obs" class="tinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="tinit_observator">Modérateur à l'origine du constat :</label></td><td><input type="text" id="tinit_observator" class="tinit_obs_input" disabled></td>
+                                    <td><label for="tinit_observator">Modérateur à l'origine du constat :</label></td>
+                                    <td><input type="text" id="tinit_observator" class="tinit_obs_input" disabled></td>
                                 </tr>
                                 <tr>
-                                    <td><label for="tinit_obs_comment">Description du constat (liens acceptés) :</label></td><td><textarea id="tinit_obs_comment" class="tinit_obs_input l_area" disabled></textarea></td>
+                                    <td><label for="tinit_obs_comment">Description du constat (liens acceptés) :</label>
+                                    </td>
+                                    <td><textarea id="tinit_obs_comment" class="tinit_obs_input l_area"
+                                            disabled></textarea></td>
                                 </tr>
                             </table>
                         </div>
                         <div id="tinit_ind" class="tinit_config">
                             <table>
                                 <tr>
-                                    <td><label for="tinit_ind_id">Id du réquisitoire:</label></td><td><select id="tinit_ind_id" class="tinit_ind_input" disabled><option value=""></option></select></td>
+                                    <td><label for="tinit_ind_id">Id du réquisitoire:</label></td>
+                                    <td><select id="tinit_ind_id" class="tinit_ind_input" disabled>
+                                            <option value=""></option>
+                                        </select></td>
                                 </tr>
                             </table>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><hr></td>
+                    <td colspan="2">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="tick_descr">Description du ticket :</label></td><td><textarea class="l_area" id="tick_descr" placeholder="Ex: Grief constaté en -478 72 679, sans doute réalisé avec du feu..." required></textarea></td>
+                    <td><label for="tick_descr">Description du ticket :</label></td>
+                    <td><textarea class="l_area" id="tick_descr"
+                            placeholder="Ex: Grief constaté en -478 72 679, sans doute réalisé avec du feu..."
+                            required></textarea></td>
                 </tr>
                 <tr>
-                    <td><label for="tick_act">Element de preuve (liens autorisés) :</label></td><td><textarea class="l_area" id="tick_act" placeholder="Indiquer toute action réalisée permettant d'incriminer le coupable. Il est possible d'uploader des images sur des sites externes." required></textarea></td>
+                    <td><label for="tick_act">Element de preuve (liens autorisés) :</label></td>
+                    <td><textarea class="l_area" id="tick_act"
+                            placeholder="Indiquer toute action réalisée permettant d'incriminer le coupable. Il est possible d'uploader des images sur des sites externes."
+                            required></textarea></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><hr></td>
+                    <td colspan="2">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Acte(s) de fermeture(s) (sanctions)</td><td class="tick_closeActs"><div id="tick_close_new" class="plus" title="Ajouter un champ sanction">+</div></td>
+                    <td>Acte(s) de fermeture(s) (<select id="tclose_actType">
+                            <option value="Sanction">Sanction(s)</option>
+                            <option value="Dismissal">Non-Lieu</option>
+                            <option value="NoContinue">Sans suite</option>
+                        </select>)</td>
+                    <td id="tick_closeActs">
+                        <div id="tick_close_new" class="plus" title="Ajouter un champ sanction">+</div>
+                    </td>
                 </tr>
             </table>
             <input type="submit" value="Créer le ticket">
+        </form>
+    </section>
+    <section id="new_indictment" class="section_new">
+        <h1>Nouveau réquisitoire</h1>
+        <form id="new_ind_form" class="new_form">
+            <table>
+                <tr>
+                    <td><label for="ind_title">Titre du réquisitoire :</label></td>
+                    <td><input type="text" id="ind_title" placeholder="Ex: Grief près du spawn" required></td>
+                </tr>
+                <tr>
+                    <td><label for="ind_descr">Description du réquisitoire :</label></td>
+                    <td><textarea class="l_area" id="ind_descr"
+                            placeholder="Ex: Grief constaté en -478 72 679, sans doute réalisé avec du feu..."
+                            required></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sanctions temporaires appliquées</td>
+                    <td class="ind_tempActs">
+                        <div id="ind_temp_new" class="plus" title="Ajouter un champ sanction">+</div>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Créer le réquisitoire">
         </form>
     </section>
     <script src="https://code.jquery.com/jquery.min.js"></script>

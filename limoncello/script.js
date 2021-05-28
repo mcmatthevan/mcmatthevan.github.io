@@ -63,7 +63,99 @@ $(function () {
             let userinfos = getUserInfo();
             $("#titlename").text(userinfos[0]);
             $("#titlerole").text(userinfos[1]);
-            if (args.page === "home") {
+            if (args.page === "display") {
+                if (args.show === "indictment") {
+                    $.ajax({
+                        type: "GET",
+                        url: IP + "indictment/see",
+                        data: sessioned({ id: args.id }),
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            $("#display_section").css("display", "flex");
+                            $("#main_title").addClass("indictment");
+                            $("#big_title").text("Réquisitoire n°" + response.id);
+                            $("#subtitle_infos").text("Créé par " + response.authorName + " le " + stringDate(response.date));
+                            $("#a_title").text(response.title);
+                            $("#a_descr").html(response.comment.replace(/\n/g, "<br>"));
+                            if (response.tempActs.length > 0) {
+                                let form = "";
+                                for (let i = 0, c = response.tempActs.length; i < c; i++) {
+                                    form += formatSanct(response.tempActs[i]);
+                                }
+                                $("#display_table").append(`<tr>
+                                <td class='end'>Sanctions temporairement appliquées :</td><td id='sanct_display_td'>` + form + `</td>
+                                </tr>`);
+                            }
+                            if (response.procedureId === null) {
+                                $("#display_table").append("<tr><td class='end'>Statut:</td><td class='opened'>Non-traité</td></tr><tr><td></td><td id='statut_td'></td></tr>");
+                                if (checkPerm("procedure.new")) {
+                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=procedure&init=" + response.id + "'>⊕ nouvelle procédure</a>");
+                                }
+                                if (checkPerm("ticket.new")) {
+                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=ticket&init=" + response.id + "'>⊕ nouveau ticket</a>");
+                                }
+                            } else {
+                                let tickorproc = {
+                                    "p": "procedure",
+                                    "t": "ticket"
+                                }[response.procedureId.substring(0, 1)];
+                                $("#display_table").append("<tr><td class='end'>Statut:</td><td class='closed'>Traité par <a href='?page=display&show=" + tickorproc + "&id=" + response.procedureId + "'>" + response.procedureId + "</a></td></tr>");
+                            }
+
+                        },
+                        error: function (x) {
+                            if (x.status === 404) {
+                                $("#error_404").show();
+                            }
+                        }
+                    });
+                } else if (args.show === "ticket") {
+                    $.ajax({
+                        type: "GET",
+                        url: IP + "ticket/see",
+                        data: sessioned({ id: args.id }),
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            $("#display_section").css("display", "flex");
+                            $("#main_title").addClass("ticket");
+                            $("#big_title").text("Ticket n°" + response.id);
+                            $("#subtitle_infos").text("Créé par " + response.authorName + " le " + stringDate(response.date));
+                            $("#a_title").text(response.title);
+                            $("#a_descr").html(response.comment.replace(/\n/g, "<br>"));
+
+                            if (typeof response.initiative.valueOf() === "string") {
+                                let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id="+response.initiative.replace(/::Indictment\./g, "")+"'>"+response.initiative.replace(/::Indictment\./g, "")+"</a>" };
+                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(objind) + "</td></tr>");
+                            } else {
+                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(response.initiative,["date"],{},{"target":"Joueur ciblé :"}) + "</td></tr>")
+                            }
+                            $("#display_table").append(`<tr><td colspan='2'><hr/>
+                            <table class='acts_list'><tr><td colspan='5' class='tag'>Liste des actes de procédure</td></tr><tr><td class='tag'>Type</td>
+                            <td class='tag'>Acte</td><td class='tag'>Date</td>
+                            <td class='tag'>Auteur</td></tr>`+ formatAct(response.act, ["subject"]) + `</table><hr/></td></tr>`);
+
+                            if (response.closeActs.length > 0) {
+                                let form = "";
+                                for (let i = 0, c = response.closeActs.length; i < c; i++) {
+                                    form += formatSanct(response.closeActs[i]);
+                                }
+                                $("#display_table").append(`<tr>
+                                <td class='end'>Décisions clôturant le ticket :</td><td id='sanct_display_td'>` + form + `</td>
+                                </tr>`);
+                            }
+
+
+                        },
+                        error: function (x) {
+                            if (x.status === 404) {
+                                $("#error_404").show();
+                            }
+                        }
+                    });
+                }
+            } else if (args.page === "home") {
                 $("#home").show();
                 $("#home_display_option input").change(function () {
                     let actsearch = location.search.replace(/&(nbpage|perpage)=[0-9]*/g, "");
@@ -111,7 +203,7 @@ $(function () {
                                     } else {
                                         status = ["closed", "Clôturé"];
                                     }
-                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
+                                    let toappend = "<div class='summary' id='_tic_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
                                         "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
@@ -121,6 +213,7 @@ $(function () {
                                         $("#home_closed").append(toappend);
                                     }
                                 }
+                                summRedirect();
                             }
                         });
                         break;
@@ -156,7 +249,7 @@ $(function () {
                                     } else {
                                         status = ["opened", "En cours"];
                                     }
-                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
+                                    let toappend = "<div class='summary' id='_pro_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
                                         "</h1><p>" + response[i].descr + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>"
@@ -166,6 +259,7 @@ $(function () {
                                         $("#home_closed").append(toappend);
                                     }
                                 }
+                                summRedirect();
                             }
                         });
                         break;
@@ -198,7 +292,7 @@ $(function () {
                                     } else {
                                         status = ["closed", "Traité par<br/>" + response[i].procedureId];
                                     }
-                                    let toappend = "<div class='summary'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
+                                    let toappend = "<div class='summary' id='_ind_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
                                         "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
@@ -209,10 +303,12 @@ $(function () {
                                     }
 
                                 }
+                                summRedirect();
                             }
                         });
                         break;
                 }
+
             } else if (args.page === "changepassword") {
                 $("#changepassword").show();
                 if (needpchange) {
@@ -281,9 +377,10 @@ $(function () {
                                     location.search = "?page=home&show=procedures";
                                 }
                             });
-                            
+
                         });
                         $("#new_procedure").css("display", "flex");
+
                         $("#proc_initiative").change(function () {
                             let initValue = $("#proc_initiative option:selected").val();
                             $(".pinit_config").hide();
@@ -295,7 +392,7 @@ $(function () {
                                     break;
                                 case "Observation":
                                     $("#pinit_obs").show();
-                                    $(".pinit_obs_input").prop({ "disabled": false, "required": true });
+                                    $(".pinit_obs_input").prop({ "disabled": false });
                                     break;
                                 case "Indictment":
                                     $("#pinit_ind").show();
@@ -320,6 +417,10 @@ $(function () {
                                             for (let i = 0, c = ids.length; i < c; ++i) {
                                                 $("#pinit_ind_id").append("<option value=\"" + ids[i] + "\">" + ids[i] + "</option>");
                                             }
+                                            if (typeof args.init !== "undefined") {
+                                                $("#pinit_ind_id option[value='" + args.init + "']").prop("selected", true);
+
+                                            }
                                         }
                                     });
                                     break;
@@ -328,6 +429,10 @@ $(function () {
                                     break;
                             }
                         });
+                        if (typeof args.init !== "undefined") {
+                            $("#proc_initiative option[value='Indictment']").prop("selected", true);
+                            $("#proc_initiative").trigger("change");
+                        }
                         break;
                     case "ticket":
                         $("#new_tick_form").submit(function (e) {
@@ -360,21 +465,29 @@ $(function () {
                             } else {
                                 dic.initiative = "::Indictment." + $("#tinit_ind_id").val();
                             }
-
-                            $(".tclose").each(function(j,v){
-                                let i = parseInt(v.id.replace(/tclose/,""));
+                            let actType = $("#tclose_actType option:selected").val();
+                            if (actType === "Sanction") {
+                                $(".tclose").each(function (j, v) {
+                                    let i = parseInt(v.id.replace(/tclose/, ""));
+                                    closeActs.push({
+                                        type: $("#tclose_type" + i + " option:selected").val(),
+                                        target: $("#tclose_target" + i).val(),
+                                        reason: $("#tclose_reason" + i).val(),
+                                        comment: $("#tclose_comment" + i).val(),
+                                        expire: new Date($("#tclose_expire" + i).val()).getTime() / 1000,
+                                        authorId: ""
+                                    });
+                                    if ($("#tclose_type" + i + " option:selected").val() === "ItemBlacklist") {
+                                        closeActs[j].blacklisted = $("#tclose_item" + i).val();
+                                    }
+                                });
+                            } else {
                                 closeActs.push({
-                                    type: $("#tclose_type"+i+" option:selected").val(),
-                                    target: $("#tclose_target"+i).val(),
-                                    reason: $("#tclose_reason"+i).val(),
-                                    comment: $("#tclose_comment"+i).val(),
-                                    expire: new Date($("#tclose_expire"+i).val()).getTime()/1000,
+                                    type: actType,
                                     authorId: ""
                                 });
-                                if ($("#tclose_type"+i+" option:selected").val() === "ItemBlacklist"){
-                                    closeActs[j].blacklisted = $("#tclose_item"+i).val();
-                                }
-                            });
+                            }
+
                             dic.closeActs = JSON.stringify(closeActs);
                             $.ajax({
                                 type: "POST",
@@ -386,6 +499,15 @@ $(function () {
                                     location.search = "?page=home&show=tickets";
                                 }
                             });
+                        });
+                        $("#tclose_actType").change(function () {
+                            if ($(this).val() === "Sanction") {
+                                $("#tick_closeActs").css("display", "flex");
+                                $("#tick_close_new").trigger("click");
+                            } else {
+                                $("#tick_closeActs").css("display", "none");
+                                $(".tclose").remove();
+                            }
                         });
                         $("#tick_close_new").click(function () {
                             counter += 1;
@@ -429,8 +551,8 @@ $(function () {
                                         $("#tclose_commenttd" + counter).hide();
                                         $("#tclose_comment" + counter).prop({ "disabled": true, "required": false });
                                     }
-                                    if ($(this).val() === "Delete"){
-                                        $("#tclose"+this.id.replace(/tclose_type/,"")).remove();
+                                    if ($(this).val() === "Delete") {
+                                        $("#tclose" + this.id.replace(/tclose_type/, "")).remove();
                                     }
                                 });
                             })(counter);
@@ -473,6 +595,9 @@ $(function () {
                                             for (let i = 0, c = ids.length; i < c; ++i) {
                                                 $("#tinit_ind_id").append("<option value=\"" + ids[i] + "\">" + ids[i] + "</option>");
                                             }
+                                            if (typeof args.init !== "undefined") {
+                                                $("#tinit_ind_id option[value='" + args.init + "']").prop("selected", true);
+                                            }
                                         }
                                     });
                                     break;
@@ -481,7 +606,97 @@ $(function () {
                                     break;
                             }
                         });
+                        if (typeof args.init !== "undefined") {
+                            $("#tick_initiative option[value='Indictment']").prop("selected", true);
+                            $("#tick_initiative").trigger("change");
+                        }
                         $("#tick_close_new").trigger("click");
+                        break;
+                    case "indictment":
+                        $("#new_ind_form").submit(function (e) {
+                            e.preventDefault();
+                            let initValue = $("#ind_initiative option:selected").val(),
+                                dic = {
+                                    "title": $("#ind_title").val(),
+                                    "comment": $("#ind_descr").val()
+                                },
+                                tempActs = [];
+                            $(".rtemp").each(function (j, v) {
+                                let i = parseInt(v.id.replace(/rtemp/, ""));
+                                tempActs.push({
+                                    type: $("#rtemp_type" + i + " option:selected").val(),
+                                    target: $("#rtemp_target" + i).val(),
+                                    reason: $("#rtemp_reason" + i).val(),
+                                    comment: $("#rtemp_comment" + i).val(),
+                                    expire: new Date($("#rtemp_expire" + i).val()).getTime() / 1000,
+                                    authorId: ""
+                                });
+                                if ($("#rtemp_type" + i + " option:selected").val() === "ItemBlacklist") {
+                                    tempActs[j].blacklisted = $("#rtemp_item" + i).val();
+                                }
+                            });
+                            dic.tempActs = JSON.stringify(tempActs);
+                            $.ajax({
+                                type: "POST",
+                                url: IP + "indictment/new",
+                                data: sessioned(dic),
+                                dataType: "JSON",
+                                success: function (response) {
+                                    console.log(response);
+                                    location.search = "?page=home&show=indictments";
+                                }
+                            });
+                        });
+                        $("#ind_temp_new").click(function () {
+                            counter += 1;
+                            let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                                maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
+                            $(this).before(`<table id='rtemp` + counter + `' class='rtemp'>
+                            <tr><td><label for='rtemp_type`+ counter + `'>Sanction :</label></td><td><select required id='rtemp_type` + counter + `'>
+                                <option value=""></option>
+                                <optgroup label="Sanctions habituelles">
+                                    <option value="Ban">Bannissement</option>
+                                    <option value="Jail">Emprisonnement</option>
+                                    <option value="Mute">Mute</option>
+                                    <option value="ItemBlacklist">Interdiction d'item</option>
+                                </optgroup>
+                                <optgroup label="Autre">
+                                    <option value="Sanction">Autre</option>
+                                </optgroup><optgroup label="OPTIONS">
+                                <option value="Delete" style='color:red;'>Supprimer le champ</option>
+                            </optgroup>
+                            </select></td></tr>
+                            <tr class="rtemp_commenttd" id='rtemp_commenttd`+ counter + `'><td><label for='rtemp_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='rtemp_comment` + counter + `' type='text' disabled></textarea></td></tr>
+                            <tr class="rtemp_itemd" id='rtemp_itemtd`+ counter + `'><td><label for='rtemp_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='rtemp_item` + counter + `' type='text' disabled/></td></tr>
+                            <tr><td><label for='rtemp_target`+ counter + `'>Joueur :</label></td><td><input required id='rtemp_target` + counter + `' type='text'/></td></tr>
+                            <tr><td><label for='rtemp_reason`+ counter + `'>Motif :</label></td><td><input required id='rtemp_reason` + counter + `' type='text'/></td></tr>
+                            <tr><td><label for='rtemp_expire`+ counter + `'>Expiration :</label></td><td><input required id='rtemp_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
+                            
+                            </table>`);
+                            (function (counter) {
+                                $("#rtemp_type" + counter).change(function (e) {
+                                    if ($(this).val() === "ItemBlacklist") {
+                                        $("#rtemp_itemtd" + counter).show();
+                                        $("#rtemp_item" + counter).prop({ "disabled": false, "required": true });
+                                    } else {
+                                        $("#rtemp_itemtd" + counter).hide();
+                                        $("#rtemp_item" + counter).prop({ "disabled": true, "required": false });
+                                    }
+                                    if ($(this).val() === "Sanction") {
+                                        $("#rtemp_commenttd" + counter).show();
+                                        $("#rtemp_comment" + counter).prop({ "disabled": false, "required": true });
+                                    } else {
+                                        $("#rtemp_commenttd" + counter).hide();
+                                        $("#rtemp_comment" + counter).prop({ "disabled": true, "required": false });
+                                    }
+                                    if ($(this).val() === "Delete") {
+                                        $("#rtemp" + this.id.replace(/rtemp_type/, "")).remove();
+                                    }
+                                });
+                            })(counter);
+
+                        });
+                        $("#new_indictment").css("display", "flex");
                         break;
                     default:
                         $("#error_404").show();

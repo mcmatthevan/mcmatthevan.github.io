@@ -100,6 +100,9 @@
 	#banner div:nth-child(1) {
 		justify-content: flex-start;
 	}
+	#display_table{
+		width: 100%;
+	}
 
 	/* Un message personnalisé */
 
