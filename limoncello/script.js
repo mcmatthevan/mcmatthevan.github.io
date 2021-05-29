@@ -90,10 +90,10 @@ $(function () {
                             if (response.procedureId === null) {
                                 $("#display_table").append("<tr><td class='end'>Statut:</td><td class='opened'>Non-traité</td></tr><tr><td></td><td id='statut_td'></td></tr>");
                                 if (checkPerm("procedure.new")) {
-                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=procedure&init=" + response.id + "'>⊕ nouvelle procédure</a>");
+                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=procedure&init=" + response.id + "' title='Traiter le réquisitoire par une procédure'>⊕ nouvelle procédure</a>");
                                 }
                                 if (checkPerm("ticket.new")) {
-                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=ticket&init=" + response.id + "'>⊕ nouveau ticket</a>");
+                                    $("#statut_td").append("<a class='new' href='index.html?page=new&new=ticket&init=" + response.id + "' title='Traiter le réquisitoire par un ticket'>⊕ nouveau ticket</a>");
                                 }
                             } else {
                                 let tickorproc = {
@@ -126,10 +126,10 @@ $(function () {
                             $("#a_descr").html(response.comment.replace(/\n/g, "<br>"));
 
                             if (typeof response.initiative.valueOf() === "string") {
-                                let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id="+response.initiative.replace(/::Indictment\./g, "")+"'>"+response.initiative.replace(/::Indictment\./g, "")+"</a>" };
+                                let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id=" + response.initiative.replace(/::Indictment\./g, "") + "'>" + response.initiative.replace(/::Indictment\./g, "") + "</a>" };
                                 $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(objind) + "</td></tr>");
                             } else {
-                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(response.initiative,["date"],{},{"target":"Joueur ciblé :"}) + "</td></tr>")
+                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(response.initiative, ["date"], {}, { "target": "Joueur ciblé :" }) + "</td></tr>")
                             }
                             $("#display_table").append(`<tr><td colspan='2'><hr/>
                             <table class='acts_list'><tr><td colspan='5' class='tag'>Liste des actes de procédure</td></tr><tr><td class='tag'>Type</td>
@@ -144,6 +144,282 @@ $(function () {
                                 $("#display_table").append(`<tr>
                                 <td class='end'>Décisions clôturant le ticket :</td><td id='sanct_display_td'>` + form + `</td>
                                 </tr>`);
+                            }
+                            if (response.closedConfirm) {
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='closed'>Clôturé</td></tr>");
+                            } else {
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='waiting'>En attente de clôture</td></tr>");
+                                if (checkPerm("ticket.close.confirm")) {
+                                    $("#display_table").append(`<tr><td></td><td>
+                                    <form class='formcl'>
+                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer le ticket :</label><input type='password' id='close_password' required/><input type='submit' value='OK'/>
+                                        <p id='p_error'></p>
+                                        </form>
+                                    </td>`);
+                                }
+                                $(".formcl").submit(function (e) {
+                                    e.preventDefault();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: IP + "ticket/close",
+                                        data: sessioned({
+                                            "id": response.id,
+                                            "password": $("#close_password").val()
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            if (response === "ERR_PASSWORD") {
+                                                $("#p_error").html("Mot de passe incorrect");
+                                            } else if (response === "OK") {
+                                                $("#p_error").html("");
+                                                location.reload();
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                            if (response.closeManage.length > 0) {
+                                $("#display_table").append("<tr><td id='closemanagetd' colspan='2'><hr/></td></tr>");
+                            }
+                            for (let i = 0, c = response.closeManage.length; i < c; i++) {
+                                $("#closemanagetd").append(formatCloseManage(response.closeManage[i]) + "<br/>");
+                            }
+
+
+                        },
+                        error: function (x) {
+                            if (x.status === 404) {
+                                $("#error_404").show();
+                            }
+                        }
+                    });
+                } else if (args.show === "procedure") {
+                    $.ajax({
+                        type: "GET",
+                        url: IP + "procedure/see",
+                        data: sessioned({ id: args.id }),
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            $("#display_section").css("display", "flex");
+                            $("#main_title").addClass("procedure");
+                            $("#big_title").text("Procédure n°" + response.id);
+                            $("#subtitle_infos").text("Créée par " + response.authorName + " le " + stringDate(response.date));
+                            $("#a_title").text(response.title);
+                            $("#a_descr").html(response.descr.replace(/\n/g, "<br>"));
+
+                            if (typeof response.initiative.valueOf() === "string") {
+                                let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id=" + response.initiative.replace(/::Indictment\./g, "") + "'>" + response.initiative.replace(/::Indictment\./g, "") + "</a>" };
+                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(objind) + "</td></tr>");
+                            } else {
+                                $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(response.initiative, ["date"], {}, { "target": "Joueur ciblé :" }) + "</td></tr>")
+                            }
+                            $("#display_table").append(`<tr><td colspan='2'><hr/>
+                            <table class='acts_list'><tr><td colspan='5' class='tag'>Liste des actes de procédure</td></tr><tr><td class='tag'>Type</td>
+                            <td class='tag'>Acte</td><td class='tag'>Date</td>
+                            <td class='tag'>Auteur</td></tr></table><hr/></td></tr>`);
+                            for (let i = 0, c = response.acts.length; i < c; i++) {
+                                $(".acts_list").append(formatAct(response.acts[i], ["subject"]));
+                            }
+
+
+                            if (response.closeActs.length > 0) {
+                                let form = "";
+                                for (let i = 0, c = response.closeActs.length; i < c; i++) {
+                                    form += formatSanct(response.closeActs[i]);
+                                }
+                                $("#display_table").append(`<tr>
+                                <td class='end'>Décisions clôturant la procédure :</td><td id='sanct_display_td'>` + form + `</td>
+                                </tr>`);
+                            }
+                            if (response.opened) {
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='opened'>Ouvert</td></tr>");
+                                if (checkPerm("procedure.close")) {
+                                    $("#display_table").append(`<tr><td colspan='2'><input type='button' id='proc_close_button' value='Clore la procédure'><div id='proc_close_opt'>
+                                    <form class='formcl'>
+                                    <fieldset>
+                                    <legend>Clore la procédure</legend>
+                                    <div>
+                                        <label for='proc_decision'>Décision de clôture : </label><select id='proc_decision' required>
+                                            <option value=''></option>
+                                            <option value='Dismissal'>Non-lieu</option>
+                                            <option value='NoContinue'>Sans suite</option>
+                                            <option value='Sanction'>Sanction(s)</option>
+                                        </select>
+                                    </div>
+                                    <div id='proc_closeActs'>
+                                    <div id="proc_close_new" class="plus" title="Ajouter un champ sanction">+</div></div></fieldset><fieldset>
+                                    <legend>Mot de passe</legend>
+                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :</label><input type='password' id='close_password' required/><input type='submit' value='OK'/>
+                                        <p id='p_error'></p></fieldset>
+                                        </form></div>
+                                    </td>`);
+
+                                    $("#proc_close_button").click(function () {
+                                        $("#proc_close_opt").css("display", ($("#proc_close_opt").css("display") === "none" ? "block" : "none"));
+                                    });
+                                    $("#proc_close_new").click(function () {
+                                        counter += 1;
+                                        let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                                            maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
+                                        $(this).before(`<table id='pclose` + counter + `' class='pclose'>
+                                        <tr><td><label for='pclose_type`+ counter + `'>Sanction :</label></td><td><select required id='pclose_type` + counter + `'>
+                                            <option value=""></option>
+                                            <optgroup label="Sanctions habituelles">
+                                                <option value="Ban">Bannissement</option>
+                                                <option value="Jail">Emprisonnement</option>
+                                                <option value="Mute">Mute</option>
+                                                <option value="ItemBlacklist">Interdiction d'item</option>
+                                            </optgroup>
+                                            <optgroup label="Autre">
+                                                <option value="Sanction">Autre</option>
+                                            </optgroup>` + (counter > 1 ? `<optgroup label="OPTIONS">
+                                            <option value="Delete" style='color:red;'>Supprimer le champ</option>
+                                        </optgroup>` : "") + `
+                                        </select></td></tr>
+                                        <tr class="pclose_commenttd" id='pclose_commenttd`+ counter + `'><td><label for='pclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='pclose_comment` + counter + `' type='text' disabled></textarea></td></tr>
+                                        <tr class="pclose_itemd" id='pclose_itemtd`+ counter + `'><td><label for='pclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='pclose_item` + counter + `' type='text' disabled/></td></tr>
+                                        <tr><td><label for='pclose_target`+ counter + `'>Joueur :</label></td><td><input required id='pclose_target` + counter + `' type='text'/></td></tr>
+                                        <tr><td><label for='pclose_reason`+ counter + `'>Motif :</label></td><td><input required id='pclose_reason` + counter + `' type='text'/></td></tr>
+                                        <tr><td><label for='pclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='pclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
+                                        
+                                        </table>`);
+                                        (function (counter) {
+                                            $("#pclose_type" + counter).change(function (e) {
+                                                if ($(this).val() === "ItemBlacklist") {
+                                                    $("#pclose_itemtd" + counter).show();
+                                                    $("#pclose_item" + counter).prop({ "disabled": false, "required": true });
+                                                } else {
+                                                    $("#pclose_itemtd" + counter).hide();
+                                                    $("#pclose_item" + counter).prop({ "disabled": true, "required": false });
+                                                }
+                                                if ($(this).val() === "Sanction") {
+                                                    $("#pclose_commenttd" + counter).show();
+                                                    $("#pclose_comment" + counter).prop({ "disabled": false, "required": true });
+                                                } else {
+                                                    $("#pclose_commenttd" + counter).hide();
+                                                    $("#pclose_comment" + counter).prop({ "disabled": true, "required": false });
+                                                }
+                                                if ($(this).val() === "Delete") {
+                                                    $("#pclose" + this.id.replace(/pclose_type/, "")).remove();
+                                                }
+                                            });
+                                        })(counter);
+
+                                    });
+                                    $("#proc_decision").change(function () {
+                                        if ($("#proc_decision option:selected").val() === "Sanction") {
+                                            $("#proc_closeActs").show();
+                                            $("#proc_close_new").trigger("click");
+                                        } else {
+                                            $(".pclose").remove();
+                                            $("#proc_closeActs").hide();
+                                        }
+                                    });
+                                    $(".formcl").submit(function (e) {
+                                        e.preventDefault();
+                                        let closeActs = [],
+                                            actType = $("#proc_decision option:selected").val();
+                                        if (actType === "Sanction") {
+                                            $(".pclose").each(function (j, v) {
+                                                let i = parseInt(v.id.replace(/pclose/, ""));
+                                                closeActs.push({
+                                                    type: $("#pclose_type" + i + " option:selected").val(),
+                                                    target: $("#pclose_target" + i).val(),
+                                                    reason: $("#pclose_reason" + i).val(),
+                                                    comment: $("#pclose_comment" + i).val(),
+                                                    expire: new Date($("#pclose_expire" + i).val()).getTime() / 1000,
+                                                    authorId: ""
+                                                });
+                                                if ($("#pclose_type" + i + " option:selected").val() === "ItemBlacklist") {
+                                                    closeActs[j].blacklisted = $("#pclose_item" + i).val();
+                                                }
+                                            });
+                                        } else {
+                                            closeActs.push({
+                                                type: actType,
+                                                authorId: ""
+                                            });
+                                        }
+                                        $.ajax({
+                                            type: "POST",
+                                            url: IP + "procedure/close",
+                                            data: sessioned({
+                                                "id": response.id,
+                                                "password": $("#close_password").val(),
+                                                "closeActs": JSON.stringify(closeActs)
+                                            }),
+                                            dataType: "json",
+                                            success: function (response) {
+                                                if (response === "ERR_PASSWORD") {
+                                                    $("#p_error").html("Mot de passe incorrect");
+                                                } else if (response === "OK") {
+                                                    $("#p_error").html("");
+                                                    location.reload();
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+
+                            } else if (response.closedConfirm) {
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='closed'>Clôturé</td></tr>");
+                            } else {
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='waiting'>En attente de clôture</td></tr>");
+                                if (checkPerm("procedure.close.confirm")) {
+                                    $("#display_table").append(`<tr><td></td><td>
+                                    <form class='formcl'>
+                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :</label><input type='password' id='close_password' required/><input type='submit' value='OK'/>
+                                        <p id='p_error'></p>
+                                        <input type='button' value='Réouvrir la procédure' id='reopen_proc'/>
+                                        </form>
+                                    </td>`);
+                                }
+                                $("#reopen_proc").click(function () {
+                                    visualPrompt("Voulez-vous vraiment réouvrir la procédure ?<br/>Cela invalidera les décisions émises lors de sa clôture.", ["Oui", "Non"],
+                                        function (ans) {
+                                            if (ans === "Oui") {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: IP + "procedure/reopen",
+                                                    data: sessioned({ "id": response.id }),
+                                                    dataType: "json",
+                                                    success: function (response) {
+                                                        if (response === "OK") {
+                                                            location.reload();
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+
+                                });
+                                $(".formcl").submit(function (e) {
+                                    e.preventDefault();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: IP + "procedure/confirmClose",
+                                        data: sessioned({
+                                            "id": response.id,
+                                            "password": $("#close_password").val()
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            if (response === "ERR_PASSWORD") {
+                                                $("#p_error").html("Mot de passe incorrect");
+                                            } else if (response === "OK") {
+                                                $("#p_error").html("");
+                                                location.reload();
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                            if (response.closeManage.length > 0) {
+                                $("#display_table").append("<tr><td id='closemanagetd' colspan='2'><hr/></td></tr>");
+                            }
+                            for (let i = 0, c = response.closeManage.length; i < c; i++) {
+                                $("#closemanagetd").append(formatCloseManage(response.closeManage[i], "e") + "<br/>");
                             }
 
 
@@ -238,7 +514,7 @@ $(function () {
                             success: function (response) {
                                 let status;
 
-                                if (response != []) {
+                                if (response.length !== 0) {
                                     $("#nothing_to_see").html("");
                                 }
                                 for (let i = 0, c = response.length; i < c; ++i) {

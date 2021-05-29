@@ -52,9 +52,13 @@ img{
     text-align: center;
 }
 
-.error{
+.error, #p_error{
     color: red;
     font-style: italic;
+}
+
+#p_error{
+    display: inline-block;
 }
 
 .success{
@@ -78,6 +82,7 @@ img{
     width: 60%;
     margin: auto;
     margin-top: 0;
+    margin-bottom: 20px;
     border: 1px black solid;
 }
 
@@ -87,7 +92,7 @@ img{
 }
 
 .waiting{
-    color: rgb(255, 123, 0);
+    color: rgb(255, 102, 0);
 }
 
 .opened{
@@ -120,7 +125,7 @@ img{
 
 .summary{
     display: flex;
-    background: linear-gradient(rgb(163, 162, 162),rgb(202, 202, 202));
+    background: linear-gradient(rgb(197, 197, 197),rgb(226, 226, 226));
     flex-direction: row;
     justify-content: space-between;
     border-radius: 10px;
@@ -133,7 +138,7 @@ img{
 
 .summary:hover{
     box-shadow: black 3px 3px 3px;
-    background: linear-gradient(rgb(139, 139, 139),rgb(185, 185, 185));
+    background: linear-gradient(rgb(190, 190, 190),rgb(202, 201, 201));
 }
 
 .summary div h1, .summary div p{
@@ -306,24 +311,31 @@ a:visited{
 }
 
 
-#tick_closeActs, .ind_tempActs{
+#tick_closeActs, .ind_tempActs, #proc_closeActs{
     border: 1px black solid;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
-.tclose, .rtemp{
+#proc_closeActs{
+    display: none;
+}
+
+.tclose, .rtemp, .pclose{
     border: 1px dashed grey;
     margin: 5px;
 }
 
-.tclose_itemd, .rtemp_itemd{
-    display: none;
+.pclose{
+    margin: auto;
+    margin-top: 5px;
 }
-.tclose_commenttd, .rtemp_commenttd{
+
+.tclose_commenttd, .rtemp_commenttd, .tclose_itemd, .rtemp_itemd,.pclose_commenttd,.pclose_itemd{
     display: none;
 }
 
@@ -479,4 +491,25 @@ a.new:hover{
 
 .smaller{
     font-size: 0.8em;
+}
+
+.formcl{
+    padding: 5px;
+    border: dashed 1px grey;
+}
+
+#closemanagetd{
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+#proc_close_opt{
+    display: none;
+    transition: linear 200ms;
+}
+
+#proc_close_button{
+    text-align: center;
+    width: 100%;
+    margin: auto;
 }
