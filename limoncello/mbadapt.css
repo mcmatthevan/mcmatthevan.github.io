@@ -103,6 +103,15 @@
 	#display_table{
 		width: 100%;
 	}
+	#newact_choose{
+		width: 100%;
+	}
+	.fieldset_NA{
+		width: 100%;
+	}
+	#request_result{
+		width: 100%;
+	}
 
 	/* Un message personnalisé */
 

@@ -496,6 +496,7 @@ a.new:hover{
 .formcl{
     padding: 5px;
     border: dashed 1px grey;
+    text-align: center;
 }
 
 #closemanagetd{
@@ -512,4 +513,68 @@ a.new:hover{
     text-align: center;
     width: 100%;
     margin: auto;
+    cursor: pointer;
+}
+
+#newact_td > a {
+    font-size: 2em;
+    color: rgb(151, 149, 149);
+    text-decoration: unset;
+    transition: linear 100ms;
+}
+#newact_td > a:hover{
+    color: black;
+}
+
+#newact > h1{
+    text-align: center;
+    text-decoration: underline;
+}
+
+#newact_choose{
+    border-collapse: collapse;
+    width: 60%;
+    margin: auto;
+    display: none;
+}
+
+#newact_choose td{
+    border: solid 1px black;
+    text-align: center;
+    background: rgb(228, 228, 228);
+}
+
+#newact_choose .tag{
+    background: rgb(184, 184, 184);
+}
+
+.newAct:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.newAct{
+    cursor: pointer;
+    user-select: none;
+}
+.fieldset_NA{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    align-items: center;
+}
+
+#request_result{
+    width: 60%;
+    margin: auto;
+}
+
+#newact .error{
+    text-align: center;
+}
+
+#pre_result{
+    padding: 10px;
+    border: solid 1px rgb(206, 206, 206);
 }

@@ -1,4 +1,94 @@
-const IP = "http://localhost:8888/"
+const IP = "http://localhost:8888/";
+const ACTLIST = {
+    "Sanction": {
+        "target": ["Joueur",true],
+        "comment": ["Description de la sanction",true,"<textarea $$></textarea>"],
+        "reason": ["Motif",true],
+        "expire": ["Expiration",true,"<input type='date' $$/>"]
+    },
+    "Ban": {
+        "target": ["Joueur",true],
+        "reason": ["Motif",true],
+        "expire": ["Expiration",true,"<input type='date' $$/>"]
+    },
+    "Mute": {
+        "target": ["Joueur",true],
+        "reason": ["Motif",true],
+        "expire": ["Expiration",true,"<input type='date' $$/>"]
+    },
+    "Jail": {
+        "target": ["Joueur",true],
+        "reason": ["Motif",true],
+        "expire": ["Expiration",true,"<input type='date' $$/>"]
+    },
+    "ItemBlacklist": {
+        "target": ["Joueur",true],
+        "blacklisted": ["Item(s) interdit(s)",true],
+        "reason": ["Motif",true],
+        "expire": ["Expiration",true,"<input type='date' $$/>"]
+    },
+    "Request": {
+        "subject": ["Type de requête",true],
+        "comment": ["Description de la requête",true,"<textarea $$></textarea>"]
+    },
+    "LogGetting":{
+        "dayLog": ["Date des logs requis",true,"<input type='date' $$/>"],
+        "content": ["Terme à rechercher",true]
+    },
+    "IpGetting":{
+        "target": ["Pseudo du joueur",true]
+    },
+    "Element": {
+        "subject": ["Type d'élément",true],
+        "comment": ["Description",true,"<textarea $$></textarea>"]
+    },
+    "Notification": {
+        "subject": ["Type de notification",true],
+        "comment": ["Description",true,"<textarea $$></textarea>"]
+    },
+    "Observation": {
+        "author": ["Modérateur à l'origine du constat",true,"<input type='text' value='$pseudo$' $$/>"],
+        "comment": ["Description",true,"<textarea $$></textarea>"]
+    },
+    "Complaint": {
+        "complainant": ["Plaignant",true],
+        "target": ["Joueur ciblé",true],
+        "comment": ["Motif de la plainte",true,"<textarea $$></textarea>"]
+    }
+};
+const _classEquivalent = {
+    "Ban": "Bannissement",
+    "Mute": "Mute",
+    "ItemBlacklist": "Interdiction d'item",
+    "Jail": "Emprisonnement",
+    "Dismissal": "Non-lieu",
+    "NoContinue": "Sans suite",
+    "Element": "Élément de procédure",
+    "Complaint": "Plainte",
+    "Indictment": "Réquisitoire",
+    "Observation": "Constat",
+    "Sanction": "Sanction",
+    "LogGetting": "Demande de logs",
+    "Request": "Requête",
+    "Notification": "Notification",
+    "IpGetting": "Demande d'adresse IP"
+},
+    _attrEquivalent = {
+        "target": "Joueur :",
+        "date": "Date :",
+        "expire": "Expiration :",
+        "blacklisted": "Item(s) interdit(s) :",
+        "reason": "Raison indiquée :",
+        "comment": "Description :",
+        "authorId": "Modérateur :",
+        "complainant": "Plaignant :",
+        "Id": "Id :",
+        "author": "Modérateur à l'origine du constat :",
+        "dayLog": "Date des logs consultés :",
+        "content": "Termes recherchés :",
+        "subject": "Type :"
+    };
+
 
 function parsedDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
@@ -20,6 +110,11 @@ function summRedirect() {
 
 function stringDate(date, a = true) {
     return new Date(date * 1000).toLocaleString("fr", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" }).replace(", ", (a ? " à " : ", "));
+}
+
+function stringOnlyDay(datenb){
+    let date = new Date(datenb*1000);
+    return format00(date.getDate()) + "/" + format00(date.getMonth()+1) + "/" + date.getFullYear();
 }
 
 function parseTimeSpan(time) {
@@ -124,64 +219,46 @@ function needPassword() {
         return result;
     }
 }
-
+var userInfo;
 function getUserInfo() {
-    let result;
-    if (typeof sessionStorage["limoncello-sessionId"] !== "undefined") {
-        $.ajax({
-            type: "GET",
-            url: IP + "user/selfInfo",
-            data: sessioned({}),
-            async: false,
-            dataType: "json",
-            error: function (x) {
-                if (x.status === 0) {
-                    result = "ERR_NOT_AVAILABLE";
+    if (typeof userInfo === "undefined") {
+        let result;
+        if (typeof sessionStorage["limoncello-sessionId"] !== "undefined") {
+            $.ajax({
+                type: "GET",
+                url: IP + "user/selfInfo",
+                data: sessioned({}),
+                async: false,
+                dataType: "json",
+                error: function (x) {
+                    if (x.status === 0) {
+                        result = "ERR_NOT_AVAILABLE";
+                    }
+                },
+                success: function (response) {
+                    result = response;
                 }
-            },
-            success: function (response) {
-                result = response;
-            }
-        });
-        return result;
+            });
+            userInfo = result;
+            return result;
+        }
+    } else {
+        return userInfo;
     }
+
 }
 
-let _classEquivalent = {
-    "Ban": "Bannissement",
-    "Mute": "Mute",
-    "ItemBlacklist": "Interdiction d'item",
-    "Jail": "Emprisonnement",
-    "Dismissal": "Non-lieu",
-    "NoContinue": "Sans suite",
-    "Element": "Élément de procédure",
-    "Complaint": "Plainte",
-    "Indictment": "Réquisitoire",
-    "Observation": "Constat",
-    "Sanction": "Sanction",
-    "LogGetting": "Demande de logs"
-},
-    _attrEquivalent = {
-        "target": "Joueur :",
-        "date": "Date :",
-        "expire": "Expiration :",
-        "blacklisted": "Item(s) interdit(s) :",
-        "reason": "Raison indiquée :",
-        "comment": "Description :",
-        "authorId": "Modérateur :",
-        "complainant": "Plaignant :",
-        "Id": "Id :",
-        "dayLog": "Date des logs consultés :",
-        "content": "Termes recherchés :"
-    };
+
 
 function getActType(type) {
-    if (~["Ban", "Mute", "ItemBlacklist", "Jail"].indexOf(type)) {
+    if (~["Ban", "Mute", "ItemBlacklist", "Jail","Sanction"].indexOf(type)) {
         return "Sanction temporaire";
-    } else if (~["Element"].indexOf(type)) {
+    } else if (~["Element","Observation","Complaint"].indexOf(type)) {
         return "Élément de procédure";
-    } else if (~["LogGetting", "IpGetting"].indexOf(type)) {
+    } else if (~["LogGetting", "IpGetting", "Request"].indexOf(type)) {
         return "Requête";
+    } else if (~["Notification"].indexOf(type)) {
+        return "Notification";
     }
 }
 
@@ -229,21 +306,12 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
     result += getActType(act.type) + "</td><td><table class='display_act_descr'><tr><td class='tag' colspan='2'>" + atype + "<hr/></td>";
     delete act.type;
     for (let item in act) {
-        if (!~notshown.concat(["date", "authorId"]).indexOf(item) && act[item] !== "") {
+        if (!~notshown.concat(["date", "authorId"]).indexOf(item) && act[item] !== "" && act[item] !== "Simple Element") {
             let value;
             if (item === "expire") {
-                value = stringDate(act[item]) + "</td></tr><tr><td class='tag end'><i>Durée totale</i></td><td><i>" + parseTimeSpan(act.expire - act.date) + "</i>";
+                value = stringDate(act[item]) + "</td></tr><tr><td class='tag end smaller'><i>(Durée totale :</i></td><td class='smaller'><i>" + parseTimeSpan(act.expire - act.date) + ")</i>";
             } else if (item === "dayLog") {
-                let actual = new Date();
-                if (act[item] === "today") {
-                    value = format00(actual.getDate()) + "/" + format00(actual.getMonth()) + "/" + format00(actual.getFullYear());
-                } else if (act[item] === "yest") {
-
-                    let yest = new Date(actual.getTime() - 86400000);
-                    value = format00(yest.getDate()) + "/" + format00(yest.getMonth()) + "/" + format00(yest.getFullYear());
-                } else {
-                    value = act[item].replace(/-/g, "/");
-                }
+                value = stringOnlyDay(act[item]);
             } else {
                 value = act[item];
             }
@@ -264,11 +332,11 @@ function formatCloseManage(act, e = "") {
 function visualPrompt(question, choices, funct) {
     let answered;
     $("#display_section").append(`<div id='prompt_overlay' style='position:fixed; left:0;top:0;width:100%;height:100%;'>
-    <div id='prompt_window' style='background:white;border:2px solid grey;position:relative;top: 40%; width: 40%; margin: auto;text-align:center;'></div></div>`);
+    <div id='prompt_window' style='background:white;border:2px solid grey;position:relative;top: 40%; width: 40%; margin: auto;text-align:center;padding:10px;'></div></div>`);
     $("#prompt_window").append("<p>" + question + "</p>");
     let c = choices.length;
     for (let i = 0; i < c; i++) {
-        $("#prompt_window").append("<input type='button' class='prompt_button' value='" + choices[i] + "'/>");
+        $("#prompt_window").append("<input style='margin: 5px;' type='button' class='prompt_button' value='" + choices[i] + "'/>");
     }
     $(".prompt_button").click(function () {
         answered = $(this).val();
@@ -279,6 +347,6 @@ function visualPrompt(question, choices, funct) {
             clearInterval(interv);
             funct(answered);
         }
-    },100);
+    }, 100);
 
 }

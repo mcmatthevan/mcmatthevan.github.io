@@ -63,7 +63,58 @@ $(function () {
             let userinfos = getUserInfo();
             $("#titlename").text(userinfos[0]);
             $("#titlerole").text(userinfos[1]);
-            if (args.page === "display") {
+            if (args.page === "newact"){
+                $("#newact").css("display","block");
+                if (typeof args.act === "undefined"){
+                    $("#newact_choose").show();
+                    $(".newAct").click(function(){
+                        location.search = "?page=newact&id=" + args.id + "&act=" + this.id.replace(/newAct_/,"");
+                    });
+                } else {
+                    $("#newact").append(`<form class='form_NA' id='form_NA_` + args.act + `'><fieldset class='fieldset_NA'>
+                    <legend>` + _classEquivalent[args.act] + `</legend>
+                    </fieldset></form><p class="error"></p><div id="request_result"></div>`);
+                    for (let i in ACTLIST[args.act]){
+                        $(".fieldset_NA").append(`<label for="inputNA_` + i + `">`+ACTLIST[args.act][i][0]+` : </label>`);
+                        let attrs = `class="inputNA" id="inputNA_` + i + '" ' + (ACTLIST[args.act][i][1] ? "required":"");
+                        if (typeof ACTLIST[args.act][i][2] === "undefined"){
+                            $(".fieldset_NA").append("<input type='text' " + attrs + "/><br/>");
+                        } else {
+                            $(".fieldset_NA").append(ACTLIST[args.act][i][2].replace(/\$\$/g,attrs).replace(/\$pseudo\$/g,getUserInfo()[0]));
+                        }
+                    }
+                    $(".fieldset_NA").append("<input type='submit' value='OK'/>");
+                    $(".form_NA").submit(function(e){
+                        e.preventDefault();
+                        let dic = {type: args.act, authorId:"", procedure_id_:args.id};
+                        $(".inputNA").each(function(i,v){
+                            if (v.type === "date"){
+                                dic[v.id.replace(/inputNA_/g,"")] = Math.floor(new Date($(v).val()).getTime()/1000);
+                            } else {
+                                dic[v.id.replace(/inputNA_/g,"")] = $(v).val();
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: IP + "procedure/newAct",
+                            data: sessioned(dic),
+                            dataType: "json",
+                            success: function (response) {
+                                if (response === "OK"){
+                                    location.search = "?page=display&show=procedure&id=" + args.id;
+                                } else if (response === "ERR_TOO_MANY_LINES"){
+                                    $(".error").html("La requête ne peut pas aboutir car le nombre de résultats est trop conséquent.<br>\
+                                    Essayez d'affiner la recherche.");
+                                } else if (response === "BAD_PSEUDO"){
+                                    $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié est incorrect.");
+                                } else {
+                                    $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><pre id='pre_result'>"+response+"</pre>");
+                                }
+                            }
+                        });
+                    });
+                }
+            } else if (args.page === "display") {
                 if (args.show === "indictment") {
                     $.ajax({
                         type: "GET",
@@ -131,10 +182,12 @@ $(function () {
                             } else {
                                 $("#display_table").append("<tr><td class='end'>Initiative de la procédure :</td><td>" + formatSanct(response.initiative, ["date"], {}, { "target": "Joueur ciblé :" }) + "</td></tr>")
                             }
-                            $("#display_table").append(`<tr><td colspan='2'><hr/>
-                            <table class='acts_list'><tr><td colspan='5' class='tag'>Liste des actes de procédure</td></tr><tr><td class='tag'>Type</td>
-                            <td class='tag'>Acte</td><td class='tag'>Date</td>
-                            <td class='tag'>Auteur</td></tr>`+ formatAct(response.act, ["subject"]) + `</table><hr/></td></tr>`);
+                            if (response.act.comment !== "") {
+                                $("#display_table").append(`<tr><td colspan='2'><hr/>
+                                <table class='acts_list'><tr><td colspan='5' class='tag'>Liste des actes de procédure</td></tr><tr><td class='tag'>Type</td>
+                                <td class='tag'>Acte</td><td class='tag'>Date</td>
+                                <td class='tag'>Auteur</td></tr>`+ formatAct(response.act, []) + `</table><hr/></td></tr>`);
+                            }
 
                             if (response.closeActs.length > 0) {
                                 let form = "";
@@ -219,7 +272,10 @@ $(function () {
                             <td class='tag'>Acte</td><td class='tag'>Date</td>
                             <td class='tag'>Auteur</td></tr></table><hr/></td></tr>`);
                             for (let i = 0, c = response.acts.length; i < c; i++) {
-                                $(".acts_list").append(formatAct(response.acts[i], ["subject"]));
+                                $(".acts_list").append(formatAct(response.acts[i], []));
+                            }
+                            if (response.opened && checkPerm("procedure.act.new")){
+                                $(".acts_list").append("<tr><td id='newact_td' colspan='5'><a href='?page=newact&id="+response.id+"'>⊕</a></td></tr>");
                             }
 
 
@@ -250,7 +306,7 @@ $(function () {
                                     <div id='proc_closeActs'>
                                     <div id="proc_close_new" class="plus" title="Ajouter un champ sanction">+</div></div></fieldset><fieldset>
                                     <legend>Mot de passe</legend>
-                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :</label><input type='password' id='close_password' required/><input type='submit' value='OK'/>
+                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :<br/></label><input type='password' id='close_password' required/><input type='submit' value='OK'/><br/>
                                         <p id='p_error'></p></fieldset>
                                         </form></div>
                                     </td>`);
@@ -260,7 +316,7 @@ $(function () {
                                     });
                                     $("#proc_close_new").click(function () {
                                         counter += 1;
-                                        let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                                        let currentDate = parsedDate(new Date(new Date().getTime())),
                                             maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
                                         $(this).before(`<table id='pclose` + counter + `' class='pclose'>
                                         <tr><td><label for='pclose_type`+ counter + `'>Sanction :</label></td><td><select required id='pclose_type` + counter + `'>
@@ -277,8 +333,8 @@ $(function () {
                                             <option value="Delete" style='color:red;'>Supprimer le champ</option>
                                         </optgroup>` : "") + `
                                         </select></td></tr>
-                                        <tr class="pclose_commenttd" id='pclose_commenttd`+ counter + `'><td><label for='pclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='pclose_comment` + counter + `' type='text' disabled></textarea></td></tr>
-                                        <tr class="pclose_itemd" id='pclose_itemtd`+ counter + `'><td><label for='pclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='pclose_item` + counter + `' type='text' disabled/></td></tr>
+                                        <tr class="pclose_commenttd" id='pclose_commenttd`+ counter + `'><td><label for='pclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='pclose_comment` + counter + `' type='text' disabled required></textarea></td></tr>
+                                        <tr class="pclose_itemd" id='pclose_itemtd`+ counter + `'><td><label for='pclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='pclose_item` + counter + `' type='text' disabled required/></td></tr>
                                         <tr><td><label for='pclose_target`+ counter + `'>Joueur :</label></td><td><input required id='pclose_target` + counter + `' type='text'/></td></tr>
                                         <tr><td><label for='pclose_reason`+ counter + `'>Motif :</label></td><td><input required id='pclose_reason` + counter + `' type='text'/></td></tr>
                                         <tr><td><label for='pclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='pclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
@@ -288,17 +344,17 @@ $(function () {
                                             $("#pclose_type" + counter).change(function (e) {
                                                 if ($(this).val() === "ItemBlacklist") {
                                                     $("#pclose_itemtd" + counter).show();
-                                                    $("#pclose_item" + counter).prop({ "disabled": false, "required": true });
+                                                    $("#pclose_item" + counter).prop({ "disabled": false });
                                                 } else {
                                                     $("#pclose_itemtd" + counter).hide();
-                                                    $("#pclose_item" + counter).prop({ "disabled": true, "required": false });
+                                                    $("#pclose_item" + counter).prop({ "disabled": true });
                                                 }
                                                 if ($(this).val() === "Sanction") {
                                                     $("#pclose_commenttd" + counter).show();
-                                                    $("#pclose_comment" + counter).prop({ "disabled": false, "required": true });
+                                                    $("#pclose_comment" + counter).prop({ "disabled": false });
                                                 } else {
                                                     $("#pclose_commenttd" + counter).hide();
-                                                    $("#pclose_comment" + counter).prop({ "disabled": true, "required": false });
+                                                    $("#pclose_comment" + counter).prop({ "disabled": true });
                                                 }
                                                 if ($(this).val() === "Delete") {
                                                     $("#pclose" + this.id.replace(/pclose_type/, "")).remove();
@@ -369,9 +425,9 @@ $(function () {
                                 if (checkPerm("procedure.close.confirm")) {
                                     $("#display_table").append(`<tr><td></td><td>
                                     <form class='formcl'>
-                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :</label><input type='password' id='close_password' required/><input type='submit' value='OK'/>
-                                        <p id='p_error'></p>
-                                        <input type='button' value='Réouvrir la procédure' id='reopen_proc'/>
+                                        <label for='close_password' class='tag end'>Entrez votre mot de passe pour clôturer la procédure :<br/></label><input type='password' id='close_password' required/><input type='submit' value='OK'/><br/>
+                                        <p id='p_error'></p><hr/>
+                                        <input style='font-size: 0.6em;font-style:italic' type='button' value='Réouvrir la procédure' id='reopen_proc'/>
                                         </form>
                                     </td>`);
                                 }
@@ -660,19 +716,22 @@ $(function () {
                         $("#proc_initiative").change(function () {
                             let initValue = $("#proc_initiative option:selected").val();
                             $(".pinit_config").hide();
-                            $(".pinit_config input, .pinit_config textarea, .pinit_config select").prop({ "disabled": true, "required": false });
+                            $(".pinit_config input, .pinit_config textarea, .pinit_config select").prop({ "disabled": true });
                             switch (initValue) {
                                 case "Complaint":
                                     $("#pinit_compl").show();
-                                    $(".pinit_compl_input").prop({ "disabled": false, "required": true });
+                                    $(".pinit_compl_input").prop({ "disabled": false });
                                     break;
                                 case "Observation":
                                     $("#pinit_obs").show();
+                                    $("#pinit_observator").val(getUserInfo()[0]);
                                     $(".pinit_obs_input").prop({ "disabled": false });
+                                    $("#pinit_observator").trigger("focus");
+                                    $("#pinit_observator").get()[0].selectionStart = 0;
                                     break;
                                 case "Indictment":
                                     $("#pinit_ind").show();
-                                    $(".pinit_ind_input").prop({ "disabled": false, "required": true });
+                                    $(".pinit_ind_input").prop({ "disabled": false });
                                     $("#pinit_ind_id").html("<option value=''></option>");
                                     $.ajax({
                                         type: "GET",
@@ -787,7 +846,7 @@ $(function () {
                         });
                         $("#tick_close_new").click(function () {
                             counter += 1;
-                            let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                            let currentDate = parsedDate(new Date(new Date().getTime())),
                                 maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
                             $(this).before(`<table id='tclose` + counter + `' class='tclose'>
                             <tr><td><label for='tclose_type`+ counter + `'>Sanction :</label></td><td><select required id='tclose_type` + counter + `'>
@@ -804,8 +863,8 @@ $(function () {
                                 <option value="Delete" style='color:red;'>Supprimer le champ</option>
                             </optgroup>` : "") + `
                             </select></td></tr>
-                            <tr class="tclose_commenttd" id='tclose_commenttd`+ counter + `'><td><label for='tclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='tclose_comment` + counter + `' type='text' disabled></textarea></td></tr>
-                            <tr class="tclose_itemd" id='tclose_itemtd`+ counter + `'><td><label for='tclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='tclose_item` + counter + `' type='text' disabled/></td></tr>
+                            <tr class="tclose_commenttd" id='tclose_commenttd`+ counter + `'><td><label for='tclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='tclose_comment` + counter + `' type='text' disabled required></textarea></td></tr>
+                            <tr class="tclose_itemd" id='tclose_itemtd`+ counter + `'><td><label for='tclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='tclose_item` + counter + `' type='text' disabled required/></td></tr>
                             <tr><td><label for='tclose_target`+ counter + `'>Joueur :</label></td><td><input required id='tclose_target` + counter + `' type='text'/></td></tr>
                             <tr><td><label for='tclose_reason`+ counter + `'>Motif :</label></td><td><input required id='tclose_reason` + counter + `' type='text'/></td></tr>
                             <tr><td><label for='tclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='tclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
@@ -815,17 +874,17 @@ $(function () {
                                 $("#tclose_type" + counter).change(function (e) {
                                     if ($(this).val() === "ItemBlacklist") {
                                         $("#tclose_itemtd" + counter).show();
-                                        $("#tclose_item" + counter).prop({ "disabled": false, "required": true });
+                                        $("#tclose_item" + counter).prop({ "disabled": false });
                                     } else {
                                         $("#tclose_itemtd" + counter).hide();
-                                        $("#tclose_item" + counter).prop({ "disabled": true, "required": false });
+                                        $("#tclose_item" + counter).prop({ "disabled": true });
                                     }
                                     if ($(this).val() === "Sanction") {
                                         $("#tclose_commenttd" + counter).show();
-                                        $("#tclose_comment" + counter).prop({ "disabled": false, "required": true });
+                                        $("#tclose_comment" + counter).prop({ "disabled": false });
                                     } else {
                                         $("#tclose_commenttd" + counter).hide();
-                                        $("#tclose_comment" + counter).prop({ "disabled": true, "required": false });
+                                        $("#tclose_comment" + counter).prop({ "disabled": true });
                                     }
                                     if ($(this).val() === "Delete") {
                                         $("#tclose" + this.id.replace(/tclose_type/, "")).remove();
@@ -838,19 +897,23 @@ $(function () {
                         $("#tick_initiative").change(function () {
                             let initValue = $("#tick_initiative option:selected").val();
                             $(".tinit_config").hide();
-                            $(".tinit_config input, .tinit_config textarea, .tinit_config select").prop({ "disabled": true, "required": false });
+                            $(".tinit_config input, .tinit_config textarea, .tinit_config select").prop({ "disabled": true });
                             switch (initValue) {
                                 case "Complaint":
                                     $("#tinit_compl").show();
-                                    $(".tinit_compl_input").prop({ "disabled": false, "required": true });
+                                    $(".tinit_compl_input").prop({ "disabled": false });
                                     break;
                                 case "Observation":
                                     $("#tinit_obs").show();
-                                    $(".tinit_obs_input").prop({ "disabled": false, "required": true });
+                                    $("#tinit_observator").val(getUserInfo()[0]);
+                                    $(".tinit_obs_input").prop({ "disabled": false });
+                                    $("#tinit_observator").trigger("focus");
+
+                                    $("#tinit_observator").get()[0].selectionStart = 0;
                                     break;
                                 case "Indictment":
                                     $("#tinit_ind").show();
-                                    $(".tinit_ind_input").prop({ "disabled": false, "required": true });
+                                    $(".tinit_ind_input").prop({ "disabled": false });
                                     $("#tinit_ind_id").html("<option value=''></option>");
                                     $.ajax({
                                         type: "GET",
@@ -925,7 +988,7 @@ $(function () {
                         });
                         $("#ind_temp_new").click(function () {
                             counter += 1;
-                            let currentDate = parsedDate(new Date(new Date().getTime() + 86400000)),
+                            let currentDate = parsedDate(new Date(new Date().getTime())),
                                 maxDate = parsedDate(new Date(new Date().getTime() + 31536000000));
                             $(this).before(`<table id='rtemp` + counter + `' class='rtemp'>
                             <tr><td><label for='rtemp_type`+ counter + `'>Sanction :</label></td><td><select required id='rtemp_type` + counter + `'>
@@ -942,8 +1005,8 @@ $(function () {
                                 <option value="Delete" style='color:red;'>Supprimer le champ</option>
                             </optgroup>
                             </select></td></tr>
-                            <tr class="rtemp_commenttd" id='rtemp_commenttd`+ counter + `'><td><label for='rtemp_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='rtemp_comment` + counter + `' type='text' disabled></textarea></td></tr>
-                            <tr class="rtemp_itemd" id='rtemp_itemtd`+ counter + `'><td><label for='rtemp_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='rtemp_item` + counter + `' type='text' disabled/></td></tr>
+                            <tr class="rtemp_commenttd" id='rtemp_commenttd`+ counter + `'><td><label for='rtemp_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='rtemp_comment` + counter + `' type='text' disabled required></textarea></td></tr>
+                            <tr class="rtemp_itemd" id='rtemp_itemtd`+ counter + `'><td><label for='rtemp_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='rtemp_item` + counter + `' type='text' disabled required/></td></tr>
                             <tr><td><label for='rtemp_target`+ counter + `'>Joueur :</label></td><td><input required id='rtemp_target` + counter + `' type='text'/></td></tr>
                             <tr><td><label for='rtemp_reason`+ counter + `'>Motif :</label></td><td><input required id='rtemp_reason` + counter + `' type='text'/></td></tr>
                             <tr><td><label for='rtemp_expire`+ counter + `'>Expiration :</label></td><td><input required id='rtemp_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
@@ -953,17 +1016,17 @@ $(function () {
                                 $("#rtemp_type" + counter).change(function (e) {
                                     if ($(this).val() === "ItemBlacklist") {
                                         $("#rtemp_itemtd" + counter).show();
-                                        $("#rtemp_item" + counter).prop({ "disabled": false, "required": true });
+                                        $("#rtemp_item" + counter).prop({ "disabled": false });
                                     } else {
                                         $("#rtemp_itemtd" + counter).hide();
-                                        $("#rtemp_item" + counter).prop({ "disabled": true, "required": false });
+                                        $("#rtemp_item" + counter).prop({ "disabled": true });
                                     }
                                     if ($(this).val() === "Sanction") {
                                         $("#rtemp_commenttd" + counter).show();
-                                        $("#rtemp_comment" + counter).prop({ "disabled": false, "required": true });
+                                        $("#rtemp_comment" + counter).prop({ "disabled": false });
                                     } else {
                                         $("#rtemp_commenttd" + counter).hide();
-                                        $("#rtemp_comment" + counter).prop({ "disabled": true, "required": false });
+                                        $("#rtemp_comment" + counter).prop({ "disabled": true });
                                     }
                                     if ($(this).val() === "Delete") {
                                         $("#rtemp" + this.id.replace(/rtemp_type/, "")).remove();
