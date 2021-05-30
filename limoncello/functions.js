@@ -1,39 +1,44 @@
-const IP = "http://localhost:8888/";
+//const IP = "http://localhost:8888/";
+function parsedDate(date) {
+    return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
+}
+const IP = "http://singalong-game.com:8888/";
 const ACTLIST = {
     "Sanction": {
         "target": ["Joueur",true],
         "comment": ["Description de la sanction",true,"<textarea $$></textarea>"],
         "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' $$/>"]
+        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Ban": {
         "target": ["Joueur",true],
         "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' $$/>"]
+        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Mute": {
         "target": ["Joueur",true],
         "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' $$/>"]
+        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Jail": {
         "target": ["Joueur",true],
         "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' $$/>"]
+        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "ItemBlacklist": {
         "target": ["Joueur",true],
         "blacklisted": ["Item(s) interdit(s)",true],
         "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' $$/>"]
+        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Request": {
         "subject": ["Type de requête",true],
         "comment": ["Description de la requête",true,"<textarea $$></textarea>"]
     },
     "LogGetting":{
-        "dayLog": ["Date des logs requis",true,"<input type='date' $$/>"],
-        "content": ["Terme à rechercher",true]
+        "dayLog": ["Date des logs requis",true,"<input type='date' value='" + parsedDate(new Date()) + "' $$/>"],
+        "content": ["Terme à rechercher",true,"<input type='text' $$/><br><p style='font-style:italic; color:grey;'>Pour \
+            rechercher plusieurs termes, les séparer par un point-virgule (;)</p>"]
     },
     "IpGetting":{
         "target": ["Pseudo du joueur",true]
@@ -90,9 +95,7 @@ const _classEquivalent = {
     };
 
 
-function parsedDate(date) {
-    return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
-}
+
 
 function format00(nb) {
     return nb.toLocaleString('en-US', {
@@ -273,10 +276,9 @@ function formatSanct(act, notshown = ["authorId", "sanctionType"], modifClassEqu
     }
     let result = "<table class='display_sanct'><tr><td class='tag' colspan='2'>",
         atype = classEquivalent[act.type];
-    delete act.type;
     result += atype + "<hr/></td></tr>";
     for (let item in act) {
-        if (!~notshown.indexOf(item) && act[item] !== "") {
+        if (!~notshown.indexOf(item) && act[item] !== "" && item !== "type") {
             let value;
             if (item === "date") {
                 value = stringDate(act[item]);
@@ -304,18 +306,21 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
     let result = "<tr class='display_act'><td>",
         atype = classEquivalent[act.type];
     result += getActType(act.type) + "</td><td><table class='display_act_descr'><tr><td class='tag' colspan='2'>" + atype + "<hr/></td>";
-    delete act.type;
     for (let item in act) {
-        if (!~notshown.concat(["date", "authorId"]).indexOf(item) && act[item] !== "" && act[item] !== "Simple Element") {
+        if (!~notshown.concat(["date", "authorId"]).indexOf(item) && act[item] !== "" && act[item] !== "Simple Element" && item != "type") {
             let value;
             if (item === "expire") {
                 value = stringDate(act[item]) + "</td></tr><tr><td class='tag end smaller'><i>(Durée totale :</i></td><td class='smaller'><i>" + parseTimeSpan(act.expire - act.date) + ")</i>";
             } else if (item === "dayLog") {
-                value = stringOnlyDay(act[item]);
+                if (typeof act[item].valueOf() === "number"){
+                    value = stringOnlyDay(act[item]);
+                } else {
+                    value = act[item].replace(/-/g,"/");
+                }
             } else {
                 value = act[item];
             }
-            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value + "</td></tr>";
+            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g," ; ") + "</td></tr>";
         }
     }
     return result + "</table><td>" + stringDate(act.date).replace(/ à /g, "<br>") + "</td><td>" + act.authorId + "</td>";

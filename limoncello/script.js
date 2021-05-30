@@ -90,6 +90,8 @@ $(function () {
                         $(".inputNA").each(function(i,v){
                             if (v.type === "date"){
                                 dic[v.id.replace(/inputNA_/g,"")] = Math.floor(new Date($(v).val()).getTime()/1000);
+                            } else if (v.id === "inputNA_content"){
+                                dic[v.id.replace(/inputNA_/g,"")] = $(v).val().replace(/;/g,":::");
                             } else {
                                 dic[v.id.replace(/inputNA_/g,"")] = $(v).val();
                             }
@@ -105,10 +107,18 @@ $(function () {
                                 } else if (response === "ERR_TOO_MANY_LINES"){
                                     $(".error").html("La requête ne peut pas aboutir car le nombre de résultats est trop conséquent.<br>\
                                     Essayez d'affiner la recherche.");
+                                    $("#request_result").html("");
                                 } else if (response === "BAD_PSEUDO"){
                                     $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié est incorrect.");
+                                    $("#request_result").html("");
                                 } else {
-                                    $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><pre id='pre_result'>"+response+"</pre>");
+                                    $(".error").html("");
+                                    $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><div id='pre_result'>"+response+"</div>");
+                                }
+                            },
+                            error: function(x){
+                                if (x.status === 425){
+                                    $(".error").html("Erreur : nombre de requêtes trop conséquent<br>Réessayez dans quelques secondes.")
                                 }
                             }
                         });
