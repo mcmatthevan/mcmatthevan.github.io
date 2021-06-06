@@ -62,6 +62,7 @@ const ACTLIST = {
     }
 };
 const _classEquivalent = {
+    //edit procpvbuild too
     "Ban": "Bannissement",
     "Mute": "Mute",
     "ItemBlacklist": "Interdiction d'item",
@@ -79,6 +80,7 @@ const _classEquivalent = {
     "IpGetting": "Demande d'adresse IP"
 },
     _attrEquivalent = {
+        //edit procpvbuild too
         "target": "Joueur :",
         "date": "Date :",
         "expire": "Expiration :",
@@ -254,6 +256,7 @@ function getUserInfo() {
 
 
 function getActType(type) {
+    //edit procpvbuild too
     if (~["Ban", "Mute", "ItemBlacklist", "Jail","Sanction"].indexOf(type)) {
         return "Sanction temporaire";
     } else if (~["Element","Observation","Complaint"].indexOf(type)) {

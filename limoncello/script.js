@@ -60,6 +60,10 @@ $(function () {
                 });
             });
         } else {
+            $("#userbloc").css("display","flex");
+            if (checkPerm("admin.access")){
+                $("#homesettings").append("<a id='configlink' href='admin.html'>🔒 Configuration</a>")
+            }
             let userinfos = getUserInfo();
             $("#titlename").text(userinfos[0]);
             $("#titlerole").text(userinfos[1]);
@@ -236,6 +240,11 @@ $(function () {
                                             } else if (response === "OK") {
                                                 $("#p_error").html("");
                                                 location.reload();
+                                            }
+                                        },
+                                        error: function(s){
+                                            if (s.status === 425){
+                                                $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
                                             }
                                         }
                                     });
@@ -423,13 +432,28 @@ $(function () {
                                                     $("#p_error").html("");
                                                     location.reload();
                                                 }
+                                            },
+                                            error: function(s){
+                                                if (s.status === 425){
+                                                    $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
+                                                }
                                             }
                                         });
                                     });
                                 }
 
                             } else if (response.closedConfirm) {
-                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='closed'>Clôturé</td></tr>");
+                                $("#display_table").append("<tr><td class='end'>Statut :</td><td class='closed'>Clôturé</td></tr>\
+                                <tr><td></td><td><a id='pv_link' href='https://mcmatthevan.github.io/limoncello/pv_proc/" + response.id + ".pdf' target='_blank'>Afficher le PV de procédure</a></td></tr>");
+                                $.ajax({
+                                    type: "HEAD",
+                                    url: "https://mcmatthevan.github.io/limoncello/pv_proc/"+response.id+".pdf",
+                                    error: function (s) {
+                                        if (s.status === 404){
+                                            $("#pv_link").attr("href","https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/pv_proc/"+response.id+".pdf");
+                                        }
+                                    }
+                                });
                             } else {
                                 $("#display_table").append("<tr><td class='end'>Statut :</td><td class='waiting'>En attente de clôture</td></tr>");
                                 if (checkPerm("procedure.close.confirm")) {
@@ -470,12 +494,30 @@ $(function () {
                                             "password": $("#close_password").val()
                                         }),
                                         dataType: "json",
-                                        success: function (response) {
-                                            if (response === "ERR_PASSWORD") {
+                                        success: function (resp) {
+                                            if (resp === "ERR_PASSWORD") {
                                                 $("#p_error").html("Mot de passe incorrect");
-                                            } else if (response === "OK") {
-                                                $("#p_error").html("");
-                                                location.reload();
+                                            } else if (resp === "OK") {
+                                                $("#p_error").html("<span style='color: grey'>Veuillez patienter, la génération du PV est en cours...</span>");
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: IP + "procedure/genpv",
+                                                    data: sessioned({"id": response.id}),
+                                                    dataType: "json",
+                                                    success: function (response) {
+                                                        if (response === "OK"){
+                                                            $("#p_error").html("");
+                                                            location.reload();
+                                                        } else if (response === "ERR_INTERNAL"){
+                                                            $("#p_error").html("Une erreur est survenue pendant la génération du PV.");
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        },
+                                        error: function(s){
+                                            if (s.status === 425){
+                                                $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
                                             }
                                         }
                                     });
@@ -671,6 +713,9 @@ $(function () {
                         success: function (response) {
                             if (response === "OK") {
                                 $("#error_changepassword").text("");
+                                $("#input_new").prop("disabled",true);
+                                $("#input_confirm").prop("disabled",true);
+                                $("#input_old").prop("disabled",true);
                                 $("#success_changepassword").text("Le changement a été effectué avec succès.");
                                 $("#success_changepassword").append("<br/><a href='?page=home'>Retourner à l'accueil</a>")
                             } else if (response === "ERR_CONFIRM") {
@@ -717,6 +762,11 @@ $(function () {
                                 success: function (response) {
                                     console.log(response);
                                     location.search = "?page=home&show=procedures";
+                                },
+                                error: function(s){
+                                    if (s.status === 425){
+                                        $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
+                                    }
                                 }
                             });
 
@@ -842,6 +892,11 @@ $(function () {
                                 success: function (response) {
                                     console.log(response);
                                     location.search = "?page=home&show=tickets";
+                                },
+                                error: function(s){
+                                    if (s.status === 425){
+                                        $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
+                                    }
                                 }
                             });
                         });
@@ -993,6 +1048,11 @@ $(function () {
                                 success: function (response) {
                                     console.log(response);
                                     location.search = "?page=home&show=indictments";
+                                },
+                                error: function(s){
+                                    if (s.status === 425){
+                                        $("#p_error").html("Nombre de requêtes serveurs trop important. <br/>Veuillez réessayer dans quelques secondes.")
+                                    }
                                 }
                             });
                         });

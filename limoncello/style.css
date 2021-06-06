@@ -148,7 +148,7 @@ img{
 #userbloc{
     position: absolute;
     right: 10px;
-    display: flex;
+    display: none;
     align-items: center;
 }
 
@@ -215,6 +215,12 @@ a:visited{
 #homelink{
     border-right: 1px grey solid;
 }
+
+#configlink{
+    border-left: 1px grey solid;
+
+}
+
 
 #titlename{
     font-weight: bold;

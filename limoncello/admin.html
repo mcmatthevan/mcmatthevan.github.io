@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="mbadapt.css">
+    <link rel="shortcut icon" href="../palgania/images/logo.png" type="image/png">
+    <title>Limoncello</title>
+</head>
+
+<body>
+    <div id="banner">
+        <div id="divlogos"><img src="../palgania/images/logo.png" alt=""><img src="img/Commission_modo.png" alt="">
+        </div>
+        <div id="divinst" class="hide_mobile">
+            <p>Administration de Palgania</p>
+            <p>Commission de Modération</p>
+        </div>
+        <div id="userbloc">
+            <a href="index.html">Retourner à l'API</a>
+        </div>
+    </div>
+    <div class="main">
+        <h1>
+            Interface d'administration Limoncello
+        </h1>
+        <section id='usermanage'>
+            <table id='userlist'>
+                <tr>
+                    <td class='tag'>Utilisateur</td><td class='tag'>Email</td><td class='tag'>Rôle</td>
+                </tr>
+            </table>
+        </section>
+        <section id="usernew">
+            <h2>Nouvel utilisateur</h2>
+            <form id='form_newuser'>
+                <label for="nwu_pseudo">Pseudo : </label><input type='text' id='nwu_pseudo' required/><br/>
+                <label for="nwu_title">Rôle : </label><input type='text' id='nwu_title' placeholder="Ex : Modérateur" required/><br/>
+                <label for="nwu_email">Email : </label><input type='text' id='nwu_email' required/><br/>
+                <label for="nwu_perms">Permissions : </label><textarea type='text' id='nwu_perms' required>Group.base</textarea><br/>
+                <p class='p_info'>Séparer les permissions par des points virgules (;)</p>
+                <label for="nwu_sendmail">Envoyer un mail contenant les identifiants : </label><input id="nwu_sendmail" type="checkbox" checked><br/>
+                <input type="submit" value="OK"><br/>
+                <p id='p_error'></p>
+                <p id='p_info'></p>
+            </form>
+        </section>
+    </div>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="functions.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

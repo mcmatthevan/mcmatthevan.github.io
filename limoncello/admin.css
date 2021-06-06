@@ -1,0 +1,121 @@
+body{
+    margin: unset;
+    font-family: Calibri,Arial, Helvetica, sans-serif;
+}
+
+section{
+    display: none;
+}
+
+#banner{
+    position: relative;
+    height: 6em;
+    background: linear-gradient(rgb(160, 75, 26),rgb(255, 95, 95));
+    display: flex;
+    align-items: center;
+    font-variant: small-caps;
+}
+a{
+    color: blue;
+    font-variant: normal;
+    font-size: 0.8em;
+}
+
+a:hover{
+    color: rgb(26, 90, 109);
+    text-decoration: unset;
+}
+
+a:visited{
+    color: blue;
+}
+#divlogos{
+    display: flex;
+    height: 5em;
+    align-items: center;
+}
+#divinst{
+    display: block;
+    font-size: 1.1em;
+}
+img{
+    display: block;
+    height: 95%;
+    margin: 10px;
+}
+
+#connection{
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#connection div{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(rgb(194, 194, 194),rgb(240, 240, 240));
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.error_section{
+    display: none;
+    color: red;
+    text-align: center;
+}
+
+.error, #p_error{
+    color: red;
+    font-style: italic;
+}
+
+#p_error{
+    display: inline-block;
+}
+
+.success{
+    color: green;
+}
+#userbloc{
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.main{
+    text-align: center;
+}
+
+#userlist{
+    width: 60%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+#userlist td{
+    border: 1px solid black;
+}
+
+.tag{
+    font-weight: bold;
+}
+
+#newuser{
+    color: grey;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition-duration: 100ms;
+}
+
+#newuser:hover{
+    color: black;
+}
+
+.p_info, #p_info{
+    font-style: italic;
+    font-size: 0.8em;
+    color: grey;
+}
