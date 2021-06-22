@@ -92,7 +92,43 @@ $(function () {
                 }
             }
             $("#reg_new").show();
-            var previewed = false, counter = 0;
+            var preview = 1, counter = 0;
+            $("#rgn_form").submit(function(e){
+                e.preventDefault();
+                let form = $(this),
+                    dic = makeJson();
+                $("#rgn_preview_bloc").show();
+                $("#rgn_preview_bloc > p").show();
+                $("#rgn_preview_bloc embed").remove();
+                $("#rgn_preview").prop("disabled",false);
+                location.href = "#rgn_preview_bloc";
+                $.ajax({
+                    type: "POST",
+                    url: IP + "admin/reg",
+                    data: sessioned({
+                        title: dic.title,
+                        regtype: dic.type,
+                        content: JSON.stringify(dic.content),
+                        dispo: JSON.stringify(dic.dispos),
+                        signs: JSON.stringify(dic.sign),
+                        preview: preview.toString(),
+                        preamble: dic.preamble
+
+                    }),
+                    dataType: "json",
+                    success: function (response) {
+                        $("#rgn_preview").prop("disabled",false);
+                        $("#rgn_preview_bloc > p").hide();
+                        $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
+                        location.href = "#rgn_preview_bloc";
+                    },
+                    error: function(){
+                        $("#rgn_preview_bloc > p").hide();
+                        $("#rgn_preview_bloc").append("<p class='error'>Une erreur est survenue.</p>");
+                        location.href = "#rgn_preview_bloc";
+                    }
+                });
+            });
             let permType = {
                 "Statut": "status",
                 "Proposition de règlement": "propreg",
