@@ -2,7 +2,7 @@
 function parsedDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
 }
-const IP = "https://singalong-game.com:8888/";
+const IP = "http://localhost:8888/";
 const ACTLIST = {
     "Sanction": {
         "target": ["Joueur",true],

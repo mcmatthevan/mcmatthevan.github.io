@@ -115,6 +115,9 @@
 	#userlist{
 		width: 90%;
 	}
+	#regnewtable, #reg_home_list table{
+		width: 90%;
+	}
 
 	/* Un message personnalisé */
 

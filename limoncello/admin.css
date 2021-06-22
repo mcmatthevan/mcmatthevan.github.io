@@ -3,8 +3,19 @@ body{
     font-family: Calibri,Arial, Helvetica, sans-serif;
 }
 
+.main{
+    position: relative;
+}
+
 section{
     display: none;
+}
+
+#home_link{
+    font-size: 1.8em;
+    color: grey;
+    border: solid 1px grey;
+    margin: 10px;
 }
 
 #banner{
@@ -118,4 +129,86 @@ img{
     font-style: italic;
     font-size: 0.8em;
     color: grey;
+}
+.end{
+    text-align: end;
+}
+
+#regnewtable, #reg_home_list table{
+    width: 60%;
+    margin: auto;
+}
+.start{
+    text-align: start;
+    margin: auto;
+}
+
+.rgn, .rgn_content, .rgn_sign, #rgn_dispos{
+    width: 100%;
+}
+
+textarea.rgn, textarea.rgn_content, #rgn_dispos{
+    height: 10em;
+}
+
+#rgn_tbody{
+    display: none;
+}
+
+#rgn_title{
+    width: 70%;
+}
+
+.rgn_notprop{
+    display: none;
+}
+
+.rgn_add{
+    font-size: 1.1em;
+    color: grey;
+    transition: linear 100ms;
+    cursor: pointer;
+}
+
+.rgn_add:hover{
+    color: black;
+}
+
+.rgn_delete, .delete{
+    color: rgb(255, 129, 129);
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: linear 100ms;
+    position: relative;
+    top: 2px;
+}
+
+.rgn_delete:hover, .delete:hover{
+    color: red;
+}
+
+#reg_home_list{
+    display: none;
+}
+#reg_home_list table {
+    border-collapse: collapse;
+}
+#reg_home_list table td{
+    border: 1px black solid;
+}
+.return_arrow > a{
+    font-size: 2em;
+    text-decoration: none;
+    position: absolute;
+    left: 2%;
+    top: 0;
+    color: rgb(187, 187, 187);
+    cursor: pointer;
+    transition: linear 100ms;
+}
+.return_arrow > a:hover{
+    color: black;
+}
+.return_arrow{
+    display: none;
 }

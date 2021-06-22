@@ -24,9 +24,48 @@
         </div>
     </div>
     <div class="main">
+        <div class="return_arrow"><a href="#">←</a></div>
         <h1>
             Interface d'administration Limoncello
         </h1>
+        <section id="home">
+            <div id="home_link"><a href="?page=usermanage">Gestion des utilisateurs</a></div>
+            <div id="home_link"><a href="?page=reg_home">Gérer les actes administratifs</a></div>
+        </section>
+        <section id="reg_home">
+            <h2>Gestion des actes administratifs</h2>
+            <div id="home_link"><a href="?page=reg_new">⊕ Nouveau</a></div>
+            <div id="reg_home_list">
+                <hr>
+                <h3>Brouillons enregistrés localement</h3>
+                <table><tr><td class="tag">ID</td><td class="tag">Titre</td><td class="tag">Supprimer</td></tr></table>
+            </div>
+        </section>
+        <section id="reg_new">
+            <form action="" id="rgn_form">
+                <table id="regnewtable">
+                    <tbody>
+                        <tr><td class="end tag"><label for="rgn_type">Type</label></td><td>:</td><td><select class="rgn" id="rgn_type" required>
+                            <option value="" selected></option>
+                        </select></td></tr>
+                    </tbody>
+                    <tbody id="rgn_tbody">
+                        <tr><td colspan="3"><hr/></td></tr>
+                        <tr><td class="end tag"><label for="rgn_title">Titre</label></td><td>:</td><td><span id="rgn_sttitle"></span><input required type="text" id="rgn_title" class="rgn" placeholder="portant nomination.../fixant les modalités.../modifiant.../..."/></td></tr>
+                        <tr class='rgn_notprop'><td class="end tag"><label for="rgn_dispos">Contexte</label></td><td>:</td><td><textarea required id="rgn_dispos" placeholder="Ex:&#10;Vu l'article 6 du R.I.O.R.,&#10;Considérant le compte rendu de vote n°X,&#10;Après délibération de l'équipe d'administration,&#10;..."></textarea></td></tr>
+                        <tr><td colspan="3"><hr/><h2>Contenu :</h2></td></tr>
+                        <tr><td class="end tag"><label for="rgn_preamble">Préambule (facultatif)</label></td><td>:</td><td><textarea class="rgn" id="rgn_preamble"></textarea></td></tr>
+                        <tr id="rgn_insert"><td id="rgn_addtitle" class="rgn_add" colspan="3">⊕Ajouter un titre</td></tr>
+                        <tr><td id="rgn_addarticle" class="rgn_add" colspan="3">⊕Ajouter un article</td></tr>
+                        <tr><td colspan="3"><hr/><h2>Signatures :</h2></td></tr>
+                        <tr id="rgn_insert2"><td id="rgn_addsign" class="rgn_add" colspan="3">⊕Ajouter un contre-signataire</td></tr>
+                        <tr><td colspan="3"><hr>
+                            <input type="button" value="Enregistrer" id="rgn_save"/></td></tr>
+                    </tbody>
+                </table>
+            </form>
+            
+        </section>
         <section id='usermanage'>
             <table id='userlist'>
                 <tr>
@@ -48,6 +87,7 @@
                 <p id='p_info'></p>
             </form>
         </section>
+        <div id="display_section"></div>
     </div>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="functions.js"></script>
