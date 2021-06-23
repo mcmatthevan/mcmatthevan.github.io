@@ -18,9 +18,11 @@ $(function () {
                     $("#confirmSign .info").text("Le document a été signé avec succès.");
                 },
                 error: function(x){
+                    $("#confirmSign .info").text("");
                     if (x.status===403){
                         $("#confirmSign .error").html("Mot de passe incorrect.");
-                        $("#confirmSign .info").text("");
+                    } else if (x.status===404){
+                        $("#confirmSign .error").html("Une erreur est survenue. Utilisez-vous le lien obtenu par mail ?");
                     }
                 }
             });
