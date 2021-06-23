@@ -15,7 +15,7 @@ $(function () {
                     "signId": args.signId,
                     "password": $("#cfs_password").val()
                 },
-                dataType: "dataType",
+                dataType: "json",
                 success: function (response) {
                     $("#confirmSign .info").text("Le document a été signé avec succès.");
                 },
