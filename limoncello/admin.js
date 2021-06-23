@@ -145,6 +145,7 @@ $(function () {
                             `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
                             `.pdf</a>`);
                             $("#rgn_preview_bloc > p").show();
+                            $("#rgn_publy").prop("disabled",true);
                         }
                         location.href = "#rgn_preview_bloc";
                     },
