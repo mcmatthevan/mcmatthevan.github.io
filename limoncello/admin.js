@@ -1,6 +1,32 @@
 $(function () {
     let args = locationArgs();
-    if (isAuth() && checkPerm("admin.access")) {
+    if (args.page === "confirmSign" && typeof args.signId !== "undefined"){
+        $("#confirmSign").show();
+        $("#confirmSign > form").submit(function(e){
+            e.preventDefault();
+            $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.");
+            $.ajax({
+                type: "POST",
+                url: IP + "admin/sign",
+                data: {
+                    "signId": args.signId,
+                    "password": $("#cfs_password").val()
+                },
+                dataType: "dataType",
+                success: function (response) {
+                    $("#confirmSign .error").html("");
+                    $("#confirmSign .info").text("Le document a été signé avec succès.");
+                },
+                error: function(x){
+                    if (x.status===403){
+                        $("#confirmSign .error").html("Mot de passe incorrect.");
+                        $("#confirmSign .info").text("");
+                    }
+                }
+            });
+        });
+    }
+    else if (isAuth() && checkPerm("admin.access")) {
         if (typeof args.page === "undefined") {
             location.search = "?page=home";
         }
