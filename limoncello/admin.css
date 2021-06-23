@@ -229,3 +229,9 @@ embed{
 #rgn_publy{
     display: none;
 }
+
+.loading_img{
+    display: block;
+    width: 3em;
+    margin: auto;
+}

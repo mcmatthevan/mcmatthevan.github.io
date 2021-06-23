@@ -5,7 +5,7 @@ $(function () {
         $("#confirmSign > form").submit(function(e){
             e.preventDefault();
             $("#confirmSign .error").html("");
-            $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.");
+            $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
             $("#cfs_password").prop("disabled",true);
             $("#confirmSign input[type=submit]").prop("disabled",true);
             $.ajax({
@@ -22,6 +22,7 @@ $(function () {
                 },
                 error: function(x){
                     console.log("error")
+                    console.log(x)
                     $("#confirmSign .info").text("");
                     $("#cfs_password").prop("disabled",false);
                     $("#confirmSign input[type=submit]").prop("disabled",false);
@@ -140,9 +141,9 @@ $(function () {
                     dic = makeJson();
                 $("#rgn_preview_bloc").show();
                 if (preview){
-                    $("#rgn_preview_bloc > p").text("Veuillez patienter.");
+                    $("#rgn_preview_bloc > p").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
                 } else {
-                    $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.");
+                    $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
                 }
                 $("#rgn_preview_bloc > p").show();
                 $("#rgn_preview_bloc embed").remove();
@@ -325,7 +326,7 @@ $(function () {
                 e.preventDefault();
                 if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#nwu_email").val().trim())) {
                     $("#p_error").html("");
-                    $("#p_info").html("Veuillez patienter...");
+                    $("#p_info").html("Veuillez patienter...<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
                     $.ajax({
                         type: "POST",
                         url: IP + "user/new",
