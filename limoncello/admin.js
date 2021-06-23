@@ -134,12 +134,14 @@ $(function () {
                         $("#rgn_publy").prop("disabled",false);
                         $("#rgn_preview_bloc > p").hide();
                         if (preview){
+                            $("#rgn_preview_bloc > h2").show();
                             $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
                         } else {
+                            $("#rgn_preview_bloc > h2").hide();
                             $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
                             le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
                             `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                            `.pdf</a><br/>
+                            `.pdf</a><br/><br/>
                             Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
                             <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
                             `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
