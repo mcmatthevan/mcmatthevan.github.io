@@ -105,7 +105,11 @@ $(function () {
                 let form = $(this),
                     dic = makeJson();
                 $("#rgn_preview_bloc").show();
-                $("#rgn_preview_bloc > p").text("Veuillez patienter.");
+                if (preview){
+                    $("#rgn_preview_bloc > p").text("Veuillez patienter.");
+                } else {
+                    $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.");
+                }
                 $("#rgn_preview_bloc > p").show();
                 $("#rgn_preview_bloc embed").remove();
                 $("#rgn_preview").prop("disabled",true);
