@@ -6,6 +6,8 @@ $(function () {
             e.preventDefault();
             $("#confirmSign .error").html("");
             $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.");
+            $("#cfs_password").prop("disabled",true);
+            $("#confirmSign input[type=submit]").prop("disabled",true);
             $.ajax({
                 type: "POST",
                 url: IP + "admin/sign",
@@ -19,6 +21,8 @@ $(function () {
                 },
                 error: function(x){
                     $("#confirmSign .info").text("");
+                    $("#cfs_password").prop("disabled",false);
+                    $("#confirmSign input[type=submit]").prop("disabled",false);
                     if (x.status===403){
                         $("#confirmSign .error").html("Mot de passe incorrect.");
                     } else if (x.status===404){
