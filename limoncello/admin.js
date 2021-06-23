@@ -93,14 +93,23 @@ $(function () {
             }
             $("#reg_new").show();
             var preview = 1, counter = 0;
+            $("#rgn_preview").click(function(){
+                preview = 1;
+                $("#rgn_publy").show();
+            });
+            $("#rgn_publy").click(function(){
+                preview = 0;
+            });
             $("#rgn_form").submit(function(e){
                 e.preventDefault();
                 let form = $(this),
                     dic = makeJson();
                 $("#rgn_preview_bloc").show();
+                $("#rgn_preview_bloc > p").text("Veuillez patienter.");
                 $("#rgn_preview_bloc > p").show();
                 $("#rgn_preview_bloc embed").remove();
-                $("#rgn_preview").prop("disabled",false);
+                $("#rgn_preview").prop("disabled",true);
+                $("#rgn_publy").prop("disabled",true);
                 location.href = "#rgn_preview_bloc";
                 $.ajax({
                     type: "POST",
@@ -118,8 +127,14 @@ $(function () {
                     dataType: "json",
                     success: function (response) {
                         $("#rgn_preview").prop("disabled",false);
+                        $("#rgn_publy").prop("disabled",false);
                         $("#rgn_preview_bloc > p").hide();
-                        $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
+                        if (preview){
+                            $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
+                        } else {
+                            $("#rgn_preview_bloc > p").text("Le document a bien été publié.");
+                            $("#rgn_preview_bloc > p").show();
+                        }
                         location.href = "#rgn_preview_bloc";
                     },
                     error: function(){
