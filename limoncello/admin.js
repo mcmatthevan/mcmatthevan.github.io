@@ -17,9 +17,11 @@ $(function () {
                 },
                 dataType: "json",
                 success: function (response) {
+                    console.log("success")
                     $("#confirmSign .info").text("Le document a été signé avec succès.");
                 },
                 error: function(x){
+                    console.log("error")
                     $("#confirmSign .info").text("");
                     $("#cfs_password").prop("disabled",false);
                     $("#confirmSign input[type=submit]").prop("disabled",false);
