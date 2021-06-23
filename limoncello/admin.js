@@ -4,6 +4,7 @@ $(function () {
         $("#confirmSign").show();
         $("#confirmSign > form").submit(function(e){
             e.preventDefault();
+            $("#confirmSign .error").html("");
             $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.");
             $.ajax({
                 type: "POST",
@@ -14,7 +15,6 @@ $(function () {
                 },
                 dataType: "dataType",
                 success: function (response) {
-                    $("#confirmSign .error").html("");
                     $("#confirmSign .info").text("Le document a été signé avec succès.");
                 },
                 error: function(x){
@@ -164,14 +164,20 @@ $(function () {
                             $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
                         } else {
                             $("#rgn_preview_bloc > h2").hide();
-                            $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
-                            le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                            `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                            `.pdf</a><br/><br/>
-                            Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
-                            <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
-                            `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
-                            `.pdf</a>`);
+                            if (dic.signs === {}){
+                                $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
+                                le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
+                                `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
+                                `.pdf</a><br/><br/>
+                                Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
+                                <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
+                                `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
+                                `.pdf</a>`);
+                            } else {
+                                $("#rgn_preview_bloc > p").html(`Un exemplaire du document a été envoyé par mail aux personnes figurant
+                                parmi les cosignataires. Vous serez averti par mail de la publication du document lorsque tous auront
+                                confirmé leur signature.`)
+                            }
                             $("#rgn_preview_bloc > p").show();
                             $("#rgn_publy").prop("disabled",true);
                         }
