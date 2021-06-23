@@ -138,11 +138,11 @@ $(function () {
                         } else {
                             $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
                             le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                            `.pdf>https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
+                            `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
                             `.pdf</a><br/>
                             Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
                             <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
-                            `.pdf>https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
+                            `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
                             `.pdf</a>`);
                             $("#rgn_preview_bloc > p").show();
                         }
