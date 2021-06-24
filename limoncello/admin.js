@@ -47,10 +47,59 @@ $(function () {
                 dataType: "json",
                 success: function (response) {
                     for (let i = 0, c = response.length; i < c; ++i) {
-                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td>" + response[i].title[1] + "</td></tr>");
+                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g,"<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td></tr>");
                     }
                     if (checkPerm("user.manage.new")) {
-                        $("#userlist").append("<tr><td colspan='3'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
+                        $("#userlist").append("<tr><td colspan='4'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
+                    }
+                    if (checkPerm("user.manage.attrs")){
+                        $(".attrch").click(function(){
+                            let td = this;
+                            $(this).html("<input type='text' value=\""+$(this).text()+"\"/>");
+                            let input = $("#"+this.id+" input").get()[0];
+            
+                            input.focus();
+                            input.addEventListener("keydown",function(e){
+                                if (e.keyCode === 13)
+                                input.blur();
+                            });
+                            $(input).blur(function(){
+                                $.ajax({
+                                    type: "POST",
+                                    url: IP + "user/attrs",
+                                    data: sessioned({
+                                        user: td.id.replace(/attrch_/,""),
+                                        attrs: $(this).val().trim()
+                                    }),
+                                    dataType: "json",
+                                    success: function (response) {
+                                        $(td).html($(input).val().trim());
+                                    }
+                                });
+                            });
+                        });
+                    }
+                    if (checkPerm("user.manage.title.change")){
+                        $(".titlerole").click(function(){
+                            let td = this;
+                            $(this).html("<textarea type='text'>"+$(this).text()+"</textarea>");
+                            let input = $("#"+this.id+" textarea").get()[0];
+                            input.focus();
+                            $(input).blur(function(){
+                                $.ajax({
+                                    type: "POST",
+                                    url: IP + "user/title",
+                                    data: sessioned({
+                                        username: td.id.replace(/titlerole_/,""),
+                                        new: $(this).val().trim()
+                                    }),
+                                    dataType: "json",
+                                    success: function (response) {
+                                        $(td).html($(input).val().trim());
+                                    }
+                                });
+                            });
+                        });
                     }
                 }
             });

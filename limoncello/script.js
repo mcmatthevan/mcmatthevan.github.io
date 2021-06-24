@@ -66,7 +66,7 @@ $(function () {
             }
             let userinfos = getUserInfo();
             $("#titlename").text(userinfos[0]);
-            $("#titlerole").text(userinfos[1]);
+            $("#titlerole").html(userinfos[1].replace(/\n/g,"<br>"));
             if (args.page === "newact"){
                 $("#newact").css("display","block");
                 if (typeof args.act === "undefined"){
