@@ -187,6 +187,17 @@ function checkPerm(perm) {
     }).responseJSON;
 }
 
+function download(text, name, type) {
+    var a = document.createElement("a");
+    a.style.display = "none";
+    document.body.appendChild(a);
+    var file = new Blob([text], {type: type});
+    a.href = URL.createObjectURL(file);
+    a.download = name;
+    a.click();
+    a.parentNode.removeChild(a);
+  }
+
 function isAuth() {
     let result;
     $.ajax({

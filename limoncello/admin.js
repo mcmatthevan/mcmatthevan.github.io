@@ -1,13 +1,13 @@
 $(function () {
     let args = locationArgs();
-    if (args.page === "confirmSign" && typeof args.signId !== "undefined"){
+    if (args.page === "confirmSign" && typeof args.signId !== "undefined") {
         $("#confirmSign").show();
-        $("#confirmSign > form").submit(function(e){
+        $("#confirmSign > form").submit(function (e) {
             e.preventDefault();
             $("#confirmSign .error").html("");
-            $("#confirmSign .info").text("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
-            $("#cfs_password").prop("disabled",true);
-            $("#confirmSign input[type=submit]").prop("disabled",true);
+            $("#confirmSign .info").html("Veuillez patienter, cela peut prendre jusqu'à quelques minutes.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
+            $("#cfs_password").prop("disabled", true);
+            $("#confirmSign input[type=submit]").prop("disabled", true);
             $.ajax({
                 type: "POST",
                 url: IP + "admin/sign",
@@ -17,18 +17,15 @@ $(function () {
                 },
                 dataType: "json",
                 success: function (response) {
-                    console.log("success")
-                    $("#confirmSign .info").text("Le document a été signé avec succès.");
+                    $("#confirmSign .info").html("Le document a été signé avec succès.");
                 },
-                error: function(x){
-                    console.log("error")
-                    console.log(x)
-                    $("#confirmSign .info").text("");
-                    $("#cfs_password").prop("disabled",false);
-                    $("#confirmSign input[type=submit]").prop("disabled",false);
-                    if (x.status===403){
+                error: function (x) {
+                    $("#confirmSign .info").html("");
+                    $("#cfs_password").prop("disabled", false);
+                    $("#confirmSign input[type=submit]").prop("disabled", false);
+                    if (x.status === 403) {
                         $("#confirmSign .error").html("Mot de passe incorrect.");
-                    } else if (x.status===404){
+                    } else if (x.status === 404) {
                         $("#confirmSign .error").html("Une erreur est survenue. Utilisez-vous le lien obtenu par mail ?");
                     }
                 }
@@ -41,7 +38,7 @@ $(function () {
         }
         if (args.page === "usermanage" && checkPerm("user.manage.list")) {
             $(".return_arrow").show();
-            $(".return_arrow a").attr("href","?page=home");
+            $(".return_arrow a").attr("href", "?page=home");
             $("#usermanage").show();
             $.ajax({
                 type: "GET",
@@ -59,9 +56,15 @@ $(function () {
             });
         } else if (args.page === "home") {
             $("#home").show();
-        } else if (args.page === "reg_new") {
+            if (checkPerm("user.manage.list")) {
+                $("#hl_users").show();
+            }
+            if (checkPerm("admin.reg")) {
+                $("#hl_acts").show();
+            }
+        } else if (args.page === "reg_new" && checkPerm("admin.reg")) {
             $(".return_arrow").show();
-            $(".return_arrow a").attr("href","?page=reg_home");
+            $(".return_arrow a").attr("href", "?page=reg_home");
             function makeJson() {
                 let maindic = { "content": [], "sign": {} };
                 $(".rgn").each(function (i, v) {
@@ -128,76 +131,84 @@ $(function () {
             }
             $("#reg_new").show();
             var preview = 1, counter = 0;
-            $("#rgn_preview").click(function(){
+            $("#rgn_preview").click(function () {
                 preview = 1;
                 $("#rgn_publy").show();
             });
-            $("#rgn_publy").click(function(){
+            $("#rgn_publy").click(function () {
                 preview = 0;
             });
-            $("#rgn_form").submit(function(e){
+            $("#rgn_form").submit(function (e) {
                 e.preventDefault();
-                let form = $(this),
-                    dic = makeJson();
-                $("#rgn_preview_bloc").show();
-                if (preview){
-                    $("#rgn_preview_bloc > p").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
-                } else {
-                    $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
-                }
-                $("#rgn_preview_bloc > p").show();
-                $("#rgn_preview_bloc embed").remove();
-                $("#rgn_preview").prop("disabled",true);
-                $("#rgn_publy").prop("disabled",true);
-                location.href = "#rgn_preview_bloc";
-                $.ajax({
-                    type: "POST",
-                    url: IP + "admin/reg",
-                    data: sessioned({
-                        title: dic.title,
-                        regtype: dic.type,
-                        content: JSON.stringify(dic.content),
-                        dispo: JSON.stringify(dic.dispos),
-                        signs: JSON.stringify(dic.sign),
-                        preview: preview.toString(),
-                        preamble: dic.preamble
+                function main() {
+                    let dic = makeJson();
+                    $("#rgn_preview_bloc").show();
+                    $("#rgn_preview_bloc > p").show();
+                    $("#rgn_preview_bloc embed").remove();
+                    $("#rgn_preview").prop("disabled", true);
+                    $("#rgn_publy").prop("disabled", true);
+                    location.href = "#rgn_preview_bloc";
+                    $.ajax({
+                        type: "POST",
+                        url: IP + "admin/reg",
+                        data: sessioned({
+                            title: dic.title,
+                            regtype: dic.type,
+                            content: JSON.stringify(dic.content),
+                            dispo: JSON.stringify(dic.dispos),
+                            signs: JSON.stringify(dic.sign),
+                            preview: preview.toString(),
+                            preamble: dic.preamble
 
-                    }),
-                    dataType: "json",
-                    success: function (response) {
-                        $("#rgn_preview").prop("disabled",false);
-                        $("#rgn_publy").prop("disabled",false);
-                        $("#rgn_preview_bloc > p").hide();
-                        if (preview){
-                            $("#rgn_preview_bloc > h2").show();
-                            $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
-                        } else {
-                            $("#rgn_preview_bloc > h2").hide();
-                            if (dic.signs === {}){
-                                $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
-                                le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                                `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+response+
-                                `.pdf</a><br/><br/>
-                                Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
-                                <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
-                                `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/`+response+
-                                `.pdf</a>`);
+                        }),
+                        dataType: "json",
+                        success: function (response) {
+                            $("#rgn_preview").prop("disabled", false);
+                            $("#rgn_publy").prop("disabled", false);
+                            $("#rgn_preview_bloc > p").hide();
+                            if (preview) {
+                                $("#rgn_preview_bloc > h2").show();
+                                $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
                             } else {
-                                $("#rgn_preview_bloc > p").html(`Un exemplaire du document a été envoyé par mail aux personnes figurant
+                                $("#rgn_preview_bloc > h2").hide();
+                                if (dic.signs === {}) {
+                                    $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
+                                le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+ response +
+                                        `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/` + response +
+                                        `.pdf</a><br/><br/>
+                                Vous pourrez visualiser le document directement dans le navigateur d'ici quelques minutes à ce lien (partager celui-ci de préférence): 
+                                <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/`+ response +
+                                        `.pdf">https://mcmatthevan.github.io/limoncello/reg/pdf/` + response +
+                                        `.pdf</a>`);
+                                } else {
+                                    $("#rgn_preview_bloc > p").html(`Un exemplaire du document a été envoyé par mail aux personnes figurant
                                 parmi les cosignataires. Vous serez averti par mail de la publication du document lorsque tous auront
                                 confirmé leur signature.`)
+                                }
+                                $("#rgn_preview_bloc > p").show();
+                                $("#rgn_publy").prop("disabled", true);
                             }
-                            $("#rgn_preview_bloc > p").show();
-                            $("#rgn_publy").prop("disabled",true);
+                            location.href = "#rgn_preview_bloc";
+                        },
+                        error: function () {
+                            $("#rgn_preview_bloc > p").hide();
+                            $("#rgn_preview_bloc").append("<p class='error'>Une erreur est survenue.</p>");
+                            location.href = "#rgn_preview_bloc";
                         }
-                        location.href = "#rgn_preview_bloc";
-                    },
-                    error: function(){
-                        $("#rgn_preview_bloc > p").hide();
-                        $("#rgn_preview_bloc").append("<p class='error'>Une erreur est survenue.</p>");
-                        location.href = "#rgn_preview_bloc";
-                    }
-                });
+                    });
+                }
+                if (preview) {
+                    $("#rgn_preview_bloc > p").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
+                    main();
+                } else {
+                    visualPrompt("Voulez-vous vraiment publier le document prévisualisé ?",["Oui","Non"],function (ch){
+                        if (ch === "Oui"){
+                            $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
+                            main();
+                        }
+                    });
+                }
+
             });
             let permType = {
                 "Statut": "status",
@@ -274,7 +285,7 @@ $(function () {
                         if (typeof args.load === "undefined") {
                             let type = toSave.type.replace(/\s+de\s+/g, " ").split(" ");
                             var id = "";
-                            for (let i=0, c = type.length; i < c; ++i) {
+                            for (let i = 0, c = type.length; i < c; ++i) {
                                 id += type[i].charAt(0).toUpperCase();
                             }
                             let date = new Date(),
@@ -289,38 +300,73 @@ $(function () {
                         }
                         regSaves[id] = toSave;
                         localStorage["adm_limoncello_regsave"] = JSON.stringify(regSaves);
-                        location.search = "?page=reg_new&load="+id;
+                        location.search = "?page=reg_new&load=" + id;
 
                     }
                 });
             });
 
-        } else if (args.page === "reg_home") {
+        } else if (args.page === "reg_home" && checkPerm("admin.reg")) {
+            $("#reg_home .home_link").show();
             $(".return_arrow").show();
-            $(".return_arrow a").attr("href","?page=home");
+            $(".return_arrow a").attr("href", "?page=home");
             $("#reg_home").show();
             let saves = typeof localStorage["adm_limoncello_regsave"] === "undefined" ? {} : JSON.parse(localStorage["adm_limoncello_regsave"]);
-            if (Object.keys(saves).length > 0){
-                for (let key in saves){
+            if (Object.keys(saves).length > 0) {
+                for (let key in saves) {
                     $("#reg_home_list table").append("<tr><td>" + key + "</td><td><a href='?page=reg_new&load=" + key + "'>" + saves[key].type + " " + saves[key].title + "</a></td>\
-                    <td class='delete' id='delete_" + key + "'>×</td></tr>");
+                    <td class='delete' id='delete_" + key + "'>×</td><td class='export' id='export_" + key + "'>↓</td></tr>");
                 }
-                $(".delete").click(function(){
-                    let id = this.id.replace(/delete_/,"");
-                    visualPrompt("Voulez-vous vraiment supprimer le brouillon \""+id+"\" ?",["Oui","Non"],function(ch){
-                        if (ch === "Oui"){
+                $(".delete").click(function () {
+                    let id = this.id.replace(/delete_/, "");
+                    visualPrompt("Voulez-vous vraiment supprimer le brouillon \"" + id + "\" ?", ["Oui", "Non"], function (ch) {
+                        if (ch === "Oui") {
                             delete saves[id];
                             localStorage["adm_limoncello_regsave"] = JSON.stringify(saves);
                             location.reload();
                         }
                     });
                 });
+                $(".export").click(function () {
+                    let id = this.id.replace(/export_/, ""),
+                        saves = {};
+                    saves[id] = JSON.parse(localStorage["adm_limoncello_regsave"])[id];
+                    download(JSON.stringify(saves, null, 4), id + ".nosj", "text/plain");
+                });
                 $("#reg_home_list").show();
             }
+            $("#reg_import_input").change(function () {
+                let filename = this.files[0].name.split(".");
+                console.log(filename)
+                if (filename[filename.length - 1] !== "nosj") {
+                    this.value = "";
+                    return;
+                }
+                let reader = new FileReader();
+                reader.addEventListener("load", function (f) {
+                    let saves = JSON.parse(localStorage["adm_limoncello_regsave"]),
+                        fimport = JSON.parse(reader.result),
+                        mkey = Object.keys(fimport)[0],
+                        nb = "";
+                    fimport = fimport[mkey]
+                    while (~Object.keys(saves).indexOf(mkey + nb)) {
+                        if (nb === "") {
+                            nb = 0;
+                        } else {
+                            nb += 1;
+                        }
+                    }
+                    mkey = mkey + nb.toString();
+                    saves[mkey] = fimport;
+                    localStorage["adm_limoncello_regsave"] = JSON.stringify(saves);
+                    location.search = "?page=reg_new&load=" + mkey;
+                });
+                reader.readAsText(this.files[0], "text/plain");
+            });
 
         } else if (args.page === "newuser" && checkPerm("user.manage.new")) {
             $(".return_arrow").show();
-            $(".return_arrow a").attr("href","?page=usermanage");
+            $(".return_arrow a").attr("href", "?page=usermanage");
             $("#usernew").show();
             $("#form_newuser").submit(function (e) {
                 e.preventDefault();

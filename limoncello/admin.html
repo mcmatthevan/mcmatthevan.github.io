@@ -38,16 +38,21 @@
             </form>
         </section>
         <section id="home">
-            <div id="home_link"><a href="?page=usermanage">Gestion des utilisateurs</a></div>
-            <div id="home_link"><a href="?page=reg_home">Gérer les actes administratifs</a></div>
+            <div class="home_link" id="hl_users"><a href="?page=usermanage">Gestion des utilisateurs</a></div>
+            <div class="home_link" id="hl_acts"><a href="?page=reg_home">Gérer les actes administratifs</a></div>
         </section>
         <section id="reg_home">
             <h2>Gestion des actes administratifs</h2>
-            <div id="home_link"><a href="?page=reg_new">⊕ Nouveau</a></div>
+            <div class="home_link"><a href="?page=reg_new">⊕ Nouveau</a></div>
             <div id="reg_home_list">
                 <hr>
                 <h3>Brouillons enregistrés localement</h3>
-                <table><tr><td class="tag">ID</td><td class="tag">Titre</td><td class="tag">Supprimer</td></tr></table>
+                <table><tr><td class="tag">ID</td><td class="tag">Titre</td><td class="tag">Supprimer</td><td class="tag">Exporter</td></tr></table>
+            </div>
+            <div id="reg_home_import">
+                <hr>
+                <h3>Importer un brouillon</h3>
+                <input type="file" id="reg_import_input"/>
             </div>
         </section>
         <section id="reg_new">
