@@ -210,6 +210,7 @@ $(function () {
                 }
 
             });
+            
             let permType = {
                 "Statut": "status",
                 "Proposition de règlement": "propreg",
