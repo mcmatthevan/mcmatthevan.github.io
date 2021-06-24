@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recueil des documents</title>
+    <link rel="stylesheet" href="mbadapt.css">
+    <link rel="stylesheet" href="find.css">
+    <link rel="shortcut icon" href="../palgania/images/logo.png" type="image/png">
+</head>
+<body>
+    <div id="banner">
+        <div id="divlogos"><img src="../palgania/images/logo.png" alt="">
+        </div>
+        <div id="divinst" class="hide_mobile">
+            <p>Administration de Palgania</p>
+        </div>
+    </div>
+    <h1>Recueil des documents à portée règlementaire</h1>
+    <div id="settings">
+        <div><label for="perpage">Résultats par page :</label><input type="number" value="10" max="10" min="1" id="perpage"> /<span id='perpage_max'></span></div>
+        <div>Date de publication : <label for="date1">Entre le </label><input type="date" value="2021-06-23" min="2021-06-23" max="today" id="date1"/><label for="date2"> et le </label><input id="date2" type="date" value="today" min="2021-06-23" max="today"/></div>
+        <div><label for="doctype">Type de document : </label><select id="doctype">
+            <option value="">Tout</option>
+            <option value="Règlement">Règlement</option>
+            <option value="Statut">Statut</option>
+            <option value="Acte">Acte de modération</option>
+        </select></div>
+        <div><label for="page">Page :</label><input id="page" type="number" value="1" min="1"> /<span id='page_max'></span></div>
+    </div>
+    <div id="results"></div>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="find.js"></script>
+</body>
+</html>

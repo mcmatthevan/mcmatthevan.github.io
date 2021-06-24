@@ -210,11 +210,12 @@ $(function () {
                 }
 
             });
-            
+
             let permType = {
                 "Statut": "status",
                 "Proposition de règlement": "propreg",
                 "Règlement": "reg",
+                "Acte": "acte"
             };
             for (let typ in permType) {
                 if (checkPerm("admin.reg." + permType[typ])) {
@@ -291,7 +292,7 @@ $(function () {
                             }
                             let date = new Date(),
                                 nb = 0;
-                            id += date.getFullYear().toString() + date.getMonth().toString() + date.getDay().toString() + "-";
+                            id += date.getFullYear().toString() + date.getMonth().toString() + date.getDate().toString() + "-";
                             while (typeof regSaves[id + nb] !== "undefined") {
                                 nb += 1;
                             }

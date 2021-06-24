@@ -1,0 +1,90 @@
+#banner{
+    position: relative;
+    height: 6em;
+    background: linear-gradient(rgb(175, 175, 175),rgb(233, 233, 233));
+    display: flex;
+    align-items: center;
+    font-variant: small-caps;
+}
+img{
+    display: block;
+    height: 95%;
+    margin: 10px;
+}
+#divlogos{
+    display: flex;
+    height: 5em;
+    align-items: center;
+}
+#divinst{
+    display: block;
+    font-size: 1.1em;
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Calibri, Arial, Helvetica, sans-serif;
+}
+h1{
+    text-align: center;
+}
+
+#settings{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#settings input{
+    text-align: center;
+}
+
+.info{
+    font-style: italic;
+    text-align: center;
+}
+
+#results{
+    border: 1px solid black;
+    margin: auto;
+    width: 60%;
+    margin-top: 10px;
+}
+
+#results table{
+    width: 100%;
+}
+
+.loading_img{
+    display: block;
+    width: 3em;
+    margin-left: auto; margin-right: auto;
+    margin-top: 10px; margin-bottom: 10px;
+}
+
+.error{
+    color: red;
+    font-style: italic;
+    text-align: center;
+}
+
+.tag{
+    font-weight: bold;
+    border-bottom: 2px black solid;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+td{
+    text-align: center;
+    border: 1px rgb(211, 211, 211) solid;
+}
+
+
+@media (max-width: 640px) {
+    #results{
+        width: 100%;
+    }
+}
