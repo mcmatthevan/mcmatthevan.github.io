@@ -137,7 +137,7 @@ $(function () {
                 return maindic;
             }
             if (typeof args.load !== "undefined" && typeof localStorage["adm_limoncello_regsave"] !== "undefined") {
-                let saves = JSON.parse(localStorage["adm_limoncello_regsave"]);
+                let saves = JSON.parse(typeof localStorage["adm_limoncello_regsave"] === "undefined" ? "{}":localStorage["adm_limoncello_regsave"]);
                 if (typeof saves[args.load] !== "undefined") {
                     let toLoad = saves[args.load];
                     delete saves;
