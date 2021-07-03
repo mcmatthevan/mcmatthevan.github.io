@@ -1,3 +1,6 @@
-var banniere = document.querySelector(".firstelement"),
+var banniere = document.querySelectorAll(".firstelement"),
             menu = document.querySelector("header");
-        banniere.style.marginTop = menu.offsetHeight + 20 + "px";
+
+            for (let i = 0, c = banniere.length ; i < c ; ++i){
+                banniere[i].style.marginTop = menu.offsetHeight + 20 + "px";
+            }

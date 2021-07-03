@@ -301,6 +301,37 @@ mark{
     margin: auto;
     margin-top: 5px;
 }
+#candidate_form input, #candidate_form textarea{
+    width: 100%;
+}
+#candidate_form textarea{
+    height: 30em;
+    resize: none;
+}
+#candidate_form table{
+    width: 100%;
+}
+.tag{
+    text-align: end;
+    width: 20%;
+}
+#load_gif{
+    display: block;
+    width: 3em;
+    margin: auto;
+}
+.error{
+    color: red;
+}
+
+.radios{
+    display: flex;
+    text-align: center;
+}
+.hide{
+    display: none;
+}
+
 @media (max-width: 640px) {
 	* {
 		box-sizing: border-box;
@@ -417,3 +448,4 @@ mark{
     }
   }
 }
+

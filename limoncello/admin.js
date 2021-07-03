@@ -47,28 +47,28 @@ $(function () {
                 dataType: "json",
                 success: function (response) {
                     for (let i = 0, c = response.length; i < c; ++i) {
-                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g,"<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td></tr>");
+                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g, "<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td></tr>");
                     }
                     if (checkPerm("user.manage.new")) {
                         $("#userlist").append("<tr><td colspan='4'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
                     }
-                    if (checkPerm("user.manage.attrs")){
-                        $(".attrch").click(function(){
+                    if (checkPerm("user.manage.attrs")) {
+                        $(".attrch").click(function () {
                             let td = this;
-                            $(this).html("<input type='text' value=\""+$(this).text()+"\"/>");
-                            let input = $("#"+this.id+" input").get()[0];
-            
+                            $(this).html("<input type='text' value=\"" + $(this).text() + "\"/>");
+                            let input = $("#" + this.id + " input").get()[0];
+
                             input.focus();
-                            input.addEventListener("keydown",function(e){
+                            input.addEventListener("keydown", function (e) {
                                 if (e.keyCode === 13)
-                                input.blur();
+                                    input.blur();
                             });
-                            $(input).blur(function(){
+                            $(input).blur(function () {
                                 $.ajax({
                                     type: "POST",
                                     url: IP + "user/attrs",
                                     data: sessioned({
-                                        user: td.id.replace(/attrch_/,""),
+                                        user: td.id.replace(/attrch_/, ""),
                                         attrs: $(this).val().trim()
                                     }),
                                     dataType: "json",
@@ -79,18 +79,18 @@ $(function () {
                             });
                         });
                     }
-                    if (checkPerm("user.manage.title.change")){
-                        $(".titlerole").click(function(){
+                    if (checkPerm("user.manage.title.change")) {
+                        $(".titlerole").click(function () {
                             let td = this;
-                            $(this).html("<textarea type='text'>"+$(this).text()+"</textarea>");
-                            let input = $("#"+this.id+" textarea").get()[0];
+                            $(this).html("<textarea type='text'>" + $(this).text() + "</textarea>");
+                            let input = $("#" + this.id + " textarea").get()[0];
                             input.focus();
-                            $(input).blur(function(){
+                            $(input).blur(function () {
                                 $.ajax({
                                     type: "POST",
                                     url: IP + "user/title",
                                     data: sessioned({
-                                        username: td.id.replace(/titlerole_/,""),
+                                        username: td.id.replace(/titlerole_/, ""),
                                         new: $(this).val().trim()
                                     }),
                                     dataType: "json",
@@ -110,6 +110,219 @@ $(function () {
             }
             if (checkPerm("admin.reg")) {
                 $("#hl_acts").show();
+            }
+            if (checkPerm("admin.report")) {
+                $("#hl_subm").show();
+            }
+        } else if (args.page === "submissions" && checkPerm("admin.report")) {
+            $(".return_arrow").show();
+            $("#submissions").show();
+            if (typeof args.id === "undefined") {
+                $(".return_arrow a").attr("href", "?page=home");
+                $("#submissions > h2").show();
+                $("#submissions table").show();
+                $.ajax({
+                    type: "GET",
+                    url: IP + "admin/submlist",
+                    data: sessioned({}),
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.length) {
+                            for (let i = 0, c = response.length, adm; i < c; i++) {
+                                if (response[i].report_admin === null) {
+                                    adm = "Non renseigné";
+                                } else if (response[i].report_admin) {
+                                    adm = "Favorable";
+                                } else {
+                                    adm = "Défavorable"
+                                }
+                                $("#submissions table").append("<tr><td><a href='?page=submissions&id=" + response[i].subm_id + "'>" + response[i].pseudo + "</a></td><td>" + adm + "</td><td>Non renseigné</td></tr>");
+                            }
+                        } else {
+                            $("#submissions").html("<p class='p_info'>Aucune candidature en attente</p>");
+                        }
+
+                    }
+                });
+            } else {
+                $(".return_arrow a").attr("href", "?page=submissions");
+                $("#subm_disp").show();
+                $.ajax({
+                    type: "GET",
+                    url: IP + "admin/submlist",
+                    data: sessioned({}),
+                    dataType: "json",
+                    success: function (response) {
+                        let ok = 0;
+                        for (let i = 0, c = response.length; i < c; i++) {
+                            if (args.id === response[i].subm_id) {
+                                ok = 1;
+                                $("#subm_disp").append(`<h2>Candidature de ` + response[i].pseudo + `</h2><pre>` + response[i].text + `</pre><br/>
+                                <a href='/cam/licence?id=`+ response[i].cam_id + `'>Lien vers le certificat d'aptitude à la modération</a><hr/>
+                                <h3>Avis de l'administration</h3>`);
+                                if (checkPerm("admin.report.admin") && response[i].report_admin === null) {
+                                    $("#subm_disp").append(`<form id='avis_adm' class='subm_avis'><div>
+                                        <div><label for='adm_fav'>Favorable</label><br/><input id='adm_fav' name='adm_input' type='radio' value='1' required/></div>
+                                        <div><label for='adm_defav'>Défavorable</label><br/><input id='adm_defav' name='adm_input' type='radio' value='0'/></div>
+                                    </div>
+                                    <label for="adm_comment">Commentaire (facultatif) :</label><br/>
+                                    <textarea id="adm_comment"></textarea><br/>
+                                    <input type="submit" value="Valider"/>
+                                    <div id='adm_info'></div>
+                                    </form>`);
+                                    $("#avis_adm").submit(function (e) {
+                                        e.preventDefault();
+                                        $("#adm_info").html("<div class='load_info'>Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/></div>");
+                                        $.ajax({
+                                            type: "POST",
+                                            url: IP + "admin/adm_creport",
+                                            data: sessioned({
+                                                "subm_id": args.id,
+                                                "favorable": $("input[name=adm_input]:checked").val(),
+                                                "comment": $("#adm_comment").val().trim()
+                                            }),
+                                            dataType: "json",
+                                            success: function (response) {
+                                                if (response === "OK") {
+                                                    location.reload();
+                                                } else {
+                                                    $("#adm_info").html("<p class='error'>Une erreur est survenue.</p>")
+
+                                                }
+                                            },
+                                            error: function (x) {
+                                                $("#adm_info").html("<p class='error'>Une erreur inattendue est survenue.</p>")
+                                            }
+                                        });
+                                    });
+                                } else {
+                                    if (response[i].report_admin === null) {
+                                        $("#subm_disp").append("<div>Avis <span style='color: grey;font-variant: small-caps;'>non renseigné</span><br/></div>");
+                                    } else if (response[i].report_admin) {
+                                        $("#subm_disp").append("<div>Avis <span style='color: green; font-variant: small-caps;'>favorable</span><p style='font-style: italic;'>" + (response[i].comment_admin === null ? "" : response[i].comment_admin) + "</p></div>");
+                                    } else {
+                                        $("#subm_disp").append("<div>Avis <span style='color: red; font-variant: small-caps;'>défavorable</span><p style='font-style: italic;'>" + (response[i].comment_admin === null ? "" : response[i].comment_admin) + "</p></div>");
+                                    }
+                                }
+                                $("#subm_disp").append("<h3>Avis de la commission de modération</h3>");
+                                if (checkPerm("admin.report.modo")) {
+                                    if (response[i].report_admin === null) { //THERE IS NO ERROR IN THIS LINE
+                                        $("#subm_disp").append("<p class='p_info'>Vous devez attendre que l'administration ait rendu son avis avant de rendre celui de la commission de modération.</p><div>Avis <span style='color: grey;font-variant: small-caps;'>non renseigné</span><br/></div>");
+                                    } else {
+                                        if (!response[i].report_admin) {
+                                            $("#subm_disp").append("<p class='p_info'>ATTENTION : L'avis de l'administration étant défavorable, vous ne pouvez donner un avis favorable qu'avec l'approbation des autres membres de la commission de modération, en l'application de l'article 2-4 du <a href='/limoncello/reg/pdf/R20210623-0.pdf' target='_blank'>R.I.O.R.</a></p>")
+                                        }
+                                        $("#subm_disp").append(`<form id='avis_mod' class='subm_avis'><div>
+                                        <div><label for='mod_fav'>Favorable</label><br/><input id='mod_fav' name='mod_input' type='radio' value='1' required/></div>
+                                        <div><label for='mod_defav'>Défavorable</label><br/><input id='mod_defav' name='mod_input' type='radio' value='0'/></div>
+                                    </div>
+                                    <label for="mod_comment">Commentaire (facultatif) :</label><br/>
+                                    <textarea id="mod_comment"></textarea><br/>
+                                    <input type="submit" value="Valider"/>
+                                    <div id='mod_info'></div>
+                                    </form>`);
+                                        $("#avis_mod").submit(function (e) {
+                                            e.preventDefault();
+                                            let mainFunc = function (ch) {
+                                                if (ch === "Oui") {
+                                                    $("#mod_info").html("<div class='load_info'>Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/></div>");
+                                                    $("#avis_mod input[type=submit]").prop("disabled", true);
+                                                    let favorable = $("input[name=mod_input]:checked").val();
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: IP + "admin/mod_creport",
+                                                        data: sessioned({
+                                                            "subm_id": args.id,
+                                                            "favorable": favorable,
+                                                            "comment": $("#mod_comment").val().trim()
+                                                        }),
+                                                        dataType: "json",
+                                                        success: function (resp) {
+                                                            if (resp === "OK") {
+                                                                $("#mod_info").html("<div class='load_info'>Veuillez patienter.<br/>Envoi du compte-rendu d'examen au joueur.<br/>NE QUITTEZ PAS LA PAGE<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/></div>");
+                                                                $.ajax({
+                                                                    type: "POST",
+                                                                    url: IP + "admin/creport_pv",
+                                                                    dataType: "json",
+                                                                    data: sessioned({ subm_id: args.id }),
+                                                                    success: function (resp) {
+                                                                        if (resp === "OK") {
+                                                                            if (favorable === "1") {
+                                                                                $("#mod_info").html("<div class='load_info'>Veuillez patienter.<br/>Publication de l'acte de nomination.<br/>NE QUITTEZ PAS LA PAGE<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/></div>");
+                                                                                let content, title;
+                                                                                if (response[i].gender === "f") {
+                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommée modératrice et est appelée à exercer les droits et les devoirs qui en découlent.")]);
+                                                                                    title = "portant nomination d'une modératrice - " + response[i].pseudo;
+                                                                                } else {
+                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommé modérateur et est appelé à exercer les droits et les devoirs qui en découlent.")]);
+                                                                                    title = "portant nomination d'un modérateur - " + response[i].pseudo;
+                                                                                }
+                                                                                $.ajax({
+                                                                                    type: "POST",
+                                                                                    url: IP + "admin/reg",
+                                                                                    data: sessioned({
+                                                                                        title: title,
+                                                                                        regtype: "Acte",
+                                                                                        content: content,
+                                                                                        dispo: JSON.stringify(["Vu le procès verbal d'analyse de la candidature de " + response[i].pseudo]),
+                                                                                        preview: "1",
+                                                                                        preamble: ""
+                                                                                    }),
+                                                                                    dataType: "json",
+                                                                                    success: function (resp) {
+                                                                                        location.search = "?page=submissions";
+
+                                                                                    },
+                                                                                    error: function (resp) {
+                                                                                        $("#mod_info").html("<p class='error'>Une erreur inattendue est survenue.</p>");
+                                                                                        $("#avis_mod input[type=submit]").prop("disabled", false);
+
+                                                                                    }
+                                                                                });
+                                                                            } else {
+                                                                                location.search = "?page=submissions";
+                                                                            }
+                                                                        } else {
+                                                                            $("#mod_info").html("<p class='error'>Une erreur est survenue.</p>");
+                                                                            $("#avis_mod input[type=submit]").prop("disabled", false);
+                                                                        }
+                                                                    },
+                                                                    error: function (x) {
+                                                                        $("#mod_info").html("<p class='error'>Une erreur inattendue est survenue.</p>");
+                                                                        $("#avis_mod input[type=submit]").prop("disabled", false);
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                $("#mod_info").html("<p class='error'>Une erreur est survenue.</p>");
+                                                                $("#avis_mod input[type=submit]").prop("disabled", false);
+                                                            }
+                                                        },
+                                                        error: function (x) {
+                                                            $("#mod_info").html("<p class='error'>Une erreur inattendue est survenue.</p>");
+                                                            $("#avis_mod input[type=submit]").prop("disabled", false);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                            if ($("input[name=mod_input]:checked").val() === "1") {
+                                                visualPrompt("Envoyer l'avis favorable ? Cela provoquera la publication automatique de l'acte de nomination du joueur.", ["Oui", "Non"], mainFunc);
+                                            } else {
+                                                mainFunc("Oui");
+                                            }
+
+                                        });
+                                    }
+                                } else {
+                                    $("#subm_disp").append("<div>Avis <span style='color: grey;font-variant: small-caps;'>non renseigné</span><br/></div>");
+
+                                }
+                            }
+                        }
+                        if (!ok) {
+                            location.search = "?page=submissions";
+                        }
+                    }
+                });
             }
         } else if (args.page === "reg_new" && checkPerm("admin.reg")) {
             $(".return_arrow").show();
@@ -137,7 +350,7 @@ $(function () {
                 return maindic;
             }
             if (typeof args.load !== "undefined" && typeof localStorage["adm_limoncello_regsave"] !== "undefined") {
-                let saves = JSON.parse(typeof localStorage["adm_limoncello_regsave"] === "undefined" ? "{}":localStorage["adm_limoncello_regsave"]);
+                let saves = JSON.parse(typeof localStorage["adm_limoncello_regsave"] === "undefined" ? "{}" : localStorage["adm_limoncello_regsave"]);
                 if (typeof saves[args.load] !== "undefined") {
                     let toLoad = saves[args.load];
                     delete saves;
@@ -250,8 +463,8 @@ $(function () {
                     $("#rgn_preview_bloc > p").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
                     main();
                 } else {
-                    visualPrompt("Voulez-vous vraiment publier le document prévisualisé ?",["Oui","Non"],function (ch){
-                        if (ch === "Oui"){
+                    visualPrompt("Voulez-vous vraiment publier le document prévisualisé ?", ["Oui", "Non"], function (ch) {
+                        if (ch === "Oui") {
                             $("#rgn_preview_bloc > p").html("Veuillez patienter. <br/>La publication peut durer quelques minutes, ne fermez pas la fenêtre.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
                             main();
                         }
@@ -388,7 +601,6 @@ $(function () {
             }
             $("#reg_import_input").change(function () {
                 let filename = this.files[0].name.split(".");
-                console.log(filename)
                 if (filename[filename.length - 1] !== "nosj") {
                     this.value = "";
                     return;

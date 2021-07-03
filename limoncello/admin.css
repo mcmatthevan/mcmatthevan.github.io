@@ -245,9 +245,41 @@ embed{
 .loading_img{
     display: block;
     width: 3em;
+    height: auto;
     margin: auto;
 }
 
 .attrch{
     font-size: 0.8em;
+}
+
+#submissions table{
+    display: none;
+    margin: auto;
+    border-collapse: collapse;
+}
+#submissions > h2, #subm_disp{
+    display: none;
+}
+
+#submissions table td{
+    border: solid 2px black;
+    padding: 5px;
+}
+
+.subm_avis > div{
+    display: flex;
+    justify-content: center;
+}
+.subm_avis > div > div{
+    margin: 10px;
+}
+
+.subm_avis textarea{
+    resize: none;
+}
+
+.load_info{
+    display: block;
+    text-align: center;
 }
