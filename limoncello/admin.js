@@ -433,7 +433,9 @@ $(function () {
                                 $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
                             } else {
                                 $("#rgn_preview_bloc > h2").hide();
-                                if (dic.sign === {}) {
+                                if (/proposition/gi.test(dic.type)){
+                                    $("#rgn_preview_bloc > p").html("<a href=\"" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "\" download>Cliquez ici</a> pour télécharger le document.");
+                                } else if (dic.sign === {}) {
                                     $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
                                 le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+ response +
                                         `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/` + response +
