@@ -47,6 +47,9 @@
     color: blue;
     font-weight: normal;
 }
+.pfunctions i{
+    font-size: unset;
+}
 
 .pfunctions a:hover{
     color: rgb(0, 195, 255);

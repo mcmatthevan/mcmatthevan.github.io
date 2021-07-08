@@ -62,6 +62,8 @@ $(function(){
             error: function(x){
                 if (x.status === 404){
                     $(".error").text("Erreur : joueur non-trouvé. Est-il un joueur du serveur ? (404)");
+                } else {
+                    $(".error").text("Erreur " + x.status);
                 }
             }
         });
