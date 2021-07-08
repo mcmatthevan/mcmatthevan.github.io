@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PALGANIA-wiki</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="player.css">
 </head>
 <body>
     <header>
@@ -19,18 +20,37 @@
     </header>
     <div></div>
     <section class="firstelement">
-        <table class="borders">
+        <div id="load_div">
+            Veuillez patienter...
+            <img src="https://icon-library.com/images/loading-icon-transparent-background/loading-icon-transparent-background-12.jpg"
+                id="load_gif" alt=""></div>
+        <p class="error"></p>
+        <table id ="pframe" class="borders">
             <tr>
-                <td rowspan="2"><img id='skin' src=""/></td><td>Player</td>
+                <td rowspan="2"><img id='skin' src=""/></td><td id="pseudo">Player</td>
             </tr>
             <tr><td id="role">Joueur</td></tr>
-            <tr><td class="entree">Inscription</td><td id="inscr">01/01/1960</td></tr>
+            <tr><td class="entree">Date d'arrivée</td><td id="inscr">01/01/1960</td></tr>
         </table>
+        <div id="pbio">
+            <hr>
+            <h2>Informations subsidiaires</h2>
+            <table id="pbanned" class="borders">
+                <th><td class="tag">Depuis le :</td><td class="tag">Expiration :</td><td class="tag">Motif</td><td class="tag">Opéré par :</td></th>
+                <tr id="baninfos">
+                    <td><img id="banicon" src="../images/justice-hammer.png" alt=""> Banni</td></tr>
+            </table>
+            <fieldset id="pfunctions">
+                <legend>Fonctions</legend>
+            </fieldset>
+        </div>
     </section>
     <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a>
+        <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </footer>
     <script src="../scripts/autoplaceheader.js"></script>
     <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="../../limoncello/functions.js"></script>
     <script src="../scripts/player.js"></script>
 </body>
 </html>

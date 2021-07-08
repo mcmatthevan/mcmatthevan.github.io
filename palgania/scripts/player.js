@@ -1,3 +1,69 @@
 $(function(){
-    var pseudo = location.search.substring(8);
+    function formattedArg(tx){
+
+        return tx.replace(/\[player\]([\S\s]+?)\[\/player\]/g,`<a href="?pseudo=$1">$1</a>`);
+    }
+    let args = locationArgs();
+    if (typeof args.pseudo === "undefined"){
+        $("#load_div").hide();
+        $(".error").text("Erreur : joueur non spécifié");
+    } else {
+        $.ajax({
+            type: "GET",
+            url: IP + "services/player_info",
+            data: {pseudo: args.pseudo},
+            dataType: "json",
+            success: function (response) {
+                $("#pseudo").text(response.pseudo);
+                if (response.firstjoin === null){
+                    $("#inscr").text("Inconnue");
+                } else {
+                    $("#inscr").text(new Date(response.firstjoin).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}));
+                }
+                $("#skin").attr("src","https://crafatar.com/renders/body/"+response.uuid);
+                $("#load_div").hide();
+                $("#pframe").show();
+                if (response.banned !== null){
+                    let source = response.banned.source === "Console" ? "<i>Console</i>" : formattedArg("[player]" + response.banned.source.split(/\s+/g).reverse()[0].replace(/§\S/g,"") + "[/player]");
+                    $("#baninfos").append(`<td>` + new Date(response.banned.created).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric"}) + `</td>
+                    <td>` + new Date(response.banned.expires).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric"}) + `</td>
+                    <td><p>` + response.banned.reason + `</p></td>
+                    <td>` + source + `</td>`);
+                    $("#pbio, #pbanned").show();
+                }
+                if (response.bio !== null && typeof response.bio.functions !== "undefined"){
+                    let admin=false, modo=false;
+                    for (let i = 0, c = response.bio.functions.length ; i < c ; i ++){
+                        let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to);
+                        let formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr><td colspan="2">` +
+                        (toNotDefined ? "Depuis le " : "") + new Date(response.bio.functions[i].from).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + new Date(response.bio.functions[i].to).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr>`;
+                        for (let key in response.bio.functions[i]){
+                            if (key.charAt(0) === "_"){
+                                formatted += "<tr><td class='tag wiki'>" + key.substring(1) + "</td><td class='item'>" + formattedArg(response.bio.functions[i][key]) + "</td></tr>";
+                            }
+                        }
+                        $("#pfunctions").append(formatted + "</table>");
+                        if (typeof response.bio.functions[i].to === "undefined" || response.bio.functions[i].to === null || response.bio.functions[i].to === ""){
+                            if (/(administra(?:teur|trice))/gi.test(response.bio.functions[i].title) && !admin){
+                                admin = response.bio.functions[i].title;
+                            } else if (/(modéra(?:teur|trice|tion))/gi.test(response.bio.functions[i].title) && !modo){
+                                modo = response.bio.functions[i].title;
+                            }
+                        }
+                    }
+                    if (admin){
+                        $("#role").html("<span class='red'>" + admin + "</span>");
+                    } else if (modo){
+                        $("#role").html("<span class='blue'>" + modo + "</span>");
+                    }
+                    $("#pbio, #pfunctions").show();
+                }
+            },
+            error: function(x){
+                if (x.status === 404){
+                    $(".error").text("Erreur : joueur non-trouvé. Est-il un joueur du serveur ? (404)");
+                }
+            }
+        });
+    }
 });

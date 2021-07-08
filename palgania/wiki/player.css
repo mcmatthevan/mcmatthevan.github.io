@@ -1,0 +1,63 @@
+#pframe{
+    display: none;
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color: cyan;
+}
+
+#banicon{
+    width: 24px;
+}
+
+#pbanned{
+    text-align: center;
+    display: none;
+    font-size: 0.8em;
+}
+
+#pbanned i, #pbanned a{
+    font-size: unset;
+}
+
+#pbio{
+    display: none;
+}
+
+#pfunctions{
+    border: 1px solid rgb(168, 168, 168);
+    display: none;
+}
+
+.pfunctions{
+    width: 50%;
+    font-size: 0.8em;
+    border: 1px solid black;
+    margin: auto;
+    color: black;
+}
+
+.pfunctions a{
+    font-size: unset;
+    margin: 0;
+    color: blue;
+    font-weight: normal;
+}
+
+.pfunctions a:hover{
+    color: rgb(0, 195, 255);
+}
+
+#pfunctions legend{
+    color: rgb(168, 168, 168);
+}
+
+.tag{
+    font-weight: bold;
+    text-align: center;
+    width: unset;
+}
