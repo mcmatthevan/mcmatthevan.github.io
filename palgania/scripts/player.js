@@ -44,8 +44,8 @@ $(function(){
                 if (response.bio !== null && typeof response.bio.functions !== "undefined"){
                     let admin=false, modo=false;
                     for (let i = 0, c = response.bio.functions.length ; i < c ; i ++){
-                        let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to);
-                        let formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr class='pfuncdate'><td colspan="2">` +
+                        let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to),
+                            formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr class='pfuncdate'><td colspan="2">` +
                         (toNotDefined ? "Depuis le " : "") + new Date(response.bio.functions[i].from).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + new Date(response.bio.functions[i].to).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr><tr><td colspan='2'><br/></td></tr>`;
                         for (let key in response.bio.functions[i]){
                             if (key.charAt(0) === "_"){
