@@ -6,7 +6,11 @@ $(function(){
     let args = locationArgs();
     if (typeof args.pseudo === "undefined"){
         $("#load_div").hide();
-        $(".error").text("Erreur : joueur non spécifié");
+        $("section").append("<form id='formsearch'><label>Entrez le pseudo d'un joueur : </label><input id='pseudosearch' type='text' required/><br/><input type='submit' value='Rechercher'/></form>");
+        $("#formsearch").submit(function(e){
+            e.preventDefault();
+            location.search = "?pseudo=" + $("#pseudosearch").val().trim();
+        });
     } else {
         $.ajax({
             type: "GET",
@@ -35,8 +39,8 @@ $(function(){
                     let admin=false, modo=false;
                     for (let i = 0, c = response.bio.functions.length ; i < c ; i ++){
                         let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to);
-                        let formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr><td colspan="2">` +
-                        (toNotDefined ? "Depuis le " : "") + new Date(response.bio.functions[i].from).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + new Date(response.bio.functions[i].to).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr>`;
+                        let formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr class='pfuncdate'><td colspan="2">` +
+                        (toNotDefined ? "Depuis le " : "") + new Date(response.bio.functions[i].from).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + new Date(response.bio.functions[i].to).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr><tr><td colspan='2'><br/></td></tr>`;
                         for (let key in response.bio.functions[i]){
                             if (key.charAt(0) === "_"){
                                 formatted += "<tr><td class='tag wiki'>" + key.substring(1) + "</td><td class='item'>" + formattedArg(response.bio.functions[i][key]) + "</td></tr>";
@@ -60,10 +64,11 @@ $(function(){
                 }
             },
             error: function(x){
+                $("#load_div").hide();
                 if (x.status === 404){
                     $(".error").text("Erreur : joueur non-trouvé. Est-il un joueur du serveur ? (404)");
                 } else {
-                    $(".error").text("Erreur " + x.status);
+                    $(".error").text("Erreur " + x.status + " - " + x.statusText);
                 }
             }
         });
