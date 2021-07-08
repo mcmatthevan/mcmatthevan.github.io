@@ -24,6 +24,12 @@ $(function(){
                 } else {
                     $("#inscr").text(new Date(response.firstjoin).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}));
                 }
+                let logoutd = new Date(response.lastLogout).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'});
+                if (logoutd==="Invalid Date"){
+                    $("#lastcotr").hide();
+                } else {
+                    $("#lastLogout").text(logoutd);
+                }
                 $("#skin").attr("src","https://crafatar.com/renders/body/"+response.uuid);
                 $("#load_div").hide();
                 $("#pframe").show();
