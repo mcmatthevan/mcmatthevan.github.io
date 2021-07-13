@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment devenir modérateur ?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="modo.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../regles.html">Règlement</a></li>
+                <li class="selected"><a href="../actus/">Actualités</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="firstelement cgu reglement">
+        <div class="modeaffichage">
+            <div id="dark">Sombre</div>
+            <div id="light">Clair</div>
+        </div>
+        <H1>Comment devenir modérateur ?</H1>
+
+        <p>Depuis le <strong>13 juillet 2020</strong>, le poste de modérateur est accessible sur Palgania par candidature.<br/>Vous souhaitez nous aider à modérer le serveur en rejoignant le staff ? Voici les deux étapes que vous devez suivre.</p>
+
+        <h2>I. Le Certificat d'Aptitude à la Modération (C.A.M.)</h2>
+        <p>Avant de pouvoir candidater, il est nécessaire de passer le <strong>Certificat d'Aptitude à la Modération</strong>, abrégé <strong>C.A.M.</strong>. <br>
+        C'est un "examen" sous forme de QCM qui vise à déterminer si vous êtes apte à modérer. L'essentiel de ce qu'il faut savoir pour pouvoir l'obtenir aisément se trouve <a href="CAM_memo.pdf">dans cette présentation</a>.<br/>
+        Une fois que vous vous sentez prêt(e), vous pouvez effectuer la commande <strong>/cam inscription</strong> depuis le serveur Minecraft pour vous inscrire.<br/>
+    <strong>Une fois inscrit, n'oubliez pas de vous présenter dans la plage horaire indiquée, sans quoi un avis défavorable sera émis et vous devrez attendre 1 mois avant de pouvoir réessayer !</strong><br>
+    Vous devez avoir au moins <strong>15/20</strong> pour obtenir le certificat. Si vous n'y parvenez pas du premier coup, pas d'inquiétude, vous disposez d'un délai d'un mois pour vous remettre à niveau avant de pouvoir vous réinscrire ! <br>
+Enfin, vous pouvez consulter la règlementation interne relative au C.A.M. ici : <a href="https://mcmatthevan.github.io/limoncello/reg/pdf/S20210713-1.pdf">Statut n◦S20210713-1
+    fixant les conditions
+    d’inscription, de passage
+    et de délivrance du
+    Certificat d’Aptitude à la
+    Modération</a></p>
+
+    <h2>II. La candidature</h2>
+    <p>Vous avez passé le C.A.M. avec succès ? Bravo ! Le plus dur est fait. Pour accéder au poste de modérateur, vous devez maintenant déposer une candidature <a href="../submission">sur ce lien</a>. <br>
+    Il s'agit ici de convaincre les examinateurs que vous feriez un bon modérateur. Il est inutile d'exposer votre savoir en terme de commandes de sanctions, vous possédez déjà le C.A.M. qui atteste de vos connaissances ! Parlez plutôt de vos motivations (pourquoi voulez-vous devenir modérateur sur Palgania ?), de votre expérience personnelle (si par exemple vous avez déjà été modérateur sur un autre serveur), etc. Soignez votre orthographe autant que possible. <br>
+<strong>N'oubliez pas qu'une candidature n'a pas besoin d'être très longue pour être convaincante ! Il n'y a pas qu'une seule manière de faire des candidatures, n'hésitez pas à être un peu original (mais vous cassez pas trop la tête non plus hein :p)</strong><br><br>
+Après examen de votre candidature, celle-ci sera acceptée... ou alors refusée (mais ne parlons pas de malheur !). <br>
+Une fois accepté, nous serons ravis de vous accueillir dans notre équipe ! À bientôt. </p>
+<hr>
+        <p class="signature">
+            <strong>lumahell</strong>, le 12/07/2021<br />
+        </p>
+    </section>
+    <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a>
+        <!--<br />Icons made by <a
+            href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+    </footer>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="../scripts/autoplaceheader.js"></script>
+    <script>
+        (function(){
+            var dark_bt = document.querySelector("#dark"),
+                light_bt = document.querySelector("#light"),
+                firstel = document.querySelector(".firstelement");
+            dark_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv != null){
+                    configdiv.parentNode.removeChild(configdiv);
+                }
+            });
+            light_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv == null){
+                    var configdiv = document.createElement("div");
+                    configdiv.id = "darklightdiv";
+                    document.body.insertBefore(configdiv,firstel);
+                }
+            });
+        })();
+
+    </script>
+</body>
+
+</html>
