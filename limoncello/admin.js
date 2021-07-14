@@ -575,14 +575,17 @@ $(function () {
                             dataType: "json",
                             success: function (response) {
                                 let index = regIndex(response),
-                                    adder = $("#rgn_artid"+counter);
+                                    adder = $("#rgn_artid"+counter),
+                                    currentAdder = adder.get(0);
                                 $("#execerror").text("");
                                 adder.html("<option value=\"\"></option>");
                                 for (let i = 0, c = index.length ; i < c ; ++i){
                                     if (/titre/gi.test(index[i][0])){
-                                        adder.append("<optgroup>" + index[i][0] + " - " + index[i][1] + "</optgroup>");
+                                        currentAdder = document.createElement("optgroup");
+                                        currentAdder.label = index[i][0] + " - " + index[i][1];
+                                        adder.get(0).appendChild(currentAdder)
                                     } else if (/article/gi.test(index[i][0])){
-                                        adder.append("<option value=\"" + index[i][0] + "\">" + index[i][0] + "</option>");
+                                        $(currentAdder).append("<option value=\"" + index[i][0] + "\">" + index[i][0] + "</option>");
                                     }
                                 }
                                 adder.prop("readonly",false);
