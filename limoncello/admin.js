@@ -402,8 +402,11 @@ $(function () {
                             for (let i = 0, c = toLoad.execute.length ; i < c ; ++i) {
                                     $("#rgn_addexec").trigger("click");
                                     $(".rgn_execid").last().val(toLoad.execute[i]["regId"]);
-                                    $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
-                                    $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
+                                    $(".rgn_execid").last().trigger("change");
+                                    setTimeout(function(){
+                                        $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
+                                        $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
+                                    },1);
                             }
                         }
                     }, 1);
