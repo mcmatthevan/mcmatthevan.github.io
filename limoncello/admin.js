@@ -328,7 +328,7 @@ $(function () {
             $(".return_arrow").show();
             $(".return_arrow a").attr("href", "?page=reg_home");
             function makeJson() {
-                let maindic = { "content": [], "sign": {} };
+                let maindic = { "content": [], "sign": {}, "execute": []};
                 $(".rgn").each(function (i, v) {
                     maindic[v.id.replace(/rgn_/g, "")] = $(v).val().trim();
                 });
@@ -346,6 +346,16 @@ $(function () {
                         maindic["sign"][mentionValue] = [];
                     }
                     maindic["sign"][mentionValue].push($("#rgn_signname" + v.id.replace(/rgn_signmention/, "")).val().trim());
+                });
+                $(".rgn_execid").each(function(i,v){
+                    let cid = v.id.replace(/rgn_execid/,"");
+                    maindic["execute"].push({
+                        type: "ChangeArt",
+                        authorId: "",
+                        regId: $(v).val().trim(),
+                        artId: $("#rgn_artid"+cid).val(),
+                        comment: $("#rgn_newtx"+cid).val().trim()
+                    });
                 });
                 return maindic;
             }
@@ -386,6 +396,14 @@ $(function () {
                                     $(".rgn_signname").last().val(toLoad.sign[mention][i]);
 
                                 }
+                            }
+                        }
+                        if (typeof toLoad.execute !== "undefined") {
+                            for (let i = 0, c = toLoad.execute.length ; i < c ; ++i) {
+                                    $("#rgn_addexec").trigger("click");
+                                    $(".rgn_execid").last().val(toLoad.execute[i]["regId"]);
+                                    $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
+                                    $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
                             }
                         }
                     }, 1);
@@ -585,14 +603,14 @@ $(function () {
                                         currentAdder.label = index[i][0] + " - " + index[i][1];
                                         adder.get(0).appendChild(currentAdder)
                                     } else if (/article/gi.test(index[i][0])){
-                                        $(currentAdder).append("<option value=\"" + index[i][0] + "\">" + index[i][0] + "</option>");
+                                        $(currentAdder).append("<option value=\"" + i + "\">" + index[i][0] + "</option>");
                                     }
                                 }
                                 adder.prop("readonly",false);
                                 adder.change(function(){
                                     if ($(this).val() !== ""){
                                         for (let i = 0, c = index.length ; i < c ; ++i){
-                                            if (index[i][0] === $(this).val()){
+                                            if (index[i][0] === $(this).text()){
                                                 $("#rgn_newtx"+counter).val(index[i][1]);
                                                 break;
                                             }
