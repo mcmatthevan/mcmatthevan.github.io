@@ -406,7 +406,7 @@ $(function () {
                                     setTimeout(function(){
                                         $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
                                         $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
-                                    },1);
+                                    },500);
                             }
                         }
                     }, 1);
