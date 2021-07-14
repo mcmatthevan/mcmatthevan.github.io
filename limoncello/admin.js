@@ -624,7 +624,7 @@ $(function () {
                             },
                             error: function(x){
                                 if (x.status === 404){
-                                    $("#execerror").text("Le numéro d'identification ne correspond à aucun acte existant.");
+                                    $("#execerror"+counter).text("Le numéro d'identification ne correspond à aucun acte existant.");
                                     $("#rgn_execid"+counter).prop("readonly",false);
                                     $("#rgn_execid"+counter).get()[0].focus();
                                 }
