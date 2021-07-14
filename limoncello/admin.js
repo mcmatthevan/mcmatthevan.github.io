@@ -441,7 +441,8 @@ $(function () {
                             dispo: JSON.stringify(dic.dispos),
                             signs: JSON.stringify(dic.sign),
                             preview: preview.toString(),
-                            preamble: dic.preamble
+                            preamble: dic.preamble,
+                            execute: JSON.stringify(dic.execute)
 
                         }),
                         dataType: "json",
@@ -454,6 +455,7 @@ $(function () {
                                 $("#rgn_preview_bloc").append("<embed src='" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "'></embed>");
                             } else {
                                 $("#rgn_preview_bloc > h2").hide();
+                                console.log(dic.sign);
                                 if (/proposition/gi.test(dic.type)){
                                     let clicked = false;
                                     $("#rgn_preview_bloc > p").html("<a class='onlyonce' href=\"" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "&download=1\" download>Cliquez ici</a> pour télécharger le document.");
