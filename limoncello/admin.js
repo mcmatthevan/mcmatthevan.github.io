@@ -353,7 +353,7 @@ $(function () {
                         type: "ChangeArt",
                         authorId: "",
                         regId: $(v).val().trim(),
-                        artId: $("#rgn_artid"+cid).val(),
+                        artId: parseInt($("#rgn_artid"+cid).val()),
                         comment: $("#rgn_newtx"+cid).val().trim()
                     });
                 });
@@ -610,7 +610,7 @@ $(function () {
                                 adder.change(function(){
                                     if ($(this).val() !== ""){
                                         for (let i = 0, c = index.length ; i < c ; ++i){
-                                            if (index[i][0] === $(this).text()){
+                                            if (index[i][0] === $("#rgn_execid"+counter+" option::selected").text()){
                                                 $("#rgn_newtx"+counter).val(index[i][1]);
                                                 break;
                                             }
