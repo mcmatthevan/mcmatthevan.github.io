@@ -548,6 +548,68 @@ $(function () {
                     $("#rgn_nsigntr_" + this.id.replace(/rgn\_sdelete/g, "")).remove();
                 });
             });
+            $("#rgn_addexec").click(function(e){
+                $("#rgn_insert3").before(`<tr class="unpersistent" id="rgn_nexectr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_edelete" id="rgn_edelete` + counter + `">×</span>
+                <label for="rgn_nexec` + counter + `">Modification</label></td><td>:</td><td><table>
+                    <tr><td class="end tag"><label for='rgn_execid`+ counter + `'>Numéro d'identifiant de l'acte à modifier</label></td><td>:</td><td>
+                        <input required id='rgn_execid`+ counter + `' class='rgn_exec rgn_execid' placeholder="Ex : S20260703-2"/><p style='color:red;font-style:italic' id='execerror'></p>
+                    </td></tr>
+                    <tr><td class="end tag"><label for='rgn_artid`+ counter + `'>Article à modifier</label></td><td>:</td><td>
+                        <select required readonly id='rgn_artid`+ counter + `' class='rgn_exec rgn_artid'>
+                        <option value="">Entrez d'abord l'ID de l'acte à modifier.</option>
+                        </select>
+                    </td></tr>
+                    <tr><td class="end tag"><label for='rgn_newtx`+ counter + `'>Nouveau texte de l'article</label></td><td>:</td><td>
+                        <textarea required readonly id='rgn_newtx`+ counter + `' class='rgn_exec rgn_newtx'></textarea>
+                    </td></tr>
+                </table></td></tr>`);
+                (function(counter){
+                    $(".rgn_edelete").click(function (e) {
+                        $("#rgn_nexectr_" + counter).remove();
+                    });
+                    $("#rgn_execid"+counter).change(function(){
+                        $(this).prop("readonly",true);
+                        $.ajax({
+                            type: "GET",
+                            url: "reg/" + $(this).val().trim() + ".json",
+                            dataType: "json",
+                            success: function (response) {
+                                let index = regIndex(response),
+                                    adder = $("#rgn_artid"+counter);
+                                $("#execerror").text("");
+                                adder.html("<option value=\"\"></option>");
+                                for (let i = 0, c = index.length ; i < c ; ++i){
+                                    if (/titre/gi.test(index[i][0])){
+                                        adder.append("<optgroup>" + index[i][0] + " - " + index[i][1] + "</optgroup>");
+                                    } else if (/article/gi.test(index[i][0])){
+                                        adder.append("<option value=\"" + index[i][0] + "\">" + index[i][0] + "</option>");
+                                    }
+                                }
+                                adder.prop("readonly",false);
+                                adder.change(function(){
+                                    if ($(this).val() !== ""){
+                                        for (let i = 0, c = index.length ; i < c ; ++i){
+                                            if (index[i][0] === $(this).val()){
+                                                $("#rgn_newtx"+counter).val(index[i][1]);
+                                                break;
+                                            }
+                                        }
+                                        $("#rgn_newtx"+counter).prop("readonly",false);
+                                    }
+                                });
+                            },
+                            error: function(x){
+                                if (x.status === 404){
+                                    $("#execerror").text("Le numéro d'identification ne correspond à aucun acte existant.");
+                                    $(this).prop("readonly",false);
+                                    this.focus();
+                                }
+                            }
+                        });
+                    });
+                })(counter);
+                counter += 1;
+            });
             $("#rgn_save").click(function (e) {
                 visualPrompt("Voulez-vous sauvegarder le brouillon de ce règlement ?<br>⚠ Celui-ci sera enregistré sur votre disque local.", ["Oui", "Non"], function (ch) {
                     if (ch === "Oui") {

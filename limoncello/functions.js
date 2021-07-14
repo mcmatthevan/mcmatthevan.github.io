@@ -2,67 +2,67 @@
 function parsedDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
 }
-if (location.protocol === "file:"){
+if (location.protocol === "file:") {
     var IP = "http://localhost:8888/";
 } else {
     var IP = "https://singalong-game.com:8888/";
 }
 const ACTLIST = {
     "Sanction": {
-        "target": ["Joueur",true],
-        "comment": ["Description de la sanction",true,"<textarea $$></textarea>"],
-        "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
+        "target": ["Joueur", true],
+        "comment": ["Description de la sanction", true, "<textarea $$></textarea>"],
+        "reason": ["Motif", true],
+        "expire": ["Expiration", true, "<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Ban": {
-        "target": ["Joueur",true],
-        "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
+        "target": ["Joueur", true],
+        "reason": ["Motif", true],
+        "expire": ["Expiration", true, "<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Mute": {
-        "target": ["Joueur",true],
-        "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
+        "target": ["Joueur", true],
+        "reason": ["Motif", true],
+        "expire": ["Expiration", true, "<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Jail": {
-        "target": ["Joueur",true],
-        "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
+        "target": ["Joueur", true],
+        "reason": ["Motif", true],
+        "expire": ["Expiration", true, "<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "ItemBlacklist": {
-        "target": ["Joueur",true],
-        "blacklisted": ["Item(s) interdit(s)",true],
-        "reason": ["Motif",true],
-        "expire": ["Expiration",true,"<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
+        "target": ["Joueur", true],
+        "blacklisted": ["Item(s) interdit(s)", true],
+        "reason": ["Motif", true],
+        "expire": ["Expiration", true, "<input type='date' min='" + parsedDate(new Date()) + "' $$/>"]
     },
     "Request": {
-        "subject": ["Type de requête",true],
-        "comment": ["Description de la requête",true,"<textarea $$></textarea>"]
+        "subject": ["Type de requête", true],
+        "comment": ["Description de la requête", true, "<textarea $$></textarea>"]
     },
-    "LogGetting":{
-        "dayLog": ["Date des logs requis",true,"<input type='date' value='" + parsedDate(new Date()) + "' $$/>"],
-        "content": ["Terme à rechercher",true,"<input type='text' $$/><br><p style='font-style:italic; color:grey;'>Pour \
+    "LogGetting": {
+        "dayLog": ["Date des logs requis", true, "<input type='date' value='" + parsedDate(new Date()) + "' $$/>"],
+        "content": ["Terme à rechercher", true, "<input type='text' $$/><br><p style='font-style:italic; color:grey;'>Pour \
             rechercher plusieurs termes, les séparer par un point-virgule (;)</p>"]
     },
-    "IpGetting":{
-        "target": ["Pseudo du joueur",true]
+    "IpGetting": {
+        "target": ["Pseudo du joueur", true]
     },
     "Element": {
-        "subject": ["Type d'élément",true],
-        "comment": ["Description",true,"<textarea $$></textarea>"]
+        "subject": ["Type d'élément", true],
+        "comment": ["Description", true, "<textarea $$></textarea>"]
     },
     "Notification": {
-        "subject": ["Type de notification",true],
-        "comment": ["Description",true,"<textarea $$></textarea>"]
+        "subject": ["Type de notification", true],
+        "comment": ["Description", true, "<textarea $$></textarea>"]
     },
     "Observation": {
-        "author": ["Modérateur à l'origine du constat",true,"<input type='text' value='$pseudo$' $$/>"],
-        "comment": ["Description",true,"<textarea $$></textarea>"]
+        "author": ["Modérateur à l'origine du constat", true, "<input type='text' value='$pseudo$' $$/>"],
+        "comment": ["Description", true, "<textarea $$></textarea>"]
     },
     "Complaint": {
-        "complainant": ["Plaignant",true],
-        "target": ["Joueur ciblé",true],
-        "comment": ["Motif de la plainte",true,"<textarea $$></textarea>"]
+        "complainant": ["Plaignant", true],
+        "target": ["Joueur ciblé", true],
+        "comment": ["Motif de la plainte", true, "<textarea $$></textarea>"]
     }
 };
 const _classEquivalent = {
@@ -99,8 +99,36 @@ const _classEquivalent = {
         "content": "Termes recherchés :",
         "subject": "Type :"
     };
+function romanize(num) {
+    if (isNaN(num))
+        return NaN;
+    var digits = String(+num).split(""),
+        key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+            "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+            "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
 
-
+function regIndex(regObj) {
+    let tCount = 0, aCount = 0, result = [];
+    for (let i = 0, c = regObj.content.length; i < c; i++) {
+        if (typeof regObj.content[i].valueOf() === "string") {
+            regObj.content[i] = ["article", regObj.content[i]];
+        }
+        if (/title/gi.test(regObj.content[i][0])) {
+            tCount ++;
+            result.push(["Titre " + romanize(tCount),regObj.content[i][1]]);
+        } else if (/article/gi.test(regObj.content[i][0])) {
+            aCount ++;
+            result.push(["Article " + (tCount > 0 ? tCount + "-" : "") + aCount,regObj.content[i][1]]);
+        } 
+    }
+    return regObj;
+}
 
 
 function format00(nb) {
@@ -121,9 +149,9 @@ function stringDate(date, a = true) {
     return new Date(date * 1000).toLocaleString("fr", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" }).replace(", ", (a ? " à " : ", "));
 }
 
-function stringOnlyDay(datenb){
-    let date = new Date(datenb*1000);
-    return format00(date.getDate()) + "/" + format00(date.getMonth()+1) + "/" + date.getFullYear();
+function stringOnlyDay(datenb) {
+    let date = new Date(datenb * 1000);
+    return format00(date.getDate()) + "/" + format00(date.getMonth() + 1) + "/" + date.getFullYear();
 }
 
 function parseTimeSpan(time) {
@@ -191,12 +219,12 @@ function download(text, name, type) {
     var a = document.createElement("a");
     a.style.display = "none";
     document.body.appendChild(a);
-    var file = new Blob([text], {type: type});
+    var file = new Blob([text], { type: type });
     a.href = URL.createObjectURL(file);
     a.download = name;
     a.click();
     a.parentNode.removeChild(a);
-  }
+}
 
 function isAuth() {
     let result;
@@ -272,9 +300,9 @@ function getUserInfo() {
 
 function getActType(type) {
     //edit procpvbuild too
-    if (~["Ban", "Mute", "ItemBlacklist", "Jail","Sanction"].indexOf(type)) {
+    if (~["Ban", "Mute", "ItemBlacklist", "Jail", "Sanction"].indexOf(type)) {
         return "Sanction temporaire";
-    } else if (~["Element","Observation","Complaint"].indexOf(type)) {
+    } else if (~["Element", "Observation", "Complaint"].indexOf(type)) {
         return "Élément de procédure";
     } else if (~["LogGetting", "IpGetting", "Request"].indexOf(type)) {
         return "Requête";
@@ -330,15 +358,15 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
             if (item === "expire") {
                 value = stringDate(act[item]) + "</td></tr><tr><td class='tag end smaller'><i>(Durée totale :</i></td><td class='smaller'><i>" + parseTimeSpan(act.expire - act.date) + ")</i>";
             } else if (item === "dayLog") {
-                if (typeof act[item].valueOf() === "number"){
+                if (typeof act[item].valueOf() === "number") {
                     value = stringOnlyDay(act[item]);
                 } else {
-                    value = act[item].replace(/-/g,"/");
+                    value = act[item].replace(/-/g, "/");
                 }
             } else {
                 value = act[item];
             }
-            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g," ; ") + "</td></tr>";
+            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g, " ; ") + "</td></tr>";
         }
     }
     return result + "</table><td>" + stringDate(act.date).replace(/ à /g, "<br>") + "</td><td>" + act.authorId + "</td>";
