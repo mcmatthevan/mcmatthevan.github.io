@@ -601,8 +601,8 @@ $(function () {
                             error: function(x){
                                 if (x.status === 404){
                                     $("#execerror").text("Le numéro d'identification ne correspond à aucun acte existant.");
-                                    $(this).prop("readonly",false);
-                                    this.focus();
+                                    $("#rgn_execid"+counter).prop("readonly",false);
+                                    $("#rgn_execid"+counter).get()[0].focus();
                                 }
                             }
                         });
