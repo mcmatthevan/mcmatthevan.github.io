@@ -121,6 +121,7 @@ function regIndex(regObj) {
         }
         if (/title/gi.test(regObj.content[i][0])) {
             tCount ++;
+            aCount = 0;
             result.push(["Titre " + romanize(tCount),regObj.content[i][1]]);
         } else if (/article/gi.test(regObj.content[i][0])) {
             aCount ++;
