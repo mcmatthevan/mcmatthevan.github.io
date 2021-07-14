@@ -127,7 +127,7 @@ function regIndex(regObj) {
             result.push(["Article " + (tCount > 0 ? tCount + "-" : "") + aCount,regObj.content[i][1]]);
         } 
     }
-    return regObj;
+    return result;
 }
 
 
