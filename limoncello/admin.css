@@ -148,7 +148,7 @@ img{
     width: 100%;
 }
 
-textarea.rgn, textarea.rgn_content, #rgn_dispos{
+textarea.rgn, textarea.rgn_content, #rgn_dispos, textarea.rgn_exec{
     height: 10em;
 }
 
