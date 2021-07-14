@@ -467,7 +467,7 @@ $(function () {
                                             clicked = true;
                                         }
                                     });
-                                } else if (dic.sign === {}) {
+                                } else if (Object.keys(dic.sign).length === 0) {
                                     $("#rgn_preview_bloc > p").html(`Le document a bien été publié.<br>Le lien de téléchargement est
                                 le suivant : <a href="https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/`+ response +
                                         `.pdf">https://github.com/mcmatthevan/mcmatthevan.github.io/raw/master/limoncello/reg/pdf/` + response +
