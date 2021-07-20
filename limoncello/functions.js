@@ -367,7 +367,7 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
             } else {
                 value = act[item];
             }
-            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g, " ; ") + "</td></tr>";
+            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g, " ; ").replace(/\n/g,"<br>") + "</td></tr>";
         }
     }
     return result + "</table><td>" + stringDate(act.date).replace(/ à /g, "<br>") + "</td><td>" + act.authorId + "</td>";
