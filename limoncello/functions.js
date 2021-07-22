@@ -341,6 +341,13 @@ function formatSanct(act, notshown = ["authorId", "sanctionType"], modifClassEqu
 
 }
 
+function autoFormatUrl(text){
+    let reg = /(https?:\/\/[A-Za-z\.]+(?:\/\S*)?(?:\?\S+?)?)/g,
+        reg_img = /<a[\S\s]+?>(https?:\/\/[A-Za-z\.]+?(?:\/\S*?\.(?:png|jpg|jpeg))?(?:\?\S+?)?)<\/a>/g;
+    return text.replace(reg,"<a href=\"$1\">$1</a>")
+                .replace(reg_img,"<a href=\"$1\"><img alt=\"$1\" src=\"$1\" style='width: 50px;'/></a>");
+}
+
 function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}) {
     let classEquivalent = Object.assign({}, _classEquivalent),
         attrEquivalent = Object.assign({}, _attrEquivalent);
@@ -367,7 +374,7 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
             } else {
                 value = act[item];
             }
-            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + value.replace(/:::/g, " ; ").replace(/\n/g,"<br>") + "</td></tr>";
+            result += "<tr><td class='tag end'>" + attrEquivalent[item] + "</td><td>" + autoFormatUrl(value.replace(/:::/g, " ; ").replace(/\n/g,"<br>")) + "</td></tr>";
         }
     }
     return result + "</table><td>" + stringDate(act.date).replace(/ à /g, "<br>") + "</td><td>" + act.authorId + "</td>";

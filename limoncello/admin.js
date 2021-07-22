@@ -265,7 +265,8 @@ $(function () {
                                                                                         regtype: "Acte",
                                                                                         content: content,
                                                                                         dispo: JSON.stringify(["Vu le procès verbal d'analyse de la candidature de " + response[i].pseudo]),
-                                                                                        preview: "1",
+                                                                                        preview: "0",
+                                                                                        publy: "1",
                                                                                         preamble: ""
                                                                                     }),
                                                                                     dataType: "json",
