@@ -283,3 +283,34 @@ embed{
     display: block;
     text-align: center;
 }
+
+#crvgen_form table{
+    width: 60%;
+    margin: auto;
+}
+
+#crvgen_form > table > tbody> tr >td >input[type=text], #crvgen_form > table > tr >td >input[type=text]{
+    width: 100%;
+}
+#crvgen_add{
+    color: rgb(192, 192, 192);
+    transition: linear 100ms;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+#crvgen_add:hover{
+    color: black;
+}
+
+#crv_vote{
+    border-collapse: collapse;
+}
+
+#crv_vote td{
+    border: solid 1px black;
+}
+
+.crvremove{
+    color: red;
+    cursor: pointer;
+}

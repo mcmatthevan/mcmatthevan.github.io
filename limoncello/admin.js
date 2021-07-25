@@ -1,4 +1,20 @@
 $(function () {
+    (function(){
+        let today = new Date(),
+            dic = ["value","min","max"];
+        for (let i = 0; i < 3 ; ++i){
+            $("input[type='date'][" + dic[i] + "='today']").attr(dic[i],today.getFullYear().toLocaleString('en-US', {
+                minimumIntegerDigits: 2,
+                useGrouping: false
+            }) + "-" + (today.getMonth() + 1).toLocaleString('en-US', {
+                minimumIntegerDigits: 2,
+                useGrouping: false
+            }) + "-" + today.getDate().toLocaleString('en-US', {
+                minimumIntegerDigits: 2,
+                useGrouping: false
+            }));
+        }
+    })();
     let args = locationArgs();
     if (args.page === "confirmSign" && typeof args.signId !== "undefined") {
         $("#confirmSign").show();
@@ -36,7 +52,52 @@ $(function () {
         if (typeof args.page === "undefined") {
             location.search = "?page=home";
         }
-        if (args.page === "usermanage" && checkPerm("user.manage.list")) {
+        if (args.page === "crvgen" && checkPerm("admin.crvgen")){
+            let counter = 0;
+            $(".return_arrow").show();
+            $(".return_arrow a").attr("href", "?page=home");
+            $("#crvgen").show();
+            $("#crvgen_add").click(function(){
+                let th = this;
+                (function(counter){
+                    $(th).before(`<tr id="crvtr`+counter+`">`+(counter ? `<td class="crvremove" id="crvremove`+counter+`">☓</td>`:"<td>&nbsp;</td>")+`<td><input required type="text" class="crvgen_choice" id="crvgen_choice`+counter+`"/></td><td><input required type="number" min="0" class="crvgen_nb" id="crvgen_nb`+counter+`"/></td></tr>`);
+                    $("#crvremove"+counter).click(function(){
+                        $("#crvtr"+counter).remove();
+                    });
+                })(counter);
+                counter +=1 ;
+            });
+            $("#crvgen_add").trigger("click");
+            $("#crvgen_form").submit(function(e){
+                e.preventDefault();
+                let votes = {};
+                $(".crvgen_choice").each(function(i,v){
+                    votes[$(v).val().trim()] = parseInt($("#crvgen_nb"+v.id.replace(/crvgen_choice/,"")).val());
+                });
+                $(".p_info").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>")
+                $.ajax({
+                    type: "POST",
+                    url: IP + "admin/crvgen",
+                    data: sessioned({
+                        subject: $("#crvgen_subject").val().trim(),
+                        registered: $("#crvgen_registered").val().trim(),
+                        modalities: $("#crvgen_modalities").val().trim(),
+                        date: Math.floor(new Date($("#crvgen_date").val()).getTime()/1000),
+                        voteinfo: JSON.stringify(votes)
+                    }),
+                    dataType: "json",
+                    success: function (response) {
+                        $(".p_info").html("");
+                        $(".return_arrow a").trigger("click");
+                    },
+                    error: function(x){
+                        $(".p_info").html("");
+                        $(".error").text("Erreur "+x.status);
+                    }
+                });
+            });
+        }
+        else if (args.page === "usermanage" && checkPerm("user.manage.list")) {
             $(".return_arrow").show();
             $(".return_arrow a").attr("href", "?page=home");
             $("#usermanage").show();
@@ -113,6 +174,9 @@ $(function () {
             }
             if (checkPerm("admin.report")) {
                 $("#hl_subm").show();
+            }
+            if (checkPerm("admin.crvgen")) {
+                $("#hl_crvgen").show();
             }
         } else if (args.page === "submissions" && checkPerm("admin.report")) {
             $(".return_arrow").show();
