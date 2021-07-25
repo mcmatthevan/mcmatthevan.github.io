@@ -342,10 +342,10 @@ function formatSanct(act, notshown = ["authorId", "sanctionType"], modifClassEqu
 }
 
 function autoFormatUrl(text){
-    let reg = /(https?:\/\/[A-Za-z\.]+(?:\/\S*)?(?:\?\S+?)?)/g,
-        reg_img = /<a[\S\s]+?>(https?:\/\/[A-Za-z\.]+?(?:\/\S*?\.(?:png|jpg|jpeg))?(?:\?\S+?)?)<\/a>/g;
+    let reg = /(https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g,
+        reg_img = /<a[\S\s]+?>(https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)\.(?:png|jpg|jpeg)(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*))<\/a>/g;
     return text.replace(reg,"<a href=\"$1\">$1</a>")
-                .replace(reg_img,"<a href=\"$1\"><img alt=\"$1\" src=\"$1\" style='width: 50px;'/></a>");
+                .replace(reg_img,"<a href=\"$1\"><img alt=\"$1\" src=\"$1\" style='display: block; width: 50%; height: auto;'/></a>");
 }
 
 function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}) {
