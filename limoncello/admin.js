@@ -88,7 +88,7 @@ $(function () {
                     dataType: "json",
                     success: function (response) {
                         $(".p_info").html("");
-                        $(".return_arrow a").trigger("click");
+                        location.search = "?page=home";
                     },
                     error: function(x){
                         $(".p_info").html("");
