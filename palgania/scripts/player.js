@@ -1,7 +1,7 @@
 $(function(){
     function formattedArg(tx){
 
-        return tx.replace(/\[player\]([\S\s]+?)\[\/player\]/g,`<a href="?pseudo=$1">$1</a>`);
+        return tx.replace(/\[player\]([\S\s]+?)\[\/player\]/g,`<a href="?pseudo=$1">$1</a>`).replace(/\[small\]([\S\s]+?)\[\/small\]/g,`<span class="small">$1</span>`);
     }
     let args = locationArgs();
     if (typeof args.pseudo === "undefined"){
@@ -45,8 +45,16 @@ $(function(){
                     let admin=false, modo=false;
                     for (let i = 0, c = response.bio.functions.length ; i < c ; i ++){
                         let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to),
-                            formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + response.bio.functions[i].title + `</h3></td></tr><tr class='pfuncdate'><td colspan="2">` +
-                        (toNotDefined ? "Depuis le " : "") + new Date(response.bio.functions[i].from).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + new Date(response.bio.functions[i].to).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr><tr><td colspan='2'><br/></td></tr>`;
+                            fromDate = new Date(response.bio.functions[i].from),
+                            timespan, toDate;
+                        if (toNotDefined){
+                            timespan = parseTimeSpan((Date.now() - fromDate.getTime())/1000,false);
+                        } else {
+                            toDate = new Date(response.bio.functions[i].to);
+                            timespan = parseTimeSpan((toDate.getTime() - fromDate.getTime())/1000,false);
+                        }
+                        let formatted = `<table class="pfunctions"><tr><td colspan="2"><h3>` + formattedArg(response.bio.functions[i].title) + `</h3></td></tr><tr class='pfuncdate'><td colspan="2">` +
+                        (toNotDefined ? "Depuis le " : "") + fromDate.toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + (toNotDefined ? "" : " - " + toDate.toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'})) + `</td></tr><tr><td colspan='2'><span class='small'>(` + timespan + `)</span></td></tr><tr><td colspan='2'><br/></td></tr>`;
                         for (let key in response.bio.functions[i]){
                             if (key.charAt(0) === "_"){
                                 formatted += "<tr><td class='tag wiki'>" + key.substring(1) + "</td><td class='item'>" + formattedArg(response.bio.functions[i][key]) + "</td></tr>";

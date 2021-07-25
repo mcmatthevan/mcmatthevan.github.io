@@ -6,6 +6,11 @@
     color: red;
 }
 
+.small{
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 .blue{
     color: rgb(0, 183, 255);
 }

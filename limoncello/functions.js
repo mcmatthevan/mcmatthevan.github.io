@@ -155,17 +155,19 @@ function stringOnlyDay(datenb) {
     return format00(date.getDate()) + "/" + format00(date.getMonth() + 1) + "/" + date.getFullYear();
 }
 
-function parseTimeSpan(time) {
+function parseTimeSpan(time,doHour=true) {
     let data = {
         "mois": 2592000,
-        "jours": 86400,
-        "heures": 3600
+        "jours": 86400
     },
         counter = {
             "mois": 0,
-            "jours": 0,
-            "heures": 0
+            "jours": 0
         };
+    if (doHour){
+        data["heures"] = 3600;
+        counter["heures"] = 0;
+    }
     for (let tps in data) {
         while (time >= data[tps]) {
             counter[tps] += 1;
