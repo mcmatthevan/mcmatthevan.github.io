@@ -75,6 +75,7 @@ $(function () {
                     votes[$(v).val().trim()] = parseInt($("#crvgen_nb"+v.id.replace(/crvgen_choice/,"")).val());
                 });
                 $(".p_info").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>")
+                $("input[type=submit]").prop("disabled",true);
                 $.ajax({
                     type: "POST",
                     url: IP + "admin/crvgen",
@@ -91,6 +92,7 @@ $(function () {
                         location.search = "?page=home";
                     },
                     error: function(x){
+                        $("input[type=submit]").prop("disabled",false);
                         $(".p_info").html("");
                         $(".error").text("Erreur "+x.status);
                     }
