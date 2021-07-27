@@ -63,6 +63,12 @@ const ACTLIST = {
         "complainant": ["Plaignant", true],
         "target": ["Joueur ciblé", true],
         "comment": ["Motif de la plainte", true, "<textarea $$></textarea>"]
+    },
+    "Repayment": {
+        "payer": ["Payeur du remboursement <i>(laisser vide si serveur)</i>", false],
+        "target": ["Destinataire du remboursement", true],
+        "itemlist": ["Items remboursés",true],
+        "comment": ["Motif du remboursement", true, "<textarea $$></textarea>"]
     }
 };
 const _classEquivalent = {
@@ -81,7 +87,8 @@ const _classEquivalent = {
     "LogGetting": "Demande de logs",
     "Request": "Requête",
     "Notification": "Notification",
-    "IpGetting": "Demande d'adresse IP"
+    "IpGetting": "Demande d'adresse IP",
+    "Repayment": "Remboursement"
 },
     _attrEquivalent = {
         //edit procpvbuild too
@@ -97,7 +104,10 @@ const _classEquivalent = {
         "author": "Modérateur à l'origine du constat :",
         "dayLog": "Date des logs consultés :",
         "content": "Termes recherchés :",
-        "subject": "Type :"
+        "subject": "Type :",
+        "sanctionType": "Type de sanction :",
+        "payer": "Payeur du remboursement :",
+        "itemlist": "Liste d'items :"
     };
 function romanize(num) {
     if (isNaN(num))
@@ -309,7 +319,7 @@ function getActType(type) {
         return "Élément de procédure";
     } else if (~["LogGetting", "IpGetting", "Request"].indexOf(type)) {
         return "Requête";
-    } else if (~["Notification"].indexOf(type)) {
+    } else if (~["Notification","Repayment"].indexOf(type)) {
         return "Notification";
     }
 }

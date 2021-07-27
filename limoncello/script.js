@@ -347,6 +347,7 @@ $(function () {
                                                 <option value="ItemBlacklist">Interdiction d'item</option>
                                             </optgroup>
                                             <optgroup label="Autre">
+                                                <option value="Repayment">Remboursement</option>
                                                 <option value="Sanction">Autre</option>
                                             </optgroup>` + (counter > 1 ? `<optgroup label="OPTIONS">
                                             <option value="Delete" style='color:red;'>Supprimer le champ</option>
@@ -354,9 +355,11 @@ $(function () {
                                         </select></td></tr>
                                         <tr class="pclose_commenttd" id='pclose_commenttd`+ counter + `'><td><label for='pclose_comment` + counter + `'>Description de la sanction :</label></td><td><textarea id='pclose_comment` + counter + `' type='text' disabled required></textarea></td></tr>
                                         <tr class="pclose_itemd" id='pclose_itemtd`+ counter + `'><td><label for='pclose_item` + counter + `'>Item(s) interdit(s) :</label></td><td><input id='pclose_item` + counter + `' type='text' disabled required/></td></tr>
+                                        <tr class="pclose_payertd" id='pclose_payertd`+ counter + `'><td><label for='pclose_payer` + counter + `'>Payeur du remboursement <i>(laisser vide si serveur)</i> :</label></td><td><input id='pclose_payer` + counter + `' type='text' disabled/></td></tr>
                                         <tr><td><label for='pclose_target`+ counter + `'>Joueur :</label></td><td><input required id='pclose_target` + counter + `' type='text'/></td></tr>
+                                        <tr class="pclose_itemlistd" id='pclose_itemlistd`+ counter + `'><td><label for='pclose_itemlist` + counter + `'>Liste des items :</label></td><td><input id='pclose_itemlist` + counter + `' type='text' disabled required/></td></tr>
                                         <tr><td><label for='pclose_reason`+ counter + `'>Motif :</label></td><td><input required id='pclose_reason` + counter + `' type='text'/></td></tr>
-                                        <tr><td><label for='pclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='pclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
+                                        <tr id="pclose_expiretd`+counter+`"><td><label for='pclose_expire`+ counter + `'>Expiration :</label></td><td><input required id='pclose_expire` + counter + `' type='date' value="` + currentDate + `"min="` + currentDate + `" max="` + maxDate + `" /></td></tr>
                                         
                                         </table>`);
                                         (function (counter) {
@@ -374,6 +377,23 @@ $(function () {
                                                 } else {
                                                     $("#pclose_commenttd" + counter).hide();
                                                     $("#pclose_comment" + counter).prop({ "disabled": true });
+                                                }
+                                                if ($(this).val() === "Repayment") {
+                                                    $("#pclose_payertd" + counter).show();
+                                                    $("#pclose_payer" + counter).prop({ "disabled": false });
+                                                    $("#pclose_itemlistd" + counter).show();
+                                                    $("#pclose_itemlist" + counter).prop({ "disabled": false });
+                                                    $("#pclose_expiretd" + counter).hide();
+                                                    $("#pclose_expire" + counter).prop({ "disabled": true });
+                                                    $("label[for=pclose_target"+counter+"]").text("Destinataire du remboursement :");
+                                                } else {
+                                                    $("#pclose_payertd" + counter).hide();
+                                                    $("#pclose_payer" + counter).prop({ "disabled": true });
+                                                    $("#pclose_itemlistd" + counter).hide();
+                                                    $("#pclose_itemlist" + counter).prop({ "disabled": true });
+                                                    $("label[for=pclose_target"+counter+"]").text("Joueur :");
+                                                    $("#pclose_expiretd" + counter).show();
+                                                    $("#pclose_expire" + counter).prop({ "disabled": false });
                                                 }
                                                 if ($(this).val() === "Delete") {
                                                     $("#pclose" + this.id.replace(/pclose_type/, "")).remove();
@@ -408,6 +428,10 @@ $(function () {
                                                 });
                                                 if ($("#pclose_type" + i + " option:selected").val() === "ItemBlacklist") {
                                                     closeActs[j].blacklisted = $("#pclose_item" + i).val();
+                                                }
+                                                if ($("#pclose_type" + i + " option:selected").val() === "Repayment") {
+                                                    closeActs[j].payer = $("#pclose_payer" + i).val();
+                                                    closeActs[j].itemlist = $("#pclose_itemlist" + i).val();
                                                 }
                                             });
                                         } else {

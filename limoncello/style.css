@@ -341,7 +341,7 @@ a:visited{
     margin-top: 5px;
 }
 
-.tclose_commenttd, .rtemp_commenttd, .tclose_itemd, .rtemp_itemd,.pclose_commenttd,.pclose_itemd{
+.tclose_commenttd, .rtemp_commenttd, .tclose_itemd, .rtemp_itemd,.pclose_commenttd,.pclose_itemd,.pclose_payertd,.pclose_itemlistd{
     display: none;
 }
 
