@@ -69,6 +69,12 @@ const ACTLIST = {
         "target": ["Destinataire du remboursement", true],
         "itemlist": ["Items remboursés",true],
         "comment": ["Motif du remboursement", true, "<textarea $$></textarea>"]
+    },
+    "TempPerm": {
+        "modoname": ["Nom du modérateur",true,"<input type='text' value='$pseudo$' $$/>"],
+        "perm": ["Permission",true,`<select $$><option value=""></option><option value="essentials.gamemode.creative">
+        Mode créatif</option></select>`],
+        "temp": ["Durée d'application",true,"<div style='display: flex; margin:2px;'><input type='number' max='60' min='1' value='5' $$/>&nbsp;minutes</div>"]
     }
 };
 const _classEquivalent = {
@@ -88,7 +94,8 @@ const _classEquivalent = {
     "Request": "Requête",
     "Notification": "Notification",
     "IpGetting": "Demande d'adresse IP",
-    "Repayment": "Remboursement"
+    "Repayment": "Remboursement",
+    "TempPerm": "Octroi temporaire de permission"
 },
     _attrEquivalent = {
         //edit procpvbuild too
@@ -107,7 +114,10 @@ const _classEquivalent = {
         "subject": "Type :",
         "sanctionType": "Type de sanction :",
         "payer": "Payeur du remboursement :",
-        "itemlist": "Liste d'items :"
+        "itemlist": "Liste d'items :",
+        "perm": "Permission :",
+        "modoname": "Nom du modérateur :",
+        "temp": "Durée d'application :"
     };
 function romanize(num) {
     if (isNaN(num))
@@ -317,7 +327,7 @@ function getActType(type) {
         return "Sanction temporaire";
     } else if (~["Element", "Observation", "Complaint"].indexOf(type)) {
         return "Élément de procédure";
-    } else if (~["LogGetting", "IpGetting", "Request"].indexOf(type)) {
+    } else if (~["LogGetting", "IpGetting", "Request","TempPerm"].indexOf(type)) {
         return "Requête";
     } else if (~["Notification","Repayment"].indexOf(type)) {
         return "Notification";
@@ -383,6 +393,8 @@ function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}
                 } else {
                     value = act[item].replace(/-/g, "/");
                 }
+            } else if (item === "temp") {
+                value = Math.ceil(act[item]/60) + " minutes";
             } else {
                 value = act[item];
             }

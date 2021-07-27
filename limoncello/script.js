@@ -115,6 +115,9 @@ $(function () {
                                 } else if (response === "BAD_PSEUDO"){
                                     $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié est incorrect.");
                                     $("#request_result").html("");
+                                } else if (response === "ERR_BAD_GROUP" || response === "ERR_BAD_USER"){
+                                    $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié ne correspond pas au pseudo d'un modérateur.");
+                                    $("#request_result").html("");
                                 } else {
                                     $(".error").html("");
                                     $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><div id='pre_result'>"+response+"</div>");
