@@ -601,25 +601,60 @@ $(function () {
                     }
                 }
             });
-            $("#rgn_addtitle").click(function (e) {
-                $("#rgn_insert").before(`<tr class="unpersistent" id="rgn_ntitletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_tdelete" id="rgn_tdelete` + counter + `">×</span>
+            function htmlTITLE(counter){
+                return `<tr><td colspan='3' id='insertbetween`+counter+`' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_ntitletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_tdelete" id="rgn_tdelete` + counter + `">×</span>
                 <label for="rgn_ntitle` + counter + `">Titre</label></td><td>:</td><td>
                     <input required type="text" class="rgn_content rgn_ntitle" id="rgn_ntitle` + counter + `"/>
-                </td></tr>`);
+                </td></tr>`
+            }
+            function htmlARTICLE(counter){
+                return `<tr><td colspan='3' id='insertbetween`+counter+`' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_narticletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_adelete" id="rgn_adelete` + counter + `">×</span>
+                <label for="rgn_narticle` + counter + `">Article</label></td><td>:</td><td>
+                    <textarea required type="text" class="rgn_content rgn_narticle" id="rgn_narticle` + counter + `"></textarea>
+                </td></tr>`
+            }
+            function applyInsertBetween(){
+                $(".rgn_insertbetween").off()
+                $(".rgn_insertbetween").click(function(){
+                    let ibtw = $(this.parentNode);
+                    visualPrompt("Vous souhaitez insérer :", ["Un article","Un titre","Annuler"], function(ch){
+                        if (ch === "Un article"){
+                            ibtw.before(htmlARTICLE(counter));
+                            counter += 1;
+                            $(".rgn_adelete").click(function (e) {
+                                $("#rgn_narticletr_" + this.id.replace(/rgn\_adelete/g, "")).remove();
+                                $("#insertbetween" + this.id.replace(/rgn\_adelete/g, "")).remove();
+                            });
+                            applyInsertBetween()
+                        } else if (ch === "Un titre"){
+                            ibtw.before(htmlTITLE(counter));
+                            counter += 1;
+                            $(".rgn_tdelete").click(function (e) {
+                                $("#rgn_ntitletr_" + this.id.replace(/rgn\_tdelete/g, "")).remove();
+                                $("#insertbetween" + this.id.replace(/rgn\_tdelete/g, "")).remove();
+                            });
+                            applyInsertBetween()
+                        }
+                    })
+                });
+            }
+            $("#rgn_addtitle").click(function (e) {
+                $("#rgn_insert").before(htmlTITLE(counter));
                 counter += 1;
                 $(".rgn_tdelete").click(function (e) {
                     $("#rgn_ntitletr_" + this.id.replace(/rgn\_tdelete/g, "")).remove();
+                    $("#insertbetween" + this.id.replace(/rgn\_tdelete/g, "")).remove();
                 });
+                applyInsertBetween()
             });
             $("#rgn_addarticle").click(function (e) {
-                $("#rgn_insert").before(`<tr class="unpersistent" id="rgn_narticletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_adelete" id="rgn_adelete` + counter + `">×</span>
-                <label for="rgn_narticle` + counter + `">Article</label></td><td>:</td><td>
-                    <textarea required type="text" class="rgn_content rgn_narticle" id="rgn_narticle` + counter + `"></textarea>
-                </td></tr>`);
+                $("#rgn_insert").before(htmlARTICLE(counter));
                 counter += 1;
                 $(".rgn_adelete").click(function (e) {
                     $("#rgn_narticletr_" + this.id.replace(/rgn\_adelete/g, "")).remove();
+                    $("#insertbetween" + this.id.replace(/rgn\_adelete/g, "")).remove();
                 });
+                applyInsertBetween()
             });
             $("#rgn_addsign").click(function (e) {
                 $("#rgn_insert2").before(`<tr class="unpersistent" id="rgn_nsigntr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_sdelete" id="rgn_sdelete` + counter + `">×</span>

@@ -3,6 +3,17 @@ body{
     font-family: Calibri,Arial, Helvetica, sans-serif;
 }
 
+.rgn_insertbetween{
+    font-size: 5px;
+    color: white;
+}
+
+.rgn_insertbetween:hover{
+    font-size: 2em;
+    color: black;
+    cursor: pointer;
+}
+
 .main{
     position: relative;
 }
