@@ -323,6 +323,7 @@ $(function () {
                                             <option value='Dismissal'>Non-lieu</option>
                                             <option value='NoContinue'>Sans suite</option>
                                             <option value='Sanction'>Sanction(s)</option>
+                                            <option value='NTD'>Rien à déclarer</option>
                                         </select>
                                     </div>
                                     <div id='proc_closeActs'>

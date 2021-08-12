@@ -95,7 +95,8 @@ const _classEquivalent = {
     "Notification": "Notification",
     "IpGetting": "Demande d'adresse IP",
     "Repayment": "Remboursement",
-    "TempPerm": "Octroi temporaire de permission"
+    "TempPerm": "Octroi temporaire de permission",
+    "NTD": "Rien à déclarer"
 },
     _attrEquivalent = {
         //edit procpvbuild too
