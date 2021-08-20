@@ -110,7 +110,22 @@ $(function () {
                 dataType: "json",
                 success: function (response) {
                     for (let i = 0, c = response.length; i < c; ++i) {
-                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g, "<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td></tr>");
+                        let consoleAccess = new Date(response[i].consoleAccess*1000);
+                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g, "<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td><td>Expire le : <input readonly class='input_console' id='input_console" + response[i].title[0] + "' type='date' value='" + format00(consoleAccess.getFullYear()) + "-" + format00(consoleAccess.getMonth() + 1) + "-" +format00(consoleAccess.getDate()) + "'/></td></tr>");
+                    }
+                    if (checkPerm("user.manage.console")) {
+                        $(".input_console").prop("readonly",false);
+                        $(".input_console").change(function(e){
+                            $.ajax({
+                                type: "POST",
+                                url: IP + "user/consolemanage",
+                                data: sessioned({
+                                    "user": e.currentTarget.id.replace(/input_console/,""),
+                                    "consoleAccess": Math.floor(new Date(e.currentTarget.value).getTime()/1000)
+                                }),
+                                dataType: "json"
+                            });
+                        });
                     }
                     if (checkPerm("user.manage.new")) {
                         $("#userlist").append("<tr><td colspan='4'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
