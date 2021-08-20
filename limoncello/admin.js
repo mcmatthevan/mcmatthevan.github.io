@@ -128,7 +128,7 @@ $(function () {
                         });
                     }
                     if (checkPerm("user.manage.new")) {
-                        $("#userlist").append("<tr><td colspan='4'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
+                        $("#userlist").append("<tr><td colspan='5'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
                     }
                     if (checkPerm("user.manage.attrs")) {
                         $(".attrch").click(function () {
