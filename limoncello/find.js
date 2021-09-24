@@ -73,7 +73,13 @@ $(function () {
                         results = results.slice(perpage*page,perpage*(page+1));
                         $("#results").html("<table><tr><td class='tag'>ID</td><td class='tag'>Titre</td><td class='tag'>Date</td></tr></table>");
                         for (let i = 0, d = results.length ; i < d ; i++){
-                            $("#results table").append("<tr><td>" + results[i].id + "</td><td><a href=\"reg/pdf/"+ results[i].id + ".pdf\" target='_blank'>" + results[i].title + "</a></td><td>" + new Date(results[i].date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + "</td></tr>");
+                            let rtype;
+                            if (results[i].type === "CRV"){
+                                rtype = "crv/";
+                            } else {
+                                rtype = 'reg/pdf/';
+                            }
+                            $("#results table").append("<tr><td>" + results[i].id + "</td><td><a href=\""+ rtype + results[i].id + ".pdf\" target='_blank'>" + results[i].title + "</a></td><td>" + new Date(results[i].date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + "</td></tr>");
                         }
                     }
                 });
