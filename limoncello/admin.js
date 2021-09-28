@@ -823,7 +823,7 @@ $(function () {
                 }
                 let reader = new FileReader();
                 reader.addEventListener("load", function (f) {
-                    let saves = JSON.parse(localStorage["adm_limoncello_regsave"]),
+                    let saves = JSON.parse(typeof localStorage["adm_limoncello_regsave"] === "undefined" ? "{}" : localStorage["adm_limoncello_regsave"]),
                         fimport = JSON.parse(reader.result),
                         mkey = Object.keys(fimport)[0],
                         nb = "";
