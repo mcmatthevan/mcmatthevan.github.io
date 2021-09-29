@@ -48,6 +48,7 @@ $(function(){
         dataType: "text",
         success: function (response) {
             response = JSON.parse(unescape(response));
+            document.title = response.title;
             let textformat = "", titlecounter = 0, artcounter = 0;
             for (let i = 0, c = response.content.length ; i < c ; i++){
                 if (typeof response.content[i].valueOf() === "string"){
@@ -86,7 +87,7 @@ $(function(){
             reglement.append("<h1>" + response.title + "</h1>" + "<p>" + [response.author,formatted(response.dispo.join(",<br/>")),response.verb].join(",<br/>") + ": <br/>" + (response.preamble ? "<p><b>Préambule : </b><br/>" + formatted(response.preamble) + "</p>" : "") + "</p>"+textformat+
             "<p style='text-align: right'>Fait le " + new Date().toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + ".</p>" +signs+infos);
             $("a").each(function(i,v){
-                $(v).attr("href",$(v).attr("href").replace(/\s/g,""));
+                $(v).attr("href",$(v).attr("href").replace(/\s/g,"").replace(/\/limoncello\/reg\/pdf\/([\S\s]+?)\.pdf/,"/palgania/regles.html?reg=$1"));
             });
             $("#endsec").append("<p>Texte : " + response.title + "<br/><a href='" + IP + "/limoncello/reg/pdf/" + response.id+".pdf'>Téléchargement au format PDF</a><br/><br/>Vous pouvez retrouver l'ensemble des actes relatifs au serveur sur le <a href='"+IP+"/limoncello/find'>Recueil des documents à portée règlementaire</a>.");
         }});
