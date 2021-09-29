@@ -85,7 +85,7 @@ $(function(){
                 }
             }
             reglement.append("<h1>" + response.title + "</h1>" + "<p>" + [response.author,formatted(response.dispo.join(",<br/>")),response.verb].join(",<br/>") + ": <br/>" + (response.preamble ? "<p><b>Préambule : </b><br/>" + formatted(response.preamble) + "</p>" : "") + "</p>"+textformat+
-            "<p style='text-align: right'>Fait le " + new Date().toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + ".</p>" +signs+infos);
+            "<p style='text-align: right'>Fait le " + new Date(response.date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + ".</p>" +signs+infos);
             $("a").each(function(i,v){
                 $(v).attr("href",$(v).attr("href").replace(/\s/g,"").replace(/\/limoncello\/reg\/pdf\/([\S\s]+?)\.pdf/,"/palgania/regles.html?reg=$1"));
             });
