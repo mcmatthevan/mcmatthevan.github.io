@@ -71,15 +71,13 @@ $(function () {
                         $("#page").attr("max",maxpage);
                         $("#page_max").text(maxpage);
                         results = results.slice(perpage*page,perpage*(page+1));
-                        $("#results").html("<table><tr><td class='tag'>ID</td><td class='tag'>Titre</td><td class='tag'>Date</td></tr></table>");
+                        $("#results").html("<table><tr><td class='tag'>ID</td><td class='tag'>Titre</td><td class='tag'>Date</td><td class='tag'>Téléchargement PDF</td></tr></table>");
                         for (let i = 0, d = results.length ; i < d ; i++){
-                            let rtype;
                             if (results[i].type === "CRV"){
-                                rtype = "crv/";
+                                $("#results table").append("<tr><td>" + results[i].id + "</td><td><a href=\"crv/" + results[i].id + ".pdf\" target='_blank'>" + results[i].title + "</a></td><td>" + new Date(results[i].date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + "</td><td><a href=\"crv/" + results[i].id + ".pdf\" target='_blank' title='Téléchargement PDF'><img alt='' src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/195px-PDF_file_icon.svg.png' class='pdflogo'></a></td></tr>");
                             } else {
-                                rtype = 'reg/pdf/';
+                                $("#results table").append("<tr><td>" + results[i].id + "</td><td><a href=\"../palgania/regles.html?reg=" + results[i].id + "\">" + results[i].title + "</a></td><td>" + new Date(results[i].date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + "</td><td><a href=\"reg/pdf/" + results[i].id + ".pdf\" target=\"_blank\" title='Téléchargement PDF'><img alt='' src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/195px-PDF_file_icon.svg.png' class='pdflogo'></a></td></tr>");
                             }
-                            $("#results table").append("<tr><td>" + results[i].id + "</td><td><a href=\""+ rtype + results[i].id + ".pdf\" target='_blank'>" + results[i].title + "</a></td><td>" + new Date(results[i].date*1000).toLocaleString("fr",{year: 'numeric', month: 'long', day: 'numeric'}) + "</td></tr>");
                         }
                     }
                 });
