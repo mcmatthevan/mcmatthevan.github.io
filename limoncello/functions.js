@@ -5,7 +5,7 @@ function parsedDate(date) {
 if (location.protocol === "file:") {
     var IP = "http://localhost:8888/";
 } else {
-    var IP = "https://singalong-game.com:8888/";
+    var IP = "https://palgania.ovh:8888/";
 }
 const ACTLIST = {
     "Sanction": {

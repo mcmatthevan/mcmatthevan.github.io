@@ -13,11 +13,11 @@
     <header>
         <nav>
             <ul>
-                <li class="selected"><a href="index.html">Accueil</a></li>
-                <li><a href="regles.html">Règlement</a></li>
-                <li><a href="actus/">Actualités</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="wiki/player.html">Wiki Joueurs</a></li>
+                <li id="banner_index"><a href="index.html">Accueil</a></li>
+                <li id="banner_regles"><a href="regles.html">Règlement</a></li>
+                <li id="banner_actus"><a href="actus/">Actualités</a></li>
+                <li id="banner_contacts"><a href="contacts.html">Contacts</a></li>
+                <li id="banner_wikip"><a href="wiki/player.html">Wiki Joueurs</a></li>
             </ul>
         </nav>
     </header>
@@ -72,7 +72,8 @@
     <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a><br />Icons made by <a
             href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
             href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></footer>
-    <script src="scripts/autoplaceheader.js"></script>
+    <script>const BANNER = "banner_index";const BANNER_PREFIX = "";</script>
+    <script src="scripts/getbanner.js"></script>
 </body>
 
 </html>
