@@ -593,7 +593,9 @@ $(function () {
                 "Statut": "status",
                 "Proposition de règlement": "propreg",
                 "Règlement": "reg",
-                "Acte": "acte"
+                "Acte": "acte",
+                "Révision": "reg",
+                "Proposition de révision": "propreg"
             };
             for (let typ in permType) {
                 if (checkPerm("admin.reg." + permType[typ])) {
@@ -607,7 +609,7 @@ $(function () {
                 } else {
                     $("#rgn_tbody").show();
                     $("#rgn_sttitle").html(value + (value === "Statut" ? " n°XXXXX " : " "));
-                    if (value === "Proposition de règlement") {
+                    if (/Proposition de/.test(value)) {
                         $(".rgn_notprop").hide();
                         $(".rgn_notprop textarea").prop("disabled", true);
                     } else {
