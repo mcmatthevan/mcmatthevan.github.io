@@ -62,7 +62,7 @@ $(function () {
         } else {
             $("#userbloc").css("display","flex");
             if (checkPerm("admin.access")){
-                $("#homesettings").append("<a id='configlink' href='admin.html'>🔒 Configuration</a>")
+                $("#homesettings").append("<a id='configlink' href='admin.html'>🔒 Administration</a>")
             }
             let userinfos = getUserInfo();
             $("#titlename").text(userinfos[0]);
