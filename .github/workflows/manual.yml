@@ -1,0 +1,19 @@
+name: Command via SSH
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: pull on palgania server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: pull
+          host: ${{ secrets.HOST }}
+          username: minecraft
+          passphrase: ${{ secrets.PASSPHRASE }}
+          privateKey: ${{ secrets.PRIVATE_KEY}}
+        env:
+          CI: true
