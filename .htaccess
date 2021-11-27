@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+#this will start rewrite engine
+RewriteEngine On
+
+#this will set the base directory
+RewriteBase /
+</IfModule>
