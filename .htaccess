@@ -4,4 +4,6 @@ RewriteEngine On
 
 #this will set the base directory
 RewriteBase /
+RewriteCond %{REQUEST_URI} ! \.html$
+RewriteRule ^(.*)$ $1.html
 </IfModule>
