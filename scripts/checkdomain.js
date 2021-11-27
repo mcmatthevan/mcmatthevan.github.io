@@ -15,10 +15,13 @@
                 links[i].href = links[i].href.replace(/mcmatthevan\.github\.io/g,"palgania.ovh");
             }
         };
-        let links = document.querySelectorAll("a");
-        for (let i = 0, c = links.length ; i < c ; i++){
-            links[i].href = links[i].href.replace(/mcmatthevan\.github\.io/g,"palgania.ovh");
-        }
+        setTimeout(function(){
+            let links = document.querySelectorAll("a");
+            for (let i = 0, c = links.length ; i < c ; i++){
+                links[i].href = links[i].href.replace(/mcmatthevan\.github\.io/g,"palgania.ovh");
+            }
+        },500);
+        
     }
 
 })();
