@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment devenir modérateur ?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="modo.css">
+    <script src="/scripts/checkdomain.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../regles.html">Règlement</a></li>
+                <li class="selected"><a href="../actus/">Actualités</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="firstelement cgu reglement">
+        <div class="modeaffichage">
+            <div id="dark">Sombre</div>
+            <div id="light">Clair</div>
+        </div>
+        <H1>Palgania : Un serveur qui appartient aux joueurs</H1>
+
+        <p>
+            Le serveur Palgania offre aux joueurs, selon le <a href="https://palgania.ovh/palgania/regles.html?reg=R20210623-0">Règlement Interne de l'Organisation des Responsabilités</a>, la possibilité
+            de proposer de nouveaux règlements ou des modifications de règlements existants.</p>
+
+        <p>En effet, les différents règlements du serveur, en plus d'être votés par les joueurs, peuvent également
+            être conçus par eux-mêmes. Si une règle ne vous convient pas et que vous souhaitez la modifier,
+            ou si vous estimez nécessaire la création d'un règlement spécifique pour un quelconque
+            aspect du serveur, voici par quels moyens
+            les joueurs peuvent influencer les règlements en vigueur sur Palgania, que cela soit sur Minecraft,
+            Discord ou les autres services.</p>
+
+        <h2>Conditions pour proposer un règlement ou une révision</h2>
+        <p>
+            La plupart du temps, l'équipe d'administration donne des propositions de règlement ou de révision,
+            qui peuvent être débattues et amendées par les joueurs, puis les propositions sont adoptées
+            si les joueurs votent favorablement.
+        </p>
+        <p>
+            Cependant, l'équipe d'administration n'a pas l'exclusivité des propositions de règlement ou de révision.
+            Il est en effet prévu que les joueurs aient la possibilité, <strong>par groupe de 5 joueurs minimum</strong>,
+            de proposer un règlement ou une révision qui suive le même processus que lorsqu'il est proposé
+            par l'administration.
+        </p>
+        <p>
+            Avant de faire votre proposition, vous devez donc vous assurez que vous êtes soutenus par au moins 5 joueurs
+            du serveur (dont vous-même), qui doivent l'affirmer publiquement. Une fois que vous avez cette garantie, vous pouvez
+            rédiger votre proposition de règlement ou de révision.
+        </p>
+
+        <h2>Rédiger sa proposition</h2>
+        <p>La proposition doit être rédigée telle que vous souhaitez qu'elle soit une fois en vigueur.
+            Cela signifie que si vous proposez un nouveau règlement, vous devez le rédiger intégralement, article par
+            article, tel qu'il serait une fois adopté.<br>
+            Si vous proposez une révision (modification) d'un règlement (ou d'ailleurs de tout autre type d'acte) existant,
+            chaque article 
+            doit spécifier une modification, en détaillant exactement les termes qui doivent être modifiés,
+            les articles qui doivent être ajoutés ou supprimés. <em>(ex: "À l'article 6-2 du Règlement général du serveur, il est ajouté le paragraphe suivant : [...]")</em><br>
+            Le style utilisé doit être impersonnel. Pas de 'nous', de 'je', ni de 'tu' ou de 'vous'. Inspirez-vous des règlements
+            existants. <em>(ex : Ne pas écrire "Vous ne devez pas utiliser des logiciels de triche", mais "Les logiciels
+                de triche sont interdits")
+            </em>
+        </p>
+        <p>
+            Vous pouvez précéder votre proposition d'une <em>expression des motivations</em>, ou vous expliquez
+            plus clairement aux joueurs quelle est votre intention à travers
+            votre règlement ou votre révision. Peu de joueurs liront le contenu
+            de votre proposition, l'expression de vos motivations peut donc être très importante pour
+            espérer remporter le vote de la majorité. <br> L'expression des motivations peut être plus personnelle
+            et ne pas forcément répondre aux même critères que le style des articles de règlement. <br>
+            Vous pouvez également faire précéder votre proposition par un préambule. Celui-ci aura la particularité
+            de faire partie intégrante de la révision ou du règlement une fois entré en vigueur,
+            contrairement à l'expression des motivations qui n'apparait que dans la proposition. Le préambule
+            doit cependant répondre aux critères de style propres aux articles de règlements.
+        </p>
+        <p>
+            N'oubliez pas de terminer votre proposition en la datant et en signant avec le nom
+            des 5 joueurs (minimum), précédé de la mention <em>Proposé par :</em>.
+        </p>
+        <p>
+            Une fois votre proposition donnée aux joueurs, elle pourra être débattue et amendée, puis votée. 
+            Elle est adoptée et entre en vigueur si une majorité de votes favorables l'appuie.
+        </p>
+<hr>
+        <p class="signature">
+            <strong>lumahell</strong>, le 2 décembre 2021<br />
+        </p>
+    </section>
+    <footer>Site réalisé par <a href="mailto:lumahell9@gmail.com">lumahell</a>
+        <!--<br />Icons made by <a
+            href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+    </footer>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>const BANNER = "banner_actus";const BANNER_PREFIX = "../";</script>
+    <script src="../scripts/getbanner.js"></script>
+    <script>
+        (function(){
+            var dark_bt = document.querySelector("#dark"),
+                light_bt = document.querySelector("#light"),
+                firstel = document.querySelector(".firstelement");
+            dark_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv != null){
+                    configdiv.parentNode.removeChild(configdiv);
+                }
+            });
+            light_bt.addEventListener("click",function(){
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv == null){
+                    var configdiv = document.createElement("div");
+                    configdiv.id = "darklightdiv";
+                    document.body.insertBefore(configdiv,firstel);
+                }
+            });
+        })();
+
+    </script>
+</body>
+
+</html>
