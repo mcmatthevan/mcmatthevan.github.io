@@ -1,0 +1,24 @@
+table{
+    max-width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+}
+td{
+    border: 1px grey solid;
+    padding: 5px;
+}
+
+table img{
+    padding: 5px;
+    display: block;
+    width: 70%;
+    margin: auto;
+}
+section{
+    position: relative;
+}
+#next{
+    position: absolute;
+    top: 20px;
+    right: 5px;
+}
