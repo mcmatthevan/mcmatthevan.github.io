@@ -25,6 +25,7 @@ header{
 }
 
 .banniere{
+    height: 60vh;
     margin-top: 10%;
     border-radius: 10px;
     display: flex;
