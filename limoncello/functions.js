@@ -178,12 +178,14 @@ function stringOnlyDay(datenb) {
 
 function parseTimeSpan(time,doHour=true) {
     let data = {
+        "an": 31536000,
         "mois": 2592000,
-        "jours": 86400
+        "jour": 86400
     },
         counter = {
+            "an": 0,
             "mois": 0,
-            "jours": 0
+            "jour": 0
         };
     if (doHour){
         data["heures"] = 3600;
@@ -198,6 +200,9 @@ function parseTimeSpan(time,doHour=true) {
     let result = "";
     for (let tps in counter) {
         if (counter[tps] > 0) {
+            if (tps !== "mois" && counter[tps] > 0){
+                tps += "s";
+            }
             result += (result !== "" ? " " : "") + counter[tps] + " " + tps;
         }
     }
