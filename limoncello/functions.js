@@ -200,10 +200,11 @@ function parseTimeSpan(time,doHour=true) {
     let result = "";
     for (let tps in counter) {
         if (counter[tps] > 0) {
+            let span = tps;
             if (tps !== "mois" && counter[tps] > 0){
-                tps += "s";
+                span += "s";
             }
-            result += (result !== "" ? " " : "") + counter[tps] + " " + tps;
+            result += (result !== "" ? " " : "") + counter[tps] + " " + span;
         }
     }
     return (result === "" ? "0 jour" : result);
