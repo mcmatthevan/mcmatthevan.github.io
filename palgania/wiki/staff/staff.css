@@ -27,3 +27,16 @@ section{
     top: 20px;
     left: 5px;
 }
+
+@media (max-width: 640px) {
+
+    a{
+        font-size: 0.9em;
+    }
+    h1{
+        padding-top: 2em;
+    }
+    table{
+        max-width: 100%;
+    }
+}
