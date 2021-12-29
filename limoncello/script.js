@@ -123,6 +123,9 @@ $(function () {
                                 } else {
                                     $(".error").html("");
                                     $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><div id='pre_result'>"+response+"</div>");
+                                    if (args.act == "TempPerm"){
+                                        $("input").prop("disabled",true);
+                                    }
                                 }
                             },
                             error: function(x){
