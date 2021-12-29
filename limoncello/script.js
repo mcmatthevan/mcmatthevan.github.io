@@ -96,6 +96,8 @@ $(function () {
                                 dic[v.id.replace(/inputNA_/g,"")] = Math.floor(new Date($(v).val()).getTime()/1000);
                             } else if (v.id === "inputNA_content"){
                                 dic[v.id.replace(/inputNA_/g,"")] = $(v).val().replace(/;/g,":::");
+                            } else if (v.id === "inputNA_temp"){
+                                dic[v.id.replace(/inputNA_/g,"")] = parseInt($(v).val())*60;
                             } else {
                                 dic[v.id.replace(/inputNA_/g,"")] = $(v).val();
                             }
