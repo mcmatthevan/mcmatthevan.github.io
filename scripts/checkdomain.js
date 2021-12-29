@@ -12,13 +12,13 @@
         window.onload = function(e){
             let links = document.querySelectorAll("a");
             for (let i = 0, c = links.length ; i < c ; i++){
-                links[i].href = links[i].href.replace(/mcmatthevan\.github\.io/g,"palgania.ovh");
+                links[i].href = links[i].href.replace(/https?:\/\/mcmatthevan\.github\.io/g,"palgania.ovh");
             }
         };
         setTimeout(function(){
             let links = document.querySelectorAll("a");
             for (let i = 0, c = links.length ; i < c ; i++){
-                links[i].href = links[i].href.replace(/mcmatthevan\.github\.io/g,"palgania.ovh");
+                links[i].href = links[i].href.replace(/https?:\/\/mcmatthevan\.github\.io/g,"palgania.ovh");
             }
         },500);
         
