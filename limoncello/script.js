@@ -611,7 +611,7 @@ $(function () {
                                     $("#nothing_to_see").html("");
                                 }
                                 response.sort(function(a,b){
-                                    if (a.date >= b.date){
+                                    if (a.date <= b.date){
                                         return 1;
                                     } else {
                                         return -1
@@ -663,7 +663,7 @@ $(function () {
                                     $("#nothing_to_see").html("");
                                 }
                                 response.sort(function(a,b){
-                                    if (a.date >= b.date){
+                                    if (a.date <= b.date){
                                         return 1;
                                     } else {
                                         return -1
@@ -714,7 +714,7 @@ $(function () {
                                     $("#nothing_to_see").html("");
                                 }
                                 response.sort(function(a,b){
-                                    if (a.date >= b.date){
+                                    if (a.date <= b.date){
                                         return 1;
                                     } else {
                                         return -1
