@@ -610,6 +610,13 @@ $(function () {
                                 if (response.length !== 0) {
                                     $("#nothing_to_see").html("");
                                 }
+                                response.sort(function(a,b){
+                                    if (a.date >= b.date){
+                                        return 1;
+                                    } else {
+                                        return -1
+                                    }
+                                });
                                 for (let i = 0, c = response.length; i < c; ++i) {
                                     let status;
                                     if (response[i].closedConfirm === false) {
@@ -655,6 +662,13 @@ $(function () {
                                 if (response.length !== 0) {
                                     $("#nothing_to_see").html("");
                                 }
+                                response.sort(function(a,b){
+                                    if (a.date >= b.date){
+                                        return 1;
+                                    } else {
+                                        return -1
+                                    }
+                                });
                                 for (let i = 0, c = response.length; i < c; ++i) {
                                     if (response[i].closedConfirm && !response[i].opened) {
                                         status = ["closed", "Clôturée"];
@@ -699,6 +713,13 @@ $(function () {
                                 if (response != []) {
                                     $("#nothing_to_see").html("");
                                 }
+                                response.sort(function(a,b){
+                                    if (a.date >= b.date){
+                                        return 1;
+                                    } else {
+                                        return -1
+                                    }
+                                });
                                 for (let i = 0, c = response.length; i < c; ++i) {
                                     let status;
                                     if (typeof response[i].procedureId === "undefined" || response[i].procedureId === null) {
