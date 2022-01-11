@@ -52,7 +52,7 @@ $(function () {
                         if (/^ERR_SUSPENDED/.test(response)){
                             let infos = response.split(/___%/g);
                             $("#error_connect").html(`Connexion impossible.<br/>Sur décision de la Commission de Modération, votre compte
-                            est suspendu jusqu'au ` + stringDate(new Date(parseFloat(infos[2]))) + `<br/>Raison de la suspension : ` + infos[1]);
+                            est suspendu jusqu'au ` + stringDate(parseFloat(infos[2])) + `<br/>Raison de la suspension : ` + infos[1]);
                         } else {
                             sessionStorage["limoncello-sessionId"] = response;
                             location.search = "?page=home";
