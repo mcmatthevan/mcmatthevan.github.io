@@ -49,8 +49,14 @@ $(function () {
                     },
                     dataType: "json",
                     success: function (response) {
-                        sessionStorage["limoncello-sessionId"] = response;
-                        location.search = "?page=home";
+                        if (/^ERR_SUSPENDED/.test(response)){
+                            let infos = response.split(/___%/g);
+                            $("#error_connect").html(`Connexion impossible.<br/>Sur décision de la Commission de Modération, votre compte
+                            est suspendu jusqu'au ` + stringDate(new Date(parseFloat(infos[2]))) + `<br/>Raison de la suspension : ` + infos[1]);
+                        } else {
+                            sessionStorage["limoncello-sessionId"] = response;
+                            location.search = "?page=home";
+                        }
                     },
                     error: function (x) {
                         if (x.status === 403) {
@@ -97,7 +103,11 @@ $(function () {
                             } else if (v.id === "inputNA_content"){
                                 dic[v.id.replace(/inputNA_/g,"")] = $(v).val().replace(/;/g,":::");
                             } else if (v.id === "inputNA_temp"){
-                                dic[v.id.replace(/inputNA_/g,"")] = parseInt($(v).val())*60;
+                                if (args.act === "TempPerm"){
+                                    dic[v.id.replace(/inputNA_/g,"")] = parseInt($(v).val())*60;
+                                } else if (args.act === "Suspension"){
+                                    dic[v.id.replace(/inputNA_/g,"")] = parseInt($(v).val())*3600;
+                                } 
                             } else {
                                 dic[v.id.replace(/inputNA_/g,"")] = $(v).val();
                             }
@@ -117,13 +127,19 @@ $(function () {
                                 } else if (response === "BAD_PSEUDO"){
                                     $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié est incorrect.");
                                     $("#request_result").html("");
+                                } else if (response === "ERR_NOT_FOUND"){
+                                    $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié est inconnu.");
+                                    $("#request_result").html("");
                                 } else if (response === "ERR_BAD_GROUP" || response === "ERR_BAD_USER"){
                                     $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié ne correspond pas au pseudo d'un modérateur.");
+                                    $("#request_result").html("");
+                                } else if (response === "ERR_NOT_ADMIN"){
+                                    $(".error").html("La requête ne peut pas aboutir car le pseudo spécifié ne correspond pas au pseudo d'un administrateur.");
                                     $("#request_result").html("");
                                 } else {
                                     $(".error").html("");
                                     $("#request_result").html("<h4>Résultat de la requête :</h4><hr/><div id='pre_result'>"+response+"</div>");
-                                    if (args.act == "TempPerm"){
+                                    if (~["TempPerm","Suspension"].indexOf(args.act)){
                                         $("input").prop("disabled",true);
                                     }
                                 }

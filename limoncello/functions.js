@@ -75,6 +75,11 @@ const ACTLIST = {
         "perm": ["Permission",true,`<select $$><option value=""></option><option value="essentials.gamemode.creative">
         Mode créatif</option></select>`],
         "temp": ["Durée d'application",true,"<div style='display: flex; margin:2px;'><input type='number' max='60' min='1' value='5' $$/>&nbsp;minutes</div>"]
+    },
+    "Suspension": {
+        "target": ["Nom de l'administrateur à suspendre",true],
+        "temp": ["Durée de la suspension",true,"<div style='display: flex; margin:2px;'><input type='number' max='168' min='0' value='5' $$/>&nbsp;heures</div>"],
+        "reason": ["Raison de la suspension",true]
     }
 };
 const _classEquivalent = {
@@ -96,7 +101,8 @@ const _classEquivalent = {
     "IpGetting": "Demande d'adresse IP",
     "Repayment": "Remboursement",
     "TempPerm": "Octroi temporaire de permission",
-    "NTD": "Rien à déclarer"
+    "NTD": "Rien à déclarer",
+    "Suspension" : "Suspension de fonctions"
 },
     _attrEquivalent = {
         //edit procpvbuild too
@@ -330,7 +336,7 @@ function getUserInfo() {
 
 function getActType(type) {
     //edit procpvbuild too
-    if (~["Ban", "Mute", "ItemBlacklist", "Jail", "Sanction"].indexOf(type)) {
+    if (~["Ban", "Mute", "ItemBlacklist", "Jail", "Sanction", "Suspension"].indexOf(type)) {
         return "Sanction temporaire";
     } else if (~["Element", "Observation", "Complaint"].indexOf(type)) {
         return "Élément de procédure";
