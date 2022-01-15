@@ -73,7 +73,8 @@ const ACTLIST = {
     "TempPerm": {
         "modoname": ["Nom du modérateur",true,"<input type='text' value='$pseudo$' $$/>"],
         "perm": ["Permission",true,`<select $$><option value=""></option><option value="essentials.gamemode.creative">
-        Mode créatif</option></select>`],
+        Mode créatif</option><option value="bukkit.command.restart">
+        Commande /restart</option></select>`],
         "temp": ["Durée d'application",true,"<div style='display: flex; margin:2px;'><input type='number' max='60' min='1' value='5' $$/>&nbsp;minutes</div>"]
     },
     "Suspension": {
