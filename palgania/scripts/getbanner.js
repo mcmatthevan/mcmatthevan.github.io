@@ -8,6 +8,13 @@ document.querySelector("header").innerHTML = `<nav>
 </ul>
 </nav>`;
 
+document.querySelector("footer").innerHTML = `Palgania™<br>
+<a href='https://www.serveursminecraft.org/serveur/6129/'>Voter pour Palgania</a> sur le classement de <a href='https://www.serveursminecraft.org/' target='_blank'>ServeursMinecraft.Org</a><br>
+<span style='font-size: 0.7em;'>Icons made by <a
+href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></span><br>
+`;
+
 if (BANNER !== null){
     document.getElementById(BANNER).className = "selected";
 
