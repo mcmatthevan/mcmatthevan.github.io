@@ -1,1 +1,29 @@
-{"type": "Acte", "model": "acte", "content": [["article", "Adelka56 et SilverBenji67 sont nomm\u00e9s mod\u00e9rateurs."]], "date": 1624615807, "dispo": ["Vu le statut [url=https://mcmatthevan.github.io/limoncello/reg/pdf/S20210624-0.pdf]n\u00b0S20210624-0[/url]"], "sign": {"": [["lumahell", "", "signmod.jpg"]]}, "preamble": "", "author": "Le Pr\u00e9sident par int\u00e9rim de la Commission de Mod\u00e9ration", "verb": "Acte", "id": "A20210625-0", "title": "Acte n\u00b0A20210625-0 portant nomination de mod\u00e9rateurs", "confirmSign": {}}
+{
+    "type": "Acte",
+    "model": "acte",
+    "content": [
+        [
+            "article",
+            "Adelka56 et SilverBenji67 sont nomm\u00e9s mod\u00e9rateurs."
+        ]
+    ],
+    "date": 1624615807,
+    "dispo": [
+        "Vu le statut [url=https://mcmatthevan.github.io/limoncello/reg/pdf/S20210624-0.pdf]n\u00b0S20210624-0[/url]"
+    ],
+    "sign": {
+        "": [
+            [
+                "lumahell",
+                "",
+                "signmod.jpg"
+            ]
+        ]
+    },
+    "preamble": "",
+    "author": "Le Pr\u00e9sident par int\u00e9rim de la Commission de Mod\u00e9ration",
+    "verb": "Acte",
+    "id": "A20210625-0",
+    "title": "Acte n\u00b0A20210625-0 portant nomination de mod\u00e9rateurs",
+    "confirmSign": {}
+}

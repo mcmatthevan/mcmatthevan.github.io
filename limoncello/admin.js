@@ -52,7 +52,51 @@ $(function () {
         if (typeof args.page === "undefined") {
             location.search = "?page=home";
         }
-        if (args.page === "crvgen" && checkPerm("admin.crvgen")){
+        if (args.page === "deleg" && checkPerm("admin.deleg")){
+            $("#deleg").show();
+            $("input[type=submit]").click(function(e){
+                if ($(".deleg_perm:checked").length){
+                    $(".deleg_perm").get(0).setCustomValidity("");
+
+                } else {
+                    $(".deleg_perm").get(0).setCustomValidity("Veuillez cocher au moins une permission.");
+                }
+            });
+            $("#delegform").submit(function(e){
+                e.preventDefault();
+                $("#deleg input").prop("disabled",true)
+                $(".error").text("");
+                let perms = [];
+                $(".deleg_perm:checked").each(function(i,v){
+                    perms.push($(v).val());
+                });
+                $.ajax({
+                    type: "POST",
+                    url: IP + "admin/deleg",
+                    data: sessioned({
+                        target: $("#deleg_pseudo").val().trim(),
+                        dperms: JSON.stringify(perms),
+                        expire: Math.floor((new Date($("#deleg_expire").val()).getTime() / 1000) + 86400)
+                    }),
+                    dataType: "json",
+                    success: function (response) {
+                        if (response === "OK"){
+                            $(".info").text("La délégation a bien été actée.");
+                        }
+                    },
+                    error: function (x){
+                        if (x.status === 404){
+                            $(".error").text("Le pseudo spécifié ne correspond à aucun joueur.");
+                            $("#deleg input").prop("disabled",false);
+                        } else {
+                            $(".error").text("Une erreur est survenue. Code d'erreur : "+x.status);
+                            $("#deleg input").prop("disabled",false);
+                        }
+                    }
+                });
+            });
+        }
+        else if (args.page === "crvgen" && checkPerm("admin.crvgen")){
             let counter = 0;
             $(".return_arrow").show();
             $(".return_arrow a").attr("href", "?page=home");
@@ -194,6 +238,9 @@ $(function () {
             }
             if (checkPerm("admin.crvgen")) {
                 $("#hl_crvgen").show();
+            }
+            if (checkPerm("admin.deleg")) {
+                $("#hl_deleg").show();
             }
         } else if (args.page === "submissions" && checkPerm("admin.report")) {
             $(".return_arrow").show();

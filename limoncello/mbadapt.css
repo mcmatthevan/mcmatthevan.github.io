@@ -119,6 +119,9 @@
 		width: 90%;
 	}
 
+	#deleg table{
+		width: 90%;
+	}
 	/* Un message personnalisé */
 
 @media (max-device-width:768px) and (orientation: landscape) {

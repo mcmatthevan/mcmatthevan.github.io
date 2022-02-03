@@ -29,6 +29,31 @@
         <h1>
             Interface d'administration Limoncello
         </h1>
+        <section id="deleg">
+            <h1>Délégations de fonctions</h1>
+            <form id="delegform">
+                <table>
+                    <tr>
+                        <td>Pseudo du joueur</td><td>:</td>
+                        <td><input type="text" id="deleg_pseudo" required></td>
+                    </tr>
+                    <tr>
+                        <td>Fonctions à déléguer</td><td>:</td>
+                        <td><input type="checkbox"  value="procedure.new" class="deleg_perm" id="deleg_perm0"><label for="deleg_perm0">Ouvrir des procédures</label><br>
+                            <input type="checkbox" value="procedure.close" class="deleg_perm" id="deleg_perm1"><label for="deleg_perm1">Clore des procédures et signer les PV de procédure</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Valable jusqu'au</td>
+                        <td>:</td>
+                        <td><input type="date" id="deleg_expire" value="today" max="2022-06-26" required> inclus</td>
+                    </tr>
+                </table>
+                <input type="submit" value="OK">
+                <p class="error"></p>
+                <p class="info"></p>
+            </form>
+        </section>
         <section id="crvgen">
             <h2>Créer un compte-rendu de vote</h2>
             <form id="crvgen_form">
@@ -79,6 +104,7 @@
             <div class="home_link" id="hl_acts"><a href="?page=reg_home">Gérer les actes administratifs</a></div>
             <div class="home_link" id="hl_subm"><a href="?page=submissions">Gérer les candidatures</a></div>
             <div class="home_link" id="hl_crvgen"><a href="?page=crvgen">Créer un compte-rendu de vote</a></div>
+            <div class="home_link" id="hl_deleg"><a href="?page=deleg">Créer une délégation de fonctions</a></div>
         </section>
         <section id="reg_home">
             <h2>Gestion des actes administratifs</h2>

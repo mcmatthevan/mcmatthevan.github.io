@@ -3,6 +3,11 @@ body{
     font-family: Calibri,Arial, Helvetica, sans-serif;
 }
 
+#deleg table{
+    width: 60%;
+    margin: auto;
+}
+
 .rgn_insertbetween{
     font-size: 5px;
     color: white;
