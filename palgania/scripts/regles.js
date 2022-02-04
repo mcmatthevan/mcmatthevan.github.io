@@ -27,7 +27,7 @@ function romanize (num) {
     return Array(+digits.join("") + 1).join("M") + roman;
 }
 function formatted(txt){
-    return unescape(txt).replace(/\[url=(\S+?)\]([\S\s]+?)\[\/url\]/g,"<a href=\"$1\">$2</a>").replace(/\[b\]([\s\S]+?)\[\/b\]/g,"<b>$1</b>").replace(/\[i\]([\s\S]+?)\[\/i\]/g,"<span style='font-style: italic;'>$1</span>").replace(/\[sc\]([\s\S]+?)\[\/sc\]/g,"<span style ='font-variant: small-caps;'>$1</span>").replace(/\n/g,"<br/>").replace(/\./g,".&nbsp;");
+    return unescape(txt).replace(/\[crv=(\S+?)\]([\S\s]+?)\[\/crv\]/g,"<a href=\"https://mcmatthevan.github.io/limoncello/crv/$1.pdf\">$2</a>").replace(/\[reg=(\S+?)\]([\S\s]+?)\[\/reg\]/g,"<a href=\"https://mcmatthevan.github.io/limoncello/reg/pdf/$1.pdf\">$2</a>").replace(/\[url=(\S+?)\]([\S\s]+?)\[\/url\]/g,"<a href=\"$1\">$2</a>").replace(/\[b\]([\s\S]+?)\[\/b\]/g,"<b>$1</b>").replace(/\[i\]([\s\S]+?)\[\/i\]/g,"<span style='font-style: italic;'>$1</span>").replace(/\[sc\]([\s\S]+?)\[\/sc\]/g,"<span style ='font-variant: small-caps;'>$1</span>").replace(/\n/g,"<br/>").replace(/\./g,".&nbsp;");
 }
 if (location.protocol === "https:"){
     var IP = location.origin;
