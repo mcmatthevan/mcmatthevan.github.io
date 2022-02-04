@@ -76,6 +76,7 @@ img{
     justify-content: space-around;
     width: 60%;
     margin: auto;
+    user-select: none;
 }
 
 #home_cadre{
