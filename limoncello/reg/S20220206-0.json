@@ -1,0 +1,39 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Il est mis fin aux fonctions de _Maxys_, administrateur charg\u00e9 de la communication."
+        ]
+    ],
+    "date": 1644106770,
+    "dispo": [
+        "Vu l'article 1-2 du [reg=R20210623-0]RIOR[/reg]"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "AigleAttarde",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220206-0",
+    "title": "Statut n\u00b0S20220206-0 portant r\u00e9vocation d'un administrateur - _Maxys_",
+    "confirmSign": {
+        "aigleattarde": true
+    }
+}
