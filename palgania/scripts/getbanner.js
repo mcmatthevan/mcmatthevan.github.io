@@ -9,7 +9,7 @@ document.querySelector("header").innerHTML = `<nav>
 </nav>`;
 
 document.querySelector("footer").innerHTML = `Palgania™<br>
-<a href="http://www.serveurs-minecraft.org/vote.php?id=62219">Voter pour Palgania</a> dans le top <a
+<a href="` + BANNER_PREFIX + `vote">Voter pour Palgania</a> dans le top <a
     href="http://www.serveurs-minecraft.org/">Serveurs Minecraft</a><br>
 <span style='font-size: 0.7em;'>Icons made by <a href="https://www.flaticon.com/authors/freepik"
         title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="lJx61JM7xnCOm7E9cRaHklAoLn-9ItRaDYNTyEh4Zcc" />
+    <title>PALGANIA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/logo2.png" type="image/png">
+    <script src="/scripts/checkdomain.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li id="banner_index"><a href="index.html">Accueil</a></li>
+                <li id="banner_regles"><a href="regles.html">Règlement</a></li>
+                <li id="banner_actus"><a href="actus/">Actualités</a></li>
+                <li id="banner_contacts"><a href="contacts.html">Contacts</a></li>
+                <li id="banner_wikip"><a href="wiki/player.html">Wiki Joueurs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="sections">
+        <section class="firstelement">
+            <h1>Voter pour Palgania</h1>
+            <p>Utilisez la page web ci-dessous pour voter pour Palgania. Vous pouvez aussi vous rendre <a href="https://www.serveurs-minecraft.org/vote.php?id=62219">ici</a>.</p>
+            <embed src="https://www.serveurs-minecraft.org/vote.php?id=62219" type="" height="400">
+                <hr>
+
+            <h1>Récompense de vote</h1>
+            <p>Après chaque vote, vous êtes invité à entrer votre pseudo minecraft ci-dessous pour remporter 5 crédits-tp.</p>
+            <article id="error_vaward">
+                <strong>La récompense n'a pas été attribuée. </strong> Pour que cela fonctionne : <br/>
+                    - Vous devez avoir voté sur le même appareil que celui sur lequel vous jouez (cela implique l'exclusion des VPN)<br>
+                    - Vous devez entrer votre pseudo au maximum 10 minutes après votre vote<br>
+                    - Vous ne devez pas avoir déjà obtenu une récompense dans les 10 dernières minutes.<br>
+                </ul>
+                <br>
+                Si vous pensez réunir toutes les conditions et que vous n'arrivez pourtant pas à obtenir votre
+                récompense, contactez un administrateur.
+            </article>
+            <form id="vaward_form">
+                <label for="vaward_pseudo">Pseudo minecraft : </label><input required type="text" id="vaward_pseudo"><br>
+                <input type="submit" value="OK">
+            </form>
+            <p id="p_info"></p>
+            
+        </section>
+    </div>
+    <footer>Palgania™<br>
+        <a href="http://www.serveurs-minecraft.org/vote.php?id=62219">Voter pour Palgania</a> dans le top <a
+            href="http://www.serveurs-minecraft.org/">Serveurs Minecraft</a><br>
+        <span style='font-size: 0.7em;'>Icons made by <a href="https://www.flaticon.com/authors/freepik"
+                title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">
+                www.flaticon.com</a><br>Serveur répertorié sur <a href="http://www.serveur-minecraft.eu/">Serveur
+                Minecraft EU</a></span><br>
+    </footer>
+    <script>const BANNER = null; const BANNER_PREFIX = "";</script>
+    <script src="scripts/getbanner.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="../limoncello/functions.js"></script>
+    <script src="scripts/vaward.js"></script>
+</body>
+
+</html>
