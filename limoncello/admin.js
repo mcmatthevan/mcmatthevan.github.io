@@ -220,7 +220,7 @@ $(function () {
                                     input.blur();
                             });
                             $(input).blur(function () {
-                                if (/^[0-9]+$/.test($(this).val().trim())){
+                                if (/^[0-9]+$/.test($(this).val().trim()) && s_txt.trim() !== $(this).val().trim()){
                                     $.ajax({
                                         type: "POST",
                                         url: IP + "user/discid",
