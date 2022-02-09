@@ -29,6 +29,10 @@
 		max-width: 100%;
 	}
 	
+	section{
+		overflow: scroll;
+	}
+	
 	/* conserver le ratio des images */
 
 	img {

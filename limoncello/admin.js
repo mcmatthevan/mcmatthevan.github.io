@@ -1,9 +1,9 @@
 $(function () {
-    (function(){
+    (function () {
         let today = new Date(),
-            dic = ["value","min","max"];
-        for (let i = 0; i < 3 ; ++i){
-            $("input[type='date'][" + dic[i] + "='today']").attr(dic[i],today.getFullYear().toLocaleString('en-US', {
+            dic = ["value", "min", "max"];
+        for (let i = 0; i < 3; ++i) {
+            $("input[type='date'][" + dic[i] + "='today']").attr(dic[i], today.getFullYear().toLocaleString('en-US', {
                 minimumIntegerDigits: 2,
                 useGrouping: false
             }) + "-" + (today.getMonth() + 1).toLocaleString('en-US', {
@@ -52,22 +52,22 @@ $(function () {
         if (typeof args.page === "undefined") {
             location.search = "?page=home";
         }
-        if (args.page === "deleg" && checkPerm("admin.deleg")){
+        if (args.page === "deleg" && checkPerm("admin.deleg")) {
             $("#deleg").show();
-            $("input[type=submit]").click(function(e){
-                if ($(".deleg_perm:checked").length){
+            $("input[type=submit]").click(function (e) {
+                if ($(".deleg_perm:checked").length) {
                     $(".deleg_perm").get(0).setCustomValidity("");
 
                 } else {
                     $(".deleg_perm").get(0).setCustomValidity("Veuillez cocher au moins une permission.");
                 }
             });
-            $("#delegform").submit(function(e){
+            $("#delegform").submit(function (e) {
                 e.preventDefault();
-                $("#deleg input").prop("disabled",true)
+                $("#deleg input").prop("disabled", true)
                 $(".error").text("");
                 let perms = [];
-                $(".deleg_perm:checked").each(function(i,v){
+                $(".deleg_perm:checked").each(function (i, v) {
                     perms.push($(v).val());
                 });
                 $.ajax({
@@ -80,46 +80,46 @@ $(function () {
                     }),
                     dataType: "json",
                     success: function (response) {
-                        if (response === "OK"){
+                        if (response === "OK") {
                             $(".info").text("La délégation a bien été actée.");
                         }
                     },
-                    error: function (x){
-                        if (x.status === 404){
+                    error: function (x) {
+                        if (x.status === 404) {
                             $(".error").text("Le pseudo spécifié ne correspond à aucun joueur.");
-                            $("#deleg input").prop("disabled",false);
+                            $("#deleg input").prop("disabled", false);
                         } else {
-                            $(".error").text("Une erreur est survenue. Code d'erreur : "+x.status);
-                            $("#deleg input").prop("disabled",false);
+                            $(".error").text("Une erreur est survenue. Code d'erreur : " + x.status);
+                            $("#deleg input").prop("disabled", false);
                         }
                     }
                 });
             });
         }
-        else if (args.page === "crvgen" && checkPerm("admin.crvgen")){
+        else if (args.page === "crvgen" && checkPerm("admin.crvgen")) {
             let counter = 0;
             $(".return_arrow").show();
             $(".return_arrow a").attr("href", "?page=home");
             $("#crvgen").show();
-            $("#crvgen_add").click(function(){
+            $("#crvgen_add").click(function () {
                 let th = this;
-                (function(counter){
-                    $(th).before(`<tr id="crvtr`+counter+`">`+(counter ? `<td class="crvremove" id="crvremove`+counter+`">☓</td>`:"<td>&nbsp;</td>")+`<td><input required type="text" class="crvgen_choice" id="crvgen_choice`+counter+`"/></td><td><input required type="number" min="0" class="crvgen_nb" id="crvgen_nb`+counter+`"/></td></tr>`);
-                    $("#crvremove"+counter).click(function(){
-                        $("#crvtr"+counter).remove();
+                (function (counter) {
+                    $(th).before(`<tr id="crvtr` + counter + `">` + (counter ? `<td class="crvremove" id="crvremove` + counter + `">☓</td>` : "<td>&nbsp;</td>") + `<td><input required type="text" class="crvgen_choice" id="crvgen_choice` + counter + `"/></td><td><input required type="number" min="0" class="crvgen_nb" id="crvgen_nb` + counter + `"/></td></tr>`);
+                    $("#crvremove" + counter).click(function () {
+                        $("#crvtr" + counter).remove();
                     });
                 })(counter);
-                counter +=1 ;
+                counter += 1;
             });
             $("#crvgen_add").trigger("click");
-            $("#crvgen_form").submit(function(e){
+            $("#crvgen_form").submit(function (e) {
                 e.preventDefault();
                 let votes = {};
-                $(".crvgen_choice").each(function(i,v){
-                    votes[$(v).val().trim()] = parseInt($("#crvgen_nb"+v.id.replace(/crvgen_choice/,"")).val());
+                $(".crvgen_choice").each(function (i, v) {
+                    votes[$(v).val().trim()] = parseInt($("#crvgen_nb" + v.id.replace(/crvgen_choice/, "")).val());
                 });
                 $(".p_info").html("Veuillez patienter.<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>")
-                $("input[type=submit]").prop("disabled",true);
+                $("input[type=submit]").prop("disabled", true);
                 $.ajax({
                     type: "POST",
                     url: IP + "admin/crvgen",
@@ -127,7 +127,7 @@ $(function () {
                         subject: $("#crvgen_subject").val().trim(),
                         registered: $("#crvgen_registered").val().trim(),
                         modalities: $("#crvgen_modalities").val().trim(),
-                        date: Math.floor(new Date($("#crvgen_date").val()).getTime()/1000),
+                        date: Math.floor(new Date($("#crvgen_date").val()).getTime() / 1000),
                         voteinfo: JSON.stringify(votes)
                     }),
                     dataType: "json",
@@ -135,10 +135,10 @@ $(function () {
                         $(".p_info").html("");
                         location.search = "?page=home";
                     },
-                    error: function(x){
-                        $("input[type=submit]").prop("disabled",false);
+                    error: function (x) {
+                        $("input[type=submit]").prop("disabled", false);
                         $(".p_info").html("");
-                        $(".error").text("Erreur "+x.status);
+                        $(".error").text("Erreur " + x.status);
                     }
                 });
             });
@@ -154,25 +154,32 @@ $(function () {
                 dataType: "json",
                 success: function (response) {
                     for (let i = 0, c = response.length; i < c; ++i) {
-                        let consoleAccess = new Date(response[i].consoleAccess*1000);
-                        $("#userlist").append("<tr><td>" + response[i].title[0] + "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + "</a></td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g, "<br>") + "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + "</td><td>Expire le : <input readonly class='input_console' id='input_console" + response[i].title[0] + "' type='date' value='" + format00(consoleAccess.getFullYear()) + "-" + format00(consoleAccess.getMonth() + 1) + "-" +format00(consoleAccess.getDate()) + "'/></td></tr>");
+                        let consoleAccess = new Date(response[i].consoleAccess * 1000);
+                        $("#userlist").append("<tr><td>" + response[i].title[0] +
+                         "</td><td><a href='mailto:" + response[i].email + "'>" + response[i].email + 
+                         "</a></td><td class='discid' id='discid_" + response[i].title[0] + "'>" + response[i].disc_id + 
+                         "</td><td class='titlerole' id='titlerole_" + response[i].title[0] + "'>" + response[i].title[1].replace(/\n/g, "<br>") +
+                         "</td><td class='attrch' id='attrch_" + response[i].title[0] + "'>" + (response[i].attrs instanceof Array ? response[i].attrs.join(",") : "") + 
+                         "</td><td class='permsch' id='permsch_" + response[i].title[0] + "'>" + (response[i].perms instanceof Array ? response[i].perms.join("<br>") : "") + 
+                         "</td><td>Expire le : <input readonly class='input_console' id='input_console" + response[i].title[0] + "' type='date' value='" + format00(consoleAccess.getFullYear()) + "-" + format00(consoleAccess.getMonth() + 1) + "-" + format00(consoleAccess.getDate()) + 
+                         "'/></td></tr>");
                     }
                     if (checkPerm("user.manage.console")) {
-                        $(".input_console").prop("readonly",false);
-                        $(".input_console").change(function(e){
+                        $(".input_console").prop("readonly", false);
+                        $(".input_console").change(function (e) {
                             $.ajax({
                                 type: "POST",
                                 url: IP + "user/consolemanage",
                                 data: sessioned({
-                                    "user": e.currentTarget.id.replace(/input_console/,""),
-                                    "consoleAccess": Math.floor(new Date(e.currentTarget.value).getTime()/1000)
+                                    "user": e.currentTarget.id.replace(/input_console/, ""),
+                                    "consoleAccess": Math.floor(new Date(e.currentTarget.value).getTime() / 1000)
                                 }),
                                 dataType: "json"
                             });
                         });
                     }
                     if (checkPerm("user.manage.new")) {
-                        $("#userlist").append("<tr><td colspan='5'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
+                        $("#userlist").append("<tr><td colspan='" + $("#userlist tr").get(0).children.length + "'><a href='?page=newuser' id='newuser'>⊕</a></td></tr>");
                     }
                     if (checkPerm("user.manage.attrs")) {
                         $(".attrch").click(function () {
@@ -200,6 +207,38 @@ $(function () {
                                 });
                             });
                         });
+                    }if (checkPerm("user.manage.discid.set")) {
+                        $(".discid").click(function () {
+                            let td = this,
+                                s_txt = $(this).text();
+                            $(this).html("<input type='text' value=\"" + s_txt + "\"/>");
+                            let input = $("#" + this.id + " input").get()[0];
+
+                            input.focus();
+                            input.addEventListener("keydown", function (e) {
+                                if (e.keyCode === 13)
+                                    input.blur();
+                            });
+                            $(input).blur(function () {
+                                if (/^[0-9]+$/.test($(this).val().trim())){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: IP + "user/discid",
+                                        data: sessioned({
+                                            username: td.id.replace(/discid_/, ""),
+                                            discid: $(this).val().trim()
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            $(td).html($(input).val().trim());
+                                        }
+                                    });
+                                } else {
+                                    $(td).html(s_txt);
+                                }
+                                
+                            });
+                        });
                     }
                     if (checkPerm("user.manage.title.change")) {
                         $(".titlerole").click(function () {
@@ -221,6 +260,31 @@ $(function () {
                                     }
                                 });
                             });
+                        });
+                    }
+                    if (checkPerm("user.manage.perms.set")) {
+                        $("td.permsch").click(function () {
+                            if (!$("td.permsch textarea").length){
+
+                                let td = this;
+                                $(this).html("<textarea type='text'>" + $(this).html().replace(/<br>/g,"\n") + "</textarea>");
+                                let input = $("#" + this.id + " textarea").get()[0];
+                                input.focus();
+                                $(input).blur(function () {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: IP + "user/perms",
+                                        data: sessioned({
+                                            username: td.id.replace(/permsch_/, ""),
+                                            perms: JSON.stringify($(this).val().trim().split(/\n/g))
+                                        }),
+                                        dataType: "json",
+                                        success: function (response) {
+                                            $(td).html($(input).val().trim().replace(/\n/g,"<br>"));
+                                        }
+                                    });
+                                });
+                            }
                         });
                     }
                 }
@@ -457,7 +521,7 @@ $(function () {
             $(".return_arrow").show();
             $(".return_arrow a").attr("href", "?page=reg_home");
             function makeJson() {
-                let maindic = { "content": [], "sign": {}, "execute": []};
+                let maindic = { "content": [], "sign": {}, "execute": [] };
                 $(".rgn").each(function (i, v) {
                     maindic[v.id.replace(/rgn_/g, "")] = $(v).val().trim();
                 });
@@ -476,14 +540,14 @@ $(function () {
                     }
                     maindic["sign"][mentionValue].push($("#rgn_signname" + v.id.replace(/rgn_signmention/, "")).val().trim());
                 });
-                $(".rgn_execid").each(function(i,v){
-                    let cid = v.id.replace(/rgn_execid/,"");
+                $(".rgn_execid").each(function (i, v) {
+                    let cid = v.id.replace(/rgn_execid/, "");
                     maindic["execute"].push({
                         type: "ChangeArt",
                         authorId: "",
                         regId: $(v).val().trim(),
-                        artId: parseInt($("#rgn_artid"+cid).val()),
-                        comment: $("#rgn_newtx"+cid).val().trim()
+                        artId: parseInt($("#rgn_artid" + cid).val()),
+                        comment: $("#rgn_newtx" + cid).val().trim()
                     });
                 });
                 return maindic;
@@ -528,14 +592,14 @@ $(function () {
                             }
                         }
                         if (typeof toLoad.execute !== "undefined") {
-                            for (let i = 0, c = toLoad.execute.length ; i < c ; ++i) {
-                                    $("#rgn_addexec").trigger("click");
-                                    $(".rgn_execid").last().val(toLoad.execute[i]["regId"]);
-                                    $(".rgn_execid").last().trigger("change");
-                                    setTimeout(function(){
-                                        $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
-                                        $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
-                                    },500);
+                            for (let i = 0, c = toLoad.execute.length; i < c; ++i) {
+                                $("#rgn_addexec").trigger("click");
+                                $(".rgn_execid").last().val(toLoad.execute[i]["regId"]);
+                                $(".rgn_execid").last().trigger("change");
+                                setTimeout(function () {
+                                    $(".rgn_artid").last().val(toLoad.execute[i]["artId"]);
+                                    $(".rgn_newtx").last().val(toLoad.execute[i]["comment"]);
+                                }, 500);
                             }
                         }
                     }, 1);
@@ -585,12 +649,12 @@ $(function () {
                             } else {
                                 $("#rgn_preview_bloc > h2").hide();
                                 console.log(dic.sign);
-                                if (/proposition/gi.test(dic.type)){
+                                if (/proposition/gi.test(dic.type)) {
                                     let clicked = false;
                                     $("#rgn_preview_bloc > p").html("<a class='onlyonce' href=\"" + IP + "file?sessionId=" + sessionStorage["limoncello-sessionId"] + "&download=1\" download>Cliquez ici</a> pour télécharger le document.");
-                                    $(".onlyonce").click(function(e){
-                                        if (clicked){
-                                            $(this).attr("href","#");
+                                    $(".onlyonce").click(function (e) {
+                                        if (clicked) {
+                                            $(this).attr("href", "#");
                                             e.preventDefault();
                                         } else {
                                             clicked = true;
@@ -665,24 +729,24 @@ $(function () {
                     }
                 }
             });
-            function htmlTITLE(counter){
-                return `<tr><td colspan='3' id='insertbetween`+counter+`' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_ntitletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_tdelete" id="rgn_tdelete` + counter + `">×</span>
+            function htmlTITLE(counter) {
+                return `<tr><td colspan='3' id='insertbetween` + counter + `' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_ntitletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_tdelete" id="rgn_tdelete` + counter + `">×</span>
                 <label for="rgn_ntitle` + counter + `">Titre</label></td><td>:</td><td>
                     <input required type="text" class="rgn_content rgn_ntitle" id="rgn_ntitle` + counter + `"/>
                 </td></tr>`
             }
-            function htmlARTICLE(counter){
-                return `<tr><td colspan='3' id='insertbetween`+counter+`' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_narticletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_adelete" id="rgn_adelete` + counter + `">×</span>
+            function htmlARTICLE(counter) {
+                return `<tr><td colspan='3' id='insertbetween` + counter + `' class='rgn_insertbetween'>⨁</td></tr><tr class="unpersistent" id="rgn_narticletr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_adelete" id="rgn_adelete` + counter + `">×</span>
                 <label for="rgn_narticle` + counter + `">Article</label></td><td>:</td><td>
                     <textarea required type="text" class="rgn_content rgn_narticle" id="rgn_narticle` + counter + `"></textarea>
                 </td></tr>`
             }
-            function applyInsertBetween(){
+            function applyInsertBetween() {
                 $(".rgn_insertbetween").off()
-                $(".rgn_insertbetween").click(function(){
+                $(".rgn_insertbetween").click(function () {
                     let ibtw = $(this.parentNode);
-                    visualPrompt("Vous souhaitez insérer :", ["Un article","Un titre","Annuler"], function(ch){
-                        if (ch === "Un article"){
+                    visualPrompt("Vous souhaitez insérer :", ["Un article", "Un titre", "Annuler"], function (ch) {
+                        if (ch === "Un article") {
                             ibtw.before(htmlARTICLE(counter));
                             counter += 1;
                             $(".rgn_adelete").click(function (e) {
@@ -690,7 +754,7 @@ $(function () {
                                 $("#insertbetween" + this.id.replace(/rgn\_adelete/g, "")).remove();
                             });
                             applyInsertBetween()
-                        } else if (ch === "Un titre"){
+                        } else if (ch === "Un titre") {
                             ibtw.before(htmlTITLE(counter));
                             counter += 1;
                             $(".rgn_tdelete").click(function (e) {
@@ -737,7 +801,7 @@ $(function () {
                     $("#rgn_nsigntr_" + this.id.replace(/rgn\_sdelete/g, "")).remove();
                 });
             });
-            $("#rgn_addexec").click(function(e){
+            $("#rgn_addexec").click(function (e) {
                 $("#rgn_insert3").before(`<tr class="unpersistent" id="rgn_nexectr_` + counter + `"><td class="tag end"><span class="rgn_delete rgn_edelete" id="rgn_edelete` + counter + `">×</span>
                 <label for="rgn_nexec` + counter + `">Modification</label></td><td>:</td><td><table>
                     <tr><td class="end tag"><label for='rgn_execid`+ counter + `'>Numéro d'identifiant de l'acte à modifier</label></td><td>:</td><td>
@@ -752,49 +816,49 @@ $(function () {
                         <textarea required readonly id='rgn_newtx`+ counter + `' class='rgn_exec rgn_newtx'></textarea>
                     </td></tr>
                 </table></td></tr>`);
-                (function(counter){
+                (function (counter) {
                     $(".rgn_edelete").click(function (e) {
                         $("#rgn_nexectr_" + counter).remove();
                     });
-                    $("#rgn_execid"+counter).change(function(){
-                        $(this).prop("readonly",true);
+                    $("#rgn_execid" + counter).change(function () {
+                        $(this).prop("readonly", true);
                         $.ajax({
                             type: "GET",
                             url: "reg/" + $(this).val().trim() + ".json",
                             dataType: "json",
                             success: function (response) {
                                 let index = regIndex(response),
-                                    adder = $("#rgn_artid"+counter),
+                                    adder = $("#rgn_artid" + counter),
                                     currentAdder = adder.get(0);
-                                $("#execerror"+counter).text("");
+                                $("#execerror" + counter).text("");
                                 adder.html("<option value=\"\"></option>");
-                                for (let i = 0, c = index.length ; i < c ; ++i){
-                                    if (/titre/gi.test(index[i][0])){
+                                for (let i = 0, c = index.length; i < c; ++i) {
+                                    if (/titre/gi.test(index[i][0])) {
                                         currentAdder = document.createElement("optgroup");
                                         currentAdder.label = index[i][0] + " - " + index[i][1];
                                         adder.get(0).appendChild(currentAdder)
-                                    } else if (/article/gi.test(index[i][0])){
+                                    } else if (/article/gi.test(index[i][0])) {
                                         $(currentAdder).append("<option value=\"" + i + "\">" + index[i][0] + "</option>");
                                     }
                                 }
-                                adder.prop("readonly",false);
-                                adder.change(function(){
-                                    if ($(this).val() !== ""){
-                                        for (let i = 0, c = index.length ; i < c ; ++i){
-                                            if (index[i][0] === $("#rgn_artid"+counter+" option:selected").text()){
-                                                $("#rgn_newtx"+counter).val(index[i][1]);
+                                adder.prop("readonly", false);
+                                adder.change(function () {
+                                    if ($(this).val() !== "") {
+                                        for (let i = 0, c = index.length; i < c; ++i) {
+                                            if (index[i][0] === $("#rgn_artid" + counter + " option:selected").text()) {
+                                                $("#rgn_newtx" + counter).val(index[i][1]);
                                                 break;
                                             }
                                         }
-                                        $("#rgn_newtx"+counter).prop("readonly",false);
+                                        $("#rgn_newtx" + counter).prop("readonly", false);
                                     }
                                 });
                             },
-                            error: function(x){
-                                if (x.status === 404){
-                                    $("#execerror"+counter).text("Le numéro d'identification ne correspond à aucun acte existant.");
-                                    $("#rgn_execid"+counter).prop("readonly",false);
-                                    $("#rgn_execid"+counter).get()[0].focus();
+                            error: function (x) {
+                                if (x.status === 404) {
+                                    $("#execerror" + counter).text("Le numéro d'identification ne correspond à aucun acte existant.");
+                                    $("#rgn_execid" + counter).prop("readonly", false);
+                                    $("#rgn_execid" + counter).get()[0].focus();
                                 }
                             }
                         });
