@@ -1,0 +1,118 @@
+{
+    "type": "R\u00e8glement",
+    "model": "reglement",
+    "content": [
+        [
+            "title",
+            "R\u00e8gles r\u00e9gissant les rapports joueur/monde."
+        ],
+        [
+            "article",
+            "Les arbres doivent \u00eatre coup\u00e9s enti\u00e8rement. "
+        ],
+        [
+            "article",
+            "La bedrock, que ce soit dans le nether, dans l'overworld, dans le goulag ou l'end, ne doit en aucun cas \u00eatre cass\u00e9e. Les glitchs le permettant sont donc proscrits. Les mod\u00e9rateurs ou administrateurs ne peuvent en aucun cas utiliser le mode cr\u00e9atif pour casser la bedrock. "
+        ],
+        [
+            "article",
+            "L'usage de glitchs est interdit."
+        ],
+        [
+            "title",
+            "R\u00e8gles r\u00e9gissant les rapports entre joueurs."
+        ],
+        [
+            "article",
+            "Infliger des d\u00e9g\u00e2ts \u00e0 un autre joueur sans sa complicit\u00e9 (ou circonstances particuli\u00e8res pr\u00e9cis\u00e9es par le pr\u00e9sent r\u00e8glement) est interdit. "
+        ],
+        [
+            "article",
+            "Tuer un joueur est interdit sauf dans les circonstances particuli\u00e8res pr\u00e9cis\u00e9es par le pr\u00e9sent r\u00e8glement."
+        ],
+        [
+            "article",
+            "Piller la base ou la propri\u00e9t\u00e9 d'un joueur est interdit."
+        ],
+        [
+            "article",
+            "Des joueurs peuvent d\u00e9cider de se confronter dans des combats JcJ si ceux-ci ont d\u00e9termin\u00e9 au pr\u00e9alable les modalit\u00e9s de cet affrontement.   "
+        ],
+        [
+            "article",
+            "En cas de litige lors d'un combat JcJ, c'est \u00e0 la Commission de Mod\u00e9ration de trancher.  "
+        ],
+        [
+            "article",
+            "Le vol d'\u00e9quipement ou de ressources est interdit."
+        ],
+        [
+            "article",
+            "Contourner par une destruction un syst\u00e8me de redstone est interdit."
+        ],
+        [
+            "title",
+            "Fonctionnement des TP."
+        ],
+        [
+            "article",
+            "Les joueurs ont la possibilit\u00e9 de se t\u00e9l\u00e9porter \u00e0 un autre joueur, \u00e0 un de ses homes ou au spawn via le syst\u00e8me de TP-cr\u00e9dits."
+        ],
+        [
+            "article",
+            "L'obtention de cr\u00e9dits TP se fait via la commande /tpcredits buy. 10 cr\u00e9dits sont offerts \u00e0 la premi\u00e8re connexion, 5 \u00e0 chaque vote pour le serveur. Le prix et le mat\u00e9riau utilis\u00e9 pour l'achat des cr\u00e9dits varie en fonction du niveau du joueur."
+        ],
+        [
+            "article",
+            "La t\u00e9l\u00e9portation \u00e0 un autre joueur co\u00fbte 2 cr\u00e9dits. La t\u00e9l\u00e9portation au spawn ou \u00e0 un home co\u00fbte 1 cr\u00e9dit."
+        ],
+        [
+            "article",
+            "Il est possible de donner des cr\u00e9dits TP \u00e0 un autre joueur via la commande /tpcredits give <nombre de cr\u00e9dits>"
+        ],
+        [
+            "title",
+            "Sanctions en cas de non respect du pr\u00e9sent r\u00e8glement"
+        ],
+        [
+            "article",
+            "Les sanctions prononc\u00e9es en cas de non respect d'une de ces r\u00e8gles sont r\u00e9glement\u00e9es par les articles 4-1 \u00e0 4-3 du [reg=R20210928-0]r\u00e8glement g\u00e9n\u00e9ral du serveur[/reg].\n\n "
+        ],
+        [
+            "title",
+            "D\u00e9rogations"
+        ],
+        [
+            "article",
+            "Toute d\u00e9rogation au pr\u00e9sent r\u00e8glement ne peut \u00eatre accord\u00e9e qu'avec l'examen favorable des motivations du joueur qui en fait la demande par la Commission de Mod\u00e9ration et l'\u00e9quipe d'administration. "
+        ]
+    ],
+    "date": 1644935634,
+    "dispo": [
+        "Consid\u00e9rant le [crv=CRV20220215-0]compte-rendu[/crv] de vote du 15 f\u00e9vrier 2022"
+    ],
+    "sign": {
+        "Vu pour ex\u00e9cution": [
+            [
+                "Adelka56",
+                "Pr\u00e9sidente de la Commission de Mod\u00e9ration",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "AigleAttarde & lumahell",
+                ""
+            ]
+        ]
+    },
+    "preamble": "Ce r\u00e8glement fixe les r\u00e8gles de jeu sur Palgania.",
+    "execute": [],
+    "author": "Les administrateurs principaux",
+    "verb": "Ont adopt\u00e9",
+    "id": "R20220215-0",
+    "title": "R\u00e8glement du jeu sur le serveur",
+    "confirmSign": {
+        "adelka56": true
+    }
+}
