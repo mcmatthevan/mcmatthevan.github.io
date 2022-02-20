@@ -15,8 +15,26 @@ $(function(){
         if ($(".yes").length > 0){
             $(".yes").trigger("click");
         } else {
-            let url = new URL(location.href);
-            location.href = url.searchParams.get("href");
+            if (/déjà voté/.test(document.body.textContent)){
+                $.ajax({
+                    type: "POST",
+                    url: "https://palgania.ovh:8888/services/checkvote",
+                    dataType: "json",
+                    success: function (response) {
+                        let url = new URL(location.href);
+                        location.href = url.searchParams.get("href");
+                    },
+                    error: function(x){
+                        let url = new URL(location.href);
+                        location.href = url.searchParams.get("href");
+                    }
+                });
+
+            } else {
+                let url = new URL(location.href);
+                location.href = url.searchParams.get("href");
+
+            }
         }
     } else {
         $.ajax({
