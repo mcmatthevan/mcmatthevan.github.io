@@ -136,5 +136,11 @@
         "title": "Statut n\u00b0S20220223-0 portant cr\u00e9ation de l'\u00e9quipe de d\u00e9veloppement",
         "date": 1645646556,
         "type": "Statut"
+    },
+    {
+        "id": "S20220224-2",
+        "title": "Statut n\u00b0S20220224-2 portant nomination d'un d\u00e9veloppeur.",
+        "date": 1645722698,
+        "type": "Statut"
     }
 ]

@@ -1,0 +1,41 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Mecopi est nomm\u00e9 d\u00e9veloppeur et int\u00e8gre donc l'\u00e9quipe de d\u00e9veloppement, dirig\u00e9e par l'administrateur charg\u00e9 du d\u00e9veloppement."
+        ]
+    ],
+    "date": 1645722698,
+    "dispo": [
+        "Vu les articles 1-1 et 1-6 du [reg=R20210623-0]R.I.O.R[/reg]",
+        "Vu le statut n\u00b0[reg=S20220223-0]S20220223-0[/reg] portant cr\u00e9ation de l'\u00e9quipe de d\u00e9veloppement",
+        "Sur proposition de l'administrateur charg\u00e9 du d\u00e9veloppement."
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "Warquy",
+                "Administrateur charg\u00e9 du d\u00e9veloppement",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "AigleAttarde",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "AigleAttarde, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220224-2",
+    "title": "Statut n\u00b0S20220224-2 portant nomination d'un d\u00e9veloppeur.",
+    "confirmSign": {
+        "warquy": true
+    }
+}
