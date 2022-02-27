@@ -1,7 +1,7 @@
 $(function(){
     function formattedArg(tx){
 
-        return tx.replace(/\[player\]([\S\s]+?)\[\/player\]/g,`<a href="?pseudo=$1">$1</a>`).replace(/\[small\]([\S\s]+?)\[\/small\]/g,`<span class="small">$1</span>`).replace(/\[staff\]([\S\s]+?)\[\/staff\]/g,`<a href='staff/$1.html'>$1</a>`);
+        return tx.replace(/\[player\]([\S\s]+?)\[\/player\]/g,`<a href="?pseudo=$1">$1</a>`).replace(/\[small\]([\S\s]+?)\[\/small\]/g,`<span class="small">$1</span>`).replace(/\[staff\]([\S\s]+?)\[\/staff\]/g,`<a href='staff/$1.html'>$1</a>`).replace(/\[reg=(\S+?)\]([\S\s]+?)\[\/reg\]/g,`<a href='https://mcmatthevan.github.io/limoncello/reg/pdf/$1.pdf'>$2</a>`).replace(/\[crv=(\S+?)\]([\S\s]+?)\[\/crv\]/g,`<a href='https://mcmatthevan.github.io/limoncello/crv/$1.pdf'>$2</a>`);
     }
     let args = locationArgs();
     if (typeof args.pseudo === "undefined"){
