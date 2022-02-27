@@ -1,0 +1,70 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "L'\u00e9quipe de d\u00e9veloppement du serveur Palgania est un service d\u00e9pendant de l'\u00e9quipe d'administration, charg\u00e9 du d\u00e9veloppement des plugins ou datapacks sur le serveur Minecraft."
+        ],
+        [
+            "article",
+            "L'\u00e9quipe de d\u00e9veloppement est constitu\u00e9e de d\u00e9veloppeurs nomm\u00e9s par statut. Ils ont pour r\u00f4le de r\u00e9aliser les plugins ou datapacks demand\u00e9s par l'\u00e9quipe d'administration. En cas de non respect de leurs devoirs ou des r\u00e8gles les concernant pr\u00e9cis\u00e9es par le pr\u00e9sent statut, les d\u00e9veloppeurs s'exposent \u00e0 une r\u00e9vocation, elle aussi r\u00e9alis\u00e9e par statut."
+        ],
+        [
+            "article",
+            "Les d\u00e9veloppeurs ne doivent pas int\u00e9grer dans les plugins et les datapacks des fonctionnalit\u00e9s qui n'ont pas \u00e9t\u00e9 explicitement demand\u00e9es par l'\u00e9quipe d'administration sans autorisation."
+        ],
+        [
+            "article",
+            "Dans le cadre de l'application de l'article 1-8 du [reg=R20210928-0]r\u00e8glement g\u00e9n\u00e9ral du serveur[/reg], tout d\u00e9veloppeur int\u00e9grant volontairement une fonctionnalit\u00e9 cach\u00e9e visant \u00e0 contourner les syst\u00e8mes de s\u00e9curit\u00e9 des services propos\u00e9es sera expos\u00e9 \u00e0 un an de bannissement. Cela inclut toute fonctionnalit\u00e9 permettant \u00e0 celui-ci ou un tiers d'obtenir des privil\u00e8ges plus \u00e9lev\u00e9s que ceux configur\u00e9s par l'administration."
+        ],
+        [
+            "article",
+            "L'\u00e9quipe de d\u00e9veloppement est dirig\u00e9e par l'administrateur charg\u00e9 du d\u00e9veloppement.\nIl propose la nomination des d\u00e9veloppeurs du serveur et dirige leur action."
+        ],
+        [
+            "article",
+            "\u00c0 d\u00e9faut d'administrateur charg\u00e9 du d\u00e9veloppement, les fonctions qui lui sont rattach\u00e9es sont assur\u00e9es par les administrateurs principaux."
+        ],
+        [
+            "article",
+            "L'administrateur charg\u00e9 du d\u00e9veloppement est responsable de l'application du pr\u00e9sent statut, qui sera publi\u00e9 au recueil des documents \u00e0 port\u00e9e r\u00e8glementaire."
+        ]
+    ],
+    "date": 1645646556,
+    "dispo": [
+        "Vu les articles 1-1 et 1-6 du [reg=R20210623-0]R.I.O.R.[/reg]",
+        "Vu le [reg=R20210928-0]r\u00e8glement g\u00e9n\u00e9ral du serveur[/reg], en particulier son article 1-8"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "AigleAttarde",
+                "Administrateur principal",
+                ""
+            ],
+            [
+                "Warquy",
+                "Administrateur charg\u00e9 du d\u00e9veloppement",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220223-0",
+    "title": "Statut n\u00b0S20220223-0 portant cr\u00e9ation de l'\u00e9quipe de d\u00e9veloppement",
+    "confirmSign": {
+        "aigleattarde": true,
+        "warquy": true
+    }
+}
