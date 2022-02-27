@@ -42,7 +42,7 @@ $(function(){
                     $("#pbio, #pbanned").show();
                 }
                 if (response.bio !== null && typeof response.bio.functions !== "undefined"){
-                    let admin=false, modo=false;
+                    let admin=false, modo=false, devel=false;
                     for (let i = 0, c = response.bio.functions.length ; i < c ; i ++){
                         let toNotDefined = ~[null,undefined].indexOf(response.bio.functions[i].to),
                             fromDate = new Date(response.bio.functions[i].from),
@@ -66,6 +66,8 @@ $(function(){
                                 admin = response.bio.functions[i].title;
                             } else if (/(modéra(?:teur|trice|tion))/gi.test(response.bio.functions[i].title) && !modo){
                                 modo = response.bio.functions[i].title;
+                            } else if (/(développ(?:eur|euse))/gi.test(response.bio.functions[i].title) && !modo){
+                                devel = response.bio.functions[i].title;
                             }
                         }
                     }
@@ -73,6 +75,8 @@ $(function(){
                         $("#role").html("<span class='red'>" + admin + "</span>");
                     } else if (modo){
                         $("#role").html("<span class='blue'>" + modo + "</span>");
+                    } else if (devel){
+                        $("#role").html("<span class='green'>" + devel + "</span>");
                     }
                     $("#pbio, #pfunctions").show();
                 }
