@@ -3,9 +3,9 @@ function parsedDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) + "-" + date.getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
 }
 if (location.protocol === "file:") {
-    var IP = "http://localhost:8888/";
+    var IP = "http://localhost:8443/";
 } else {
-    var IP = "https://palgania.ovh:8888/";
+    var IP = "https://palgania.ovh:8443/";
 }
 const ACTLIST = {
     "Sanction": {

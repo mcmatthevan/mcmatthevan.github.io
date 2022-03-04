@@ -18,7 +18,7 @@ $(function(){
             if (/déjà voté/.test(document.body.textContent)){
                 $.ajax({
                     type: "POST",
-                    url: "https://palgania.ovh:8888/services/checkvote",
+                    url: "https://palgania.ovh:8443/services/checkvote",
                     dataType: "json",
                     success: function (response) {
                         let url = new URL(location.href);
@@ -39,7 +39,7 @@ $(function(){
     } else {
         $.ajax({
             type: "GET",
-            url: "https://palgania.ovh:8888/services/checkvote",
+            url: "https://palgania.ovh:8443/services/checkvote",
             dataType: "json",
             success: function (response) {
                 if (!response){
