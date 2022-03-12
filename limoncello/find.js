@@ -1,4 +1,5 @@
 $(function () {
+    const MAXP = 50;
     (function(){
         let today = new Date(),
             dic = ["value","min","max"];
@@ -60,10 +61,10 @@ $(function () {
                             }
                         }
                         let c = results.length;
-                        if (parseInt($("#perpage").val()) >= parseInt($("#perpage").attr("max"))){
-                            $("#perpage").val(c);
+                        if (parseInt($("#perpage").val()) > MAXP || parseInt($("#perpage").val()) > parseInt($("#perpage_max").text())){
+                            $("#perpage").val(c < MAXP ? c : MAXP);
                         }
-                        $("#perpage").attr("max",c < 50 ? c : 50);
+                        $("#perpage").attr("max",c < MAXP ? c : MAXP);
                         $("#perpage_max").text(c);
                         let perpage = parseInt($("#perpage").val()),
                             page = (parseInt($("#page").val())-1),
