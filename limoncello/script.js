@@ -166,7 +166,7 @@ $(function () {
                             $("#big_title").text("Réquisitoire n°" + response.id);
                             $("#subtitle_infos").text("Créé par " + response.authorName + " le " + stringDate(response.date));
                             $("#a_title").text(response.title);
-                            $("#a_descr").html(response.comment.replace(/\n/g, "<br>"));
+                            $("#a_descr").html(autoFormatUrl(response.comment.replace(/\n/g, "<br>")));
                             if (response.tempActs.length > 0) {
                                 let form = "";
                                 for (let i = 0, c = response.tempActs.length; i < c; i++) {
@@ -212,7 +212,7 @@ $(function () {
                             $("#big_title").text("Ticket n°" + response.id);
                             $("#subtitle_infos").text("Créé par " + response.authorName + " le " + stringDate(response.date));
                             $("#a_title").text(response.title);
-                            $("#a_descr").html(response.comment.replace(/\n/g, "<br>"));
+                            $("#a_descr").html(autoFormatUrl(response.comment.replace(/\n/g, "<br>")));
 
                             if (typeof response.initiative.valueOf() === "string") {
                                 let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id=" + response.initiative.replace(/::Indictment\./g, "") + "'>" + response.initiative.replace(/::Indictment\./g, "") + "</a>" };
@@ -302,7 +302,7 @@ $(function () {
                             $("#big_title").text("Procédure n°" + response.id);
                             $("#subtitle_infos").text("Créée par " + response.authorName + " le " + stringDate(response.date));
                             $("#a_title").text(response.title);
-                            $("#a_descr").html(response.descr.replace(/\n/g, "<br>"));
+                            $("#a_descr").html(autoFormatUrl(response.descr.replace(/\n/g, "<br>")));
 
                             if (typeof response.initiative.valueOf() === "string") {
                                 let objind = { type: "Indictment", Id: "<a class='normalsize' href='?page=display&show=indictment&id=" + response.initiative.replace(/::Indictment\./g, "") + "'>" + response.initiative.replace(/::Indictment\./g, "") + "</a>" };
@@ -644,7 +644,7 @@ $(function () {
                                         status = ["closed", "Clôturé"];
                                     }
                                     let toappend = "<div class='summary' id='_tic_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + response[i].comment.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
                                     if (status[0] === "waiting") {
@@ -697,7 +697,7 @@ $(function () {
                                         status = ["opened", "En cours"];
                                     }
                                     let toappend = "<div class='summary' id='_pro_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].descr + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + response[i].descr.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>"
                                     if (status[0] === "waiting" || status[0] === "opened") {
@@ -747,7 +747,7 @@ $(function () {
                                         status = ["closed", "Traité par<br/>" + response[i].procedureId];
                                     }
                                     let toappend = "<div class='summary' id='_ind_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].comment + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + response[i].comment.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
                                     if (status[0] === "opened") {
