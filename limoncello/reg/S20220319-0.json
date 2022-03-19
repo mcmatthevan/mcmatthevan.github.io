@@ -1,0 +1,64 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "title",
+            "Termes du partenariat"
+        ],
+        [
+            "article",
+            "Il est \u00e9tabli un partenariat avec l'organisation [i]Supr\u00e9matie[/i]."
+        ],
+        [
+            "article",
+            "Sur le serveur Discord est ajout\u00e9 un salon [i]#affiliations[/i], dans lequel est explicit\u00e9 le partenariat avec la description suivante: \n\n[i]Supr\u00e9matie est un serveur communautaire qui regroupe du SCP SL avec du minecraft :\n1 serveur SCP SL RP\n1 serveur SCP SL NO RP\nEt exclusif 1 serveur anarchie ou vous pouvez faire tout se que vous voulez \nEt un serveur minecraft sur un autre discord.[/i] \n\nCette description est accompagn\u00e9e du lien vers le serveur Discord de Supr\u00e9matie."
+        ],
+        [
+            "article",
+            "Il est autoris\u00e9, sur le serveur Discord, et en d\u00e9rogation \u00e0 l'article 1-9 du r\u00e8glement g\u00e9n\u00e9ral du serveur, toute publicit\u00e9 pointant vers l'organisation Supr\u00e9matie."
+        ],
+        [
+            "title",
+            "Du r\u00f4le d'ambassadeur"
+        ],
+        [
+            "article",
+            "Il est cr\u00e9\u00e9, sur les serveurs Minecraft et Discord, le r\u00f4le d'ambassadeur. Il est attribu\u00e9 \u00e0 un nombre maximal de deux personnes, dont la nomination est confi\u00e9e aux g\u00e9rants de [i]Supr\u00e9matie[/i]"
+        ],
+        [
+            "article",
+            "Les ambassadeurs repr\u00e9sentent [i]Supr\u00e9matie[/i] sur l'ensemble des services de Palgania. Ils peuvent, le cas \u00e9ch\u00e9ant, avoir des permissions sp\u00e9ciales fix\u00e9es par l'\u00e9quipe d'administration."
+        ]
+    ],
+    "date": 1647724835,
+    "dispo": [
+        "Vu l'article 1-6 du [reg=R20210623-0]R.I.O.R.[/reg]",
+        "Vu l'article 1-9 du [reg=R20210928-0]r\u00e8glement g\u00e9n\u00e9ral du serveur[/reg]"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "AigleAttarde",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "Ce statut vise \u00e0 \u00e9tablir un partenariat avec l'organisation [i]Supr\u00e9matie[/i], serveur Discord regroupant des serveurs Minecraft et Discord. Ce partenariat est r\u00e9alis\u00e9 de mani\u00e8re sym\u00e9trique sur Palgania et sur le serveur Discord de Supr\u00e9matie.",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220319-0",
+    "title": "Statut n\u00b0S20220319-0 \u00e9tablissant un partenariat avec l'organisation Supr\u00e9matie",
+    "confirmSign": {
+        "aigleattarde": true
+    }
+}
