@@ -443,10 +443,10 @@ $(function () {
                                                                                 $("#mod_info").html("<div class='load_info'>Veuillez patienter.<br/>Publication de l'acte de nomination.<br/>NE QUITTEZ PAS LA PAGE<br/><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/></div>");
                                                                                 let content, title;
                                                                                 if (response[i].gender === "f") {
-                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommée modératrice et est appelée à exercer les droits et les devoirs qui en découlent.")]);
+                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommée modératrice et est appelée à exercer les droits et les devoirs qui en émanent.")]);
                                                                                     title = "portant nomination d'une modératrice - " + response[i].pseudo;
                                                                                 } else {
-                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommé modérateur et est appelé à exercer les droits et les devoirs qui en découlent.")]);
+                                                                                    content = JSON.stringify([("article", response[i].pseudo + " est nommé modérateur et est appelé à exercer les droits et les devoirs qui en émanent.")]);
                                                                                     title = "portant nomination d'un modérateur - " + response[i].pseudo;
                                                                                 }
                                                                                 $.ajax({
