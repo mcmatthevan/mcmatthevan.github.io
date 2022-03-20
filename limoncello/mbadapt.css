@@ -29,7 +29,7 @@
 		max-width: 100%;
 	}
 	
-	section{
+	table,section{
 		overflow: scroll;
 	}
 	
