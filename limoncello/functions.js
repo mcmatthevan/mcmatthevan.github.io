@@ -384,6 +384,17 @@ function autoFormatUrl(text){
                 .replace(reg_img,"<a target='_blank' href=\"$1\"><img alt=\"$1\" src=\"$1\" style='display: block; width: 50%; height: auto;'/></a>");
 }
 
+function autoShrinkUrl(text){
+    return text.replace(/(https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g,
+    "<a class='short' href=\"$1\">$1</a>");
+}
+
+function applyShrinkUrl(length=20){
+    $("a.short").each(function(i,v){
+        $(v).html($(v).html().substring(0,length-3) + "...");
+    });
+}
+
 function formatAct(act, notshown = [], modifClassEquiv = {}, modifAttrEquiv = {}) {
     let classEquivalent = Object.assign({}, _classEquivalent),
         attrEquivalent = Object.assign({}, _attrEquivalent);

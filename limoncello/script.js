@@ -644,7 +644,7 @@ $(function () {
                                         status = ["closed", "Clôturé"];
                                     }
                                     let toappend = "<div class='summary' id='_tic_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].comment.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + autoShrinkUrl(response[i].comment.replace(/\n/g,"<br>")) + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
                                     if (status[0] === "waiting") {
@@ -654,6 +654,7 @@ $(function () {
                                     }
                                 }
                                 summRedirect();
+                                applyShrinkUrl();
                             }
                         });
                         break;
@@ -697,7 +698,7 @@ $(function () {
                                         status = ["opened", "En cours"];
                                     }
                                     let toappend = "<div class='summary' id='_pro_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].descr.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + autoShrinkUrl(response[i].descr.replace(/\n/g,"<br>")) + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>"
                                     if (status[0] === "waiting" || status[0] === "opened") {
@@ -706,6 +707,7 @@ $(function () {
                                         $("#home_closed").append(toappend);
                                     }
                                 }
+                                applyShrinkUrl();
                                 summRedirect();
                             }
                         });
@@ -747,7 +749,7 @@ $(function () {
                                         status = ["closed", "Traité par<br/>" + response[i].procedureId];
                                     }
                                     let toappend = "<div class='summary' id='_ind_" + response[i].id + "'><div><p class='" + status[0] + "'>" + status[1] + "</p></div><div></div><div><h1>" + response[i].title +
-                                        "</h1><p>" + response[i].comment.replace(/\n/g,"<br>") + "</p></div><div><p>Id : " + response[i].id +
+                                        "</h1><p>" + autoShrinkUrl(response[i].comment.replace(/\n/g,"<br>")) + "</p></div><div><p>Id : " + response[i].id +
                                         "</p><p>" + response[i].authorName + "</p><p>" + new Date(response[i].date * 1000).toLocaleString("fr-FR", { year: 'numeric', month: 'numeric', day: 'numeric', hour: "numeric", minute: "numeric" })
                                         + "</p></div></div>";
                                     if (status[0] === "opened") {
@@ -758,6 +760,7 @@ $(function () {
 
                                 }
                                 summRedirect();
+                                applyShrinkUrl();
                             }
                         });
                         break;
