@@ -7,7 +7,7 @@
 
 	body {
 		width: auto;
-		font-size: 0.8em;
+		font-size: 0.7em;
 		margin: 0;
 		padding: 0;
 	}
@@ -29,8 +29,8 @@
 		max-width: 100%;
 	}
 	
-	table,section{
-		overflow: scroll;
+	section{
+		overflow: auto;
 	}
 	
 	/* conserver le ratio des images */

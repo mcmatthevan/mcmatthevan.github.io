@@ -379,7 +379,9 @@ a:visited{
 }
 
 #main_title{
-    width: 100%;
+    max-width: 100vmax;
+    min-width: 100%;
+    width: auto;
     text-align: center;
 }
 
