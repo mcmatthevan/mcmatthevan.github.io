@@ -42,6 +42,7 @@ $(function(){
             url: "https://palgania.ovh:8443/services/checkvote",
             dataType: "json",
             success: function (response) {
+                console.log(response);
                 if (!response){
                     location.href = "https://www.serveurs-minecraft.org/vote.php?id=62219&href=" + location.href;
                 }
