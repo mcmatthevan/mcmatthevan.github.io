@@ -73,6 +73,11 @@ $(function(){
                 let respobj = response.sign[mentionlist[i]][0];
                 signs += "<p style='margin-bottom: 50px; text-align: end;'>" + (mentionlist[i] ? "<span style='font-style: italic; margin: inherits;'>" + mentionlist[i] + ": </span><br/>" : "") +
                            (respobj[1] ? "" : "<span style='font-variant: small-caps;'>") + respobj[0] + (respobj[1] ? "" : "</span>") + (respobj[1] ? ", <br/>" + respobj[1] : "")+ "</p>";
+                for (let j = 1, d = response.sign[mentionlist[i]].length ; j < d ; ++j){
+                    respobj = response.sign[mentionlist[i]][j];
+                    signs += "<p style='margin-bottom: 50px; text-align: end;'>" +
+                               (respobj[1] ? "" : "<span style='font-variant: small-caps;'>") + respobj[0] + (respobj[1] ? "" : "</span>") + (respobj[1] ? ", <br/>" + respobj[1] : "")+ "</p>";
+                }
             }
 
             let infos = "";
