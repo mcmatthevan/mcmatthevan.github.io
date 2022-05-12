@@ -2,6 +2,16 @@
     display: none;
 }
 
+#discordimg{
+    width: 1.5em;
+    margin: auto;
+    box-shadow: 1px 1px 1px black;
+}
+
+#discordimg:hover{
+    box-shadow: none;
+}
+
 .red{
     color: red;
 }
