@@ -78,10 +78,10 @@ $(function(){
                     } else if (devel){
                         $("#role").html("<span class='green'>" + devel + "</span>");
                     }
-                    if (response.discord !== null){
-                        $("#pframe").append(`<tr id="sdiscordtr"><td>Discord</td><td id="sdiscord"><a href='https://discord.com/users/` + response.discord + `'><img id='sdiscordimg' src='https://cdn.discordapp.com/embed/avatars/0.png' alt=''/></a></td></tr>`)
-                    }
                     $("#pbio, #pfunctions").show();
+                }
+                if (response.discord !== null){
+                    $("#pframe").append(`<tr id="sdiscordtr"><td>Discord</td><td id="sdiscord"><a href='https://discord.com/users/` + response.discord + `'><img id='sdiscordimg' src='https://cdn.discordapp.com/embed/avatars/0.png' alt=''/></a></td></tr>`)
                 }
             },
             error: function(x){
