@@ -78,6 +78,9 @@ $(function(){
                     } else if (devel){
                         $("#role").html("<span class='green'>" + devel + "</span>");
                     }
+                    if (response.discord !== null){
+                        $("#pframe").append(`<tr id="discordtr"><td>Discord</td><td id="discord"><a href='https://discord.com/users/` + response.discord + `'><img id='discordimg' src='https://cdn.discordapp.com/embed/avatars/0.png' alt=''/></a></td></tr>`)
+                    }
                     $("#pbio, #pfunctions").show();
                 }
             },
