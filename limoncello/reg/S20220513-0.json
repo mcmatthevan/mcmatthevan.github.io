@@ -1,0 +1,39 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "L\u00e9on082005 est nomm\u00e9 administrateur charg\u00e9 de la communication du serveur."
+        ]
+    ],
+    "date": 1652467571,
+    "dispo": [
+        "Vu l'article 1.6 du R.I.O.R. "
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "lumahell",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "AigleAttarde",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "AigleAttarde, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220513-0",
+    "title": "Statut n\u00b0S20220513-0 portant nomination de L\u00e9on082005 au poste d'administrateur charg\u00e9 de la communication",
+    "confirmSign": {
+        "lumahell": true
+    }
+}
