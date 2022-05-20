@@ -1,0 +1,39 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Un compte Twitch est cr\u00e9\u00e9 pour Palgania."
+        ]
+    ],
+    "date": 1653074158,
+    "dispo": [
+        "Apr\u00e8s d\u00e9lib\u00e9ration avec l'\u00e9quipe d'administration et par d\u00e9cision de l'administrateur charg\u00e9 de la communication"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "Leon082005",
+                "Administrateur charg\u00e9 de la communication",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "AigleAttarde",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "AigleAttarde, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220520-0",
+    "title": "Statut n\u00b0S20220520-0 portant cr\u00e9ation d'un compte twitch pour Palgania",
+    "confirmSign": {
+        "leon082005": true
+    }
+}
