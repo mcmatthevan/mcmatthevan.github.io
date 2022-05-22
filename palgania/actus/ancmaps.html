@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anciennes maps du serveur</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="/scripts/checkdomain.js"></script>
+    <link rel="shortcut icon" href="../images/logo2.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../regles.html">Règlement</a></li>
+                <li class="selected"><a href="../actus/">Actualités</a></li>
+                <li><a href="../contacts.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="firstelement cgu reglement">
+        <div class="modeaffichage">
+            <div id="dark">Sombre</div>
+            <div id="light">Clair</div>
+        </div>
+        <H1>Télécharger les anciennes maps du serveur</H1>
+
+        <p>Pour les adeptes des petites bouffées de nostalgie, voici les anciennes maps des anciennes versions du
+            serveur
+            Palgania !
+        </p>
+        <p> Elles sont assez conséquentes en taille (~ 5-15 Go), donc prenez en compte le temps de téléchargement
+            qui peut être long, et considérez aussi qu'elles vont vite remplir votre disque dur !
+        </p>
+        <p>Chaque map est accompagnée de la version
+            de Minecraft recommandée pour la charger (il peut y avoir notamment des bugs de datapack si vous les chargez
+            dans
+            la mauvaise version).
+        </p>
+        <article>
+
+            <h2>V1 - La République Socialiste de Palganie</h2>
+            <p><em>24 août 2020 - 17 juillet 2021</em></p>
+            <img class="illustration" src="../images/banniere.png" alt="" />
+            <p>
+                <a href="https://drive.google.com/file/d/1X1KF8ssOziveQ8ZCITIIHAsmji06_XQH/view?usp=sharing" title="Téléchargement map v1-1.16.5"><img src="../images/download-button.png"
+                        alt="Cliquez ici" /></a><br />Version : 1.16.5
+            </p>
+        </article>
+
+
+        <hr>
+        <p class="signature">
+            <strong>lumahell</strong>, le 21 mai 2022<br />
+        </p>
+    </section>
+    <footer>Palgania™<br>
+        <a href='https://www.serveursminecraft.org/serveur/6129/'>Voter pour Palgania</a> sur le classement de <a
+            href='https://www.serveursminecraft.org/' target='_blank'>ServeursMinecraft.Org</a>
+    </footer>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>const BANNER = "banner_actus"; const BANNER_PREFIX = "../";</script>
+    <script src="../scripts/getbanner.js"></script>
+    <script>
+        (function () {
+            var dark_bt = document.querySelector("#dark"),
+                light_bt = document.querySelector("#light"),
+                firstel = document.querySelector(".firstelement");
+            dark_bt.addEventListener("click", function () {
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv != null) {
+                    configdiv.parentNode.removeChild(configdiv);
+                }
+            });
+            light_bt.addEventListener("click", function () {
+                var configdiv = document.querySelector("#darklightdiv");
+                if (configdiv == null) {
+                    var configdiv = document.createElement("div");
+                    configdiv.id = "darklightdiv";
+                    document.body.insertBefore(configdiv, firstel);
+                }
+            });
+        })();
+
+    </script>
+</body>
+
+</html>
