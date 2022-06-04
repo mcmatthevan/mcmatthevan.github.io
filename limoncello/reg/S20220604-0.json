@@ -1,0 +1,63 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "L'\u00e9lection \u00e0 la pr\u00e9sidence de la Commission de Mod\u00e9ration est convoqu\u00e9e par le Pr\u00e9sident de ladite Commission au minimum une semaine et au maximum trois semaines avant l'\u00e9ch\u00e9ance de son mandat."
+        ],
+        [
+            "article",
+            "L'acte convoquant l'\u00e9lection mentionne :\n\n- Les candidats \u00e0 la pr\u00e9sidence s'\u00e9tant explicitement d\u00e9clar\u00e9s\n\n- La date \u00e0 laquelle aura lieu l'\u00e9lection, devant se situer au minimum cinq jours et au maximum deux semaines avant l'expiration du mandat du Pr\u00e9sident en exercice."
+        ],
+        [
+            "article",
+            "Avant de convoquer l'\u00e9lection, le Pr\u00e9sident de la Commission de Mod\u00e9ration doit s'assurer d'avoir inform\u00e9 correctement et suffisamment t\u00f4t l'ensemble des membres de la Commission de leur possibilit\u00e9 d'\u00eatre candidat.\n\nIl doit \u00eatre \u00e9galement rappel\u00e9 \u00e0 l'ensemble des membres de la Commission leur qualit\u00e9 d'\u00e9lecteur."
+        ],
+        [
+            "article",
+            "Un candidat est \u00e9lu lorsqu'il obtient la majorit\u00e9 absolue des voix.\n\nLorsque personne n'obtient la majorit\u00e9 absolue, il est proc\u00e9d\u00e9 \u00e0 un second tour entre les deux premiers candidats.\n\nLe second tour peut avoir lieu le m\u00eame jour que le premier tour ou le jour suivant."
+        ],
+        [
+            "article",
+            "Le Pr\u00e9sident \u00e9lu entre en fonction le jour de l'expiration du mandat de son pr\u00e9d\u00e9cesseur.\n\nSi le Pr\u00e9sident en exercice est un membre de l'administration assurant l'int\u00e9rim, le Pr\u00e9sident \u00e9lu entre en fonction d\u00e8s la publication du compte-rendu de vote."
+        ]
+    ],
+    "date": 1654350586,
+    "dispo": [
+        "Vu l'article 2-2 du [reg=R20210623-0]RIOR[/reg]"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "AigleAttarde",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "Vu pour ex\u00e9cution": [
+            [
+                "Adelka56",
+                "Pr\u00e9sidente de la Commission de Mod\u00e9ration",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220604-0",
+    "title": "Statut n\u00b0S20220604-0 fixant les modalit\u00e9s de l'\u00e9lection \u00e0 la pr\u00e9sidence de la Commission de Mod\u00e9ration",
+    "confirmSign": {
+        "aigleattarde": true,
+        "adelka56": true
+    }
+}
