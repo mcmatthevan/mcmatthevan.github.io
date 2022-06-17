@@ -1,0 +1,68 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "title",
+            "Maintenance"
+        ],
+        [
+            "article",
+            "Le serveur entrera en maintenance \u00e0 partir du 17 juin 2022 \u00e0 16h00 et jusqu'au 8 juillet 2022 \u00e0 16h00."
+        ],
+        [
+            "title",
+            "Sortie de la V4"
+        ],
+        [
+            "article",
+            "Le serveur passera en V4 le 8 juillet 2022 \u00e0 16h00."
+        ],
+        [
+            "article",
+            "La map de la V3 est mise \u00e0 disposition des joueurs en t\u00e9l\u00e9chargement."
+        ]
+    ],
+    "date": 1655461829,
+    "dispo": [
+        "Vu l'article 1-6 du R.I.O.R",
+        "Apr\u00e8s d\u00e9lib\u00e9ration de l'\u00e9quipe d'administration"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "lumahell",
+                "Administrateur principal",
+                ""
+            ],
+            [
+                "Leon082005",
+                "Administrateur charg\u00e9 de la communication",
+                ""
+            ],
+            [
+                "Warquy",
+                "Administrateur charg\u00e9 du d\u00e9veloppement",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "AigleAttarde",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "AigleAttarde, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220617-0",
+    "title": "Statut n\u00b0S20220617-0 fixant la date de sortie de la V4",
+    "confirmSign": {
+        "lumahell": true,
+        "leon082005": true,
+        "warquy": true
+    }
+}
