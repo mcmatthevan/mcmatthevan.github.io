@@ -1,0 +1,42 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Adelka56 est relev\u00e9e de ses fonctions de Pr\u00e9sidente de la Commission de Mod\u00e9ration."
+        ],
+        [
+            "article",
+            "Adelka56 reste mod\u00e9ratrice et membre de la Commission de Mod\u00e9ration de plein droit."
+        ],
+        [
+            "article",
+            "L'administrateur AigleAttarde est charg\u00e9 d'assurer les fonctions de Pr\u00e9sident de la Commission de la Mod\u00e9ration en tant qu'int\u00e9rim jusqu'\u00e0 l'\u00e9lection du prochain pr\u00e9sident."
+        ]
+    ],
+    "date": 1658181062,
+    "dispo": [
+        "Vu l'article 2-7 du [reg=R20210623-0]RIOR[/reg]",
+        "Vu l'article 2-6 du [reg=R20210623-0]RIOR[/reg]",
+        "Consid\u00e9rant que la Pr\u00e9sidente de la Commission de Mod\u00e9ration n'a pas convoqu\u00e9 l'\u00e9lection conform\u00e9ment au statut n\u00b0[reg=S20220604-0]S20220604-0[/reg] fixant les modalit\u00e9s de l'\u00e9lection \u00e0 la pr\u00e9sidence de la Commission de Mod\u00e9ration",
+        "Consid\u00e9rant que ce fait constitue un manquement \u00e0 ses devoirs",
+        "Apr\u00e8s d\u00e9lib\u00e9ration de l'\u00e9quipe d'administration"
+    ],
+    "sign": {
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220718-0",
+    "title": "Statut n\u00b0S20220718-0 portant r\u00e9vocation de la Pr\u00e9sidente de la Commission de Mod\u00e9ration",
+    "confirmSign": {}
+}
