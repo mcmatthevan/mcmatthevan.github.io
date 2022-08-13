@@ -463,7 +463,6 @@ mark{
     }
 
     nav ul a{
-        color: rgb(235,235,235);
         padding: 5px;
         font-size: 0.8em;
     }
@@ -491,15 +490,6 @@ mark{
 
     article{
         width: unset;
-    }
-
-    li:hover{
-        opacity: 0.8;
-        background: rgb(50, 50, 50);
-    }
-    nav li:hover{
-        background: rgb(50, 50, 50);
-        color: rgb(235, 235, 235);
     }
 
 
