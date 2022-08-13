@@ -7,8 +7,10 @@
 }
 
 body{
-    background: url("images/background.jpg") fixed no-repeat;
+    /* background: url("images/background.jpg") fixed no-repeat; */
+    background:rgb(230,230,230);
     background-size: cover;
+    margin: 0;
 }
 
 #endsec{
@@ -16,28 +18,28 @@ body{
 }
 
 header{
-    margin-top: 10px;
+    margin-top: 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 5%;
-    background: rgba(128, 128, 128, 0.274);
+    height: 10vh;
+    background: rgb(235,235,235);
     display: flex;
     align-items: center;
     z-index: 100;
+    border-bottom: rgb(100,100,100) 5px double;
 }
 
 .banniere{
-    height: 60vh;
-    margin-top: 10%;
-    border-radius: 10px;
+    height: 85vh;
+    margin-top: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: url("images/banniere.jpg");
+    background: url("images/phare.jpg");
     background-size: cover;
-    color: white;
+    color: #e0e0e0;
     
 }
 
@@ -46,18 +48,15 @@ header{
 }
 
 #palg, #discordip{
-    background: rgba(122, 122, 122, 0.274) ;
+    background: rgba(50, 50, 50, 0.6) ;
     padding: 10px;
 }
 
 #ip{
     display: block;
     background: rgb(51, 51, 51);
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
     font-size: 2em;
-    color: white;
+    color: rgb(235,235,235);
     transition: 0.2s;
 }
 
@@ -70,16 +69,25 @@ header{
     width: 40%;
     height: auto;
     margin: auto;
-    margin-top: 10px;
 }
 
 nav{
-    margin-top: 0;
-    margin-bottom: 0;
-    height: 100%;
+    display: grid;
+    grid-template-columns: 5vw 95vw;
+    grid-template-areas: "img ul";
+}
+
+nav img{
+    grid-area: img;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    background-color: rgb(235,235,235);
 }
 
 nav ul{
+    color: rgb(20,20,20);
+    grid-area: ul;
     margin: 0;
     list-style: none;
     align-items: center;
@@ -89,8 +97,12 @@ nav ul{
 
 a{
     font-weight: bold;
-    font-size: 1.2em;
-    color: unset;
+    font-size: 1.1em;
+    color: rgb(100,100,200);
+}
+
+nav a{
+    color: inherit;
 }
 
 a:hover{
@@ -98,14 +110,13 @@ a:hover{
 }
 
 nav ul a{
-    color: white;
     font-weight: bold;
     text-decoration: none;
     padding: 10px;
 }
 
 .selected a{
-    text-decoration: underline white;
+    text-decoration: underline rgb(235,235,235);
 }
 
 li{
@@ -113,16 +124,25 @@ li{
     display: flex;
     align-items: center;
     height: 100%;
-    background: rgba(77, 76, 76, 0.801);
     transition: 0.2s;
     
 }
 
-li:hover, .selected{
+li:hover{
+    opacity: 0.8;
     background: rgb(50, 50, 50);
+}
+nav li:hover{
+    background: rgb(50, 50, 50);
+    color: rgb(235, 235, 235);
+}
+.selected{
+    background: rgb(50, 50, 50);
+    color: rgb(235, 235, 235);
 }
 li.selected:hover{
     background: rgb(35, 35, 35);
+    color: rgb(235, 235, 235);
 }
 #ip:hover{
     background: rgb(0, 0, 0);
@@ -130,16 +150,16 @@ li.selected:hover{
 
 section{
     text-align: center;
-    margin: 10px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
 section:nth-child(n){
-    background: rgba(255, 255, 255, 0.9);
-    color: grey;
+    background: rgb(235,235,235);
+    color: rgb(20,20,20);
 }
 
 section.reglement, .bedrock_actu{
@@ -156,7 +176,6 @@ section.reglement, .bedrock_actu{
     font-size: 3em;
     text-decoration: underline;
 }
-
 
 .reglement p{
     margin-bottom: 30px;
@@ -177,7 +196,6 @@ section.reglement, .bedrock_actu{
 article{
     width: 50%;
     margin: auto;
-    margin-top: 10px;
     padding: 10px;
 }
 
@@ -200,24 +218,29 @@ article{
   }
 
 section:nth-child(n) article{
-    background: rgba(24, 24, 24, 0.637);
-    color: white;
+    background: rgb(20,20,20);
+    color: rgb(235,235,235);
 }
 
 section:nth-child(2n) article{
-    background: rgba(255, 255, 255, 0.9);
+    background: rgb(255, 255, 255);
     color: grey;
 }
 
 section:nth-child(2n){
-    background: rgba(24, 24, 24, 0.9);
-    color: white;
+    background: rgb(20,20,20);
+    color: rgb(235,235,235);
 }
 
 footer{
-    margin: 10px;
-    background: rgba(128, 128, 128, 0.459);
+    border-top: rgb(20,20,20) double 5px;
+    background: rgb(200,200,200);
     text-align: center;
+    font-size: 0.7em;
+}
+
+footer a{
+    color: rgb(100,100,100)
 }
 
 ul.regles li{
@@ -249,7 +272,11 @@ section:nth-child(n) ul.regles li ul li::before,section:nth-child(n) ul.regles l
 }
 
 section:nth-child(2n) ul.regles li ul li::before,section:nth-child(2n) ul.regles li::before{
-    color: white;
+    color: rgb(235,235,235);
+}
+
+.firstelement{
+    margin-top: 10vh;
 }
 
 .flist{
@@ -259,7 +286,6 @@ section:nth-child(2n) ul.regles li ul li::before,section:nth-child(2n) ul.regles
 }
 strong{
     text-decoration: underline;
-    color: rgb(214, 155, 155);
 }
 .signature{
     text-align: end;
@@ -275,9 +301,9 @@ strong{
 
 .modeaffichage #dark{
     transition: 200ms;
-    background: black;
+    background: rgb(20,20,20);
     opacity: 0.6;
-    color: white;
+    color: rgb(235,235,235);
 }
 
 i{
@@ -292,7 +318,7 @@ i{
 .modeaffichage #light{
     transition: 200ms;
     margin-top: 10px;
-    background: white;
+    background: rgb(235,235,235);
     opacity: 0.6;
     color: grey;
 }
@@ -323,7 +349,7 @@ mark{
     margin-top: 5px;
 }
 #candidate_form input, #candidate_form textarea{
-    width: 100%;
+    width: 99%;
 }
 #candidate_form textarea{
     height: 30em;
@@ -437,7 +463,7 @@ mark{
     }
 
     nav ul a{
-        color: white;
+        color: rgb(235,235,235);
         padding: 5px;
         font-size: 0.8em;
     }

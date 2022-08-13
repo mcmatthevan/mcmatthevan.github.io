@@ -1,4 +1,5 @@
 document.querySelector("header").innerHTML = `<nav>
+<img src="`+BANNER_PREFIX +`images/logo128x128.png" alt="Palgania">
 <ul>
     <li id="banner_index"><a href="`+ BANNER_PREFIX + `index.html">Accueil</a></li>
     <li id="banner_regles"><a href="`+ BANNER_PREFIX + `regles.html">Règlement</a></li>
@@ -23,9 +24,9 @@ if (BANNER !== null){
 
 }
 
-var banniere = document.querySelectorAll(".firstelement"),
-    menu = document.querySelector("header");
+// var banniere = document.querySelectorAll(".firstelement"),
+//     menu = document.querySelector("header");
 
-for (let i = 0, c = banniere.length; i < c; ++i) {
-    banniere[i].style.marginTop = menu.offsetHeight + 20 + "px";
-}
+// for (let i = 0, c = banniere.length; i < c; ++i) {
+//     banniere[i].style.marginTop = menu.offsetHeight + 20 + "px";
+// }

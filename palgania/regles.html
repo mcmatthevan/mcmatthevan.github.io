@@ -22,6 +22,7 @@
             </ul>
         </nav>
     </header>
+    <div></div>
     <section class="firstelement reglement">
         <div class="modeaffichage">
             <div id="dark">Sombre</div>
@@ -34,28 +35,7 @@
         <a href='https://www.serveursminecraft.org/serveur/6129/'>Voter pour Palgania</a> sur le classement de <a href='https://www.serveursminecraft.org/' target='_blank'>ServeursMinecraft.Org</a>
     </footer>
     <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script>
-        (function(){
-            var dark_bt = document.querySelector("#dark"),
-                light_bt = document.querySelector("#light"),
-                firstel = document.querySelector(".firstelement");
-            dark_bt.addEventListener("click",function(){
-                var configdiv = document.querySelector("#darklightdiv");
-                if (configdiv != null){
-                    configdiv.parentNode.removeChild(configdiv);
-                }
-            });
-            light_bt.addEventListener("click",function(){
-                var configdiv = document.querySelector("#darklightdiv");
-                if (configdiv == null){
-                    var configdiv = document.createElement("div");
-                    configdiv.id = "darklightdiv";
-                    document.body.insertBefore(configdiv,firstel);
-                }
-            });
-        })();
-
-    </script>
+    <script src="scripts/dark_light.js"></script>
     <script>const BANNER = "banner_regles";const BANNER_PREFIX = "";</script>
     <script src="scripts/getbanner.js"></script>
     <script src="scripts/regles.js"></script>
