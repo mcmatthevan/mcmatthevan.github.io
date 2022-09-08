@@ -1,0 +1,39 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Il est mis fin, \u00e0 sa demande, aux fonctions de Warquy, administrateur charg\u00e9 du d\u00e9veloppement."
+        ]
+    ],
+    "date": 1662659442,
+    "dispo": [
+        "Vu l'article 1-2 du [reg=R20210623-0]RIOR[/reg]"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "AigleAttarde",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20220908-0",
+    "title": "Statut n\u00b0S20220908-0 portant r\u00e9vocation d'un administrateur - Warquy",
+    "confirmSign": {
+        "aigleattarde": true
+    }
+}
