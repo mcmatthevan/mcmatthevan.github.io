@@ -706,7 +706,8 @@ $(function () {
                 "Règlement": "reg",
                 "Acte": "acte",
                 "Révision": "reg",
-                "Proposition de révision": "propreg"
+                "Proposition de révision": "propreg",
+                "Décision": "decision"
             };
             for (let typ in permType) {
                 if (checkPerm("admin.reg." + permType[typ])) {
