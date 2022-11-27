@@ -1,0 +1,65 @@
+{
+    "type": "R\u00e8glement",
+    "model": "reglement",
+    "content": [
+        [
+            "article",
+            "Les fondateurs du serveur sont AigleAttarde et lumahell."
+        ],
+        [
+            "article",
+            "Les fondateurs du serveur sont les cr\u00e9ateurs de Palgania. Leur r\u00f4le est essentiellement repr\u00e9sentatif. Il constituent le Comit\u00e9 de Fondation du serveur et peuvent \u00e0 ce titre parler, \u00e9crire, publier \u00e0 propos et au nom du serveur Palgania. Ils d\u00e9l\u00e8guent \u00e9galement ce droit \u00e0 l'\u00e9quipe d'administration."
+        ],
+        [
+            "article",
+            "Les fondateurs nomment les administrateurs principaux du serveur. Leur nomination est approuv\u00e9e par un vote \u00e0 majorit\u00e9 absolue, soit de l'\u00e9quipe d'administration, soit de la communaut\u00e9, selon les choix des fondateurs. Si l'\u00e9quipe d'administration ne comporte aucun administrateur lors de la nomination, celle-ci ne peut \u00eatre soumise qu'\u00e0 la communaut\u00e9."
+        ],
+        [
+            "article",
+            "Les fondateurs acceptent ou refusent, le cas \u00e9ch\u00e9ant, la d\u00e9mission leur \u00e9tant pr\u00e9sent\u00e9e par un administrateur principal seul, ou par les deux administrateurs principaux conjointement. Ils assurent le r\u00f4le d'administrateur principal le temps de la vacance."
+        ],
+        [
+            "article",
+            "Les fondateurs peuvent, \u00e0 la demande des administrateurs principaux, pr\u00e9sider exceptionnellement une r\u00e9union de l'\u00e9quipe d'administration."
+        ],
+        [
+            "article",
+            "Les fondateurs peuvent, \u00e0 la demande des administrateurs principaux, repr\u00e9senter le serveur lors d'un \u00e9v\u00e8nement organis\u00e9 sur celui-ci."
+        ],
+        [
+            "title",
+            "Dispositions ex\u00e9cutoires"
+        ],
+        [
+            "article",
+            "A l'article 1-2 du RIOR, il est ajout\u00e9 le paragraphe suivant :\n\"Les administrateurs principaux sont nomm\u00e9s par les fondateurs du serveur, selon les dispositions pr\u00e9vues par un r\u00e8glement organique.\"\n"
+        ]
+    ],
+    "date": 1669486813,
+    "dispo": [
+        "Vu le [crv=CRV20221124-0]compte-rendu[/crv] de vote du 24 novembre 2022"
+    ],
+    "sign": {
+        "": [
+            [
+                "AigleAttarde & lumahell",
+                ""
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [
+        {
+            "type": "ChangeArt",
+            "authorId": "lumahell",
+            "regId": "R20210623-0",
+            "artId": 2,
+            "comment": "L'\u00e9quipe d'administration est dirig\u00e9e par deux administrateurs principaux, qui nomment et r\u00e9voquent les administrateurs au sein de celle-ci. Lorsqu'un administrateur souhaite quitter son poste, celui-ci peut remettre sa d\u00e9mission aux administrateurs principaux, qui l'acceptent automatiquement.\n\nLes administrateurs principaux sont nomm\u00e9s par les fondateurs du serveur, selon les dispositions pr\u00e9vues par un r\u00e8glement organique."
+        }
+    ],
+    "author": "Les administrateurs principaux",
+    "verb": "Ont adopt\u00e9",
+    "id": "R20221126-0",
+    "title": "R\u00e8glement portant cr\u00e9ation du r\u00f4le de fondateur",
+    "confirmSign": {}
+}
