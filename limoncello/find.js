@@ -1,4 +1,6 @@
 $(function () {
+    const DOMAIN = "palgania.ovh";
+    //const DOMAIN = "mcmatthevan.github.io";
     const MAXP = 50;
     (function(){
         let today = new Date(),
@@ -20,14 +22,14 @@ $(function () {
         $("#results").html("<p class='info'>Veuillez patienter</p><img class='loading_img' src='https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif' alt=''/>");
         $.ajax({
             type: "GET",
-            url: "https://mcmatthevan.github.io/limoncello/reg/index.json",
+            url: "https://" + DOMAIN + "/limoncello/reg/index.json",
             //url: "reg/index.json",
             dataType: "json",
             success: function (response) {
 
                 $.ajax({
                     type: "GET",
-                    url: "https://mcmatthevan.github.io/limoncello/crv/index.txt",
+                    url: "https://" + DOMAIN + "/limoncello/crv/index.txt",
                     success: function (resp) {
                         resp = resp.trim().split(/\n+/g);
                         for (let i = 0, c = resp.length ; i < c ; ++i){
