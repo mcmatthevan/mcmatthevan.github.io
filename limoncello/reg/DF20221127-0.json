@@ -1,0 +1,31 @@
+{
+    "type": "D\u00e9cision",
+    "model": "decision",
+    "content": [
+        [
+            "article",
+            "Melkiior et LiveYTfrags_og sont nomm\u00e9s administrateurs principaux du serveur."
+        ]
+    ],
+    "date": 1669577588,
+    "dispo": [
+        "Vu l'article 1-2 du [reg=R20210623-0]RIOR[/reg]",
+        "Vu l'article 3 du [reg=R20221126-0]r\u00e8glement[/reg] portant cr\u00e9ation du r\u00f4le de fondateur",
+        "L'\u00e9quipe d'administration l'ayant approuv\u00e9 \u00e0 l'unanimit\u00e9"
+    ],
+    "sign": {
+        "": [
+            [
+                "AigleAttarde & lumahell",
+                ""
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Les Fondateurs du serveur",
+    "verb": "D\u00e9cident",
+    "id": "DF20221127-0",
+    "title": "D\u00e9cision des Fondateurs portant nomination des administrateurs principaux",
+    "confirmSign": {}
+}
