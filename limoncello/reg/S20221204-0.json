@@ -1,0 +1,40 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Il est mis fin aux fonctions de Leon082005, administrateur charg\u00e9 de la communication."
+        ]
+    ],
+    "date": 1670184793,
+    "dispo": [
+        "Vu l'article 1-2 du [reg=R20210623-0]R.I.O.R.[/reg]",
+        "Apr\u00e8s d\u00e9lib\u00e9ration de l'\u00e9quipe d'administration"
+    ],
+    "sign": {
+        "Par l'administrateur signataire": [
+            [
+                "LiveYTfrags_og",
+                "Administrateur principal",
+                ""
+            ]
+        ],
+        "": [
+            [
+                "Melkiior",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Melkiior, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20221204-0",
+    "title": "Statut n\u00b0S20221204-0 portant r\u00e9vocation de Leon082005",
+    "confirmSign": {
+        "liveytfrags_og": true
+    }
+}
