@@ -1,0 +1,41 @@
+{
+    "type": "D\u00e9cision",
+    "model": "decision",
+    "content": [
+        [
+            "article",
+            "La d\u00e9mission de LiveYTfrags_og est accept\u00e9e"
+        ],
+        [
+            "article",
+            "Les fondateurs du serveur exercent les fonctions d'administrateur principal jusqu'\u00e0 la nomination d'un prochain administrateur principal."
+        ],
+        [
+            "article",
+            "Cette d\u00e9cision sera publi\u00e9e au recueil des documents \u00e0 port\u00e9e r\u00e9glementaire et sur le serveur Discord."
+        ]
+    ],
+    "date": 1683217968,
+    "dispo": [
+        "Vu l'article 1-2 du [reg=R20210623-0]RIOR[/reg]",
+        "Vu l'article 4 du [reg=R20221126-0] r\u00e8glement[/reg] portant cr\u00e9ation du r\u00f4le de fondateur",
+        "Consid\u00e9rant que LiveYTfrags_og a remis sa d\u00e9mission par \u00e9crit et publiquement sur le serveur Discord dans le salon d\u00e9di\u00e9 aux informations \u00e0 la date du 4 mai 2023",
+        "Consid\u00e9rant que, par la pr\u00e9sente d\u00e9cision, un des deux postes d'administrateur principal se retrouve vacant",
+        ""
+    ],
+    "sign": {
+        "": [
+            [
+                "AigleAttarde & lumahell",
+                ""
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Les Fondateurs du serveur",
+    "verb": "D\u00e9cident",
+    "id": "DF20230504-0",
+    "title": "D\u00e9cision des Fondateurs portant acceptation de la d\u00e9mission de LiveYTfrags_og",
+    "confirmSign": {}
+}
