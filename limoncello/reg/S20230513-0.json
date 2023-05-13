@@ -1,0 +1,33 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "AigleAttarde est nomm\u00e9 pr\u00e9sident de la Commission de Mod\u00e9ration par int\u00e9rim."
+        ]
+    ],
+    "date": 1683999554,
+    "dispo": [
+        "Vu la [reg=DF20230504-0]d\u00e9cision[/reg] portant acceptation de la d\u00e9mission de LiveYTFrags_og",
+        "Vu le statut n\u00b0[reg=S20221204-1]S20221204-1[/reg] portant nomination du Pr\u00e9sident de la Commission de Mod\u00e9ration",
+        "Consid\u00e9rant que LiveYTFrags_og ne peut plus assurer sa fonction de Pr\u00e9sident de la Commission de Mod\u00e9ration par int\u00e9rim, ne faisant plus partie de l'\u00e9quipe d'administration",
+        "Consid\u00e9rant qu'AigleAttarde fait partie de l'\u00e9quipe d'administration en tant que fondateur exer\u00e7ant provisoirement la fonction d'administrateur principal"
+    ],
+    "sign": {
+        "": [
+            [
+                "lumahell",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "lumahell, en qualit\u00e9 de fondateur exer\u00e7ant provisoirement la fonction d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20230513-0",
+    "title": "Statut n\u00b0S20230513-0 portant nomination du pr\u00e9sident de la Commission de Mod\u00e9ration par int\u00e9rim",
+    "confirmSign": {}
+}
