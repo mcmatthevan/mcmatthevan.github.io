@@ -1,0 +1,27 @@
+{
+    "type": "Acte",
+    "model": "acte",
+    "content": [
+        "IcE_MaN__ est nomm\u00e9 mod\u00e9rateur et est appel\u00e9 \u00e0 exercer les droits et les devoirs qui en \u00e9manent."
+    ],
+    "date": 1683999907,
+    "dispo": [
+        "Vu le proc\u00e8s verbal d'analyse de la candidature de IcE_MaN__"
+    ],
+    "sign": {
+        "": [
+            [
+                "AigleAttarde",
+                "",
+                "signmod.jpg"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Le Pr\u00e9sident par int\u00e9rim de la Commission de Mod\u00e9ration",
+    "verb": "Acte",
+    "id": "A20230513-0",
+    "title": "Acte n\u00b0A20230513-0 portant nomination d'un mod\u00e9rateur - IcE_MaN__",
+    "confirmSign": {}
+}
