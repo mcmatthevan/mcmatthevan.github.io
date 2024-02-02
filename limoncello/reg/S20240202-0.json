@@ -1,0 +1,30 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Aujourd'hui \u00e0 lieu l'ouverture de la 5eme version du serveur Palgania "
+        ]
+    ],
+    "date": 1706903745,
+    "dispo": [
+        "vu article 1-6 du R.I.O.R"
+    ],
+    "sign": {
+        "": [
+            [
+                "Melkiior",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Melkiior, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20240202-0",
+    "title": "Statut n\u00b0S20240202-0 ouverture de la 5eme Version de Palgania",
+    "confirmSign": {}
+}
