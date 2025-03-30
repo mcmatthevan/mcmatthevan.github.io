@@ -1,0 +1,30 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "TEST"
+        ]
+    ],
+    "date": 1743344265,
+    "dispo": [
+        "NE PAS TENIR COMPTE"
+    ],
+    "sign": {
+        "": [
+            [
+                "Admin",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Admin, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20250330-0",
+    "title": "Statut n\u00b0S20250330-0 test",
+    "confirmSign": {}
+}
