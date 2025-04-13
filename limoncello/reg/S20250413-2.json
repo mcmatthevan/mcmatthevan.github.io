@@ -1,0 +1,30 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "title",
+            "D\u00e9mission du poste d'administateur principale"
+        ]
+    ],
+    "date": 1744565777,
+    "dispo": [
+        "d\u00e9mission du poste d'administateur principale pour _Maxys_"
+    ],
+    "sign": {
+        "": [
+            [
+                "_Maxys_",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "D\u00e9mission du poste d'administateur principale pour _Maxys_",
+    "execute": [],
+    "author": "_Maxys_, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20250413-2",
+    "title": "Statut n\u00b0S20250413-2 Demisiont du poste d'administateur principale",
+    "confirmSign": {}
+}
