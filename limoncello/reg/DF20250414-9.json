@@ -1,0 +1,35 @@
+{
+    "type": "D\u00e9cision",
+    "model": "decision",
+    "content": [
+        [
+            "article",
+            "snubknuckeld (Camie sur Discord) est nomm\u00e9e administratrice principale.\nMelkiior est reconduit \u00e0 la fonction d'administrateur principal."
+        ],
+        [
+            "article",
+            "Cette d\u00e9cision sera publi\u00e9e au recueil des documents \u00e0 port\u00e9e r\u00e8glementaire et sur le serveur Discord."
+        ]
+    ],
+    "date": 1744657544,
+    "dispo": [
+        "Vu l'article 1-2 du RIOR",
+        "Vu l'article 3 du r\u00e8glement portant cr\u00e9ation du r\u00f4le de fondateur",
+        "L'\u00e9quipe d'administration l'ayant approuv\u00e9 \u00e0 l'unanimit\u00e9"
+    ],
+    "sign": {
+        "": [
+            [
+                "AigleAttarde & lumahell",
+                ""
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Les Fondateurs du serveur",
+    "verb": "D\u00e9cident",
+    "id": "DF20250414-9",
+    "title": "D\u00e9cision des Fondateurs portant nomination des administrateurs principaux",
+    "confirmSign": {}
+}
