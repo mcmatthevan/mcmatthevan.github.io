@@ -1,0 +1,31 @@
+{
+    "type": "Statut",
+    "model": "statut3",
+    "content": [
+        [
+            "article",
+            "Ce jour a lieu l'ouverture de la 6eme version du serveur Palgania."
+        ]
+    ],
+    "date": 1747058068,
+    "dispo": [
+        "vu article 1-6 du R. I. O. R",
+        ""
+    ],
+    "sign": {
+        "": [
+            [
+                "Melkiior",
+                "",
+                "signadm2.png"
+            ]
+        ]
+    },
+    "preamble": "",
+    "execute": [],
+    "author": "Melkiior, en qualit\u00e9 d'administrateur principal",
+    "verb": "Statue",
+    "id": "S20250512-0",
+    "title": "Statut n\u00b0S20250512-0 portant l'ouverture de la 6eme Version",
+    "confirmSign": {}
+}
