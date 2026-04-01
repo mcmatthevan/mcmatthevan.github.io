@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Factory</title>
+  <link rel="stylesheet" href="quiz.css" />
+</head>
+<body>
+  <main class="quiz-app">
+    <header class="quiz-header">
+      <h1>Quiz</h1>
+      <p class="quiz-subtitle">Répondez aux questions puis validez. Vous pourrez corriger vos erreurs.</p>
+    </header>
+
+    <section id="score-panel" class="score-panel" aria-live="polite">
+      Score: <strong id="score-value">0/0</strong>
+    </section>
+
+    <form id="quiz-form" novalidate></form>
+
+    <section id="result-panel" class="result-panel" aria-live="polite"></section>
+  </main>
+
+  <!-- A modifier pour chaque nouveau quiz -->
+  <script src="get_quiz_from_ajax.js"></script>
+
+  <!-- Moteur generique: ne change pas d'un quiz a l'autre -->
+  <script src="quiz.js"></script>
+</body>
+</html>
