@@ -3,42 +3,42 @@
         "type": "radio",
         "question": "Quel axe de coordonnées est représenté par la couleur bleue dans Minecraft ?",
         "options": ["L'axe X (Est-Ouest)", "L'axe Y (Haut-Bas)", "L'axe Z (Nord-Sud)", "L'axe W"],
-        "explain": "L'axe bleu correspond à l'axe Z, qui gère la direction Nord-Sud[cite: 302, 332].",
+        "explain": "L'axe bleu correspond à l'axe Z, qui gère la direction Nord-Sud.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Quelle couleur est associée à l'axe X dans le repère visuel du jeu ?",
         "options": ["Bleu", "Vert", "Rouge", "Jaune"],
-        "explain": "L'axe X est représenté par la couleur rouge et correspond à l'axe Est-Ouest[cite: 303, 311].",
+        "explain": "L'axe X est représenté par la couleur rouge et correspond à l'axe Est-Ouest.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Comment évolue la coordonnée Z lorsque vous vous déplacez vers le Sud ?",
         "options": ["Elle diminue", "Elle augmente", "Elle reste stable", "Elle devient négative"],
-        "explain": "L'axe bleu (Z) pointe vers le sud ; s'y diriger fait augmenter la valeur[cite: 305, 333].",
+        "explain": "L'axe bleu (Z) pointe vers le sud ; s'y diriger fait augmenter la valeur.",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quelle coordonnée (X, Y ou Z) est modifiée lorsque vous montez ou descendez ?",
         "options": ["La première (X)", "La deuxième (Y)", "La troisième (Z)", "La quatrième (W)"],
-        "explain": "L'axe vertical est l'axe Y, situé au milieu des trois nombres[cite: 303, 336].",
+        "explain": "L'axe vertical est l'axe Y, situé au milieu des trois nombres.",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quelle est la coordonnée centrale du monde Minecraft (l'origine) ?",
         "options": ["100, 100, 100", "0, 0, 0", "1000, 0, 1000", "Elle change à chaque monde"],
-        "explain": "L'origine du repère est la coordonnée 0,0 (X et Z à zéro)[cite: 316].",
+        "explain": "L'origine du repère est la coordonnée 0,0 (X et Z à zéro).",
         "answer": 1
     },
     {
         "type": "checkbox",
         "question": "Quelles sont les caractéristiques des coordonnées des blocs ?",
         "options": ["Elles sont toujours entières", "Elles ont des chiffres après la virgule", "Elles sont fixées sur une grille", "Elles sont aléatoires"],
-        "explain": "Contrairement aux joueurs, les blocs ont des coordonnées entières et fixes sur la grille du jeu[cite: 321, 322, 323].",
+        "explain": "Contrairement aux joueurs, les blocs ont des coordonnées entières et fixes sur la grille du jeu.",
         "answer": [0, 2]
     },
     {
@@ -46,62 +46,62 @@
         "question": "Si vous avancez d'un bloc vers l'Est, de combien augmente la coordonnée X ?",
         "answer": "1",
         "check": ["^1$", ""],
-        "explain": "Une unité de coordonnée correspond exactement à la traversée d'un bloc[cite: 327, 328]."
+        "explain": "Une unité de coordonnée correspond exactement à la traversée d'un bloc."
     },
     {
         "type": "radio",
         "question": "Que signifie le symbole tilde (~) utilisé seul dans une commande ?",
         "options": ["Une position aléatoire", "La coordonnée absolue 0", "La position actuelle de l'exécuteur", "Le bloc le plus proche"],
-        "explain": "Le tilde représente la coordonnée relative au point d'exécution de la commande[cite: 358, 359].",
+        "explain": "Le tilde représente la coordonnée relative au point d'exécution de la commande.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "À quoi servent les coordonnées avec un accent circonflexe (^) ?",
         "options": ["À se repérer par rapport au Nord", "À définir une position relative au regard du joueur", "À verrouiller une position", "À accélérer la commande"],
-        "explain": "La syntaxe ^ ^ ^ permet de définir des positions selon l'orientation (gauche/droite, haut/bas, devant/derrière)[cite: 391, 392].",
+        "explain": "La syntaxe ^ ^ ^ permet de définir des positions selon l'orientation (gauche/droite, haut/bas, devant/derrière).",
         "answer": 1
     },
     {
-        "type": "text",
-        "question": "Quelle coordonnée locale (^ ^ ^X) faut-il modifier pour placer un bloc devant soi ?",
-        "answer": "La troisième",
-        "check": ["3|troisi[èe]me", "i"],
-        "explain": "Dans la syntaxe locale, la troisième valeur correspond à l'axe devant/derrière[cite: 394]."
+        "type": "radio",
+        "question": "Quelle coordonnée locale (^ ^ ^) faut-il modifier pour placer un bloc devant soi ?",
+        "answer": 2,
+	"options": ["La première","La deuxième","La troisième"],
+        "explain": "Dans la syntaxe locale, la troisième valeur correspond à l'axe devant/derrière."
     },
     {
         "type": "radio",
         "question": "Quelle touche permet d'autocompléter les coordonnées du bloc que vous visez ?",
         "options": ["Espace", "Entrée", "Tabulation", "Majuscule"],
-        "explain": "La touche Tabulation propose automatiquement les coordonnées du bloc pointé par le curseur[cite: 423, 425, 427].",
+        "explain": "La touche Tabulation propose automatiquement les coordonnées du bloc pointé par le curseur.",
         "answer": 2
     },
     {
         "type": "text",
         "question": "Quelle commande permet de placer un seul bloc à une position précise ?",
         "answer": "setblock",
-        "check": ["setblock", "i"],
-        "explain": "La commande /setblock est utilisée pour manipuler les blocs de manière unitaire[cite: 407]."
+        "check": ["/?setblock", "i"],
+        "explain": "La commande /setblock est utilisée pour manipuler les blocs de manière unitaire."
     },
     {
         "type": "radio",
         "question": "Quel est le comportement par défaut de la commande /setblock si aucun mode n'est précisé ?",
         "options": ["keep", "replace", "destroy", "strict"],
-        "explain": "Par défaut, /setblock remplace le bloc existant à la position donnée (mode replace)[cite: 442, 443].",
+        "explain": "Par défaut, /setblock remplace le bloc existant à la position donnée (mode replace).",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quel mode de /setblock empêche de placer un bloc si l'endroit n'est pas vide ?",
         "options": ["destroy", "strict", "keep", "replace"],
-        "explain": "Le mode 'keep' vérifie que la position est vide (air) avant d'agir[cite: 445, 446].",
+        "explain": "Le mode 'keep' vérifie que la position est vide (air) avant d'agir.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Quelle est la différence du mode 'destroy' par rapport au mode 'replace' ?",
         "options": ["Il coûte plus cher", "Il fait exploser le bloc", "Il fait tomber le bloc précédent sous forme d'objet", "Il est plus lent"],
-        "explain": "Le mode 'destroy' simule le minage du bloc précédent, avec particules et drop de l'item[cite: 449, 451].",
+        "explain": "Le mode 'destroy' simule le minage du bloc précédent, avec particules et drop de l'item.",
         "answer": 2
     },
     {
@@ -109,118 +109,118 @@
         "question": "Quel bloc spécial faut-il utiliser pour 'supprimer' un bloc existant via une commande ?",
         "answer": "air",
         "check": ["air", "i"],
-        "explain": "Placer de l'air (minecraft:air) revient à détruire le bloc à cette position[cite: 436, 439]."
+        "explain": "Placer de l'air (minecraft:air) revient à détruire le bloc à cette position."
     },
     {
         "type": "radio",
         "question": "À quoi sert le mode 'strict' dans le placement de blocs ?",
         "options": ["À supprimer les ombres", "À placer un bloc sans mise à jour du terrain", "À empêcher le joueur de bouger", "À forcer l'orientation"],
-        "explain": "Le mode strict place le bloc sans déclencher de mise à jour (Block Update), ce qui peut par exemple empêcher l'eau de couler[cite: 458, 460, 461].",
+        "explain": "Le mode strict place le bloc sans déclencher de mise à jour (Block Update), ce qui peut par exemple empêcher l'eau de couler.",
         "answer": 1
     },
     {
         "type": "text",
         "question": "Quelle commande permet de remplir une zone entière de blocs ?",
         "answer": "fill",
-        "check": ["fill", "i"],
-        "explain": "La commande /fill nécessite deux coordonnées pour définir le volume à remplir[cite: 467, 468]."
+        "check": ["/?fill", "i"],
+        "explain": "La commande /fill nécessite deux coordonnées pour définir le volume à remplir."
     },
     {
         "type": "radio",
         "question": "Dans une commande /fill, que définit-on avec les deux premières séries de coordonnées ?",
         "options": ["Le début et la fin de la commande", "Les deux coins opposés de la zone (le rectangle)", "La position du joueur et du bloc", "Le centre de la zone"],
-        "explain": "On donne les coordonnées de deux coins pour que le jeu remplisse tout l'espace entre les deux[cite: 475].",
+        "explain": "On donne les coordonnées de deux coins pour que le jeu remplisse tout l'espace entre les deux.",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quel argument de /fill permet de ne remplacer qu'un type de bloc spécifique dans une zone ?",
         "options": ["only", "keep", "replace", "filter"],
-        "explain": "L'option /fill ... replace <bloc_cible> permet de faire un remplacement sélectif[cite: 479, 481].",
+        "explain": "L'option /fill ... replace <bloc_cible> permet de faire un remplacement sélectif.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Quelle est la particularité du mode 'hollow' de la commande /fill ?",
         "options": ["Il remplit tout de façon compacte", "Il ne remplace que l'air", "Il crée une structure creuse en remplaçant l'intérieur par de l'air", "Il crée un dôme"],
-        "explain": "Hollow dessine les contours et vide systématiquement l'intérieur[cite: 499, 500, 501].",
+        "explain": "Hollow dessine les contours et vide systématiquement l'intérieur.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Quelle est la différence entre 'hollow' et 'outline' ?",
         "options": ["Hollow est plus rapide", "Outline laisse l'intérieur de la zone intact", "Outline ne fait que les coins", "Il n'y a aucune différence"],
-        "explain": "Outline crée aussi les contours, mais contrairement à hollow, il ne touche pas aux blocs déjà présents à l'intérieur[cite: 504, 506].",
+        "explain": "Outline crée aussi les contours, mais contrairement à hollow, il ne touche pas aux blocs déjà présents à l'intérieur.",
         "answer": 1
     },
     {
         "type": "radio",
-        "question": "Peut-on mélanger coordonnées absolues et relatives dans une même commande ?",
+        "question": "Peut-on mélanger coordonnées absolues et relatives (~) dans une même commande ?",
         "options": ["Oui", "Non"],
-        "explain": "Il est tout à fait possible de fixer une hauteur absolue tout en gardant X et Z relatifs (ex: ~ 10 ~)[cite: 379, 381, 385].",
+        "explain": "Il est tout à fait possible de fixer une hauteur absolue tout en gardant X et Z relatifs (ex: ~ 10 ~). Attention, ça n'est plus possible avec les ^ .",
         "answer": 0
     },
     {
         "type": "text",
         "question": "Quelle commande est l'équivalent du 'copier-coller' pour les structures ?",
         "answer": "clone",
-        "check": ["clone", "i"],
-        "explain": "La commande /clone permet de dupliquer une zone vers une autre[cite: 529, 530]."
+        "check": ["/?clone", "i"],
+        "explain": "La commande /clone permet de dupliquer une zone vers une autre."
     },
     {
         "type": "radio",
         "question": "À quoi correspond la coordonnée de destination spécifiée dans un /clone ?",
         "options": ["Au centre de la structure", "Au point le plus au Nord, à l'Ouest et en bas", "Au point le plus au Sud et à l'Est", "À la position de l'exécuteur"],
-        "explain": "Le point de collage correspond toujours au coin inférieur Nord-Ouest du volume cloné[cite: 538, 539, 545].",
+        "explain": "Le point de collage correspond toujours au coin inférieur Nord-Ouest du volume cloné.",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quel mode de /clone ignore les blocs d'air lors de la copie ?",
         "options": ["replace", "masked", "filtered", "move"],
-        "explain": "Le mode 'masked' permet de copier une structure sans écraser la destination avec les blocs d'air environnants[cite: 550, 551, 562].",
+        "explain": "Le mode 'masked' permet de copier une structure sans écraser la destination avec les blocs d'air environnants.",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Quel mode de /clone permet de faire un 'couper-coller' ?",
         "options": ["move", "force", "replace", "masked"],
-        "explain": "Le mode 'move' déplace la structure et supprime l'originale[cite: 588, 589, 592].",
+        "explain": "Le mode 'move' déplace la structure et supprime l'originale.",
         "answer": 0
     },
     {
         "type": "radio",
         "question": "Que faire si le jeu refuse un clone car la source et la destination se chevauchent ?",
         "options": ["Il faut agrandir la zone", "Il faut utiliser l'option 'force'", "Ce n'est pas possible de cloner", "Il faut supprimer la source"],
-        "explain": "L'option 'force' permet de valider le clonage même si les zones source et cible se superposent[cite: 584, 585, 586].",
+        "explain": "L'option 'force' permet de valider le clonage même si les zones source et cible se superposent.",
         "answer": 1
     },
     {
         "type": "checkbox",
         "question": "Quelles options peut-on ajouter après 'replace' dans un /clone ?",
         "options": ["normal", "force", "move", "strict"],
-        "explain": "On peut choisir entre le comportement normal, le déplacement (move) ou le forçage (force)[cite: 572, 573, 588].",
+        "explain": "On peut choisir entre le comportement normal, le déplacement (move) ou le forçage (force).",
         "answer": [0, 1, 2]
     },
     {
         "type": "text",
         "question": "Quelle commande permet d'obtenir un bloc de commande (car il n'est pas dans l'inventaire) ?",
         "answer": "give",
-        "check": ["give", "i"],
-        "explain": "On utilise la commande /give @s command_block pour en récupérer un[cite: 597]."
+        "check": ["/?give", "i"],
+        "explain": "On utilise la commande /give @s command_block pour en récupérer un."
     },
     {
         "type": "radio",
         "question": "De quelle couleur devient un bloc de commande réglé sur 'Répétition' ?",
         "options": ["Orange", "Vert", "Violet", "Bleu"],
-        "explain": "Les blocs de commande à répétition sont violets[cite: 610].",
+        "explain": "Les blocs de commande à répétition sont violets.",
         "answer": 2
     },
     {
         "type": "radio",
         "question": "Que signifie l'option 'Always Active' sur un bloc de commande ?",
         "options": ["Il brille toujours", "Il s'exécute sans besoin de signal de redstone", "Il ne peut pas être cassé", "Il s'exécute uniquement le jour"],
-        "explain": "Cette option permet au bloc de fonctionner en permanence sans levier ou bouton[cite: 612].",
+        "explain": "Cette option permet au bloc de fonctionner en permanence sans levier ou bouton.",
         "answer": 1
     },
     {
@@ -228,55 +228,27 @@
         "question": "Quelle combinaison de touches permet de copier un bloc de commande AVEC la commande inscrite dedans ?",
         "answer": "Ctrl + Clic Milieu",
         "check": ["ctrl.*clic.*milieu|contr[ôo]le.*clic.*milieu", "i"],
-        "explain": "Cette astuce permet de dupliquer les données NBT du bloc[cite: 606, 607]."
-    },
-    {
-        "type": "checkbox",
-        "question": "Quels paramètres peut-on modifier sur un bloc de commande ?",
-        "options": ["Impulsion / Répétition", "Par la redstone / Toujours actif", "Inculpable / Coupable", "Conditionnel / Inconditionnel"],
-        "explain": "On peut régler le type d'exécution, l'activation par redstone et d'autres options techniques[cite: 610, 612].",
-        "answer": [0, 1]
-    },
-    {
-        "type": "radio",
-        "question": "Dans l'exercice du portail, quel problème pose l'utilisation de seulement deux blocs de commande ?",
-        "options": ["C'est trop lent", "Cela ne fonctionne que pour une seule orientation du portail", "Le portail explose", "On ne peut pas l'allumer"],
-        "explain": "Sans commande intermédiaire, le portail ne s'adapte pas à toutes les directions (Nord/Sud vs Est/Ouest)[cite: 621, 622, 624].",
-        "answer": 1
+        "explain": "Cette astuce permet de dupliquer les données NBT du bloc."
     },
     {
         "type": "radio",
         "question": "À quelle fréquence un bloc de commande violet exécute-t-il sa commande ?",
         "options": ["Toutes les secondes", "À chaque tick de jeu", "Toutes les minutes", "Quand un joueur passe"],
-        "explain": "En mode répétition, la commande est exécutée en boucle à chaque tick (20 fois par seconde)[cite: 613].",
+        "explain": "En mode répétition, la commande est exécutée en boucle à chaque tick (20 fois par seconde).",
         "answer": 1
     },
     {
         "type": "radio",
         "question": "Pourquoi la commande /place est-elle mentionnée ?",
         "options": ["Pour placer des blocs d'air", "Pour générer des structures prédéfinies comme des arbres ou des villages", "Pour téléporter les blocs", "Pour créer des blocs d'or"],
-        "explain": "Elle permet de placer des 'features' ou des structures complexes nativement[cite: 514, 517, 523].",
+        "explain": "Elle permet de placer des 'features' ou des structures complexes nativement.",
         "answer": 1
-    },
-    {
-        "type": "text",
-        "question": "Quelle est la version exacte de Minecraft utilisée dans ce deuxième épisode ?",
-        "answer": "26.1.2",
-        "check": ["26\\.1\\.2", ""],
-        "explain": "L'auteur précise être en version 26.1.2 suite à une mise à jour récente[cite: 290, 291]."
     },
     {
         "type": "radio",
         "question": "Quel axe de coordonnées Minecraft n'indique PAS de direction dans l'indicateur 'Facing' du F3 ?",
         "options": ["L'axe X", "L'axe Y (Haut-Bas)", "L'axe Z", "Tous sont indiqués"],
-        "explain": "L'indicateur de direction affiche Nord, Sud, Est, Ouest mais pas le haut ou le bas[cite: 313, 314].",
-        "answer": 1
-    },
-    {
-        "type": "radio",
-        "question": "Dans l'exercice de duplication infinie, que se passe-t-il si on place le 'bloc magique' dans la structure copiée ?",
-        "options": ["Le jeu plante", "La structure se duplique d'elle-même à l'infini jusqu'à la limite du monde", "Rien ne se passe", "Tout devient vert"],
-        "explain": "En se clonant elle-même, la structure crée un nouveau bloc de commande qui relance le processus[cite: 640, 641].",
+        "explain": "L'indicateur de direction affiche Nord, Sud, Est, Ouest mais pas le haut ou le bas.",
         "answer": 1
     }
 ]}
